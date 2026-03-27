@@ -95,7 +95,7 @@ const AboutPage = () => {
             <section className="relative overflow-hidden py-16 md:py-24">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
                     <div className="md:col-span-7 z-10 text-center md:text-left order-2 md:order-1">
-                        <span className="font-label text-sm tracking-[0.2em] uppercase text-secondary font-semibold mb-4 block">The Modern Archivist</span>
+                        <span className="font-label text-sm tracking-[0.2em] uppercase text-secondary font-semibold mb-4 block">{aboutBioContent.bioLabel}</span>
                         <h1 className="font-headline text-4xl md:text-7xl font-bold text-primary leading-tight mb-6">{aboutBioContent.bioHeadline}</h1>
                         <p className="font-headline text-lg md:text-xl text-on-surface-variant leading-relaxed max-w-2xl italic mx-auto md:mx-0 mb-6">
                             {aboutBioContent.bioSubtitle}

@@ -54,6 +54,7 @@ content:
     path: public/content/about-bio.json
     format: json
     fields:
+      - { name: bioLabel, label: "Bio Label", type: string }
       - { name: bioHeadline, label: "Bio Headline", type: string }
       - { name: bioSubtitle, label: "Bio Subtitle", type: string }
       - { name: bioBody, label: "Full Bio Body", type: rich-text }

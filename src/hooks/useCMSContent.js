@@ -174,6 +174,7 @@ export const fallbackContent = {
     posts: []
   },
   aboutBio: {
+    bioLabel: "The Modern Archivist",
     bioHeadline: "The Modern Archivist",
     bioSubtitle: "Writing is not just a recording of facts, but a retrieval of souls from the quiet corners of the past.",
     bioBody: `## My name is Edmond, and I am from Idaho.
