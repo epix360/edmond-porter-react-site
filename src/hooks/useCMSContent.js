@@ -77,33 +77,33 @@ export const useCMSContent = (contentType, filename = null) => {
           const mediumSectionData = await response.json();
           setContent(mediumSectionData);
         } else if (contentType === 'timeline') {
-          // Load timeline content using embedded data to avoid GitHub Pages routing issues
-          // GitHub Pages treats all .json files as client-side routes
-          const timelineData = [
-            {
-              "year": "2014",
-              "milestone1_title": "The First Spark",
-              "milestone1_description": "Publication of 'Whispers in the Grain' in a leading literary journal, marking his professional debut."
-            },
-            {
-              "year": "2017",
-              "milestone1_title": "Crossing the Continent",
-              "milestone1_description": "Relocated to the Olympic Peninsula. The rugged landscapes began to heavily influence his work."
-            },
-            {
-              "year": "2021",
-              "milestone1_title": "A Breakthrough Release",
-              "milestone1_description": "Debut novel 'The Archivist's Daughter' is released to critical acclaim.",
-              "milestone2_title": "Literary Award",
-              "milestone2_description": "Received recognition for outstanding contribution to contemporary literature."
-            },
-            {
-              "year": "2026",
-              "milestone1_title": "First novel published",
-              "milestone1_description": "Turbulent Waters releases June 1, 2026"
-            }
-          ];
-          setContent(timelineData);
+          // Load timeline data from JavaScript file to avoid GitHub Pages routing issues
+          // This allows Pages CMS to update content while bypassing JSON routing problems
+          try {
+            // Try to load the dynamically generated timeline data
+            const script = document.createElement('script');
+            script.src = '/edmond-porter-react-site/timeline-data.js';
+            script.onload = () => {
+              if (window.timelineData) {
+                setContent(window.timelineData);
+              } else {
+                // Fallback to hardcoded data
+                setContent(fallbackContent.timeline);
+              }
+              setLoading(false);
+            };
+            script.onerror = () => {
+              // Fallback to hardcoded data
+              setContent(fallbackContent.timeline);
+              setLoading(false);
+            };
+            document.head.appendChild(script);
+            return; // Don't set loading to false yet, wait for script to load
+          } catch (error) {
+            // Fallback to hardcoded data
+            const timelineData = fallbackContent.timeline;
+            setContent(timelineData);
+          }
         }
       } catch (err) {
         console.error(`Error loading ${contentType} content:`, err);
