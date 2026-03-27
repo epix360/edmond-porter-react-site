@@ -9,7 +9,6 @@ const rootElement = document.getElementById('root');
 
 // Check if root element already has content (pre-rendered)
 if (rootElement.hasChildNodes()) {
-  console.log('🔄 Hydrating pre-rendered content');
   root.hydrateRoot(
     <React.StrictMode>
       <HelmetProvider>
@@ -20,7 +19,6 @@ if (rootElement.hasChildNodes()) {
     </React.StrictMode>
   );
 } else {
-  console.log('🚀 Client-side rendering');
   root.render(
     <React.StrictMode>
       <HelmetProvider>

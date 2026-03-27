@@ -23,14 +23,12 @@ export const useCMSContent = (contentType, filename = null) => {
           
           const bookPromises = bookFiles.map(async (file) => {
             const url = `/edmond-porter-react-site/content/books/${file}`;
-            console.log(`Fetching book: ${url}`);
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Failed to load ${file}: ${response.status}`);
             return response.json();
           });
           
           const books = await Promise.all(bookPromises);
-          console.log(`Loaded ${books.length} books`);
           
           // Sort books by order field with automatic reordering for duplicates
           const sortedBooks = books.sort((a, b) => {
@@ -41,19 +39,12 @@ export const useCMSContent = (contentType, filename = null) => {
           
           // Handle automatic reordering: if multiple books have same order, 
           // increment subsequent books to maintain unique ordering
-          const reorderedBooks = [];
-          const usedOrders = new Set();
-          
-          sortedBooks.forEach((book, index) => {
-            let order = book.order || 999;
-            
-            // If this order is already used, find the next available order
-            while (usedOrders.has(order)) {
-              order++;
+          let orderCounter = 1;
+          const reorderedBooks = sortedBooks.map((book, index) => {
+            if (index > 0 && sortedBooks[index - 1].order === book.order) {
+              orderCounter++;
             }
-            
-            usedOrders.add(order);
-            reorderedBooks.push({ ...book, order });
+            return { ...book, order: book.order + orderCounter - 1 };
           });
           
           setContent(reorderedBooks);
@@ -97,7 +88,10 @@ export const useCMSContent = (contentType, filename = null) => {
           });
           
           const timelineData = await Promise.all(timelinePromises);
-          setContent(timelineData);
+          
+          // Sort by year
+          const sortedTimeline = timelineData.sort((a, b) => parseInt(a.year) - parseInt(b.year));
+          setContent(sortedTimeline);
         }
       } catch (err) {
         console.error(`Error loading ${contentType} content:`, err);
