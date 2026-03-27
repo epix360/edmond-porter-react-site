@@ -18,6 +18,57 @@ const createPreRenderedHTML = () => {
   let jsPath = '/edmond-porter-react-site/static/js/main.a62bebb7.js';
   let cssPath = '/edmond-porter-react-site/static/css/main.e35003d2.css';
   
+  // Load timeline data and embed it
+  let timelineData = [];
+  try {
+    const timelineDir = path.join(__dirname, '../public/content/timeline');
+    if (fs.existsSync(timelineDir)) {
+      const files = fs.readdirSync(timelineDir).filter(f => f.endsWith('.json'));
+      files.sort((a, b) => parseInt(a.replace('.json', '')) - parseInt(b.replace('.json', '')));
+      
+      files.forEach(file => {
+        const filePath = path.join(timelineDir, file);
+        try {
+          const content = fs.readFileSync(filePath, 'utf8');
+          const data = JSON.parse(content);
+          timelineData.push(data);
+        } catch (error) {
+          console.warn(`Warning: Could not read ${file}:`, error.message);
+        }
+      });
+    }
+  } catch (error) {
+    console.warn('Warning: Could not read timeline directory:', error.message);
+  }
+  
+  // Fallback data if no files found
+  if (timelineData.length === 0) {
+    timelineData = [
+      {
+        "year": "2014",
+        "milestone1_title": "The First Spark",
+        "milestone1_description": "Publication of 'Whispers in the Grain' in a leading literary journal, marking his professional debut."
+      },
+      {
+        "year": "2017",
+        "milestone1_title": "Crossing the Continent",
+        "milestone1_description": "Relocated to the Olympic Peninsula. The rugged landscapes began to heavily influence his work."
+      },
+      {
+        "year": "2021",
+        "milestone1_title": "A Breakthrough Release",
+        "milestone1_description": "Debut novel 'The Archivist's Daughter' is released to critical acclaim.",
+        "milestone2_title": "Literary Award",
+        "milestone2_description": "Received recognition for outstanding contribution to contemporary literature."
+      },
+      {
+        "year": "2026",
+        "milestone1_title": "First novel published",
+        "milestone1_description": "Turbulent Waters releases June 1, 2026"
+      }
+    ];
+  }
+  
   try {
     if (fs.existsSync(manifestPath)) {
       const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
@@ -113,6 +164,10 @@ const createPreRenderedHTML = () => {
     <h2>Contemporary Author</h2>
   </div>
   <div id="root"></div>
+  <script>
+    // Embed timeline data to avoid GitHub Pages routing issues
+    window.embeddedTimelineData = ${JSON.stringify(timelineData, null, 2)};
+  </script>
   <script src="${jsPath}" defer></script>
 </body>
 </html>`;
