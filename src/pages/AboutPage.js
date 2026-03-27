@@ -115,6 +115,7 @@ const AboutPage = () => {
                             src={getImagePath(aboutBioContent.bioImage)}
                             alt="Edmond A Porter"
                             className="w-full h-full object-cover"
+                            priority={true}
                         />
                         </div>
                         <div className="absolute -bottom-4 -left-4 md:-bottom-8 md:-left-8 w-32 h-32 md:w-48 md:h-48 bg-secondary/10 -z-0"></div>
