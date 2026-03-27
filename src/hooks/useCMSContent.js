@@ -77,36 +77,20 @@ export const useCMSContent = (contentType, filename = null) => {
           const mediumSectionData = await response.json();
           setContent(mediumSectionData);
         } else if (contentType === 'timeline') {
-          // Load timeline content as collection (matching Pages CMS config)
-          // First try to load the timeline index to get available years
+          // Load timeline content using fallback data for now
+          // GitHub Pages is treating JSON files as client-side routes despite .nojekyll
+          // Try alternative path first, then fallback
           try {
-            const indexResponse = await fetch('/edmond-porter-react-site/content/timeline/index.json');
-            if (indexResponse.ok) {
-              const indexData = await indexResponse.json();
-              const availableYears = indexData.items.map(item => item.year);
-              
-              // Load only available timeline files
-              const timelinePromises = availableYears.map(async (year) => {
-                const url = `/edmond-porter-react-site/content/timeline/${year}.json`;
-                const response = await fetch(url);
-                if (!response.ok) throw new Error(`Failed to load ${year}.json: ${response.status}`);
-                return response.json();
-              });
-              
-              const timelineData = await Promise.all(timelinePromises);
-              
-              // Sort by year
-              const sortedTimeline = timelineData.sort((a, b) => parseInt(a.year) - parseInt(b.year));
-              setContent(sortedTimeline);
-            } else {
-              // Fallback to hardcoded years if index doesn't exist
+            const response = await fetch('/edmond-porter-react-site/timeline-data/2014.json');
+            if (response.ok) {
+              // Load all available timeline files from alternative location
               const timelineFiles = ['2014.json', '2017.json', '2021.json', '2026.json'];
               
               const timelinePromises = timelineFiles.map(async (file) => {
-                const url = `/edmond-porter-react-site/content/timeline/${file}`;
+                const url = `/edmond-porter-react-site/timeline-data/${file}`;
                 const response = await fetch(url);
                 if (!response.ok) {
-                  console.warn(`Timeline file ${file} not found, skipping...`);
+                  console.warn(`Timeline file ${file} not found in alternative location, skipping...`);
                   return null;
                 }
                 return response.json();
@@ -118,27 +102,15 @@ export const useCMSContent = (contentType, filename = null) => {
               // Sort by year
               const sortedTimeline = timelineData.sort((a, b) => parseInt(a.year) - parseInt(b.year));
               setContent(sortedTimeline);
+            } else {
+              // Use fallback data
+              const timelineData = fallbackContent.timeline;
+              setContent(timelineData);
             }
           } catch (error) {
-            // Final fallback to hardcoded years with error handling
-            const timelineFiles = ['2014.json', '2017.json', '2021.json', '2026.json'];
-            
-            const timelinePromises = timelineFiles.map(async (file) => {
-              const url = `/edmond-porter-react-site/content/timeline/${file}`;
-              const response = await fetch(url);
-              if (!response.ok) {
-                console.warn(`Timeline file ${file} not found, skipping...`);
-                return null;
-              }
-              return response.json();
-            });
-            
-            const timelineResults = await Promise.all(timelinePromises);
-            const timelineData = timelineResults.filter(result => result !== null);
-            
-            // Sort by year
-            const sortedTimeline = timelineData.sort((a, b) => parseInt(a.year) - parseInt(b.year));
-            setContent(sortedTimeline);
+            // Use fallback data
+            const timelineData = fallbackContent.timeline;
+            setContent(timelineData);
           }
         }
       } catch (err) {

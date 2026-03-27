@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/edmond-porter-react-site/static/css/main.851edc16.css",
-    "main.js": "/edmond-porter-react-site/static/js/main.f4aca070.js",
+    "main.js": "/edmond-porter-react-site/static/js/main.e0c32fdc.js",
     "index.html": "/edmond-porter-react-site/index.html",
     "main.851edc16.css.map": "/edmond-porter-react-site/static/css/main.851edc16.css.map",
-    "main.f4aca070.js.map": "/edmond-porter-react-site/static/js/main.f4aca070.js.map"
+    "main.e0c32fdc.js.map": "/edmond-porter-react-site/static/js/main.e0c32fdc.js.map"
   },
   "entrypoints": [
     "static/css/main.851edc16.css",
-    "static/js/main.f4aca070.js"
+    "static/js/main.e0c32fdc.js"
   ]
 }
