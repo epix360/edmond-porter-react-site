@@ -77,41 +77,33 @@ export const useCMSContent = (contentType, filename = null) => {
           const mediumSectionData = await response.json();
           setContent(mediumSectionData);
         } else if (contentType === 'timeline') {
-          // Load timeline content using fallback data for now
-          // GitHub Pages is treating JSON files as client-side routes despite .nojekyll
-          // Try alternative path first, then fallback
-          try {
-            const response = await fetch('/edmond-porter-react-site/timeline-data/2014.json');
-            if (response.ok) {
-              // Load all available timeline files from alternative location
-              const timelineFiles = ['2014.json', '2017.json', '2021.json', '2026.json'];
-              
-              const timelinePromises = timelineFiles.map(async (file) => {
-                const url = `/edmond-porter-react-site/timeline-data/${file}`;
-                const response = await fetch(url);
-                if (!response.ok) {
-                  console.warn(`Timeline file ${file} not found in alternative location, skipping...`);
-                  return null;
-                }
-                return response.json();
-              });
-              
-              const timelineResults = await Promise.all(timelinePromises);
-              const timelineData = timelineResults.filter(result => result !== null);
-              
-              // Sort by year
-              const sortedTimeline = timelineData.sort((a, b) => parseInt(a.year) - parseInt(b.year));
-              setContent(sortedTimeline);
-            } else {
-              // Use fallback data
-              const timelineData = fallbackContent.timeline;
-              setContent(timelineData);
+          // Load timeline content using embedded data to avoid GitHub Pages routing issues
+          // GitHub Pages treats all .json files as client-side routes
+          const timelineData = [
+            {
+              "year": "2014",
+              "milestone1_title": "The First Spark",
+              "milestone1_description": "Publication of 'Whispers in the Grain' in a leading literary journal, marking his professional debut."
+            },
+            {
+              "year": "2017",
+              "milestone1_title": "Crossing the Continent",
+              "milestone1_description": "Relocated to the Olympic Peninsula. The rugged landscapes began to heavily influence his work."
+            },
+            {
+              "year": "2021",
+              "milestone1_title": "A Breakthrough Release",
+              "milestone1_description": "Debut novel 'The Archivist's Daughter' is released to critical acclaim.",
+              "milestone2_title": "Literary Award",
+              "milestone2_description": "Received recognition for outstanding contribution to contemporary literature."
+            },
+            {
+              "year": "2026",
+              "milestone1_title": "First novel published",
+              "milestone1_description": "Turbulent Waters releases June 1, 2026"
             }
-          } catch (error) {
-            // Use fallback data
-            const timelineData = fallbackContent.timeline;
-            setContent(timelineData);
-          }
+          ];
+          setContent(timelineData);
         }
       } catch (err) {
         console.error(`Error loading ${contentType} content:`, err);
