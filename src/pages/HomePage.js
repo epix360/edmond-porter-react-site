@@ -14,15 +14,11 @@ import { useCMSContent, fallbackContent } from '../hooks/useCMSContent';
 // Preload hero image for LCP optimization
 const preloadHeroImage = (imagePath) => {
   if (typeof window !== 'undefined' && imagePath) {
-    // Convert CDN path to GitHub Pages path for preloading
-    const preloadPath = imagePath.includes('cdn.jsdelivr.net') 
-      ? imagePath.replace(/.*\/public\/images\//, '/edmond-porter-react-site/images/')
-      : imagePath;
-    
+    // Use the image path directly - it should already be the correct CDN path
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
-    link.href = preloadPath;
+    link.href = imagePath;
     link.fetchpriority = 'high';
     document.head.appendChild(link);
   }

@@ -25,7 +25,7 @@ const createOptimizedIndexHTML = () => {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://epix360.github.io">
-  <link rel="preload" href="/edmond-porter-react-site/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
   
   <!-- Critical CSS (inline) -->
   <style>
