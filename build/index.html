@@ -8,15 +8,50 @@
   <link rel="dns-prefetch" href="https://epix360.github.io">
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
   
+  <!-- Web Font Loader for async font loading -->
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'custom',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/wf-loading/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+    
+    // Custom font loading configuration
+    WebFontConfig = {
+      google: {
+        families: [
+          'Inter:wght@300;400;500;600;700',
+          'Noto+Serif:ital,wght@0,400;0,700;1,400;1,700',
+          'Material+Symbols+Outlined:wght,FILL@100..700,0..1'
+        ],
+        display: 'swap'
+      },
+      timeout: 3000,
+      active: function() {
+        console.log('Fonts loaded successfully');
+      },
+      inactive: function() {
+        console.log('Fonts failed to load - using system fonts');
+      }
+    };
+  </script>
+  
   <!-- Critical CSS (inline) -->
   <style>
     /* Prevent flash of unstyled content */
-    body { margin: 0; font-family: 'Inter', sans-serif; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
     #root { min-height: 100vh; }
     /* Loading skeleton */
     .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
     @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    /* Font loading states */
+    .wf-loading body { opacity: 1; }
+    .wf-inactive body { opacity: 1; }
+    .wf-active body { opacity: 1; }
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
@@ -70,11 +105,11 @@
   <meta name="theme-color" content="#000000" />
   
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  
+  
   
   <title>Edmond A Porter | Author</title>
-  <link href="/edmond-porter-react-site/static/css/main.91c700b7.css" rel="stylesheet">
+  <link href="/edmond-porter-react-site/static/css/main.e362de26.css" rel="stylesheet">
   <style>
     .sr-only {
       position: absolute;
