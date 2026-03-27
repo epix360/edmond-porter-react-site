@@ -1,5 +1,9 @@
 {
   "year": "2014",
-  "milestone1_title": "The First Spark",
-  "milestone1_description": "Publication of 'Whispers in the Grain' in a leading literary journal, marking his professional debut."
+  "milestones": [
+    {
+      "title": "The First Spark",
+      "description": "Publication of 'Whispers in the Grain' in a leading literary journal, marking his professional debut."
+    }
+  ]
 }

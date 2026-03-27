@@ -146,6 +146,19 @@ fs.writeFileSync(
 );
 console.log('✅ Created: about-bio.json');
 
+// Create medium-section content
+const mediumSectionContent = {
+  headline: "Latest Musings & Essays",
+  description: "Occasional thoughts on the craft of writing, historical echoes, and creative life.",
+  posts: []
+};
+
+fs.writeFileSync(
+  path.join(contentDir, 'medium-section.json'),
+  JSON.stringify(mediumSectionContent, null, 2)
+);
+console.log('✅ Created: medium-section.json');
+
 // Create timeline content
 const timelineContent = [
   {
@@ -211,6 +224,7 @@ console.log('\n🎉 Content conversion complete!');
 console.log('\n📁 Generated files:');
 console.log('   public/content/hero.json');
 console.log('   public/content/about-bio.json');
+console.log('   public/content/medium-section.json');
 console.log('   public/content/books/ (5 book files)');
 console.log('   public/content/timeline/ (3 timeline files + index.json)');
 console.log('\n🚀 Next steps:');
@@ -218,4 +232,5 @@ console.log('   1. Commit these files to Git');
 console.log('   2. Push to GitHub');
 console.log('   3. Access Pages CMS to see your content');
 console.log('   4. Your client can now edit existing content!');
-console.log('   5. Timeline milestones are now editable through Pages CMS!');
+console.log('   5. Medium section is now editable through Pages CMS!');
+console.log('   6. Timeline milestones are now editable through Pages CMS!');
