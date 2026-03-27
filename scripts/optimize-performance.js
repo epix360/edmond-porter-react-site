@@ -158,6 +158,10 @@ const createOptimizedIndexHTML = () => {
   // Remove the original blocking CSS link (replaced with preload)
   html = html.replace(/<link[^>]*href="\/edmond-porter-react-site\/static\/css\/main\.[^"]*\.css"[^>]*rel="stylesheet"[^>]*>/g, '');
   
+  // Fix double path issue in CSS and JS links
+  html = html.replace(/href="\/edmond-porter-react-site\/edmond-porter-react-site\/static\//g, 'href="/edmond-porter-react-site/static/');
+  html = html.replace(/src="\/edmond-porter-react-site\/edmond-porter-react-site\/static\//g, 'src="/edmond-porter-react-site/static/');
+  
   fs.writeFileSync(indexPath, html);
   console.log('✅ Performance optimizations applied to index.html');
 };
