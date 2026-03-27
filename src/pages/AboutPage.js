@@ -135,7 +135,7 @@ const AboutPage = () => {
                                     <div className="w-4 h-4 rounded-full bg-secondary group-hover:scale-125 transition-transform"></div>
                                     {idx !== (timelineContent && timelineContent.length - 1) && <div className="w-0.5 flex-1 bg-outline-variant/30 mt-2"></div>}
                                 </div>
-                                <div className="pb-12">
+                                <div>
                                     <span className="font-label text-sm text-secondary font-bold mb-1 block">{yearData.year}</span>
                                     {yearData.milestone1_title && (
                                         <div className="mb-6 last:mb-0">
