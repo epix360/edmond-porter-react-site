@@ -19,13 +19,30 @@ const createOptimizedIndexHTML = () => {
   
   let html = fs.readFileSync(indexPath, 'utf8');
   
+  // Find the actual CSS and JS filenames from the build
+  const cssDir = path.join(buildDir, 'static/css');
+  const jsDir = path.join(buildDir, 'static/js');
+  
+  let cssFile = null;
+  let jsFile = null;
+  
+  if (fs.existsSync(cssDir)) {
+    const cssFiles = fs.readdirSync(cssDir).filter(f => f.endsWith('.css') && !f.endsWith('.map'));
+    cssFile = cssFiles[0];
+  }
+  
+  if (fs.existsSync(jsDir)) {
+    const jsFiles = fs.readdirSync(jsDir).filter(f => f.endsWith('.js') && !f.endsWith('.map'));
+    jsFile = jsFiles[0];
+  }
+  
   // Add resource hints for better performance
   const resourceHints = `
   <!-- Performance Optimizations -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
-  <link rel="preload" href="/edmond-porter-react-site/static/css/main.e362de26.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/edmond-porter-react-site/static/css/${cssFile || 'main.css'}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   
   <!-- Web Font Loader for async font loading -->

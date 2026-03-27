@@ -51,13 +51,6 @@ const AboutPage = () => {
     const aboutBioContent = aboutBio || fallbackContent.aboutBio;
     const timelineContent = timeline || fallbackContent.timeline;
     
-    // Enhanced error handling
-    if (aboutBioError) {
-        console.error('❌ AboutBio loading error:', aboutBioError);
-    }
-    if (aboutBioLoading) {
-        console.log('⏳ AboutBio still loading...');
-    }
     const timelineData = timelineContent.map(yearData => ({
       year: yearData.year,
       milestones: [
