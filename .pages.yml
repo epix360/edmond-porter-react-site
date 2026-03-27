@@ -75,3 +75,14 @@ content:
       - { name: milestone2_description, label: "Milestone 2 Description", type: rich-text }
       - { name: milestone3_title, label: "Milestone 3 Title", type: string }
       - { name: milestone3_description, label: "Milestone 3 Description", type: rich-text }
+
+  # SECTION 6: Medium Section (Single File)
+  - name: medium-section
+    label: "Medium Section Content"
+    type: file
+    path: public/content/medium-section.json
+    format: json
+    fields:
+      - { name: headline, label: "Section Headline", type: string }
+      - { name: description, label: "Section Description", type: rich-text }
+      - { name: posts, label: "Medium Posts (Future)", type: collection, fields: [{ name: title, label: "Post Title", type: string }, { name: link, label: "Post URL", type: string }, { name: description, label: "Post Description", type: rich-text }] }
