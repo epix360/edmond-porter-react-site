@@ -23,6 +23,7 @@ const AccessibleImage = ({
         sizes={sizes}
         width={width}
         height={height}
+        fetchpriority={priority ? 'high' : 'auto'}
         {...props}
       />
       {caption && (

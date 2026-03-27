@@ -11,6 +11,18 @@ import { getImagePath as getAssetPath, CDN_CONFIG } from '../utils/cdn';
 import emailjs from '@emailjs/browser';
 import { useCMSContent, fallbackContent } from '../hooks/useCMSContent';
 
+// Preload hero image for LCP optimization
+const preloadHeroImage = (imagePath) => {
+  if (typeof window !== 'undefined' && imagePath) {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = imagePath;
+    link.fetchpriority = 'high';
+    document.head.appendChild(link);
+  }
+};
+
 // Helper function for consistent image paths (now using CDN)
 const getImagePath = (path) => getAssetPath(path);
 
@@ -103,6 +115,13 @@ const HomePage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    // Preload hero image for LCP optimization
+    useEffect(() => {
+        if (heroContent?.cover) {
+            preloadHeroImage(getImagePath(heroContent.cover));
+        }
+    }, [heroContent]);
 
     const [formData, setFormData] = useState({
         name: '',
