@@ -1,0 +1,77 @@
+media:
+  input: public/images
+  output: ""
+
+content:
+  # SECTION 1: The Hero (Single File)
+  - name: hero
+    label: "Home Hero (Featured Book)"
+    type: file
+    path: public/content/hero.json
+    format: json
+    fields:
+      - { name: title, label: "Featured Book Title", type: string }
+      - { name: cover, label: "Large Hero Image", type: image }
+      - { name: blurb, label: "Short Teaser Text", type: rich-text }
+      - { name: buttonText, label: "Button Text", type: string }
+      - { name: link, label: "Primary Buy Link", type: string }
+      - { name: bookStatus, label: "Book Status", type: select, options: { values: [{ value: "coming-soon", label: "New Release Coming Soon" }, { value: "new-release", label: "Just Released" }, { value: "bestseller", label: "Bestselling Book" }, { value: "available", label: "Available Now" }, { value: "none", label: "Hide Status" }] } }
+      - { name: showSpecificDate, label: "Show Specific Release Date", type: boolean, default: false }
+      - { name: releaseDate, label: "Release Date", type: date }
+      - { name: customDateText, label: "Custom Date Text (Optional)", type: string }
+
+  # SECTION 2: The Bookshelf (Collection)
+  - name: books
+    label: "Bookshelf (All Books)"
+    type: collection
+    path: public/content/books
+    format: json
+    filename: "{fields.title}.json"
+    fields:
+      - { name: title, label: "Book Title", type: string }
+      - { name: order, label: "Display Order", type: number, default: 1 }
+      - { name: cover, label: "Cover Thumbnail", type: image }
+      - { name: type, label: "Book type", type: string }
+      - { name: buyLink, label: "Purchase URL", type: string }
+      - { name: description, label: "Description", type: rich-text }
+
+  # SECTION 3: Home Bio Teaser (Single File)
+  - name: home-bio
+    label: "Home Page Bio Teaser"
+    type: file
+    path: public/content/home-bio.json
+    format: json
+    fields:
+      - { name: teaserHeadline, label: "Teaser Headline", type: string }
+      - { name: teaserBody, label: "Teaser Body Text", type: rich-text }
+      - { name: teaserImage, label: "Teaser Image", type: image }
+      - { name: readMoreLink, label: "Read More Link Text", type: string }
+
+  # SECTION 4: About Page Bio (Single File)
+  - name: about-bio
+    label: "About Page Bio"
+    type: file
+    path: public/content/about-bio.json
+    format: json
+    fields:
+      - { name: bioHeadline, label: "Bio Headline", type: string }
+      - { name: bioSubtitle, label: "Bio Subtitle", type: string }
+      - { name: bioBody, label: "Full Bio Body", type: rich-text }
+      - { name: bioImage, label: "Bio Image", type: image }
+
+  # SECTION 5: Timeline Milestones (Collection)
+  - name: timeline
+    label: "Timeline Milestones"
+    type: collection
+    path: public/content/timeline
+    format: json
+    filename: "{fields.year}.json"
+    create: true
+    fields:
+      - { name: year, label: "Year", type: string }
+      - { name: milestone1_title, label: "Milestone 1 Title", type: string }
+      - { name: milestone1_description, label: "Milestone 1 Description", type: rich-text }
+      - { name: milestone2_title, label: "Milestone 2 Title", type: string }
+      - { name: milestone2_description, label: "Milestone 2 Description", type: rich-text }
+      - { name: milestone3_title, label: "Milestone 3 Title", type: string }
+      - { name: milestone3_description, label: "Milestone 3 Description", type: rich-text }

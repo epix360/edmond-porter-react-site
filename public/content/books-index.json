@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Faithful Hearts",
+    "order": 3,
+    "cover": "Faithful_Hearts.webp",
+    "type": "ANTHOLOGY",
+    "buyLink": "https://www.amazon.com/Faithful-Hearts-Celebrating-Peoples-Relationships-ebook/dp/B0DP368PKG",
+    "description": "Heartwarming stories and poems celebrating our furriest family members: our pets."
+  },
+  {
+    "title": "Lucky Penny",
+    "order": 2,
+    "cover": "Lucky_Penny.webp",
+    "type": "ANTHOLOGY",
+    "buyLink": "https://www.amazon.com/Lucky-Penny-Short-Magical-Realism-ebook/dp/B0G3NWKQC8",
+    "description": "Short stories of magical realism invite our imaginations to wander and wonder \"what if?\""
+  },
+  {
+    "title": "The Seasons That Made Me",
+    "order": 1,
+    "cover": "The_Seasons_That_Made_Me.webp",
+    "type": "ESSAY COLLECTION",
+    "buyLink": "https://www.amazon.com/Seasons-That-Made-Me-Collection-ebook/dp/B0FXD1M3QB",
+    "description": "A collection of deeply personal essays on growth, loss, and the cyclical nature of our creative lives."
+  },
+  {
+    "title": "The Work and the Stories",
+    "order": 5,
+    "cover": "The_Work_and_the_Stories.webp",
+    "type": "ANTHOLOGY",
+    "buyLink": "https://www.amazon.com/Work-Stories-Collection-Missionary-Experiences-ebook/dp/B0BW4X2N86",
+    "description": "An eclectic collection of funny memories and poignant challenges from LDS missionary experiences."
+  },
+  {
+    "title": "Wanderlust",
+    "order": 4,
+    "cover": "Wanderlust.webp",
+    "type": "ANTHOLOGY",
+    "buyLink": "https://www.amazon.com/Wanderlust-Collection-Travel-Angela-Acosta-ebook/dp/B0CM8Y7W2T",
+    "description": "Join seventeen authors as they take you on journeys through Asia, the Americas, and Europe."
+  }
+]

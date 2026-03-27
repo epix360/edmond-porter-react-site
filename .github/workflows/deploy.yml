@@ -1,0 +1,99 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # Allow manual triggering
+
+# 1. Add permissions to allow the build to "talk" to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v4 # Updated to v4 for 2026 standards
+    
+    - name: Show GitHub context 📋
+      run: |
+        echo "🔍 GitHub Actions Debug Info:"
+        echo "Event: ${{ github.event_name }}"
+        echo "Ref: ${{ github.ref }}"
+        echo "Sha: ${{ github.sha }}"
+        echo "Repository: ${{ github.repository }}"
+        echo "Actor: ${{ github.actor }}"
+        echo "Workflow: ${{ github.workflow }}"
+        echo "Run ID: ${{ github.run_id }}"
+        echo "🚀 Fix pre-rendering script to use correct GitHub Pages paths v31"
+    
+    - name: Setup Node.js 
+      uses: actions/setup-node@v4 # Updated to v4 for 2026 standards
+      with:
+        node-version: '24' # Updated to Node.js 24 to resolve deprecation warning
+        cache: 'npm'
+    
+    - name: Clear npm cache
+      run: npm cache clean --force
+    
+    - name: Install dependencies 
+      run: |
+        npm ci || npm install --prefer-offline --no-audit
+    
+    - name: Build 
+      # This will automatically run your 'prebuild' script to index the books!
+      run: npm run build
+    
+    # 2. Upload the 'build' folder as a temporary artifact
+    - name: Upload Pages Artifact 📤
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./build
+
+    # 3. Deploy that artifact directly to GitHub Pages
+    - name: Deploy to GitHub Pages 🚀
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+    # 4. Generate Version Tag for CDN
+    - name: Generate Version Tag 🏷️
+      if: success()
+      run: |
+        echo "🏷️  Generating version tag for stable CDN URLs..."
+        # Configure Git identity for the runner
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        
+        node scripts/generate-version-tag.js
+        
+        echo "✅ Version tag generated for CDN stability"
+
+    # 5. Purge jsDelivr CDN Cache
+    - name: Purge jsDelivr Cache 🧹
+      if: success()
+      run: |
+        echo "🧹 Purging jsDelivr cache for main branch..."
+        curl -X PURGE "https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/" \
+          -H "User-Agent: edmond-porter-website-cdn-purge/1.0" \
+          --max-time 30 \
+          --retry 3 \
+          --retry-delay 5
+        
+        echo "✅ jsDelivr cache purged successfully"
+        echo "📊 CDN will serve fresh assets within 5 minutes"
