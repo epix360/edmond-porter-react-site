@@ -23,9 +23,9 @@ const createOptimizedIndexHTML = () => {
   const resourceHints = `
   <!-- Performance Optimizations -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://epix360.github.io">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="/edmond-porter-react-site/static/css/main.e362de26.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   
   <!-- Web Font Loader for async font loading -->
@@ -155,6 +155,9 @@ const createOptimizedIndexHTML = () => {
   
   // Remove blocking font links from the HTML (they're now loaded async)
   html = html.replace(/<link[^>]*href="https:\/\/fonts\.googleapis\.com\/css[^"]*"[^>]*>/g, '');
+  
+  // Remove the original blocking CSS link (replaced with preload)
+  html = html.replace(/<link[^>]*href="\/edmond-porter-react-site\/static\/css\/main\.[^"]*\.css"[^>]*rel="stylesheet"[^>]*>/g, '');
   
   fs.writeFileSync(indexPath, html);
   console.log('✅ Performance optimizations applied to index.html');
