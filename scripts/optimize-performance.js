@@ -26,6 +26,7 @@ const createOptimizedIndexHTML = () => {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://epix360.github.io">
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   
   <!-- Web Font Loader for async font loading -->
   <script>
@@ -51,9 +52,11 @@ const createOptimizedIndexHTML = () => {
       timeout: 3000,
       active: function() {
         console.log('Fonts loaded successfully');
+        document.body.classList.add('fonts-loaded');
       },
       inactive: function() {
         console.log('Fonts failed to load - using system fonts');
+        document.body.classList.add('fonts-failed');
       }
     };
   </script>
@@ -71,6 +74,53 @@ const createOptimizedIndexHTML = () => {
     .wf-loading body { opacity: 1; }
     .wf-inactive body { opacity: 1; }
     .wf-active body { opacity: 1; }
+    
+    /* Font metric overrides to prevent layout shifts */
+    @font-face {
+      font-family: 'Inter-fallback';
+      size-adjust: 92.5%;
+      ascent-override: 95%;
+      descent-override: 30%;
+      line-gap-override: 10%;
+      src: local('Arial');
+    }
+    
+    @font-face {
+      font-family: 'Noto-Serif-fallback';
+      size-adjust: 95%;
+      ascent-override: 90%;
+      descent-override: 25%;
+      line-gap-override: 8%;
+      src: local('Georgia');
+    }
+    
+    @font-face {
+      font-family: 'Material-Symbols-fallback';
+      size-adjust: 100%;
+      ascent-override: 85%;
+      descent-override: 20%;
+      line-gap-override: 5%;
+      src: local('Arial');
+    }
+    
+    /* Apply fallback fonts during loading */
+    .wf-loading .font-inter { font-family: 'Inter-fallback', -apple-system, BlinkMacSystemFont, sans-serif; }
+    .wf-loading .font-noto-serif { font-family: 'Noto-Serif-fallback', Georgia, serif; }
+    .wf-loading .font-material-symbols { font-family: 'Material-Symbols-fallback', Arial, sans-serif; }
+    
+    /* Smooth transition when fonts load */
+    .wf-active .font-inter { 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: font-family 0.1s ease-in-out;
+    }
+    .wf-active .font-noto-serif { 
+      font-family: 'Noto Serif', Georgia, serif;
+      transition: font-family 0.1s ease-in-out;
+    }
+    .wf-active .font-material-symbols { 
+      font-family: 'Material Symbols Outlined', Arial, sans-serif;
+      transition: font-family 0.1s ease-in-out;
+    }
   </style>`;
   
   // Insert resource hints after charset meta tag

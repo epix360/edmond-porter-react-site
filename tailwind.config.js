@@ -44,7 +44,10 @@ module.exports = {
       fontFamily: {
         "headline": ["Noto Serif", "serif"],
         "body": ["Inter", "sans-serif"],
-        "label": ["Inter", "sans-serif"]
+        "label": ["Inter", "sans-serif"],
+        "inter-fallback": ["Inter-fallback", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        "noto-serif-fallback": ["Noto-Serif-fallback", "Georgia", "serif"],
+        "material-symbols-fallback": ["Material-Symbols-fallback", "Arial", "sans-serif"]
       },
       borderRadius: {
         "DEFAULT": "0.125rem", 
