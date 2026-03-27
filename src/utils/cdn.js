@@ -12,17 +12,13 @@ const REPO_INFO = {
 // Environment detection
 const isDevelopment = () => {
   if (typeof window !== 'undefined') {
-    // Force local mode for now until CDN is properly configured
-    return true;
-    
-    // Original logic (to be restored later):
-    // return (
-    //   window.location.hostname === 'localhost' ||
-    //   window.location.hostname === '127.0.0.1' ||
-    //   window.location.hostname === '' ||
-    //   window.location.hostname.includes('github.io') ||
-    //   process.env.NODE_ENV === 'development'
-    // );
+    // CDN is now working - enable production mode
+    return (
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname === '' ||
+      process.env.NODE_ENV === 'development'
+    );
   }
   return process.env.NODE_ENV === 'development';
 };
