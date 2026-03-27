@@ -51,7 +51,6 @@ const createOptimizedIndexHTML = () => {
       },
       timeout: 3000,
       active: function() {
-        console.log('Fonts loaded successfully');
         document.body.classList.add('fonts-loaded');
       },
       inactive: function() {
