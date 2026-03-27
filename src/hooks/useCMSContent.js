@@ -78,20 +78,68 @@ export const useCMSContent = (contentType, filename = null) => {
           setContent(mediumSectionData);
         } else if (contentType === 'timeline') {
           // Load timeline content as collection (matching Pages CMS config)
-          const timelineFiles = ['2014.json', '2017.json', '2021.json', '2026.json'];
-          
-          const timelinePromises = timelineFiles.map(async (file) => {
-            const url = `/edmond-porter-react-site/content/timeline/${file}`;
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`Failed to load ${file}: ${response.status}`);
-            return response.json();
-          });
-          
-          const timelineData = await Promise.all(timelinePromises);
-          
-          // Sort by year
-          const sortedTimeline = timelineData.sort((a, b) => parseInt(a.year) - parseInt(b.year));
-          setContent(sortedTimeline);
+          // First try to load the timeline index to get available years
+          try {
+            const indexResponse = await fetch('/edmond-porter-react-site/content/timeline/index.json');
+            if (indexResponse.ok) {
+              const indexData = await indexResponse.json();
+              const availableYears = indexData.items.map(item => item.year);
+              
+              // Load only available timeline files
+              const timelinePromises = availableYears.map(async (year) => {
+                const url = `/edmond-porter-react-site/content/timeline/${year}.json`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`Failed to load ${year}.json: ${response.status}`);
+                return response.json();
+              });
+              
+              const timelineData = await Promise.all(timelinePromises);
+              
+              // Sort by year
+              const sortedTimeline = timelineData.sort((a, b) => parseInt(a.year) - parseInt(b.year));
+              setContent(sortedTimeline);
+            } else {
+              // Fallback to hardcoded years if index doesn't exist
+              const timelineFiles = ['2014.json', '2017.json', '2021.json', '2026.json'];
+              
+              const timelinePromises = timelineFiles.map(async (file) => {
+                const url = `/edmond-porter-react-site/content/timeline/${file}`;
+                const response = await fetch(url);
+                if (!response.ok) {
+                  console.warn(`Timeline file ${file} not found, skipping...`);
+                  return null;
+                }
+                return response.json();
+              });
+              
+              const timelineResults = await Promise.all(timelinePromises);
+              const timelineData = timelineResults.filter(result => result !== null);
+              
+              // Sort by year
+              const sortedTimeline = timelineData.sort((a, b) => parseInt(a.year) - parseInt(b.year));
+              setContent(sortedTimeline);
+            }
+          } catch (error) {
+            // Final fallback to hardcoded years with error handling
+            const timelineFiles = ['2014.json', '2017.json', '2021.json', '2026.json'];
+            
+            const timelinePromises = timelineFiles.map(async (file) => {
+              const url = `/edmond-porter-react-site/content/timeline/${file}`;
+              const response = await fetch(url);
+              if (!response.ok) {
+                console.warn(`Timeline file ${file} not found, skipping...`);
+                return null;
+              }
+              return response.json();
+            });
+            
+            const timelineResults = await Promise.all(timelinePromises);
+            const timelineData = timelineResults.filter(result => result !== null);
+            
+            // Sort by year
+            const sortedTimeline = timelineData.sort((a, b) => parseInt(a.year) - parseInt(b.year));
+            setContent(sortedTimeline);
+          }
         }
       } catch (err) {
         console.error(`Error loading ${contentType} content:`, err);
