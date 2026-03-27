@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const MediumFeed = () => {
+const MediumFeed = ({ mediumContent }) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 

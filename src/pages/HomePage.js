@@ -297,7 +297,7 @@ const HomePage = () => {
             </section>
 
             {/* Medium Feed Section */}
-            <MediumFeed />
+            <MediumFeed mediumContent={mediumContent} />
 
             {/* Newsletter / Contact Section */}
             <section className="py-20 bg-primary" id="contact">
