@@ -77,12 +77,12 @@ export const useCMSContent = (contentType, filename = null) => {
           const mediumSectionData = await response.json();
           setContent(mediumSectionData);
         } else if (contentType === 'timeline') {
-          // Load timeline data from JavaScript file to avoid GitHub Pages routing issues
+          // Load timeline data from text file to avoid GitHub Pages routing issues
           // This allows Pages CMS to update content while bypassing JSON routing problems
           try {
             // Try to load the dynamically generated timeline data
             const script = document.createElement('script');
-            script.src = '/edmond-porter-react-site/timeline-data.js';
+            script.src = '/edmond-porter-react-site/timeline-data.txt';
             script.onload = () => {
               if (window.timelineData) {
                 setContent(window.timelineData);

@@ -11,7 +11,7 @@ const path = require('path');
 
 const generateTimelineJS = () => {
   const timelineDir = path.join(__dirname, '../public/content/timeline');
-  const outputPath = path.join(__dirname, '../public/timeline-data.js');
+  const outputPath = path.join(__dirname, '../public/timeline-data.txt');
   
   let timelineData = [];
   
