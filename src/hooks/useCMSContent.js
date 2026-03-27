@@ -93,6 +93,15 @@ export const useCMSContent = (contentType, filename = null) => {
             console.error('About-bio fetch error:', error);
             throw error;
           }
+        } else if (contentType === 'medium-section') {
+          // Load medium section content
+          const url = '/edmond-porter-react-site/content/medium-section.json';
+          console.log(`Fetching medium-section: ${url}`);
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`Failed to load medium-section content: ${response.status}`);
+          const mediumSectionData = await response.json();
+          console.log('Loaded medium-section content:', mediumSectionData);
+          setContent(mediumSectionData);
         } else if (contentType === 'timeline') {
           // Load timeline content as collection (matching Pages CMS config)
           const timelineFiles = ['2014.json', '2017.json', '2021.json', '2026.json'];
@@ -186,6 +195,11 @@ export const fallbackContent = {
     teaserBody: "Edmond A Porter is a novelist and essayist whose work explores the quiet intersections of human connection and historical resonance.",
     teaserImage: "Edmond_Headshot.webp",
     readMoreLink: "Read Full Biography"
+  },
+  mediumSection: {
+    headline: "Latest Musings & Essays",
+    description: "Occasional thoughts on the craft of writing, historical echoes, and creative life.",
+    posts: []
   },
   aboutBio: {
     bioHeadline: "The Modern Archivist",

@@ -5,28 +5,56 @@ const MediumFeed = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Using a public RSS to JSON converter for Medium's feed
-        fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@eporter609')
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 'ok') {
-                    // Process posts to extract images from content
-                    const processedPosts = data.items.slice(0, 3).map(post => {
-                        // Extract image from post content or description
-                        const content = post.content || post.description || '';
-                        const imgMatch = content.match(/<img[^>]+src="([^"]+)"[^>]*>/i);
-                        const thumbnail = imgMatch ? imgMatch[1] : null;
-                        
-                        return {
-                            ...post,
-                            thumbnail: thumbnail || 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=800'
-                        };
+        // Using CMS data instead of hardcoded content
+        const loadMediumContent = async () => {
+            try {
+                setLoading(true);
+                
+                // Load medium-section content from CMS
+                const response = await fetch('/edmond-porter-react-site/content/medium-section.json');
+                if (!response.ok) throw new Error(`Failed to load medium-section content: ${response.status}`);
+                const data = await response.json();
+                
+                // For now, keep existing Medium RSS feed logic for post previews
+                // In the future, posts can be managed through CMS
+                fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@eporter609')
+                    .then(res => res.json())
+                    .then(rssData => {
+                        if (rssData.status === 'ok') {
+                            // Process posts to extract images from content
+                            const processedPosts = rssData.items.slice(0, 3).map(post => {
+                                // Extract image from post content or description
+                                const content = post.content || post.description || '';
+                                const imgMatch = content.match(/<img[^>]+src="([^"]+)"[^>]*>/i);
+                                const thumbnail = imgMatch ? imgMatch[1] : null;
+                                
+                                return {
+                                    title: post.title,
+                                    link: post.link,
+                                    thumbnail,
+                                    description: post.description
+                                };
+                            });
+                            
+                            setPosts(processedPosts);
+                        } else {
+                            console.error('Medium feed error:', rssData);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Medium RSS fetch error:', error);
+                    })
+                    .finally(() => {
+                        setLoading(false);
                     });
-                    setPosts(processedPosts);
-                }
+                    
+            } catch (error) {
+                console.error('Medium content loading error:', error);
                 setLoading(false);
-            })
-            .catch(() => setLoading(false));
+            }
+        };
+
+        loadMediumContent();
     }, []);
 
     if (loading) return <div className="py-20 text-center font-label text-slate-500">Loading latest stories...</div>;
@@ -37,8 +65,8 @@ const MediumFeed = () => {
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-16">
                     <span className="font-label text-secondary uppercase tracking-widest text-sm font-bold mb-4 block">On Medium</span>
-                    <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-6">Latest Musings & Essays</h2>
-                    <p className="text-on-surface-variant max-w-2xl mx-auto">Occasional thoughts on the craft of writing, historical echoes, and the creative life.</p>
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-6">{mediumContent?.headline || 'Latest Musings & Essays'}</h2>
+                    <p className="text-on-surface-variant max-w-2xl mx-auto">{mediumContent?.description || 'Occasional thoughts on the craft of writing, historical echoes, and the creative life.'}</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {posts.map((post, i) => (

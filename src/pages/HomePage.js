@@ -99,11 +99,13 @@ const HomePage = () => {
     const { content: hero, loading: heroLoading, error: heroError } = useCMSContent('hero');
     const { content: books, loading: booksLoading, error: booksError } = useCMSContent('books');
     const { content: homeBio, loading: homeBioLoading, error: homeBioError } = useCMSContent('home-bio');
+    const { content: mediumSection, loading: mediumLoading, error: mediumError } = useCMSContent('medium-section');
     
     // Use fallback content if CMS fails
     const heroContent = hero || fallbackContent.hero;
     const booksContent = books || fallbackContent.books;
     const homeBioContent = homeBio || fallbackContent.homeBio;
+    const mediumContent = mediumSection || fallbackContent.mediumSection;
     
     // Get status template
     const statusTemplate = getStatusTemplate(
