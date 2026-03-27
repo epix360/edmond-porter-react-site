@@ -149,7 +149,7 @@ console.log('✅ Created: about-bio.json');
 // Create medium-section content
 const mediumSectionContent = {
   headline: "Latest Musings & Essays",
-  description: "Occasional thoughts on the craft of writing, historical echoes, and creative life.",
+  description: "Occasional thoughts on craft of writing, historical echoes, and creative life.",
   posts: []
 };
 
@@ -163,43 +163,25 @@ console.log('✅ Created: medium-section.json');
 const timelineContent = [
   {
     year: "2014",
-    milestones: [
-      {
-        title: "The First Spark",
-        description: "Publication of 'Whispers in the Grain' in a leading literary journal, marking his professional debut."
-      }
-    ]
+    milestone1_title: "The First Spark",
+    milestone1_description: "Publication of 'Whispers in the Grain' in a leading literary journal, marking his professional debut."
   },
   {
     year: "2017",
-    milestones: [
-      {
-        title: "Crossing the Continent",
-        description: "Relocated to the Olympic Peninsula. The rugged landscapes began to heavily influence his work."
-      }
-    ]
+    milestone1_title: "Crossing the Continent",
+    milestone1_description: "Relocated to the Olympic Peninsula. The rugged landscapes began to heavily influence his work."
   },
   {
     year: "2021",
-    milestones: [
-      {
-        title: "A Breakthrough Release",
-        description: "Debut novel 'The Archivist's Daughter' is released to critical acclaim."
-      },
-      {
-        title: "Literary Award",
-        description: "Received recognition for outstanding contribution to contemporary literature."
-      }
-    ]
+    milestone1_title: "A Breakthrough Release",
+    milestone1_description: "Debut novel 'The Archivist's Daughter' is released to critical acclaim.",
+    milestone2_title: "Literary Award",
+    milestone2_description: "Received recognition for outstanding contribution to contemporary literature."
   },
   {
     year: "2026",
-    milestones: [
-      {
-        title: "First novel published",
-        description: "Turbulent Waters releases June 1, 2026"
-      }
-    ]
+    milestone1_title: "First novel published",
+    milestone1_description: "Turbulent Waters releases June 1, 2026"
   }
 ];
 
@@ -212,8 +194,10 @@ timelineContent.forEach(yearData => {
 
 // Create timeline collection index
 const timelineIndex = {
-  collection: "timeline"
+  collection: "timeline",
+  items: timelineContent.map(yearData => ({ year: yearData.year }))
 };
+
 fs.writeFileSync(
   path.join(timelineDir, 'index.json'),
   JSON.stringify(timelineIndex, null, 2)
