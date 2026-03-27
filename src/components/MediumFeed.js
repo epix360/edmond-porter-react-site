@@ -5,57 +5,39 @@ const MediumFeed = ({ mediumContent }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Using CMS data instead of hardcoded content
-        const loadMediumContent = async () => {
-            try {
-                setLoading(true);
-                
-                // Load medium-section content from CMS
-                const response = await fetch('/edmond-porter-react-site/content/medium-section.json');
-                if (!response.ok) throw new Error(`Failed to load medium-section content: ${response.status}`);
-                const data = await response.json();
-                
-                // For now, keep existing Medium RSS feed logic for post previews
-                // In the future, posts can be managed through CMS
-                fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@eporter609')
-                    .then(res => res.json())
-                    .then(rssData => {
-                        if (rssData.status === 'ok') {
-                            // Process posts to extract images from content
-                            const processedPosts = rssData.items.slice(0, 3).map(post => {
-                                // Extract image from post content or description
-                                const content = post.content || post.description || '';
-                                const imgMatch = content.match(/<img[^>]+src="([^"]+)"[^>]*>/i);
-                                const thumbnail = imgMatch ? imgMatch[1] : null;
-                                
-                                return {
-                                    title: post.title,
-                                    link: post.link,
-                                    thumbnail,
-                                    description: post.description
-                                };
-                            });
-                            
-                            setPosts(processedPosts);
-                        } else {
-                            console.error('Medium feed error:', rssData);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Medium RSS fetch error:', error);
-                    })
-                    .finally(() => {
-                        setLoading(false);
+        // CMS data is now passed as prop, no need to load separately
+        setLoading(false);
+        setPosts([]);
+        
+        // Keep existing Medium RSS feed logic for post previews
+        fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@eporter609')
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'ok') {
+                    // Process posts to extract images from content
+                    const processedPosts = data.items.slice(0, 3).map(post => {
+                        // Extract image from post content or description
+                        const content = post.content || post.description || '';
+                        const imgMatch = content.match(/<img[^>]+src="([^"]+)"[^>]*>/i);
+                        const thumbnail = imgMatch ? imgMatch[1] : null;
+                        
+                        return {
+                            title: post.title,
+                            link: post.link,
+                            thumbnail,
+                            description: post.description
+                        };
                     });
                     
-            } catch (error) {
-                console.error('Medium content loading error:', error);
-                setLoading(false);
-            }
-        };
-
-        loadMediumContent();
-    }, []);
+                    setPosts(processedPosts);
+                } else {
+                    console.error('Medium feed error:', data);
+                }
+            })
+            .catch(error => {
+                console.error('Medium RSS fetch error:', error);
+            });
+    }, []); // Empty dependency array since we don't need to load CMS data
 
     if (loading) return <div className="py-20 text-center font-label text-slate-500">Loading latest stories...</div>;
     if (posts.length === 0) return null;

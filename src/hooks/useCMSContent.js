@@ -10,7 +10,6 @@ export const useCMSContent = (contentType, filename = null) => {
     const loadContent = async () => {
       try {
         setLoading(true);
-        console.log(`Loading ${contentType} content...`);
         
         if (contentType === 'books') {
           // Load individual book files
@@ -61,46 +60,30 @@ export const useCMSContent = (contentType, filename = null) => {
         } else if (contentType === 'hero') {
           // Load hero content
           const url = '/edmond-porter-react-site/content/hero.json';
-          console.log(`Fetching hero: ${url}`);
           const response = await fetch(url);
           if (!response.ok) throw new Error(`Failed to load hero content: ${response.status}`);
           const heroData = await response.json();
-          console.log('Loaded hero content:', heroData);
           setContent(heroData);
         } else if (contentType === 'home-bio') {
           // Load home bio content
           const url = '/edmond-porter-react-site/content/home-bio.json';
-          console.log(`Fetching home-bio: ${url}`);
           const response = await fetch(url);
           if (!response.ok) throw new Error(`Failed to load home-bio content: ${response.status}`);
           const homeBioData = await response.json();
-          console.log('Loaded home-bio content:', homeBioData);
           setContent(homeBioData);
         } else if (contentType === 'about-bio') {
           // Load about-bio content
           const url = '/edmond-porter-react-site/content/about-bio.json';
-          console.log(`Fetching about-bio: ${url}`);
-          try {
-            const response = await fetch(url);
-            console.log(`About-bio response status: ${response.status}`);
-            if (!response.ok) {
-              throw new Error(`Failed to load about-bio content: ${response.status}`);
-            }
-            const aboutBioData = await response.json();
-            console.log('Loaded about-bio content:', aboutBioData);
-            setContent(aboutBioData);
-          } catch (error) {
-            console.error('About-bio fetch error:', error);
-            throw error;
-          }
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`Failed to load about-bio content: ${response.status}`);
+          const aboutBioData = await response.json();
+          setContent(aboutBioData);
         } else if (contentType === 'medium-section') {
           // Load medium section content
           const url = '/edmond-porter-react-site/content/medium-section.json';
-          console.log(`Fetching medium-section: ${url}`);
           const response = await fetch(url);
           if (!response.ok) throw new Error(`Failed to load medium-section content: ${response.status}`);
           const mediumSectionData = await response.json();
-          console.log('Loaded medium-section content:', mediumSectionData);
           setContent(mediumSectionData);
         } else if (contentType === 'timeline') {
           // Load timeline content as collection (matching Pages CMS config)
@@ -108,18 +91,13 @@ export const useCMSContent = (contentType, filename = null) => {
           
           const timelinePromises = timelineFiles.map(async (file) => {
             const url = `/edmond-porter-react-site/content/timeline/${file}`;
-            console.log(`Fetching timeline: ${url}`);
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Failed to load ${file}: ${response.status}`);
             return response.json();
           });
           
           const timelineData = await Promise.all(timelinePromises);
-          console.log(`Loaded ${timelineData.length} timeline years`);
-          
-          // Sort by year
-          const sortedTimeline = timelineData.sort((a, b) => parseInt(a.year) - parseInt(b.year));
-          setContent(sortedTimeline);
+          setContent(timelineData);
         }
       } catch (err) {
         console.error(`Error loading ${contentType} content:`, err);

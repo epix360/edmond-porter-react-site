@@ -51,12 +51,6 @@ const AboutPage = () => {
     const aboutBioContent = aboutBio || fallbackContent.aboutBio;
     const timelineContent = timeline || fallbackContent.timeline;
     
-    // Debug: Log content loading
-    console.log('AboutBio content:', aboutBioContent);
-    console.log('AboutBio loading:', aboutBioLoading);
-    console.log('AboutBio error:', aboutBioError);
-    console.log('Using fallback:', !aboutBio ? 'YES' : 'NO');
-    
     // Enhanced error handling
     if (aboutBioError) {
         console.error('❌ AboutBio loading error:', aboutBioError);
@@ -64,8 +58,6 @@ const AboutPage = () => {
     if (aboutBioLoading) {
         console.log('⏳ AboutBio still loading...');
     }
-    
-    // Timeline data is already sorted by year from useCMSContent
     const timelineData = timelineContent.map(yearData => ({
       year: yearData.year,
       milestones: [
