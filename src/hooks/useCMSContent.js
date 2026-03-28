@@ -111,7 +111,8 @@ export const fallbackContent = {
   hero: {
     title: "Turbulent Waters",
     cover: "Turbulent_Waters.webp",
-    blurb: "In the shadow of Idaho's biggest engineering project, Jake and Anna are on opposite sides of the river—until the current pulls them together and the flood takes everything else.",
+    mobileCover: "Turbulent_Waters_mobile.webp",
+    blurb: "In the shadow of Idaho's biggest engineering project, Jake and Anna are on opposite sides of the river—until the current pulls them together and flood takes everything else.",
     buttonText: "Pre-order Now",
     link: "https://www.amazon.com/Turbulent-Waters-Edmond-Porter-ebook/dp/B0GRLFBQJX",
     bookStatus: "coming-soon",

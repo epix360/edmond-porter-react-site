@@ -10,8 +10,15 @@ const AccessibleImage = ({
   height,
   priority = false,
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
+  mobileWidth = null, // Add mobile-specific width
+  mobileHeight = null, // Add mobile-specific height
   ...props 
 }) => {
+  // Determine if mobile version should be used
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const finalWidth = isMobile && mobileWidth ? mobileWidth : width;
+  const finalHeight = isMobile && mobileHeight ? mobileHeight : height;
+  
   return (
     <figure className={`relative ${className}`}>
       <img
@@ -21,8 +28,8 @@ const AccessibleImage = ({
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
         sizes={sizes}
-        width={width}
-        height={height}
+        width={finalWidth}
+        height={finalHeight}
         fetchpriority={priority ? 'high' : 'auto'}
         {...props}
       />

@@ -14,12 +14,15 @@ import { useCMSContent, fallbackContent } from '../hooks/useCMSContent';
 // Preload hero image for LCP optimization
 const preloadHeroImage = (imagePath) => {
   if (typeof window !== 'undefined' && imagePath) {
-    // Use the image path directly - it should already be the correct CDN path
+    // Use mobile image for mobile devices
+    const isMobile = window.innerWidth <= 768;
+    const heroImage = isMobile && heroContent?.mobileCover ? heroContent.mobileCover : imagePath;
+    
     const link = document.createElement('link');
     link.rel = 'preload';
+    link.href = heroImage;
     link.as = 'image';
-    link.href = imagePath;
-    link.fetchpriority = 'high';
+    link.fetchPriority = 'high';
     document.head.appendChild(link);
   }
 };
@@ -225,6 +228,8 @@ const HomePage = () => {
                             className="relative z-10 w-full max-w-[280px] md:max-w-md mx-auto rounded-lg shadow-2xl transform md:rotate-3 transition-transform duration-500 hover:rotate-0"
                             width={280}
                             height={400}
+                            mobileWidth={200} // Mobile-optimized width
+                            mobileHeight={300} // Mobile-optimized height
                             priority={true}
                         />
                     </div>
