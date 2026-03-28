@@ -76,10 +76,10 @@ const createPreRenderedHTML = () => {
     if (fs.existsSync(manifestPath)) {
       const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
       if (manifest.files && manifest.files['main.js']) {
-        jsPath = `/edmond-porter-react-site${manifest.files['main.js'].replace('./', '/')}`;
+        jsPath = `${manifest.files['main.js'].replace('./', '/')}`;
       }
       if (manifest.files && manifest.files['main.css']) {
-        cssPath = `/edmond-porter-react-site${manifest.files['main.css'].replace('./', '/')}`;
+        cssPath = `${manifest.files['main.css'].replace('./', '/')}`;
       }
     }
   } catch (error) {
@@ -137,8 +137,8 @@ const createPreRenderedHTML = () => {
   </script>
   
   <!-- Favicon and Theme -->
-  <link rel="icon" href="/edmond-porter-react-site/favicon.ico" />
-  <link rel="apple-touch-icon" href="/edmond-porter-react-site/images/logo192.png" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/images/logo192.png" />
   <meta name="theme-color" content="#000000" />
   
   <!-- Fonts -->

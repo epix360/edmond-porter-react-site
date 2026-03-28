@@ -175,6 +175,10 @@ const createOptimizedIndexHTML = () => {
   // Remove original blocking CSS link (replaced with preload)
   html = html.replace(/<link[^>]*href="\/[^"]*\.css"[^>]*rel="stylesheet"[^>]*>/g, '');
   
+  // Fix any remaining GitHub Pages base paths
+  html = html.replace(/\/edmond-porter-react-site\/favicon\.ico/g, '/favicon.ico');
+  html = html.replace(/\/edmond-porter-react-site\/images\/logo192\.png/g, '/images/logo192.png');
+  
   // Fix any remaining double path issues in CSS and JS links
   html = html.replace(/href="\/[^"]*\/static\//g, 'href="/static/');
   html = html.replace(/src="\/[^"]*\/static\//g, 'src="/static/');
