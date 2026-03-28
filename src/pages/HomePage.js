@@ -241,10 +241,10 @@ const HomePage = () => {
                             src={getImagePath(heroContent.cover)}
                             mobileSrc={heroContent.mobileCover ? getImagePath(heroContent.mobileCover) : null}
                             alt={heroContent.title}
-                            className="relative z-10 w-full max-w-[190px] sm:max-w-[200px] md:max-w-md mx-auto rounded-lg shadow-2xl transform md:rotate-3 transition-transform duration-500 hover:rotate-0"
+                            className="relative z-10 w-full max-w-[200px] sm:max-w-[200px] md:max-w-md mx-auto rounded-lg shadow-2xl transform md:rotate-3 transition-transform duration-500 hover:rotate-0"
                             width={280}
                             height={400}
-                            mobileWidth={190} // Mobile-optimized width
+                            mobileWidth={200} // Mobile-optimized width
                             mobileHeight={260} // Mobile-optimized height
                             priority={true}
                         />
