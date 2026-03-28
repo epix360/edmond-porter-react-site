@@ -9,14 +9,18 @@ const fs = require('fs');
 const path = require('path');
 
 const createPreRenderedHTML = () => {
-  const siteUrl = 'https://edmondaporter.com';
+  // Detect if we're building for GitHub Pages or custom domain
+  // Default to GitHub Pages for now since custom domain DNS needs time to propagate
+  const isGitHubPages = true; // Will be configurable later
+  const siteUrl = isGitHubPages ? 'https://epix360.github.io/edmond-porter-react-site' : 'https://edmondaporter.com';
+  const basePath = isGitHubPages ? '/edmond-porter-react-site' : '';
   
-  // Read the actual build files to get correct paths
+  // Read actual build files to get correct paths
   const buildDir = path.join(__dirname, '../build');
   const manifestPath = path.join(buildDir, 'asset-manifest.json');
   
-  let jsPath = '/static/js/main.a62bebb7.js';
-  let cssPath = '/static/css/main.e35003d2.css';
+  let jsPath = `${basePath}/static/js/main.a62bebb7.js`;
+  let cssPath = `${basePath}/static/css/main.e35003d2.css`;
   
   // Load timeline data and embed it
   let timelineData = [];

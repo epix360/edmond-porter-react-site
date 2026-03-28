@@ -22,7 +22,7 @@ export const useCMSContent = (contentType, filename = null) => {
           ];
           
           const bookPromises = bookFiles.map(async (file) => {
-            const url = `/content/books/${file}`;
+            const url = `/edmond-porter-react-site/content/books/${file}`;
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Failed to load ${file}: ${response.status}`);
             return response.json();
@@ -50,28 +50,28 @@ export const useCMSContent = (contentType, filename = null) => {
           setContent(reorderedBooks);
         } else if (contentType === 'hero') {
           // Load hero content
-          const url = '/content/hero.json';
+          const url = '/edmond-porter-react-site/content/hero.json';
           const response = await fetch(url);
           if (!response.ok) throw new Error(`Failed to load hero content: ${response.status}`);
           const heroData = await response.json();
           setContent(heroData);
         } else if (contentType === 'home-bio') {
           // Load home bio content
-          const url = '/content/home-bio.json';
+          const url = '/edmond-porter-react-site/content/home-bio.json';
           const response = await fetch(url);
           if (!response.ok) throw new Error(`Failed to load home-bio content: ${response.status}`);
           const homeBioData = await response.json();
           setContent(homeBioData);
         } else if (contentType === 'about-bio') {
           // Load about-bio content
-          const url = '/content/about-bio.json';
+          const url = '/edmond-porter-react-site/content/about-bio.json';
           const response = await fetch(url);
           if (!response.ok) throw new Error(`Failed to load about-bio content: ${response.status}`);
           const aboutBioData = await response.json();
           setContent(aboutBioData);
         } else if (contentType === 'medium-section') {
           // Load medium section content
-          const url = '/content/medium-section.json';
+          const url = '/edmond-porter-react-site/content/medium-section.json';
           const response = await fetch(url);
           if (!response.ok) throw new Error(`Failed to load medium-section content: ${response.status}`);
           const mediumSectionData = await response.json();
