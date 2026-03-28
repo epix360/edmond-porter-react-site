@@ -44,7 +44,7 @@ const Navigation = () => {
                     {/* 2. Desktop Navigation Links */}
                     <div className="hidden md:flex items-center space-x-8 font-label text-base tracking-tight">
                         <Link className={`${location.pathname === '/' && !activeAnchor ? 'text-secondary font-bold border-b-2 border-secondary' : 'text-slate-600 hover:text-secondary'} transition-all py-1`} to="/" onClick={() => {setActiveAnchor(null); if (location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }) }}}>Home</Link>
-                        <Link className={`${location.pathname === '/books' ? 'text-secondary font-bold border-b-2 border-secondary' : 'text-slate-600 hover:text-secondary'} transition-all py-1`} to="/books" onClick={() => setActiveAnchor(null)}>Books</Link>
+                        <a className={`${activeAnchor === '#published-works' ? 'text-secondary font-bold border-b-2 border-secondary' : 'text-slate-600 hover:text-secondary'} transition-all py-1`} href="#published-works" onClick={(e) => handleAnchorClick(e, '#published-works')}>Books</a>
                         <a className={`${activeAnchor === '#medium' ? 'text-secondary font-bold border-b-2 border-secondary' : 'text-slate-600 hover:text-secondary'} transition-all py-1`} href="#medium" onClick={(e) => handleAnchorClick(e, '#medium')}>Medium</a>
                         <a className={`${activeAnchor === '#contact' ? 'text-secondary font-bold border-b-2 border-secondary' : 'text-slate-600 hover:text-secondary'} transition-all py-1`} href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')}>Contact</a>
                         <Link className={`${location.pathname === '/about' ? 'text-secondary font-bold border-b-2 border-secondary' : 'text-slate-600 hover:text-secondary'} transition-all py-1`} to="/about" onClick={() => setActiveAnchor(null)}>About</Link>
@@ -70,7 +70,7 @@ const Navigation = () => {
                     </button>
                     <div className="flex flex-col p-8 gap-8 text-2xl font-headline text-primary">
                         <Link to="/" onClick={() => { setMobileMenuOpen(false); setActiveAnchor(null); if (location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }} className={location.pathname === '/' && !activeAnchor ? 'text-secondary' : ''}>Home</Link>
-                        <Link to="/books" onClick={() => { setMobileMenuOpen(false); setActiveAnchor(null); }} className={location.pathname === '/books' ? 'text-secondary' : ''}>Books</Link>
+                        <a href="#published-works" onClick={(e) => handleAnchorClick(e, '#published-works')} className={activeAnchor === '#published-works' ? 'text-secondary' : ''}>Books</a>
                         <a href="#medium" onClick={(e) => handleAnchorClick(e, '#medium')} className={activeAnchor === '#medium' ? 'text-secondary' : ''}>Medium</a>
                         <a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')} className={activeAnchor === '#contact' ? 'text-secondary' : ''}>Contact</a>
                         <Link to="/about" onClick={() => { setMobileMenuOpen(false); setActiveAnchor(null); }} className={location.pathname === '/about' ? 'text-secondary' : ''}>About</Link>
