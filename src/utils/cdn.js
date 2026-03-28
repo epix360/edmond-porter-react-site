@@ -6,7 +6,7 @@ const REPO_INFO = {
   user: 'epix360',
   repo: 'edmond-porter-react-site',
   version: '1.0.0',
-  homepage: 'https://epix360.github.io/edmond-porter-react-site'
+  homepage: 'https://edmondaporter.com'
 };
 
 // Environment detection
@@ -17,6 +17,7 @@ const isDevelopment = () => {
       window.location.hostname === 'localhost' ||
       window.location.hostname === '127.0.0.1' ||
       window.location.hostname === '' ||
+      window.location.hostname === 'edmondaporter.com' ||
       process.env.NODE_ENV === 'development'
     );
   }
@@ -40,7 +41,7 @@ export const getAssetUrl = (path, options = {}) => {
   
   if (shouldUseLocal) {
     // Serve from local public folder during development
-    // Include base path for GitHub Pages compatibility
+    // Include base path for GitHub Pages compatibility as fallback
     const basePath = window.location.hostname.includes('github.io') ? '/edmond-porter-react-site' : '';
     return `${basePath}/${subdirectory}/${normalizedPath}`;
   }

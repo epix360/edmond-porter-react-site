@@ -9,14 +9,14 @@ const fs = require('fs');
 const path = require('path');
 
 const createPreRenderedHTML = () => {
-  const siteUrl = 'https://epix360.github.io/edmond-porter-react-site';
+  const siteUrl = 'https://edmondaporter.com';
   
   // Read the actual build files to get correct paths
   const buildDir = path.join(__dirname, '../build');
   const manifestPath = path.join(buildDir, 'asset-manifest.json');
   
-  let jsPath = '/edmond-porter-react-site/static/js/main.a62bebb7.js';
-  let cssPath = '/edmond-porter-react-site/static/css/main.e35003d2.css';
+  let jsPath = '/static/js/main.a62bebb7.js';
+  let cssPath = '/static/css/main.e35003d2.css';
   
   // Load timeline data and embed it
   let timelineData = [];

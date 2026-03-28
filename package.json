@@ -2,7 +2,7 @@
   "name": "edmond-porter-website",
   "version": "1.0.0",
   "description": "Author website for Edmond A Porter",
-  "homepage": "https://epix360.github.io/edmond-porter-react-site",
+  "homepage": "https://edmondaporter.com",
   "main": "src/index.js",
   "scripts": {
     "prebuild": "node scripts/generate-book-index.js && node scripts/generate-timeline-js.js",

@@ -9,12 +9,11 @@ Disallow: /*.json$
 Disallow: /private/
 
 # Allow search engines to access content and images
-Allow: /edmond-porter-react-site/
 Allow: /images/
 Allow: /content/
 
 # Sitemap location
-Sitemap: https://epix360.github.io/edmond-porter-react-site/sitemap.xml
+Sitemap: https://edmondaporter.com/sitemap.xml
 
 # Crawl delay for better server performance
 Crawl-delay: 1

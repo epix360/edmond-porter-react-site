@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const siteUrl = 'https://epix360.github.io/edmond-porter-react-site';
+const siteUrl = 'https://edmondaporter.com';
 
 const pages = [
   { url: '/', priority: 1.0, changefreq: 'weekly' },
