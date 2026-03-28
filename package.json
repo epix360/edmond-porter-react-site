@@ -5,7 +5,7 @@
   "homepage": "https://edmondaporter.com",
   "main": "src/index.js",
   "scripts": {
-    "prebuild": "node scripts/generate-book-index.js && node scripts/generate-timeline-js.js",
+    "prebuild": "node scripts/generate-book-index.js && node scripts/generate-timeline-js.js && node scripts/copy-images",
     "build": "react-scripts build && node scripts/pre-render && node scripts/optimize-performance",
     "build:analyze": "npm run build && node scripts/optimize-performance",
     "start": "react-scripts start",
