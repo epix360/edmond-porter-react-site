@@ -208,7 +208,7 @@ const HomePage = () => {
             {/* Hero Section */}
             <section className="relative min-h-[450px] sm:min-h-[500px] md:min-h-[800px] flex items-center overflow-hidden bg-primary-container">
                 <div className="absolute inset-0 opacity-20 pointer-events-none" style={{backgroundImage: "radial-gradient(circle at 20% 50%, #805533 0%, transparent 50%)"}}></div>
-                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10 py-12 md:py-20">
+                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center relative z-10 py-12 md:py-20">
                     <div className="order-2 md:order-1 text-center md:text-left">
                         {statusTemplate && (
                             <span className={`inline-block font-label uppercase tracking-[0.2em] font-bold mb-2 sm:mb-4 text-sm ${statusTemplate.color}`}>
@@ -235,7 +235,7 @@ const HomePage = () => {
                             )}
                         </div>
                     </div>
-                    <div className="order-1 md:order-2 relative group px-6 sm:px-10 md:px-0">
+                    <div className="order-1 md:order-2 relative group px-6 sm:px-6 md:px-6">
                         <div className="absolute -inset-4 bg-secondary/10 rounded-xl blur-3xl group-hover:bg-secondary/20 transition-all duration-700"></div>
                         <AccessibleImage 
                             src={getImagePath(heroContent.cover)}
