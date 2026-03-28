@@ -12,7 +12,7 @@ if (rootElement.hasChildNodes()) {
   root.hydrateRoot(
     <React.StrictMode>
       <HelmetProvider>
-        <BrowserRouter basename="/edmond-porter-react-site">
+        <BrowserRouter>
           <App />
         </BrowserRouter>
       </HelmetProvider>
@@ -22,7 +22,7 @@ if (rootElement.hasChildNodes()) {
   root.render(
     <React.StrictMode>
       <HelmetProvider>
-        <BrowserRouter basename="/edmond-porter-react-site">
+        <BrowserRouter>
           <App />
         </BrowserRouter>
       </HelmetProvider>
