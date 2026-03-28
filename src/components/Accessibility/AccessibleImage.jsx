@@ -16,7 +16,26 @@ const AccessibleImage = ({
   ...props 
 }) => {
   // Determine if mobile version should be used
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const [isMobile, setIsMobile] = React.useState(false);
+  
+  // Check mobile status on mount and window resize
+  React.useEffect(() => {
+    const checkMobile = () => {
+      const mobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (mobile && mobileSrc) {
+        console.log('📱 Using mobile image:', mobileSrc);
+      }
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, [mobileSrc]);
+  
   const finalWidth = isMobile && mobileWidth ? mobileWidth : width;
   const finalHeight = isMobile && mobileHeight ? mobileHeight : height;
   const finalSrc = isMobile && mobileSrc ? mobileSrc : src;
