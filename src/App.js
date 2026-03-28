@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import './styles/index.css';
+import './styles/font-optimization.css';
 
 function App() {
   return (

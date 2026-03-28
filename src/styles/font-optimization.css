@@ -1,0 +1,52 @@
+/* Font Display Optimization - Reduces layout shifts during font swap */
+
+/* Override existing Google Fonts with metric adjustments */
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url('https://fonts.gstatic.com/s/inter/v13/UcCO3FwrPK3iUeicEkQ.woff2') format('woff2');
+  font-display: swap;
+  size-adjust: 95%; /* Reduce layout shift */
+  ascent-override: 85%; /* Fine-tune metrics */
+  descent-override: 15%; /* Stabilize baseline */
+  line-gap-override: 0%; /* Prevent line height changes */
+}
+
+@font-face {
+  font-family: 'Noto Serif';
+  src: local('Noto Serif'), url('https://fonts.gstatic.com/s/notoserif/v21/ga6daw1J5X9T9RW6j9bNV.woff2') format('woff2');
+  font-display: swap;
+  size-adjust: 95%; /* Reduce layout shift */
+  ascent-override: 85%; /* Fine-tune metrics */
+  descent-override: 15%; /* Stabilize baseline */
+  line-gap-override: 0%; /* Prevent line height changes */
+}
+
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  src: local('Material Symbols Outlined'), url('https://fonts.gstatic.com/s/materialsymbolsoutlined/v109/kJEHBFvV0A1.woff2') format('woff2');
+  font-display: swap;
+  size-adjust: 95%; /* Reduce layout shift */
+  ascent-override: 85%; /* Fine-tune metrics */
+  descent-override: 15%; /* Stabilize baseline */
+  line-gap-override: 0%; /* Prevent line height changes */
+}
+
+/* Stabilize text rendering during font swap */
+body {
+  font-synthesis: none; /* Prevent font synthesis during loading */
+  text-rendering: optimizeLegibility; /* Better text rendering */
+}
+
+/* Reduce FOUT (Flash of Unstyled Text) */
+.wf-loading {
+  visibility: visible; /* Keep text visible during loading */
+}
+
+.wf-inactive {
+  visibility: visible; /* Ensure text remains visible */
+}
+
+/* Smooth font transitions */
+* {
+  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
+}
