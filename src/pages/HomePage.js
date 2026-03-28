@@ -132,10 +132,15 @@ const HomePage = () => {
             const link = document.createElement('link');
             link.rel = 'preload';
             // Use correct path for mobile vs desktop
-            link.href = isMobile && heroContent.mobileCover ? getImagePath(heroContent.mobileCover) : getImagePath(heroContent.cover);
+            link.href = getImagePath(heroImage);
             link.as = 'image';
             link.fetchPriority = 'high';
             document.head.appendChild(link);
+            
+            // Only preload if it's the mobile version being used
+            if (isMobile && heroContent.mobileCover) {
+                console.log('📱 Mobile hero image preloaded:', heroContent.mobileCover);
+            }
         }
     }, [heroContent]);
 
