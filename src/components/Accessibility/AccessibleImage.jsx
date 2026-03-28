@@ -46,6 +46,10 @@ const AccessibleImage = ({
         src={finalSrc}
         alt={alt}
         className="w-full h-auto"
+        style={{
+          maxWidth: isMobile && mobileWidth ? `${mobileWidth}px` : '100%',
+          height: 'auto'
+        }}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
         sizes={sizes}
