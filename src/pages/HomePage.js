@@ -206,36 +206,36 @@ const HomePage = () => {
         <Navigation />
         <main className="pt-16 md:pt-20">
             {/* Hero Section */}
-            <section className="relative min-h-[600px] md:min-h-[800px] flex items-center overflow-hidden bg-primary-container">
+            <section className="relative min-h-[450px] sm:min-h-[500px] md:min-h-[800px] flex items-center overflow-hidden bg-primary-container">
                 <div className="absolute inset-0 opacity-20 pointer-events-none" style={{backgroundImage: "radial-gradient(circle at 20% 50%, #805533 0%, transparent 50%)"}}></div>
-                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center relative z-10 py-16 md:py-20">
+                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center relative z-10 py-8 sm:py-12 md:py-20">
                     <div className="order-2 md:order-1 text-center md:text-left">
                         {statusTemplate && (
-                            <span className={`inline-block font-label uppercase tracking-[0.2em] font-bold mb-4 text-sm ${statusTemplate.color}`}>
+                            <span className={`inline-block font-label uppercase tracking-[0.2em] font-bold mb-2 sm:mb-4 text-sm ${statusTemplate.color}`}>
                                 {statusTemplate.label}
                             </span>
                         )}
-                        <h1 className="font-headline text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                        <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                             {heroContent.title.split(' ').map((word, i) => 
                                 i === 0 ? word : <><br/><span key={i} className="italic text-[#B8C8DB]">{word}</span></>
                             )}
                         </h1>
-                        <p className="text-lg md:text-xl text-on-primary-container mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed font-light">
+                        <p className="text-base sm:text-lg md:text-xl text-on-primary-container mb-6 sm:mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed font-light">
                             {heroContent.blurb}
                         </p>
                         <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-                            <a className="bg-secondary text-white px-8 py-4 rounded-lg font-bold text-center hover:bg-[#96643c] transition-colors shadow-lg shadow-black/20" href={heroContent.link} target="_blank" rel="noopener noreferrer">
+                            <a className="bg-secondary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-center hover:bg-[#96643c] transition-colors shadow-lg shadow-black/20" href={heroContent.link} target="_blank" rel="noopener noreferrer">
                                 {heroContent.buttonText}
                             </a>
                             {statusTemplate && (
-                                <div className={`flex items-center justify-center space-x-2 font-label py-4 ${statusTemplate.color}`}>
+                                <div className={`hidden sm:flex items-center justify-center space-x-2 font-label py-4 ${statusTemplate.color}`}>
                                     <span className="material-symbols-outlined">{statusTemplate.icon}</span>
                                     <span>{statusTemplate.text}</span>
                                 </div>
                             )}
                         </div>
                     </div>
-                    <div className="order-1 md:order-2 relative group px-10 md:px-0">
+                    <div className="order-1 md:order-2 relative group px-6 sm:px-10 md:px-0">
                         <div className="absolute -inset-4 bg-secondary/10 rounded-xl blur-3xl group-hover:bg-secondary/20 transition-all duration-700"></div>
                         <AccessibleImage 
                             src={getImagePath(heroContent.cover)}
@@ -244,8 +244,8 @@ const HomePage = () => {
                             className="relative z-10 w-full max-w-[280px] md:max-w-md mx-auto rounded-lg shadow-2xl transform md:rotate-3 transition-transform duration-500 hover:rotate-0"
                             width={280}
                             height={400}
-                            mobileWidth={200} // Mobile-optimized width
-                            mobileHeight={300} // Mobile-optimized height
+                            mobileWidth={160} // Mobile-optimized width (reduced from 200)
+                            mobileHeight={240} // Mobile-optimized height (reduced from 300)
                             priority={true}
                         />
                     </div>
