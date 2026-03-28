@@ -133,7 +133,7 @@ export const CDN_CONFIG = {
   ...REPO_INFO,
   isDevelopment: isDevelopment(),
   baseUrl: `https://cdn.jsdelivr.net/gh/${REPO_INFO.user}/${REPO_INFO.repo}`,
-  localAssetsPath: '/public/images'
+  localAssetsPath: '/images'  // Fixed: removed 'public/' prefix for custom domain
 };
 
 export default {
