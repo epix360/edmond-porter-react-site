@@ -20,17 +20,28 @@
     
     <!-- Critical Font Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Web Font Loader for async font loading -->
-    <script>
-      (function(d) {
-        var config = {
-          kitId: 'custom',
-          scriptTimeout: 3000,
-          async: true
-        },
-        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Edmond_Headshot.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="/static/css/main.e3a91856.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/static/js/main.b4f6eeda.js" as="script" fetchpriority="high">
+  
+  <!-- DNS prefetch for external resources -->
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  
+  <!-- Prefetch critical resources for next navigation -->
+  <link rel="prefetch" href="/about" as="document">
+  
+  <!-- Web Font Loader for async font loading -->
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'custom',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
       })(document);
       
       // Custom font loading configuration
