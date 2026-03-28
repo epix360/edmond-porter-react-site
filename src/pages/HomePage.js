@@ -208,7 +208,7 @@ const HomePage = () => {
             {/* Hero Section */}
             <section className="relative min-h-[450px] sm:min-h-[500px] md:min-h-[800px] flex items-center overflow-hidden bg-primary-container">
                 <div className="absolute inset-0 opacity-20 pointer-events-none" style={{backgroundImage: "radial-gradient(circle at 20% 50%, #805533 0%, transparent 50%)"}}></div>
-                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center relative z-10 py-8 sm:py-12 md:py-20">
+                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10 py-12 md:py-20">
                     <div className="order-2 md:order-1 text-center md:text-left">
                         {statusTemplate && (
                             <span className={`inline-block font-label uppercase tracking-[0.2em] font-bold mb-2 sm:mb-4 text-sm ${statusTemplate.color}`}>
@@ -253,7 +253,7 @@ const HomePage = () => {
             </section>
 
             {/* Quick About Link */}
-            <section className="py-24 bg-surface-bright" id="about-teaser">
+            <section className="py-12 bg-surface-bright" id="about-teaser">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid md:grid-cols-12 gap-16 items-center">
                         <div className="md:col-span-5 relative">
@@ -276,7 +276,7 @@ const HomePage = () => {
             </section>
 
             {/* Books Section */}
-            <section className="py-24 bg-surface-container-low" id="published-works">
+            <section className="py-12 bg-surface-container-low" id="published-works">
                 <div className="max-w-[1440px] mx-auto px-6">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                         <div>
