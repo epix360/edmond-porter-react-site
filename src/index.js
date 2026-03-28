@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
+import Analytics from './components/Analytics';
 
 // Register service worker for offline caching
 if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
@@ -31,6 +32,7 @@ if (rootElement.hasChildNodes()) {
     <React.StrictMode>
       <HelmetProvider>
         <BrowserRouter>
+          <Analytics />
           <App />
         </BrowserRouter>
       </HelmetProvider>
@@ -41,6 +43,7 @@ if (rootElement.hasChildNodes()) {
     <React.StrictMode>
       <HelmetProvider>
         <BrowserRouter>
+          <Analytics />
           <App />
         </BrowserRouter>
       </HelmetProvider>
