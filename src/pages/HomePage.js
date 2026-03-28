@@ -125,7 +125,16 @@ const HomePage = () => {
     // Preload hero image for LCP optimization
     useEffect(() => {
         if (heroContent?.cover) {
-            preloadHeroImage(getImagePath(heroContent.cover));
+            // Use mobile image for mobile devices
+            const isMobile = window.innerWidth <= 768;
+            const heroImage = isMobile && heroContent.mobileCover ? heroContent.mobileCover : heroContent.cover;
+            
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.href = heroImage;
+            link.as = 'image';
+            link.fetchPriority = 'high';
+            document.head.appendChild(link);
         }
     }, [heroContent]);
 
