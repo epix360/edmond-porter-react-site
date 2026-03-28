@@ -5,5 +5,5 @@ module.exports = {
   minify: false,
   skipThirdPartyRequests: true,
   userAgent: 'react-snap',
-  publicPath: '/edmond-porter-react-site/'
+  publicPath: '/'
 };

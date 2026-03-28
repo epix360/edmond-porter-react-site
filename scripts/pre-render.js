@@ -103,7 +103,7 @@ const createPreRenderedHTML = () => {
       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
       j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','%REACT_APP_GTM_ID%');
+      })(window,document,'script','dataLayer','${process.env.REACT_APP_GTM_ID || '%REACT_APP_GTM_ID%'}');
   </script>
   
   <!-- Open Graph Meta Tags -->
@@ -172,7 +172,7 @@ const createPreRenderedHTML = () => {
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=%REACT_APP_GTM_ID%"
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${process.env.REACT_APP_GTM_ID || '%REACT_APP_GTM_ID%'}"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
   <noscript>You need to enable JavaScript to run this app.</noscript>
