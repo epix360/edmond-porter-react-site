@@ -13,7 +13,7 @@ const Head = ({
 }) => {
   const siteTitle = title ? `${title} | Edmond A Porter` : 'Edmond A Porter | Author';
   const siteDescription = description || 'Contemporary author exploring human experience through compelling narratives and thoughtful prose.';
-  const siteUrl = 'https://epix360.github.io/edmond-porter-react-site';
+  const siteUrl = 'https://edmondaporter.com';
   const fullCanonicalUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
 
   return (
