@@ -30,7 +30,7 @@ export const getAssetUrl = (path, options = {}) => {
     useLocal = null, 
     version = null,
     branch = 'main',
-    subdirectory = 'images'  // Fixed: changed from 'public/images' to 'images'
+    subdirectory = 'images'  // For local use
   } = options;
   
   // Normalize path - remove leading slash and ensure clean path
@@ -48,7 +48,10 @@ export const getAssetUrl = (path, options = {}) => {
   const targetVersion = version || REPO_INFO.version;
   const cdnVersion = targetVersion.startsWith('v') ? targetVersion : branch;
   
-  return `https://cdn.jsdelivr.net/gh/${REPO_INFO.user}/${REPO_INFO.repo}@${cdnVersion}/${subdirectory}/${normalizedPath}`;
+  // CDN needs to use public/images/ path
+  const cdnSubdirectory = 'public/images';
+  
+  return `https://cdn.jsdelivr.net/gh/${REPO_INFO.user}/${REPO_INFO.repo}@${cdnVersion}/${cdnSubdirectory}/${normalizedPath}`;
 };
 
 // Legacy compatibility function to replace getImagePath
