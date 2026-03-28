@@ -51,9 +51,6 @@ const createOptimizedIndexHTML = () => {
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   
-  <!-- Prefetch critical resources for next navigation -->
-  <link rel="prefetch" href="/about" as="document">
-  
   <!-- Web Font Loader for async font loading -->
   <script>
     (function(d) {
