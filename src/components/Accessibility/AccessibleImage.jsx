@@ -42,7 +42,7 @@ const AccessibleImage = ({
       <img
         src={finalSrc}
         alt={alt}
-        className="w-full h-auto"
+        className="h-auto mx-auto block"
         style={{
           maxWidth: isMobile && mobileWidth ? `${mobileWidth}px` : '100%',
           height: 'auto'
