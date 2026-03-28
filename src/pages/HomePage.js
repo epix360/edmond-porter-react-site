@@ -239,6 +239,7 @@ const HomePage = () => {
                         <div className="absolute -inset-4 bg-secondary/10 rounded-xl blur-3xl group-hover:bg-secondary/20 transition-all duration-700"></div>
                         <AccessibleImage 
                             src={getImagePath(heroContent.cover)}
+                            mobileSrc={heroContent.mobileCover ? getImagePath(heroContent.mobileCover) : null}
                             alt={heroContent.title}
                             className="relative z-10 w-full max-w-[280px] md:max-w-md mx-auto rounded-lg shadow-2xl transform md:rotate-3 transition-transform duration-500 hover:rotate-0"
                             width={280}
