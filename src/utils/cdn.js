@@ -41,9 +41,7 @@ export const getAssetUrl = (path, options = {}) => {
   
   if (shouldUseLocal) {
     // Serve from local public folder during development
-    // Include base path for GitHub Pages compatibility as fallback
-    const basePath = window.location.hostname.includes('github.io') ? '/edmond-porter-react-site' : '';
-    return `${basePath}/${subdirectory}/${normalizedPath}`;
+    return `${subdirectory}/${normalizedPath}`;
   }
   
   // Use jsDelivr CDN for production
