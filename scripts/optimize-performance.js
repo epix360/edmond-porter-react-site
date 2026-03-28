@@ -42,7 +42,7 @@ const createOptimizedIndexHTML = () => {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
-  <link rel="preload" href="/edmond-porter-react-site/static/css/${cssFile || 'main.css'}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/static/css/${cssFile || 'main.css'}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   
   <!-- Web Font Loader for async font loading -->
@@ -176,8 +176,8 @@ const createOptimizedIndexHTML = () => {
   html = html.replace(/<link[^>]*href="\/[^"]*\.css"[^>]*rel="stylesheet"[^>]*>/g, '');
   
   // Fix any remaining double path issues in CSS and JS links
-  html = html.replace(/href="\/[^"]*\/static\//g, 'href="/edmond-porter-react-site/static/');
-  html = html.replace(/src="\/[^"]*\/static\//g, 'src="/edmond-porter-react-site/static/');
+  html = html.replace(/href="\/[^"]*\/static\//g, 'href="/static/');
+  html = html.replace(/src="\/[^"]*\/static\//g, 'src="/static/');
   
   fs.writeFileSync(indexPath, html);
   console.log('✅ Performance optimizations applied to index.html');

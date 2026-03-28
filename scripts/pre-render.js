@@ -9,11 +9,10 @@ const fs = require('fs');
 const path = require('path');
 
 const createPreRenderedHTML = () => {
-  // Detect if we're building for GitHub Pages or custom domain
-  // Default to GitHub Pages for now since custom domain DNS needs time to propagate
-  const isGitHubPages = true; // Will be configurable later
-  const siteUrl = isGitHubPages ? 'https://epix360.github.io/edmond-porter-react-site' : 'https://edmondaporter.com';
-  const basePath = isGitHubPages ? '/edmond-porter-react-site' : '';
+  // For now, use root paths since custom domain is active
+  // GitHub Pages will still work with these paths during transition
+  const siteUrl = 'https://edmondaporter.com';
+  const basePath = ''; // Use root paths for custom domain
   
   // Read actual build files to get correct paths
   const buildDir = path.join(__dirname, '../build');
