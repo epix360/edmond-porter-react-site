@@ -131,7 +131,8 @@ const HomePage = () => {
             
             const link = document.createElement('link');
             link.rel = 'preload';
-            link.href = heroImage;
+            // Use correct path for mobile vs desktop
+            link.href = isMobile && heroContent.mobileCover ? getImagePath(heroContent.mobileCover) : getImagePath(heroContent.cover);
             link.as = 'image';
             link.fetchPriority = 'high';
             document.head.appendChild(link);
