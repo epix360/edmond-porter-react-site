@@ -217,7 +217,7 @@ const HomePage = () => {
                         )}
                         <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                             {heroContent.title.split(' ').map((word, i) => 
-                                i === 0 ? word : <><br/><span key={i} className="italic text-[#B8C8DB]">{word}</span></>
+                                i === 0 ? word : <><br key={i} className="hidden sm:block" /><span key={i} className="italic text-[#B8C8DB] sm:inline">{' '}{word}</span></>
                             )}
                         </h1>
                         <p className="text-base sm:text-lg md:text-xl text-on-primary-container mb-6 sm:mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed font-light">
