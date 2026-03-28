@@ -23,9 +23,6 @@ const AccessibleImage = ({
     const checkMobile = () => {
       const mobile = typeof window !== 'undefined' && window.innerWidth <= 768;
       setIsMobile(mobile);
-      if (mobile && mobileSrc) {
-        console.log('📱 Using mobile image:', mobileSrc);
-      }
     };
     
     checkMobile();

@@ -139,7 +139,7 @@ const HomePage = () => {
             
             // Only preload if it's the mobile version being used
             if (isMobile && heroContent.mobileCover) {
-                console.log('📱 Mobile hero image preloaded:', heroContent.mobileCover);
+                // Mobile image preloaded silently
             }
         }
     }, [heroContent]);
