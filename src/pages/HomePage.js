@@ -255,7 +255,7 @@ const HomePage = () => {
             {/* Quick About Link */}
             <section className="py-12 bg-surface-bright" id="about-teaser">
                 <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid md:grid-cols-12 gap-16 items-center">
+                    <div className="grid md:grid-cols-12 gap-10 items-center">
                         <div className="md:col-span-5 relative">
                             <AccessibleImage 
                             src={getImagePath(homeBioContent.teaserImage)}

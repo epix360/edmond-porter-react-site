@@ -4,6 +4,13 @@ const MediumFeed = ({ mediumContent }) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    // Date validation helper
+    const formatDate = (dateString) => {
+        if (!dateString) return null;
+        const date = new Date(dateString);
+        return isNaN(date.getTime()) ? null : date;
+    };
+
     useEffect(() => {
         // CMS data is now passed as prop, no need to load separately
         setLoading(false);
@@ -25,7 +32,8 @@ const MediumFeed = ({ mediumContent }) => {
                             title: post.title,
                             link: post.link,
                             thumbnail,
-                            description: post.description
+                            description: post.description,
+                            pubDate: post.pubDate // Add pubDate to processed post
                         };
                     });
                     
@@ -41,6 +49,13 @@ const MediumFeed = ({ mediumContent }) => {
 
     if (loading) return <div className="py-20 text-center font-label text-slate-500">Loading latest stories...</div>;
     if (posts.length === 0) return null;
+    
+    // Check for invalid dates and hide section if any are found
+    const invalidDatePosts = posts.filter(post => !formatDate(post.pubDate));
+    if (invalidDatePosts.length > 0) {
+        console.error('Medium feed: Invalid or missing dates found', invalidDatePosts);
+        return null;
+    }
 
     return (
         <section className="py-24 bg-surface-bright" id="medium">
@@ -66,7 +81,7 @@ const MediumFeed = ({ mediumContent }) => {
                             <div className="p-8 flex flex-col flex-grow">
                                 <div className="flex items-center text-xs font-label text-secondary font-bold uppercase tracking-wider mb-4">
                                     <span className="material-symbols-outlined text-sm mr-1">calendar_today</span>
-                                    {new Date(post.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                    {formatDate(post.pubDate)?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                 </div>
                                 <h3 className="font-headline text-xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors line-clamp-2">
                                     {post.title}
