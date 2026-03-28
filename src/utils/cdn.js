@@ -12,12 +12,12 @@ const REPO_INFO = {
 // Environment detection
 const isDevelopment = () => {
   if (typeof window !== 'undefined') {
-    // CDN is now working - enable production mode
+    // Only treat localhost and 127.0.0.1 as development
+    // Custom domain should use CDN for production
     return (
       window.location.hostname === 'localhost' ||
       window.location.hostname === '127.0.0.1' ||
       window.location.hostname === '' ||
-      window.location.hostname === 'edmondaporter.com' ||
       process.env.NODE_ENV === 'development'
     );
   }
@@ -30,7 +30,7 @@ export const getAssetUrl = (path, options = {}) => {
     useLocal = null, 
     version = null,
     branch = 'main',
-    subdirectory = 'public/images'
+    subdirectory = 'images'  // Fixed: changed from 'public/images' to 'images'
   } = options;
   
   // Normalize path - remove leading slash and ensure clean path
