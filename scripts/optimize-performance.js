@@ -42,8 +42,17 @@ const createOptimizedIndexHTML = () => {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Edmond_Headshot.webp" as="image" fetchpriority="high">
   <link rel="preload" href="/static/css/${cssFile || 'main.css'}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/static/js/${jsFile || 'main.js'}" as="script" fetchpriority="high">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- DNS prefetch for external resources -->
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  
+  <!-- Prefetch critical resources for next navigation -->
+  <link rel="prefetch" href="/about" as="document">
   
   <!-- Web Font Loader for async font loading -->
   <script>
