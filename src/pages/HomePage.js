@@ -228,7 +228,7 @@ const HomePage = () => {
                                 {heroContent.buttonText}
                             </a>
                             {statusTemplate && (
-                                <div className={`hidden sm:flex items-center justify-center space-x-2 font-label py-4 ${statusTemplate.color}`}>
+                                <div className={`flex items-center justify-center space-x-2 font-label py-4 ${statusTemplate.color}`}>
                                     <span className="material-symbols-outlined">{statusTemplate.icon}</span>
                                     <span>{statusTemplate.text}</span>
                                 </div>
