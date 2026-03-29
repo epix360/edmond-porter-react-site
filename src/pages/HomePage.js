@@ -254,7 +254,7 @@ const HomePage = () => {
             {/* Books Section */}
             <section className="py-12 bg-surface-container-low" id="published-works">
                 <div className="max-w-[1440px] mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
                         <div>
                             <span className="font-label text-secondary uppercase tracking-widest text-sm font-bold mb-4 block">The Bibliography</span>
                             <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary">Published Works</h2>
