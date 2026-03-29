@@ -182,7 +182,7 @@ const HomePage = () => {
           structuredData={{ type: 'website', data: { books: homeBioContent?.books || fallbackContent.books } }}
         />
         <Navigation />
-        <main className="pt-16 md:pt-20">
+        <main className="pt-16 md:pt-16">
             {/* Hero Section */}
             <section className="relative min-h-[450px] sm:min-h-[500px] md:min-h-[800px] flex items-center overflow-hidden bg-primary-container">
                 <div className="absolute inset-0 opacity-20 pointer-events-none" style={{backgroundImage: "radial-gradient(circle at 20% 50%, #805533 0%, transparent 50%)"}}></div>
