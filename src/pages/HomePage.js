@@ -208,10 +208,10 @@ const HomePage = () => {
             {/* Hero Section */}
             <section className="relative min-h-[450px] sm:min-h-[500px] md:min-h-[800px] flex items-center overflow-hidden bg-primary-container">
                 <div className="absolute inset-0 opacity-20 pointer-events-none" style={{backgroundImage: "radial-gradient(circle at 20% 50%, #805533 0%, transparent 50%)"}}></div>
-                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center relative z-10 py-12 md:py-20">
+                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center relative z-10 py-12 md:py-20">
                     <div className="order-2 md:order-1 text-center md:text-left">
                         {statusTemplate && (
-                            <span className={`inline-block font-label uppercase tracking-[0.2em] font-bold mb-2 sm:mb-4 text-sm ${statusTemplate.color}`}>
+                            <span className={`inline-block font-label uppercase tracking-[0.2em] font-bold mb-1 sm:mb-4 text-sm ${statusTemplate.color}`}>
                                 {statusTemplate.label}
                             </span>
                         )}
@@ -228,7 +228,7 @@ const HomePage = () => {
                                 {heroContent.buttonText}
                             </a>
                             {statusTemplate && (
-                                <div className={`flex items-center justify-center space-x-2 font-label py-4 ${statusTemplate.color}`}>
+                                <div className={`flex items-center justify-center space-x-2 font-label py-2 ${statusTemplate.color}`}>
                                     <span className="material-symbols-outlined">{statusTemplate.icon}</span>
                                     <span>{statusTemplate.text}</span>
                                 </div>
