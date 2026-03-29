@@ -308,7 +308,7 @@ const HomePage = () => {
                     <form className="max-w-2xl mx-auto space-y-6 text-left" onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="w-full">
-                                <label htmlFor="name" className="sr-only" aria-hidden="true">Name</label>
+                                <label htmlFor="name" className="sr-only">Name</label>
                                 <input 
                                     className="bg-form-bg border-0 border-b-2 border-outline-variant text-form-text p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
                                     placeholder="Name" 
@@ -321,7 +321,7 @@ const HomePage = () => {
                                 />
                             </div>
                             <div className="w-full">
-                                <label htmlFor="email" className="sr-only" aria-hidden="true">Email Address</label>
+                                <label htmlFor="email" className="sr-only">Email Address</label>
                                 <input 
                                     className="bg-form-bg border-0 border-b-2 border-outline-variant text-form-text p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
                                     placeholder="Email Address" 
@@ -335,7 +335,7 @@ const HomePage = () => {
                             </div>
                         </div>
                         <div>
-                            <label htmlFor="subject" className="sr-only" aria-hidden="true">Subject</label>
+                            <label htmlFor="subject" className="sr-only">Subject</label>
                             <input 
                                 className="w-full bg-form-bg border-0 border-b-2 border-outline-variant text-form-text p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
                                 placeholder="Subject" 
@@ -348,7 +348,7 @@ const HomePage = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="message" className="sr-only" aria-hidden="true">Your message...</label>
+                            <label htmlFor="message" className="sr-only">Your message...</label>
                             <textarea 
                                 className="w-full bg-form-bg border-0 border-b-2 border-outline-variant text-form-text p-3 rounded-t-lg focus:border-secondary focus:ring-0 resize-none" 
                                 placeholder="Your message..." 
