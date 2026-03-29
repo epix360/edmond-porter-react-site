@@ -43,7 +43,7 @@ const AccessibleImage = ({
         {mobileSrc && (
           <source 
             media="(max-width: 768px)" 
-            src={mobileSrc}
+            srcSet={mobileSrc}
           />
         )}
         <img
