@@ -244,8 +244,6 @@ const HomePage = () => {
                             className="relative z-10 w-full max-w-[215px] sm:max-w-[200px] md:max-w-[450px] mx-auto rounded-lg shadow-2xl transform md:rotate-3 transition-transform duration-500 hover:rotate-0"
                             width={450}
                             height={550}
-                            mobileWidth={215} // Mobile-optimized width
-                            mobileHeight={260} // Mobile-optimized height
                             priority={true}
                         />
                     </div>

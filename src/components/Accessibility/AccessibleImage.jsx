@@ -39,22 +39,30 @@ const AccessibleImage = ({
   
   return (
     <figure className={`relative ${className}`}>
-      <img
-        src={finalSrc}
-        alt={alt}
-        className="h-auto mx-auto block"
-        style={{
-          maxWidth: isMobile && mobileWidth ? `${mobileWidth}px` : '100%',
-          height: 'auto'
-        }}
-        loading={priority ? 'eager' : 'lazy'}
-        decoding="async"
-        sizes={sizes}
-        width={finalWidth}
-        height={finalHeight}
-        fetchpriority={priority ? 'high' : 'auto'}
-        {...props}
-      />
+      <picture>
+        {mobileSrc && (
+          <source 
+            media="(max-width: 768px)" 
+            srcSet={mobileSrc}
+          />
+        )}
+        <img
+          src={src}
+          alt={alt}
+          className="h-auto mx-auto block"
+          style={{
+            maxWidth: '100%',
+            height: 'auto'
+          }}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          sizes={sizes}
+          width={width}
+          height={height}
+          fetchpriority={priority ? 'high' : 'auto'}
+          {...props}
+        />
+      </picture>
       {caption && (
         <figcaption className="text-sm text-on-surface-variant mt-2 text-center italic">
           {caption}
