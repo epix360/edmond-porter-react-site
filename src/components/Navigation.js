@@ -7,6 +7,11 @@ const Navigation = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeAnchor, setActiveAnchor] = useState(null);
 
+    // Debug: Log mobile menu state changes
+    useEffect(() => {
+        console.log('🔍 Navigation Debug:', { mobileMenuOpen, activeAnchor, pathname: location.pathname });
+    }, [mobileMenuOpen, activeAnchor, location.pathname]);
+
     useEffect(() => {
         if (location.pathname !== '/') {
             setActiveAnchor(null);
@@ -55,7 +60,12 @@ const Navigation = () => {
                         <a className="hidden sm:inline-flex bg-primary text-white px-6 py-2 rounded-lg font-label font-semibold tracking-wide hover:bg-primary/90 transition-all" href="https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y" target="_blank" rel="noopener noreferrer">
                             Amazon Store
                         </a>
-                        <button className="md:hidden text-primary p-2 z-[10001] relative" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                        <button 
+                            className="md:hidden text-primary p-3 z-[10001] relative block bg-white/80 backdrop-blur-sm rounded-lg shadow-md hover:shadow-lg transition-all" 
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            aria-label="Toggle mobile menu"
+                            style={{ display: 'block !important', visibility: 'visible !important' }}
+                        >
                             <span className="material-symbols-outlined text-3xl">{mobileMenuOpen ? 'close' : 'menu'}</span>
                         </button>
                     </div>
