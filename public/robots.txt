@@ -5,8 +5,11 @@ Allow: /
 Disallow: /node_modules/
 Disallow: /build/
 Disallow: /src/
-Disallow: /*.json$
 Disallow: /private/
+
+# Allow access to important JSON files for SEO and functionality
+Allow: /content/*.json
+Allow: /*.json?*
 
 # Allow search engines to access content and images
 Allow: /images/
