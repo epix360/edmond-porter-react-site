@@ -121,7 +121,7 @@ const MediumFeed = ({ mediumContent }) => {
     if (loading) {
         return (
             <section className="py-12 bg-surface-container-lowest" id="medium">
-                <div className="max-w-4xl mx-auto px-6">
+                <div className="max-w-7xl mx-auto px-6">
                     <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-8 text-center">
                         {mediumContent?.headline || "Latest from Medium"}
                     </h2>
@@ -138,7 +138,7 @@ const MediumFeed = ({ mediumContent }) => {
 
     return (
         <section className="py-12 bg-surface-container-lowest" id="medium">
-            <div className="max-w-4xl mx-auto px-6">
+            <div className="max-w-7xl mx-auto px-6">
                 <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-8 text-center">
                     {mediumContent?.headline || "Latest from Medium"}
                 </h2>
