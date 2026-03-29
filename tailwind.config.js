@@ -40,6 +40,8 @@ module.exports = {
         "primary-fixed-dim": "#b5c8df",
         "secondary-fixed": "#ffdcc5",
         "secondary-fixed-dim": "#f4bb92",
+        "form-bg": "#2F364B",
+        "form-text": "#C7CAD1",
       },
       fontFamily: {
         "headline": ["Noto Serif", "serif"],
