@@ -95,7 +95,7 @@ const AboutPage = () => {
                         </p>
                     </div>
                     <div className="md:col-span-5 relative order-1 md:order-2">
-                        <div className="aspect-[3/5] bg-surface-container-high relative z-10 overflow-hidden shadow-2xl rounded-lg max-w-[320px] md:max-w-none mx-auto">
+                        <div className="aspect-[2/3] bg-surface-container-high relative z-10 overflow-hidden shadow-2xl rounded-lg max-w-[320px] md:max-w-none mx-auto">
                             <AccessibleImage 
                             src={getImagePath(aboutBioContent.bioImage)}
                             alt="Edmond A Porter"
