@@ -310,7 +310,7 @@ const HomePage = () => {
                             <div className="w-full">
                                 <label htmlFor="name" className="sr-only">Name</label>
                                 <input 
-                                    className="bg-form-bg border-0 border-b-2 border-outline-variant text-form-text p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
+                                    className="w-full bg-form-bg border-0 border-b-2 border-outline-variant text-form-text p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
                                     placeholder="Name" 
                                     name="name"
                                     id="name"
@@ -323,7 +323,7 @@ const HomePage = () => {
                             <div className="w-full">
                                 <label htmlFor="email" className="sr-only">Email Address</label>
                                 <input 
-                                    className="bg-form-bg border-0 border-b-2 border-outline-variant text-form-text p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
+                                    className="w-full bg-form-bg border-0 border-b-2 border-outline-variant text-form-text p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
                                     placeholder="Email Address" 
                                     name="email"
                                     id="email"
