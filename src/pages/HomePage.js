@@ -269,14 +269,16 @@ const HomePage = () => {
                             <div key={i} className="flex flex-col h-full space-y-6">
                                 <a href={book.buyLink} target="_blank" rel="noopener noreferrer" className="block group h-full">
                                     <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full">
-                                        <LazyImage
-                                        src={getImagePath(book.cover)}
-                                        alt={book.title}
-                                        className="h-64 md:h-80 w-auto rounded shadow-lg -mt-12 mx-auto object-contain transform group-hover:-translate-y-2 transition-transform duration-300"
-                                        width={300}
-                                        height={450}
-                                        priority={i === 0} // Prioritize first book
-                                    />
+                                        <div className="flex justify-center -mt-12">
+                                            <LazyImage
+                                            src={getImagePath(book.cover)}
+                                            alt={book.title}
+                                            className="h-64 md:h-80 w-auto object-contain rounded shadow-lg transform group-hover:-translate-y-2 transition-transform duration-300"
+                                            width={300}
+                                            height={450}
+                                            priority={i === 0} // Prioritize first book
+                                        />
+                                        </div>
                                         <div className="mt-8 flex-grow">
                                             <h3 className="font-headline text-2xl font-bold text-primary mb-2">{book.title}</h3>
                                             <p className="text-on-surface-variant font-label text-sm uppercase tracking-wider mb-4">{book.type}</p>
