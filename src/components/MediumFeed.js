@@ -18,6 +18,39 @@ const MediumFeed = ({ mediumContent }) => {
         return html.replace(/<[^>]*>/g, '').trim();
     };
 
+    // Create excerpt from full content
+    const createExcerpt = (content, maxLength = 150) => {
+        if (!content) return '';
+        
+        // Remove HTML tags first
+        const plainText = stripHtml(content);
+        
+        // Find first sentence or create truncated excerpt
+        const sentences = plainText.split(/[.!?]+/);
+        let excerpt = '';
+        
+        // Try to use complete sentences up to maxLength
+        for (const sentence of sentences) {
+            const trimmedSentence = sentence.trim();
+            if (trimmedSentence && (excerpt.length + trimmedSentence.length + 1) <= maxLength) {
+                excerpt += (excerpt ? '. ' : '') + trimmedSentence;
+            } else if (trimmedSentence && !excerpt) {
+                // If first sentence is too long, truncate it
+                excerpt = trimmedSentence.substring(0, maxLength - 3) + '...';
+                break;
+            } else {
+                break;
+            }
+        }
+        
+        // If no sentences found, truncate the text
+        if (!excerpt && plainText) {
+            excerpt = plainText.substring(0, maxLength - 3) + '...';
+        }
+        
+        return excerpt || 'Read the full article on Medium...';
+    };
+
     useEffect(() => {
         const loadMediumFeed = () => {
             setLoading(true);
@@ -43,7 +76,7 @@ const MediumFeed = ({ mediumContent }) => {
                                 ...post,
                                 thumbnail,
                                 formattedDate: formatDate(post.pubDate),
-                                plainDescription: stripHtml(post.description)
+                                plainDescription: createExcerpt(post.content || post.description)
                             };
                         });
                         setPosts(processedPosts);
