@@ -281,6 +281,8 @@ const HomePage = () => {
                                             <h3 className="font-headline text-2xl font-bold text-primary mb-2">{book.title}</h3>
                                             <p className="text-on-surface-variant font-label text-sm uppercase tracking-wider mb-4">{book.type}</p>
                                             <p className="text-on-surface-variant line-clamp-3 mb-6">{book.description}</p>
+                                        </div>
+                                        <div className="mt-auto">
                                             <span className="text-secondary font-bold inline-flex items-center group/link">
                                                 Buy now <span className="material-symbols-outlined ml-1 text-sm group-hover/link:translate-x-1 transition-transform">open_in_new</span>
                                             </span>
