@@ -307,43 +307,55 @@ const HomePage = () => {
                     <p className="text-on-primary-container text-lg mb-10 font-light">For media inquiries, speaking engagements, or just to say hello.</p>
                     <form className="max-w-2xl mx-auto space-y-6 text-left" onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label htmlFor="name" className="sr-only">Name</label>
+                                <input 
+                                    className="bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
+                                    placeholder="Name" 
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required 
+                                    type="text" 
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="email" className="sr-only">Email Address</label>
+                                <input 
+                                    className="bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
+                                    placeholder="Email Address" 
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required 
+                                    type="email" 
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <label htmlFor="subject" className="sr-only">Subject</label>
                             <input 
-                                className="bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
-                                placeholder="Name" 
-                                name="name"
-                                value={formData.name}
+                                className="w-full bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
+                                placeholder="Subject" 
+                                name="subject"
+                                value={formData.subject}
                                 onChange={handleChange}
                                 required 
                                 type="text" 
                             />
-                            <input 
-                                className="bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
-                                placeholder="Email Address" 
-                                name="email"
-                                value={formData.email}
+                        </div>
+                        <div>
+                            <label htmlFor="message" className="sr-only">Your message...</label>
+                            <textarea 
+                                className="w-full bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0 resize-none" 
+                                placeholder="Your message..." 
+                                name="message"
+                                value={formData.message}
                                 onChange={handleChange}
                                 required 
-                                type="email" 
-                            />
+                                rows="4"
+                            ></textarea>
                         </div>
-                        <input 
-                            className="w-full bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
-                            placeholder="Subject" 
-                            name="subject"
-                            value={formData.subject}
-                            onChange={handleChange}
-                            required 
-                            type="text" 
-                        />
-                        <textarea 
-                            className="w-full bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0 resize-none" 
-                            placeholder="Your message..." 
-                            name="message"
-                            value={formData.message}
-                            onChange={handleChange}
-                            required 
-                            rows="4"
-                        ></textarea>
                         {submitStatus && (
                             <div className={`text-center p-3 rounded-lg ${submitStatus.includes('successfully') ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}`}>
                                 {submitStatus}
