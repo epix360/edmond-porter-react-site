@@ -264,20 +264,20 @@ const HomePage = () => {
                             <span className="material-symbols-outlined">arrow_forward</span>
                         </a>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-stretch">
                         {booksContent.map((book, i) => (
-                            <div key={i} className="flex flex-col space-y-6">
-                                <a href={book.buyLink} target="_blank" rel="noopener noreferrer" className="block group">
-                                    <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
+                            <div key={i} className="flex flex-col h-full space-y-6">
+                                <a href={book.buyLink} target="_blank" rel="noopener noreferrer" className="block group h-full">
+                                    <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full">
                                         <LazyImage
                                         src={getImagePath(book.cover)}
                                         alt={book.title}
-                                        className="w-full h-auto rounded shadow-lg -mt-12 transform group-hover:-translate-y-2 transition-transform duration-300"
+                                        className="h-auto rounded shadow-lg -mt-12 mx-auto max-w-full transform group-hover:-translate-y-2 transition-transform duration-300"
                                         width={300}
                                         height={450}
                                         priority={i === 0} // Prioritize first book
                                     />
-                                        <div className="mt-8">
+                                        <div className="mt-8 flex-grow">
                                             <h3 className="font-headline text-2xl font-bold text-primary mb-2">{book.title}</h3>
                                             <p className="text-on-surface-variant font-label text-sm uppercase tracking-wider mb-4">{book.type}</p>
                                             <p className="text-on-surface-variant line-clamp-3 mb-6">{book.description}</p>
