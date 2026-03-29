@@ -223,16 +223,16 @@ const HomePage = () => {
                         <p className="text-base sm:text-lg md:text-xl text-on-primary-container mb-6 sm:mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed font-light">
                             {heroContent.blurb}
                         </p>
-                        <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-                            <a className="bg-secondary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-center hover:bg-[#96643c] transition-colors shadow-lg shadow-black/20" href={heroContent.link} target="_blank" rel="noopener noreferrer">
-                                {heroContent.buttonText}
-                            </a>
+                        <div className="flex flex-col-reverse sm:flex-row-reverse justify-center md:justify-start gap-4">
                             {statusTemplate && (
                                 <div className={`flex items-center justify-center space-x-2 font-label py-2 ${statusTemplate.color}`}>
                                     <span className="material-symbols-outlined">{statusTemplate.icon}</span>
                                     <span>{statusTemplate.text}</span>
                                 </div>
                             )}
+                            <a className="bg-secondary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-center hover:bg-[#96643c] transition-colors shadow-lg shadow-black/20" href={heroContent.link} target="_blank" rel="noopener noreferrer">
+                                {heroContent.buttonText}
+                            </a>
                         </div>
                     </div>
                     <div className="order-1 md:order-2 relative group px-6 sm:px-6 md:px-6">
