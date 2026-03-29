@@ -18,12 +18,32 @@ const MediumFeed = ({ mediumContent }) => {
         return html.replace(/<[^>]*>/g, '').trim();
     };
 
-    // Create excerpt from full content
+    // Filter Medium content to remove photo captions and figures
+    const filterMediumContent = (html) => {
+        if (!html) return '';
+        
+        // Remove figure elements and their content completely
+        let filtered = html.replace(/<figure[^>]*>.*?<\/figure>/gi, '');
+        
+        // Remove any remaining figcaption elements
+        filtered = filtered.replace(/<figcaption[^>]*>.*?<\/figcaption>/gi, '');
+        
+        // Extract only article content (p, h1-h6, li, strong, em, a tags)
+        const contentMatches = filtered.match(/<(p|h[1-6]|li|strong|em|a)[^>]*>.*?<\/\1>/gi);
+        const cleanContent = contentMatches ? contentMatches.join(' ') : '';
+        
+        return cleanContent;
+    };
+
+    // Create excerpt from filtered content
     const createExcerpt = (content, maxLength = 150) => {
         if (!content) return '';
         
-        // Remove HTML tags first
-        const plainText = stripHtml(content);
+        // First filter out photo-related content
+        const filteredContent = filterMediumContent(content);
+        
+        // Then remove HTML tags
+        const plainText = stripHtml(filteredContent);
         
         // Find first sentence or create truncated excerpt
         const sentences = plainText.split(/[.!?]+/);
