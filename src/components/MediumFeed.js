@@ -12,6 +12,12 @@ const MediumFeed = ({ mediumContent }) => {
         return isNaN(date.getTime()) ? null : date;
     };
 
+    // HTML stripping helper
+    const stripHtml = (html) => {
+        if (!html) return '';
+        return html.replace(/<[^>]*>/g, '').trim();
+    };
+
     useEffect(() => {
         const loadMediumFeed = () => {
             setLoading(true);
@@ -36,7 +42,8 @@ const MediumFeed = ({ mediumContent }) => {
                             return {
                                 ...post,
                                 thumbnail,
-                                formattedDate: formatDate(post.pubDate)
+                                formattedDate: formatDate(post.pubDate),
+                                plainDescription: stripHtml(post.description)
                             };
                         });
                         setPosts(processedPosts);
@@ -123,7 +130,7 @@ const MediumFeed = ({ mediumContent }) => {
                                     </time>
                                 )}
                                 <p className="text-on-surface-variant line-clamp-3 mb-4">
-                                    {post.description}
+                                    {post.plainDescription}
                                 </p>
                                 <a 
                                     href={post.link} 
