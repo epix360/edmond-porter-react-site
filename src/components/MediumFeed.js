@@ -18,7 +18,7 @@ const MediumFeed = ({ mediumContent }) => {
         return html.replace(/<[^>]*>/g, '').trim();
     };
 
-    // Filter Medium content to remove photo captions and figures
+    // Filter Medium content to remove photo captions and figures, keep only paragraphs
     const filterMediumContent = (html) => {
         if (!html) return '';
         
@@ -28,9 +28,9 @@ const MediumFeed = ({ mediumContent }) => {
         // Remove any remaining figcaption elements
         filtered = filtered.replace(/<figcaption[^>]*>.*?<\/figcaption>/gi, '');
         
-        // Extract only article content (p, h1-h6, li, strong, em, a tags)
-        const contentMatches = filtered.match(/<(p|h[1-6]|li|strong|em|a)[^>]*>.*?<\/\1>/gi);
-        const cleanContent = contentMatches ? contentMatches.join(' ') : '';
+        // Extract only paragraph content (exclude headings, lists, etc.)
+        const paragraphMatches = filtered.match(/<p[^>]*>.*?<\/p>/gi);
+        const cleanContent = paragraphMatches ? paragraphMatches.join(' ') : '';
         
         return cleanContent;
     };
