@@ -155,7 +155,7 @@ const createPreRenderedHTML = () => {
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   
   <title>Edmond A Porter | Author</title>
-  <link href="${cssPath}" rel="stylesheet">
+  <link href="${cssPath}?v=1.0.1" rel="stylesheet">
   <style>
     .sr-only {
       position: absolute;
@@ -167,6 +167,30 @@ const createPreRenderedHTML = () => {
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border: 0;
+    }
+    .bg-form-bg { 
+      background-color: #2F364B !important; 
+    }
+    .text-form-text { 
+      color: #C7CAD1 !important; 
+    }
+    input.bg-form-bg.text-form-text, 
+    textarea.bg-form-bg.text-form-text { 
+      background-color: #2F364B !important; 
+      color: #C7CAD1 !important; 
+    }
+    /* Ensure sr-only labels are properly hidden */
+    label.sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+      opacity: 0 !important;
     }
   </style>
 </head>
@@ -185,7 +209,7 @@ const createPreRenderedHTML = () => {
     // Embed timeline data to avoid GitHub Pages routing issues
     window.embeddedTimelineData = ${JSON.stringify(timelineData, null, 2)};
   </script>
-  <script src="${jsPath}" defer></script>
+  <script src="${jsPath}?v=1.0.1" defer></script>
 </body>
 </html>`;
 
