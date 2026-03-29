@@ -98,7 +98,7 @@ const getComingSoonText = (showSpecificDate, releaseDate, customDateText) => {
 };
 
 const HomePage = () => {
-    // Load CMS content
+    // Load CMS content with deferred loading for better performance
     const { content: hero, loading: heroLoading, error: heroError } = useCMSContent('hero');
     const { content: books, loading: booksLoading, error: booksError } = useCMSContent('books');
     const { content: homeBio, loading: homeBioLoading, error: homeBioError } = useCMSContent('home-bio');
@@ -122,26 +122,44 @@ const HomePage = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    // Preload hero image for LCP optimization
+    // Defer non-critical image preloading to reduce main thread blocking
     useEffect(() => {
-        if (heroContent?.cover) {
-            // Use mobile image for mobile devices
-            const isMobile = window.innerWidth <= 768;
-            const heroImage = isMobile && heroContent.mobileCover ? heroContent.mobileCover : heroContent.cover;
-            
-            const link = document.createElement('link');
-            link.rel = 'preload';
-            // Use correct path for mobile vs desktop
-            link.href = getImagePath(heroImage);
-            link.as = 'image';
-            link.fetchPriority = 'high';
-            document.head.appendChild(link);
-            
-            // Only preload if it's the mobile version being used
-            if (isMobile && heroContent.mobileCover) {
-                // Mobile image preloaded silently
+        const preloadImage = () => {
+            if (heroContent?.cover) {
+                // Use mobile image for mobile devices
+                const isMobile = window.innerWidth <= 768;
+                const heroImage = isMobile && heroContent.mobileCover ? heroContent.mobileCover : heroContent.cover;
+                
+                // Use requestIdleCallback for non-blocking preloading
+                const schedulePreload = () => {
+                    if ('requestIdleCallback' in window) {
+                        requestIdleCallback(() => {
+                            const link = document.createElement('link');
+                            link.rel = 'preload';
+                            link.href = getImagePath(heroImage);
+                            link.as = 'image';
+                            link.fetchPriority = 'high';
+                            document.head.appendChild(link);
+                        });
+                    } else {
+                        setTimeout(() => {
+                            const link = document.createElement('link');
+                            link.rel = 'preload';
+                            link.href = getImagePath(heroImage);
+                            link.as = 'image';
+                            link.fetchPriority = 'high';
+                            document.head.appendChild(link);
+                        }, 100);
+                    }
+                };
+
+                schedulePreload();
             }
-        }
+        };
+
+        // Defer preloading to not block initial render
+        const timer = setTimeout(preloadImage, 500);
+        return () => clearTimeout(timer);
     }, [heroContent]);
 
     const [formData, setFormData] = useState({

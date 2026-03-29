@@ -9,76 +9,95 @@ const PerformanceMonitor = ({ onMetricUpdate }) => {
   });
 
   useEffect(() => {
-    const measureWebVitals = () => {
-      // Measure Largest Contentful Paint (LCP)
-      new PerformanceObserver((entryList) => {
-        const entries = entryList.getEntries();
-        const lastEntry = entries[entries.length - 1];
-        
-        if (lastEntry) {
-          setMetrics(prev => ({
-            ...prev,
-            lcp: lastEntry.startTime
-          }));
-          
-          onMetricUpdate?.('LCP', lastEntry.startTime);
+    // Defer performance monitoring to reduce main thread blocking
+    const startMonitoring = () => {
+      // Use requestIdleCallback for non-blocking execution
+      const scheduleMonitoring = () => {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(measureWebVitals);
+        } else {
+          setTimeout(measureWebVitals, 100);
         }
-      }).observe({ entryTypes: ['largest-contentful-paint'] });
+      };
 
-      // Measure First Input Delay (FID)
-      new PerformanceObserver((entryList) => {
-        const entries = entryList.getEntries();
-        entries.forEach(entry => {
-          if (entry.processingStart && entry.startTime) {
-            const fid = entry.processingStart - entry.startTime;
+      const measureWebVitals = () => {
+        try {
+          // Measure Largest Contentful Paint (LCP)
+          new PerformanceObserver((entryList) => {
+            const entries = entryList.getEntries();
+            const lastEntry = entries[entries.length - 1];
+            
+            if (lastEntry) {
+              setMetrics(prev => ({
+                ...prev,
+                lcp: lastEntry.startTime
+              }));
+              
+              onMetricUpdate?.('LCP', lastEntry.startTime);
+            }
+          }).observe({ entryTypes: ['largest-contentful-paint'] });
+
+          // Measure First Input Delay (FID) - only if supported
+          if ('PerformanceObserver' in window && 'first-input' in PerformanceObserver.supportedEntryTypes) {
+            new PerformanceObserver((entryList) => {
+              const entries = entryList.getEntries();
+              const firstEntry = entries[0];
+              
+              if (firstEntry) {
+                setMetrics(prev => ({
+                  ...prev,
+                  fid: firstEntry.processingStart - firstEntry.startTime
+                }));
+                
+                onMetricUpdate?.('FID', firstEntry.processingStart - firstEntry.startTime);
+              }
+            }).observe({ entryTypes: ['first-input'] });
+          }
+
+          // Measure Cumulative Layout Shift (CLS)
+          let clsValue = 0;
+          new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+              if (!entry.hadRecentInput) {
+                clsValue += entry.value;
+              }
+            }
             
             setMetrics(prev => ({
               ...prev,
-              fid
+              cls: clsValue
             }));
             
-            onMetricUpdate?.('FID', fid);
-          }
-        });
-      }).observe({ entryTypes: ['first-input'] });
+            onMetricUpdate?.('CLS', clsValue);
+          }).observe({ entryTypes: ['layout-shift'] });
 
-      // Measure Cumulative Layout Shift (CLS)
-      let clsValue = 0;
-      new PerformanceObserver((entryList) => {
-        const entries = entryList.getEntries();
-        entries.forEach(entry => {
-          if (!entry.hadRecentInput) {
-            clsValue += entry.value;
-          }
-        });
-        
-        setMetrics(prev => ({
-          ...prev,
-          cls: clsValue
-        }));
-        
-        onMetricUpdate?.('CLS', clsValue);
-      }).observe({ entryTypes: ['layout-shift'] });
-
-      // Measure First Contentful Paint (FCP)
-      new PerformanceObserver((entryList) => {
-        const entries = entryList.getEntries();
-        const firstPaint = entries.find(entry => entry.name === 'first-contentful-paint');
-        
-        if (firstPaint) {
-          setMetrics(prev => ({
-            ...prev,
-            fcp: firstPaint.startTime
-          }));
-          
-          onMetricUpdate?.('FCP', firstPaint.startTime);
+          // Measure First Contentful Paint (FCP)
+          new PerformanceObserver((entryList) => {
+            const entries = entryList.getEntries();
+            const fcpEntry = entries.find(entry => entry.name === 'first-contentful-paint');
+            
+            if (fcpEntry) {
+              setMetrics(prev => ({
+                ...prev,
+                fcp: fcpEntry.startTime
+              }));
+              
+              onMetricUpdate?.('FCP', fcpEntry.startTime);
+            }
+          }).observe({ entryTypes: ['paint'] });
+        } catch (error) {
+          // Silently fail to avoid blocking main thread
+          console.warn('Performance monitoring disabled:', error);
         }
-      }).observe({ entryTypes: ['paint'] });
+      };
+
+      scheduleMonitoring();
     };
 
-    // Start measuring after page loads
-    if (typeof window !== 'undefined' && 'performance' in window) {
-      setTimeout(measureWebVitals, 1000);
+    // Delay monitoring to not block initial render
+    if (typeof window !== 'undefined') {
+      const timer = setTimeout(startMonitoring, 1000);
+      return () => clearTimeout(timer);
     }
   }, [onMetricUpdate]);
 
