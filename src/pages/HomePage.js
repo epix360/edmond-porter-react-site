@@ -307,7 +307,7 @@ const HomePage = () => {
                     <p className="text-on-primary-container text-lg mb-10 font-light">For media inquiries, speaking engagements, or just to say hello.</p>
                     <form className="max-w-2xl mx-auto space-y-6 text-left" onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
+                            <div className="w-full">
                                 <label htmlFor="name" className="sr-only" aria-hidden="true">Name</label>
                                 <input 
                                     className="bg-form-bg border-0 border-b-2 border-outline-variant text-form-text p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
@@ -320,7 +320,7 @@ const HomePage = () => {
                                     type="text" 
                                 />
                             </div>
-                            <div>
+                            <div className="w-full">
                                 <label htmlFor="email" className="sr-only" aria-hidden="true">Email Address</label>
                                 <input 
                                     className="bg-form-bg border-0 border-b-2 border-outline-variant text-form-text p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
