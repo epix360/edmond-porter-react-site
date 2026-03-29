@@ -310,7 +310,7 @@ const HomePage = () => {
                             <div>
                                 <label htmlFor="name" className="sr-only">Name</label>
                                 <input 
-                                    className="bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
+                                    className="bg-[#313A4E] border-0 border-b-2 border-outline-variant text-[#CACED3] p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
                                     placeholder="Name" 
                                     name="name"
                                     id="name"
@@ -323,7 +323,7 @@ const HomePage = () => {
                             <div>
                                 <label htmlFor="email" className="sr-only">Email Address</label>
                                 <input 
-                                    className="bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
+                                    className="bg-[#313A4E] border-0 border-b-2 border-outline-variant text-[#CACED3] p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
                                     placeholder="Email Address" 
                                     name="email"
                                     id="email"
@@ -337,7 +337,7 @@ const HomePage = () => {
                         <div>
                             <label htmlFor="subject" className="sr-only">Subject</label>
                             <input 
-                                className="w-full bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
+                                className="w-full bg-[#313A4E] border-0 border-b-2 border-outline-variant text-[#CACED3] p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
                                 placeholder="Subject" 
                                 name="subject"
                                 id="subject"
@@ -350,7 +350,7 @@ const HomePage = () => {
                         <div>
                             <label htmlFor="message" className="sr-only">Your message...</label>
                             <textarea 
-                                className="w-full bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0 resize-none" 
+                                className="w-full bg-[#313A4E] border-0 border-b-2 border-outline-variant text-[#CACED3] p-3 rounded-t-lg focus:border-secondary focus:ring-0 resize-none" 
                                 placeholder="Your message..." 
                                 name="message"
                                 id="message"
