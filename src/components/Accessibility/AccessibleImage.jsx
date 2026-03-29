@@ -53,11 +53,14 @@ const AccessibleImage = ({
         {mobileSrc && (
           <source 
             media="(max-width: 768px)" 
-            src={mobileSrc}
+            srcSet={`${mobileSrc} 1x`}
+            sizes="100vw"
           />
         )}
         <img
           src={src}
+          srcSet={`${src} 1x`}
+          sizes="(min-width: 769px) 100vw"
           alt={alt}
           className="h-auto mx-auto block"
           style={{
@@ -66,7 +69,6 @@ const AccessibleImage = ({
           }}
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
-          sizes={sizes}
           width={width}
           height={height}
           fetchpriority={priority ? 'high' : 'auto'}
