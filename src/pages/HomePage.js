@@ -272,7 +272,7 @@ const HomePage = () => {
                                         <LazyImage
                                         src={getImagePath(book.cover)}
                                         alt={book.title}
-                                        className="h-auto rounded shadow-lg -mt-12 mx-auto max-w-full transform group-hover:-translate-y-2 transition-transform duration-300"
+                                        className="h-64 md:h-80 w-auto rounded shadow-lg -mt-12 mx-auto object-contain transform group-hover:-translate-y-2 transition-transform duration-300"
                                         width={300}
                                         height={450}
                                         priority={i === 0} // Prioritize first book
