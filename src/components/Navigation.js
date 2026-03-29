@@ -74,11 +74,11 @@ const Navigation = () => {
 
             {/* Mobile Menu Overlay */}
             <div className={`fixed inset-0 bg-black/50 z-[99999] transition-opacity duration-300 md:hidden ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-                <div className={`fixed top-0 h-full w-80 bg-white shadow-2xl transition-all duration-300 ease-in-out z-[100000] ${mobileMenuOpen ? 'right-0' : 'right-[-100%]'}`}>
+                <div className={`fixed top-0 h-full w-[80vw] max-w-sm bg-white shadow-2xl transition-all duration-300 ease-in-out z-[100000] ${mobileMenuOpen ? 'right-0' : 'right-[-100%]'}`}>
                     <button className="absolute top-4 right-4 text-primary p-2 z-[100001]" onClick={() => setMobileMenuOpen(false)}>
                         <span className="material-symbols-outlined text-3xl">close</span>
                     </button>
-                    <div className="flex flex-col p-8 gap-8 text-2xl font-headline text-primary">
+                    <div className="flex flex-col p-6 sm:p-8 gap-6 sm:gap-8 text-xl sm:text-2xl font-headline text-primary">
                         <Link to="/" onClick={() => { setMobileMenuOpen(false); setActiveAnchor(null); if (location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }} className={location.pathname === '/' && !activeAnchor ? 'text-secondary' : ''}>Home</Link>
                         <a href="#about-teaser" onClick={(e) => handleAnchorClick(e, '#about-teaser')} className={activeAnchor === '#about-teaser' ? 'text-secondary' : ''}>About</a>
                         <a href="#published-works" onClick={(e) => handleAnchorClick(e, '#published-works')} className={activeAnchor === '#published-works' ? 'text-secondary' : ''}>Books</a>
@@ -86,7 +86,7 @@ const Navigation = () => {
                         <a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')} className={activeAnchor === '#contact' ? 'text-secondary' : ''}>Contact</a>
                         <Link to="/about" onClick={() => { setMobileMenuOpen(false); setActiveAnchor(null); }} className={location.pathname === '/about' ? 'text-secondary' : ''}>Bio</Link>
                         <hr className="border-slate-300/30 shadow-sm" />
-                        <a className="bg-secondary text-white text-center py-4 rounded-xl text-lg font-label shadow-xl hover:shadow-2xl transition-shadow" href="https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y" target="_blank" rel="noopener noreferrer">
+                        <a className="bg-secondary text-white text-center py-3 sm:py-4 rounded-xl text-base sm:text-lg font-label shadow-xl hover:shadow-2xl transition-shadow" href="https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y" target="_blank" rel="noopener noreferrer">
                             Amazon Store
                         </a>
                     </div>
