@@ -37,6 +37,16 @@ const AccessibleImage = ({
   const finalHeight = isMobile && mobileHeight ? mobileHeight : height;
   const finalSrc = isMobile && mobileSrc ? mobileSrc : src;
   
+  // Debug logging to identify responsive image issues
+  if (typeof window !== 'undefined') {
+    console.log('🔍 Responsive Image Debug:');
+    console.log('- Window width:', window.innerWidth);
+    console.log('- Mobile src:', mobileSrc);
+    console.log('- Desktop src:', src);
+    console.log('- Is mobile detected:', isMobile);
+    console.log('- Media query should match:', window.innerWidth <= 768);
+  }
+  
   return (
     <figure className={`relative ${className}`}>
       <picture>
