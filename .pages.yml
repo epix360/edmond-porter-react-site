@@ -12,6 +12,7 @@ content:
     fields:
       - { name: title, label: "Featured Book Title", type: string }
       - { name: cover, label: "Large Hero Image", type: image }
+      - { name: mobileCover, label: "Mobile Hero Image", type: image }
       - { name: blurb, label: "Short Teaser Text", type: rich-text }
       - { name: buttonText, label: "Button Text", type: string }
       - { name: link, label: "Primary Buy Link", type: string }
