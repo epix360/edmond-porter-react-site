@@ -240,5 +240,9 @@ My first novel, Turbulent Waters, a historical romance set surrounding the build
     headline: "The Man Behind the Prose",
     photo: "Edmond_Headshot.webp",
     bioBody: "Edmond A Porter is a contemporary author whose work explores the intricate tapestry of human experience through compelling narratives and thoughtful prose.\n\nWith a background that spans multiple disciplines and cultures, Edmond brings a unique perspective to his writing, crafting stories that resonate with readers from all walks of life. His work often delves into themes of connection, resilience, and the transformative power of human relationships.\n\nEdmond's published works include several acclaimed anthologies and essay collections, each showcasing his ability to weave together personal experience with universal truths. Whether exploring the complexities of family bonds, the journey of personal growth, or the beauty found in everyday moments, his writing invites readers to see the world through fresh eyes.\n\nWhen not writing, Edmond enjoys spending time with his family, exploring the natural beauty of the Pacific Northwest, and engaging with the vibrant literary community that continues to inspire his work."
+  },
+  mediumSection: {
+    headline: "Latest from Medium",
+    subheading: "Read my latest thoughts on writing, creativity, and the stories behind the stories."
   }
 };
