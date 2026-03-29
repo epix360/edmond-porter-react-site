@@ -223,7 +223,7 @@ const HomePage = () => {
                         <p className="text-base sm:text-lg md:text-xl text-on-primary-container mb-3 sm:mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed font-light">
                             {heroContent.blurb}
                         </p>
-                        <div className="flex flex-col sm:flex-row-reverse justify-center md:justify-start gap-4">
+                        <div className="flex flex-col sm:flex-row-reverse md:justify-start gap-4">
                             {statusTemplate && (
                                 <div className={`flex items-center justify-center space-x-2 font-label ${statusTemplate.color}`}>
                                     <span className="material-symbols-outlined">{statusTemplate.icon}</span>
