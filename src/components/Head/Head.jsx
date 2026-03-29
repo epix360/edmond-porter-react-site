@@ -37,13 +37,13 @@ const Head = ({
       <meta property="og:image:alt" content="Edmond A Porter - Contemporary Author" />
       
       {/* Twitter Card Meta Tags */}
-      <meta name="twitter:card" content={twitterCard} />
+      {/* <meta name="twitter:card" content={twitterCard} />
       <meta name="twitter:site" content="@edmondporter" />
       <meta name="twitter:creator" content="@edmondporter" />
       <meta name="twitter:title" content={siteTitle} />
       <meta name="twitter:description" content={siteDescription} />
       <meta name="twitter:image" content={ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/Edmond_Headshot.webp`} />
-      <meta name="twitter:image:alt" content="Edmond A Porter - Contemporary Author" />
+      <meta name="twitter:image:alt" content="Edmond A Porter - Contemporary Author" /> */}
       
       {/* Additional SEO Meta Tags */}
       <meta name="author" content="Edmond A Porter" />
@@ -51,12 +51,13 @@ const Head = ({
       <meta name="robots" content="index, follow" />
       <meta name="language" content="en" />
       
-      {/* Structured Data */}
-      {structuredData && (
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-      )}
+   {/* Structured Data */}
+{structuredData && (
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+  />
+)}
       
       {/* Favicon and Theme */}
       <link rel="icon" href="/favicon.ico" />

@@ -4,40 +4,64 @@ const StructuredData = ({ type, data }) => {
   const getStructuredData = () => {
     switch (type) {
       case 'author':
-        return {
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "Edmond A Porter",
-          "jobTitle": "Author",
-          "description": "Contemporary author exploring human experience through compelling narratives and thoughtful prose.",
-          "url": "https://edmondaporter.com",
-          "sameAs": [
-            "https://www.amazon.com/author/edmond-a-porter"
-          ],
-          "works": data.books?.map(book => ({
-            "@type": "Book",
-            "name": book.title,
-            "genre": book.type,
-            "description": book.description,
-            "url": book.buyLink
-          })) || []
-        };
-        
-      case 'book':
-        return {
-          "@context": "https://schema.org",
-          "@type": "Book",
-          "name": data.title,
-          "author": {
-            "@type": "Person",
-            "name": "Edmond A Porter"
-          },
-          "description": data.description,
-          "genre": data.type,
-          "url": data.buyLink,
-          "image": `https://edmondaporter.com/images/${data.cover}`,
-          "datePublished": data.releaseDate
-        };
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Edmond A. Porter",
+    "givenName": "Edmond",
+    "familyName": "Porter",
+    "jobTitle": "Author",
+    "memberOf": {
+    "@type": "Organization",
+    "name": "The Writers' Cache"
+  },
+    "pronouns":"He/Him",
+    "nationality": {
+    "@type": "Country",
+    "name": "US"
+  },
+    "url": "https://edmondaporter.com",
+    "sameAs": [
+      "https://www.amazon.com/author/edmond-a-porter",
+      "https://www.goodreads.com/author/show/60996287.Edmond_A_Porter",
+      "https://medium.com/@eporter609"
+      // Add social links here if he has them
+    ],
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://edmondaporter.com"
+    }
+  };
+
+case 'book':
+  return {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": data.title,
+    "alternateName": data.subtitle || "",
+    "author": {
+      "@type": "Person",
+      "name": "Edmond A. Porter",
+      "url": "https://edmondaporter.com"
+    },
+    "description": data.description,
+    "genre": data.type,
+    "isbn": data.isbn || "", // Very important for Google Books
+    "url": `https://edmondaporter.com/books/${data.slug}`, 
+    "image": `https://edmondaporter.com/images/${data.cover}`,
+    "datePublished": data.releaseDate,
+    "publisher": {
+      "@type": "Organization",
+      "name": data.publisher || "Self-Published"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": data.buyLink,
+      "availability": "https://schema.org/InStock",
+      "priceCurrency": "USD",
+      "price": data.price || "0.00"
+    }
+  };
         
       case 'website':
         return {
@@ -63,9 +87,10 @@ const StructuredData = ({ type, data }) => {
   };
 
   return (
-    <script type="application/ld+json">
-      {JSON.stringify(getStructuredData())}
-    </script>
+    <script 
+  type="application/ld+json" 
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(getStructuredData()) }} 
+/>
   );
 };
 
