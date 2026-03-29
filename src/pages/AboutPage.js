@@ -85,7 +85,7 @@ const AboutPage = () => {
         <Navigation />
         <main className="pt-24">
             {/* About Hero */}
-            <section className="relative overflow-hidden py-10 md:py-16">
+            <section className="relative overflow-hidden py-4 md:py-16">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
                     <div className="md:col-span-7 z-10 text-center md:text-left order-2 md:order-1">
                         <span className="font-label text-sm tracking-[0.2em] uppercase text-secondary font-semibold mb-4 block">{aboutBioContent.bioLabel}</span>
@@ -109,7 +109,7 @@ const AboutPage = () => {
             </section>
 
             {/* Bio Section */}
-            <section className="py-10 md:py-16 bg-surface-container-lowest">
+            <section className="py-4 md:py-16 bg-surface-container-lowest">
                 <div className="max-w-4xl mx-auto px-6">
                     <div className="prose prose-lg prose-slate max-w-none">
                         <div className="text-on-surface-variant leading-relaxed space-y-6" dangerouslySetInnerHTML={{ __html: convertMarkdown(aboutBioContent.bioBody) }} />
