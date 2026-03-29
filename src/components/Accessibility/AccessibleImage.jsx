@@ -10,9 +10,9 @@ const AccessibleImage = ({
   height,
   priority = false,
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
-  mobileWidth = null, // Add mobile-specific width
-  mobileHeight = null, // Add mobile-specific height
-  mobileSrc = null, // Add mobile-specific source
+  mobileWidth, // Keep mobile-specific width from props
+  mobileHeight, // Keep mobile-specific height from props
+  mobileSrc, // Keep mobile-specific source from props
   ...props 
 }) => {
   // Determine if mobile version should be used
