@@ -98,7 +98,7 @@ const getComingSoonText = (showSpecificDate, releaseDate, customDateText) => {
 };
 
 const HomePage = () => {
-    // Load CMS content with deferred loading for better performance
+    // Load CMS content
     const { content: hero, loading: heroLoading, error: heroError } = useCMSContent('hero');
     const { content: books, loading: booksLoading, error: booksError } = useCMSContent('books');
     const { content: homeBio, loading: homeBioLoading, error: homeBioError } = useCMSContent('home-bio');
@@ -121,69 +121,6 @@ const HomePage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-
-    // Defer non-critical image preloading to reduce main thread blocking
-    useEffect(() => {
-        const preloadImage = () => {
-            if (heroContent?.cover) {
-                // Use mobile image for mobile devices
-                const isMobile = window.innerWidth <= 768;
-                const heroImage = isMobile && heroContent.mobileCover ? heroContent.mobileCover : heroContent.cover;
-                
-                // Use requestIdleCallback for non-blocking preloading
-                const schedulePreload = () => {
-                    if ('requestIdleCallback' in window) {
-                        requestIdleCallback(() => {
-                            const link = document.createElement('link');
-                            link.rel = 'preload';
-                            link.href = getImagePath(heroImage);
-                            link.as = 'image';
-                            link.fetchPriority = 'high';
-                            
-                            // Add media query for mobile-specific preloading
-                            if (heroContent.mobileCover) {
-                                // Preload desktop image for desktop
-                                const desktopLink = document.createElement('link');
-                                desktopLink.rel = 'preload';
-                                desktopLink.href = getImagePath(heroContent.cover);
-                                desktopLink.as = 'image';
-                                desktopLink.media = '(min-width: 769px)';
-                                desktopLink.fetchPriority = 'high';
-                                document.head.appendChild(desktopLink);
-                                
-                                // Preload mobile image for mobile only
-                                const mobileLink = document.createElement('link');
-                                mobileLink.rel = 'preload';
-                                mobileLink.href = getImagePath(heroContent.mobileCover);
-                                mobileLink.as = 'image';
-                                mobileLink.media = '(max-width: 768px)';
-                                mobileLink.fetchPriority = 'high';
-                                document.head.appendChild(mobileLink);
-                            } else {
-                                // Only preload desktop image if no mobile version
-                                document.head.appendChild(link);
-                            }
-                        });
-                    } else {
-                        setTimeout(() => {
-                            const link = document.createElement('link');
-                            link.rel = 'preload';
-                            link.href = getImagePath(heroImage);
-                            link.as = 'image';
-                            link.fetchPriority = 'high';
-                            document.head.appendChild(link);
-                        }, 100);
-                    }
-                };
-
-                schedulePreload();
-            }
-        };
-
-        // Defer preloading to not block initial render
-        const timer = setTimeout(preloadImage, 500);
-        return () => clearTimeout(timer);
-    }, [heroContent]);
 
     const [formData, setFormData] = useState({
         name: '',
