@@ -313,6 +313,7 @@ const HomePage = () => {
                                     className="bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
                                     placeholder="Name" 
                                     name="name"
+                                    id="name"
                                     value={formData.name}
                                     onChange={handleChange}
                                     required 
@@ -325,6 +326,7 @@ const HomePage = () => {
                                     className="bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
                                     placeholder="Email Address" 
                                     name="email"
+                                    id="email"
                                     value={formData.email}
                                     onChange={handleChange}
                                     required 
@@ -338,6 +340,7 @@ const HomePage = () => {
                                 className="w-full bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0" 
                                 placeholder="Subject" 
                                 name="subject"
+                                id="subject"
                                 value={formData.subject}
                                 onChange={handleChange}
                                 required 
@@ -350,6 +353,7 @@ const HomePage = () => {
                                 className="w-full bg-white/10 border-0 border-b-2 border-outline-variant text-white p-3 rounded-t-lg focus:border-secondary focus:ring-0 resize-none" 
                                 placeholder="Your message..." 
                                 name="message"
+                                id="message"
                                 value={formData.message}
                                 onChange={handleChange}
                                 required 
