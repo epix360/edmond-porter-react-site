@@ -16,7 +16,7 @@ if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
         }, 60 * 60 * 1000); // Check every hour
       })
       .catch((registrationError) => {
-        console.log('SW registration failed: ', registrationError);
+        // Silently fail to avoid blocking app initialization
       });
   });
 }
