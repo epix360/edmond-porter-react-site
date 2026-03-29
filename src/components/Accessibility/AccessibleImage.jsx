@@ -56,17 +56,8 @@ const AccessibleImage = ({
         width={width}
         height={height}
         fetchpriority={priority ? 'high' : 'auto'}
-        onLoad={(event) => {
-          if (typeof window !== 'undefined') {
-            console.log('🖼️ Image Loaded:');
-            console.log('- Current src:', event.target.src);
-            console.log('- Natural width:', event.target.naturalWidth);
-            console.log('- Natural height:', event.target.naturalHeight);
-            console.log('- Display width:', event.target.width);
-            console.log('- Display height:', event.target.height);
-            console.log('- Is mobile:', isMobile);
-            console.log('- Mobile src available:', !!mobileSrc);
-          }
+        onLoad={() => {
+          // Mobile image successfully loaded - no debug logging needed
         }}
         {...props}
       />
