@@ -17,12 +17,19 @@ const AccessibleImage = ({
 }) => {
   // Determine if mobile version should be used
   const [isMobile, setIsMobile] = React.useState(false);
+  const [currentSrc, setCurrentSrc] = React.useState(src);
   
   // Check mobile status on mount and window resize
   React.useEffect(() => {
     const checkMobile = () => {
       const mobile = typeof window !== 'undefined' && window.innerWidth <= 768;
       setIsMobile(mobile);
+      // Force mobile image selection
+      if (mobile && mobileSrc) {
+        setCurrentSrc(mobileSrc);
+      } else {
+        setCurrentSrc(src);
+      }
     };
     
     checkMobile();
@@ -31,60 +38,38 @@ const AccessibleImage = ({
     return () => {
       window.removeEventListener('resize', checkMobile);
     };
-  }, [mobileSrc]);
-  
-  const finalWidth = isMobile && mobileWidth ? mobileWidth : width;
-  const finalHeight = isMobile && mobileHeight ? mobileHeight : height;
-  const finalSrc = isMobile && mobileSrc ? mobileSrc : src;
-  
-  // Debug logging to identify responsive image issues
-  if (typeof window !== 'undefined') {
-    console.log('🔍 Responsive Image Debug:');
-    console.log('- Window width:', window.innerWidth);
-    console.log('- Mobile src:', mobileSrc);
-    console.log('- Desktop src:', src);
-    console.log('- Is mobile detected:', isMobile);
-    console.log('- Media query should match:', window.innerWidth <= 768);
-  }
+  }, [mobileSrc, src]);
   
   return (
     <figure className={`relative ${className}`}>
-      <picture>
-        {mobileSrc && (
-          <source 
-            media="(max-width: 768px)" 
-            srcSet={`${mobileSrc} 1x`}
-            sizes="100vw"
-          />
-        )}
-        <img
-          src={src}
-          srcSet={`${src} 1x`}
-          sizes="(min-width: 769px) 100vw"
-          alt={alt}
-          className="h-auto mx-auto block"
-          style={{
-            maxWidth: '100%',
-            height: 'auto'
-          }}
-          loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
-          width={width}
-          height={height}
-          fetchpriority={priority ? 'high' : 'auto'}
-          onLoad={(event) => {
-            if (typeof window !== 'undefined') {
-              console.log('🖼️ Image Loaded:');
-              console.log('- Current src:', event.target.src);
-              console.log('- Natural width:', event.target.naturalWidth);
-              console.log('- Natural height:', event.target.naturalHeight);
-              console.log('- Display width:', event.target.width);
-              console.log('- Display height:', event.target.height);
-            }
-          }}
-          {...props}
-        />
-      </picture>
+      <img
+        src={currentSrc}
+        alt={alt}
+        className="h-auto mx-auto block"
+        style={{
+          maxWidth: '100%',
+          height: 'auto'
+        }}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        sizes={sizes}
+        width={width}
+        height={height}
+        fetchpriority={priority ? 'high' : 'auto'}
+        onLoad={(event) => {
+          if (typeof window !== 'undefined') {
+            console.log('🖼️ Image Loaded:');
+            console.log('- Current src:', event.target.src);
+            console.log('- Natural width:', event.target.naturalWidth);
+            console.log('- Natural height:', event.target.naturalHeight);
+            console.log('- Display width:', event.target.width);
+            console.log('- Display height:', event.target.height);
+            console.log('- Is mobile:', isMobile);
+            console.log('- Mobile src available:', !!mobileSrc);
+          }
+        }}
+        {...props}
+      />
       {caption && (
         <figcaption className="text-sm text-on-surface-variant mt-2 text-center italic">
           {caption}
