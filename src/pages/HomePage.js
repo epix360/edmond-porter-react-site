@@ -139,7 +139,30 @@ const HomePage = () => {
                             link.href = getImagePath(heroImage);
                             link.as = 'image';
                             link.fetchPriority = 'high';
-                            document.head.appendChild(link);
+                            
+                            // Add media query for mobile-specific preloading
+                            if (heroContent.mobileCover) {
+                                // Preload desktop image for desktop
+                                const desktopLink = document.createElement('link');
+                                desktopLink.rel = 'preload';
+                                desktopLink.href = getImagePath(heroContent.cover);
+                                desktopLink.as = 'image';
+                                desktopLink.media = '(min-width: 769px)';
+                                desktopLink.fetchPriority = 'high';
+                                document.head.appendChild(desktopLink);
+                                
+                                // Preload mobile image for mobile only
+                                const mobileLink = document.createElement('link');
+                                mobileLink.rel = 'preload';
+                                mobileLink.href = getImagePath(heroContent.mobileCover);
+                                mobileLink.as = 'image';
+                                mobileLink.media = '(max-width: 768px)';
+                                mobileLink.fetchPriority = 'high';
+                                document.head.appendChild(mobileLink);
+                            } else {
+                                // Only preload desktop image if no mobile version
+                                document.head.appendChild(link);
+                            }
                         });
                     } else {
                         setTimeout(() => {
