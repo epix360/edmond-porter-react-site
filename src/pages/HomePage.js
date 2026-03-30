@@ -19,6 +19,9 @@ emailjs.init({
     throttle: 60000, // Users can only send 1 email every 60 seconds
   },
 });
+
+// Google Apps Script endpoint
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwyB9lKwi9FHadaQ_jrKhJdwW29B2dyEX2fqkVi8E1xNwg5TuPSbhBxBsgCt_QB4618IA/exec";
 import { useCMSContent, fallbackContent } from '../hooks/useCMSContent';
 
 // Preload hero image for LCP optimization
@@ -139,8 +142,8 @@ const HomePage = () => {
         message: '',
         organization_name: '' // Honeypot field to catch bots
     });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState('');
+    const [submissionStatus, setSubmissionStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e) => {
         setFormData({
@@ -151,62 +154,57 @@ const HomePage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsSubmitting(true);
-        setSubmitStatus('');
+        const form = e.target;
+        const formData = new FormData(form);
 
-        // Check honeypot field - if filled, it's likely a bot
-        if (formData.organization_name) {
-            console.warn('Spam blocked via honeypot:', {
+        // 1. Honeypot check
+        if (formData.get("organization_name")) {
+            console.warn("Spam detected:", {
                 timestamp: new Date().toISOString(),
-                formData: { ...formData, message: '[REDACTED]' }
+                formData: Object.fromEntries(formData)
             });
-            setSubmitStatus('');
-            setIsSubmitting(false);
-            return; // Silent abort - don't send email
+            setSubmissionStatus("success"); // Fake success to fool bots
+            form.reset(); // Clear form for bots
+            return;
         }
 
-        try {
-            // Send email using initialized EmailJS service
-            const result = await emailjs.send(
-                'service_g5clgej', // Replace with your EmailJS service ID
-                'template_2flsjn5', // Replace with your EmailJS template ID
-                {
-                    user_name: formData.name,
-                    user_email: formData.email,
-                    subject: formData.subject,
-                    message: formData.message,
-                    to_email: 'eporter609@hotmail.com' // Replace with your email
-                }
-            );
+        setSubmissionStatus("sending");
+        setErrorMessage('');
 
-            if (result.status === 200) {
-                setSubmitStatus('Message sent successfully!');
-                setFormData({ 
-                    name: '', 
-                    email: '', 
-                    subject: '', 
-                    message: '',
-                    organization_name: '' // Clear honeypot field too
-                });
-            } else {
-                setSubmitStatus('Failed to send message. Please try again.');
+        try {
+            // 2. Fire both requests in parallel
+            const [emailResponse, sheetResponse] = await Promise.allSettled([
+                emailjs.sendForm('service_g5clgej', 'template_2flsjn5', form),
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors", // Crucial for Google Apps Script
+                    body: new URLSearchParams(formData),
+                })
+            ]);
+
+            // 3. Handle EmailJS specific errors (like Rate Limiting)
+            if (emailResponse.status === 'rejected' && emailResponse.reason.status === 429) {
+                setErrorMessage("Please wait a minute before sending another message.");
+                setSubmissionStatus("error");
+                return;
             }
-        } catch (error) {
-            console.error('EmailJS Error:', error);
-            
-            // Log blocked attempts for security monitoring
-            if (error.status === 429 || error.text?.includes('rate limit') || error.text?.includes('too many requests')) {
-                console.warn('Rate limit or blocked attempt detected:', {
-                    timestamp: new Date().toISOString(),
-                    error: error.text || error.message,
-                    formData: { ...formData, message: '[REDACTED]' }
-                });
-                setSubmitStatus('Please wait a minute before sending another message.');
-            } else {
-                setSubmitStatus('Failed to send message. Please try again.');
+
+            // 4. Handle other EmailJS errors
+            if (emailResponse.status === 'rejected') {
+                console.error('EmailJS Error:', emailResponse.reason);
+                setErrorMessage("Failed to send email. Please try again.");
+                setSubmissionStatus("error");
+                return;
             }
-        } finally {
-            setIsSubmitting(false);
+
+            // 5. Success
+            setSubmissionStatus("success");
+            form.reset(); // Clear the form
+
+        } catch (err) {
+            console.error('Submission Error:', err);
+            setErrorMessage("Something went wrong. Please try again.");
+            setSubmissionStatus("error");
         }
     };
 
@@ -415,27 +413,34 @@ const HomePage = () => {
                                 autoComplete="off"
                             ></textarea>
                         </div>
-                        {submitStatus && (
-                            <div className={`text-center p-4 rounded-lg mb-4 transition-all duration-300 ${
-                                submitStatus.includes('successfully') 
-                                    ? 'bg-green-500/20 text-green-300 border border-green-500/30' 
-                                    : 'bg-red-500/20 text-red-300 border border-red-500/30'
-                            }`}>
+                        {submissionStatus === 'success' && (
+                            <div className="text-center p-4 rounded-lg mb-4 bg-green-500/20 text-green-300 border border-green-500/30 transition-all duration-300">
                                 <div className="flex items-center justify-center">
-                                    <span className="material-symbols-outlined mr-2">
-                                        {submitStatus.includes('successfully') ? 'check_circle' : 'error'}
-                                    </span>
-                                    {submitStatus}
+                                    <span className="material-symbols-outlined mr-2">check_circle</span>
+                                    Message sent successfully!
+                                </div>
+                            </div>
+                        )}
+
+                        {submissionStatus === 'error' && (
+                            <div className="text-center p-4 rounded-lg mb-4 bg-red-500/20 text-red-300 border border-red-500/30 transition-all duration-300">
+                                <div className="flex items-center justify-center">
+                                    <span className="material-symbols-outlined mr-2">error</span>
+                                    {errorMessage}
                                 </div>
                             </div>
                         )}
                         <div className="text-center">
                             <button 
-                                className="bg-secondary text-white px-12 py-4 rounded-lg font-bold hover:bg-[#96643c] transition-colors shadow-lg shadow-black/20 uppercase tracking-widest text-sm disabled:opacity-50 disabled:cursor-not-allowed" 
+                                className={`px-12 py-4 rounded-lg font-bold transition-all duration-300 shadow-lg shadow-black/20 uppercase tracking-widest text-sm ${
+                                    submissionStatus === 'sending' 
+                                        ? 'bg-gray-500 text-white cursor-not-allowed opacity-50' 
+                                        : 'bg-secondary text-white hover:bg-[#96643c] disabled:opacity-50 disabled:cursor-not-allowed'
+                                }`} 
                                 type="submit"
-                                disabled={isSubmitting}
+                                disabled={submissionStatus === 'sending'}
                             >
-                                {isSubmitting ? 'Sending...' : 'Send Message'}
+                                {submissionStatus === 'sending' ? 'Sending...' : 'Send Message'}
                             </button>
                         </div>
                     </form>
