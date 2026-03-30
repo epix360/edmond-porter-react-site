@@ -369,6 +369,7 @@ const HomePage = () => {
                                     onChange={handleChange}
                                     required 
                                     type="text" 
+                                    autoComplete="name"
                                 />
                             </div>
                             <div className="w-full">
@@ -382,6 +383,7 @@ const HomePage = () => {
                                     onChange={handleChange}
                                     required 
                                     type="email" 
+                                    autoComplete="email"
                                 />
                             </div>
                         </div>
@@ -396,6 +398,7 @@ const HomePage = () => {
                                 onChange={handleChange}
                                 required 
                                 type="text" 
+                                autoComplete="off"
                             />
                         </div>
                         <div>
@@ -409,6 +412,7 @@ const HomePage = () => {
                                 onChange={handleChange}
                                 required 
                                 rows="4"
+                                autoComplete="off"
                             ></textarea>
                         </div>
                         {submitStatus && (
