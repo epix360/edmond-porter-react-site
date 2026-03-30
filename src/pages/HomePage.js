@@ -9,6 +9,16 @@ import LazyImage from '../components/Optimization/LazyImage';
 import AccessibleImage from '../components/Accessibility/AccessibleImage';
 import { getImagePath as getAssetPath, CDN_CONFIG } from '../utils/cdn';
 import emailjs from '@emailjs/browser';
+
+// Initialize EmailJS with security features
+emailjs.init({
+  publicKey: 'HfqzXzg24u4VT7IwB',
+  blockHeadless: true, // Prevents headless browser spam
+  limitRate: {
+    id: 'contact-form',
+    throttle: 60000, // Users can only send 1 email every 60 seconds
+  },
+});
 import { useCMSContent, fallbackContent } from '../hooks/useCMSContent';
 
 // Preload hero image for LCP optimization
@@ -144,7 +154,7 @@ const HomePage = () => {
         setSubmitStatus('');
 
         try {
-            // You'll need to configure these values with your EmailJS account
+            // Send email using initialized EmailJS service
             const result = await emailjs.send(
                 'service_g5clgej', // Replace with your EmailJS service ID
                 'template_2flsjn5', // Replace with your EmailJS template ID
@@ -154,8 +164,7 @@ const HomePage = () => {
                     subject: formData.subject,
                     message: formData.message,
                     to_email: 'eporter609@hotmail.com' // Replace with your email
-                },
-                'HfqzXzg24u4VT7IwB' // Replace with your EmailJS public key
+                }
             );
 
             if (result.status === 200) {
@@ -166,7 +175,18 @@ const HomePage = () => {
             }
         } catch (error) {
             console.error('EmailJS Error:', error);
-            setSubmitStatus('Failed to send message. Please try again.');
+            
+            // Log blocked attempts for security monitoring
+            if (error.status === 429 || error.text?.includes('rate limit') || error.text?.includes('too many requests')) {
+                console.warn('Rate limit or blocked attempt detected:', {
+                    timestamp: new Date().toISOString(),
+                    error: error.text || error.message,
+                    formData: { ...formData, message: '[REDACTED]' }
+                });
+                setSubmitStatus('Please wait a moment before sending another message.');
+            } else {
+                setSubmitStatus('Failed to send message. Please try again.');
+            }
         } finally {
             setIsSubmitting(false);
         }
