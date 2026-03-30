@@ -136,7 +136,8 @@ const HomePage = () => {
         name: '',
         email: '',
         subject: '',
-        message: ''
+        message: '',
+        organization_name: '' // Honeypot field to catch bots
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState('');
@@ -152,6 +153,17 @@ const HomePage = () => {
         e.preventDefault();
         setIsSubmitting(true);
         setSubmitStatus('');
+
+        // Check honeypot field - if filled, it's likely a bot
+        if (formData.organization_name) {
+            console.warn('Spam blocked via honeypot:', {
+                timestamp: new Date().toISOString(),
+                formData: { ...formData, message: '[REDACTED]' }
+            });
+            setSubmitStatus('');
+            setIsSubmitting(false);
+            return; // Silent abort - don't send email
+        }
 
         try {
             // Send email using initialized EmailJS service
@@ -169,7 +181,13 @@ const HomePage = () => {
 
             if (result.status === 200) {
                 setSubmitStatus('Message sent successfully!');
-                setFormData({ name: '', email: '', subject: '', message: '' });
+                setFormData({ 
+                    name: '', 
+                    email: '', 
+                    subject: '', 
+                    message: '',
+                    organization_name: '' // Clear honeypot field too
+                });
             } else {
                 setSubmitStatus('Failed to send message. Please try again.');
             }
@@ -183,7 +201,7 @@ const HomePage = () => {
                     error: error.text || error.message,
                     formData: { ...formData, message: '[REDACTED]' }
                 });
-                setSubmitStatus('Please wait a moment before sending another message.');
+                setSubmitStatus('Please wait a minute before sending another message.');
             } else {
                 setSubmitStatus('Failed to send message. Please try again.');
             }
@@ -326,6 +344,19 @@ const HomePage = () => {
                     <h2 className="font-headline text-3xl md:text-4xl font-bold text-white mb-6">Get in Touch</h2>
                     <p className="text-on-primary-container text-lg mb-10 font-light">For media inquiries, speaking engagements, or just to say hello.</p>
                     <form className="max-w-2xl mx-auto space-y-6 text-left" onSubmit={handleSubmit}>
+                        {/* Honeypot field - hidden from humans but detectable by bots */}
+                        <div className="absolute opacity-0 -z-10 h-0 w-0 pointer-events-none">
+                            <input
+                                type="text"
+                                name="organization_name"
+                                tabIndex="-1"
+                                aria-hidden="true"
+                                autoComplete="off"
+                                value={formData.organization_name}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="w-full">
                                 <label htmlFor="name" className="sr-only">Name</label>
@@ -381,8 +412,17 @@ const HomePage = () => {
                             ></textarea>
                         </div>
                         {submitStatus && (
-                            <div className={`text-center p-3 rounded-lg ${submitStatus.includes('successfully') ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}`}>
-                                {submitStatus}
+                            <div className={`text-center p-4 rounded-lg mb-4 transition-all duration-300 ${
+                                submitStatus.includes('successfully') 
+                                    ? 'bg-green-500/20 text-green-300 border border-green-500/30' 
+                                    : 'bg-red-500/20 text-red-300 border border-red-500/30'
+                            }`}>
+                                <div className="flex items-center justify-center">
+                                    <span className="material-symbols-outlined mr-2">
+                                        {submitStatus.includes('successfully') ? 'check_circle' : 'error'}
+                                    </span>
+                                    {submitStatus}
+                                </div>
                             </div>
                         )}
                         <div className="text-center">
