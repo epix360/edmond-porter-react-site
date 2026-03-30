@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GTM Test - Edmond A Porter</title>
+    <script>
+        console.log('🔍 GTM Verification Test Started');
+        
+        // Check if dataLayer exists
+        console.log('dataLayer exists:', typeof window.dataLayer !== 'undefined');
+        console.log('dataLayer content:', window.dataLayer);
+        
+        // Check if GTM loaded
+        setTimeout(() => {
+            console.log('GTM loaded:', !!window.google_tag_manager);
+            console.log('GTM container ID:', 'GTM-KCRB5LLM');
+            
+            // Test dataLayer push
+            if (window.dataLayer) {
+                window.dataLayer.push({
+                    event: 'test_page_view',
+                    page_path: '/test',
+                    page_title: 'GTM Test Page',
+                    page_location: window.location.href,
+                    test_mode: true
+                });
+                console.log('✅ Test event pushed to dataLayer');
+            }
+        }, 2000);
+    </script>
+</head>
+<body>
+    <h1>GTM Configuration Test</h1>
+    <p>This page tests Google Tag Manager setup for Edmond A Porter website.</p>
+    <p>Check browser console for verification results.</p>
+    
+    <script>
+        // Manual test for dataLayer functionality
+        console.log('🔍 Manual dataLayer test:');
+        console.log('Before push - dataLayer length:', window.dataLayer ? window.dataLayer.length : 'undefined');
+        
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: 'manual_test',
+            message: 'GTM verification test',
+            timestamp: new Date().toISOString()
+        });
+        
+        console.log('After push - dataLayer length:', window.dataLayer.length);
+        console.log('Last dataLayer item:', window.dataLayer[window.dataLayer.length - 1]);
+    </script>
+</body>
+</html>
