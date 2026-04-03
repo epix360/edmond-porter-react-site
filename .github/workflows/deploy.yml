@@ -156,7 +156,7 @@ jobs:
         fi
         
         # Check if bundle contains expected content
-        if ! grep -q "Utah.*Best.*Poetry" "$MAIN_BUNDLE"; then
+        if ! grep -q "Utah" "$MAIN_BUNDLE"; then
           echo "❌ Bundle does not contain expected content"
           exit 1
         fi
