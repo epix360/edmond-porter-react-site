@@ -24,13 +24,11 @@ permissions:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   REACT_APP_GTM_ID: ${{ secrets.REACT_APP_GTM_ID }}
-  REACT_APP_GA4_ID: ${{ secrets.REACT_APP_GA4_ID }}
 
 jobs:
   validate-and-deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     
     steps:
