@@ -7,8 +7,6 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Edmond_Headshot.webp" as="image" fetchpriority="high">
-  <link rel="preload" href="/static/css/main.2ddd112c.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="/static/js/main.2862575b.js" as="script" fetchpriority="high">
   
   
   <!-- CDN Fallback Script -->
@@ -48,14 +46,13 @@
         document.head.appendChild(script);
       }
       
-      // Load assets with fallback after DOM is ready
+      // Load CSS immediately (critical for rendering)
+      loadCssWithFallback();
+      
+      // Load JS after DOM is ready to avoid blocking
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          loadCssWithFallback();
-          loadJsWithFallback();
-        });
+        document.addEventListener('DOMContentLoaded', loadJsWithFallback);
       } else {
-        loadCssWithFallback();
         loadJsWithFallback();
       }
     })();

@@ -49,8 +49,6 @@ const createOptimizedIndexHTML = () => {
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Edmond_Headshot.webp" as="image" fetchpriority="high">
-  <link rel="preload" href="${cssLocalUrl}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="${jsLocalUrl}" as="script" fetchpriority="high">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   
   <!-- CDN Fallback Script -->
@@ -90,14 +88,13 @@ const createOptimizedIndexHTML = () => {
         document.head.appendChild(script);
       }
       
-      // Load assets with fallback after DOM is ready
+      // Load CSS immediately (critical for rendering)
+      loadCssWithFallback();
+      
+      // Load JS after DOM is ready to avoid blocking
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          loadCssWithFallback();
-          loadJsWithFallback();
-        });
+        document.addEventListener('DOMContentLoaded', loadJsWithFallback);
       } else {
-        loadCssWithFallback();
         loadJsWithFallback();
       }
     })();
