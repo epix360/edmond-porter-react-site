@@ -36,15 +36,19 @@ const createOptimizedIndexHTML = () => {
     jsFile = jsFiles[0];
   }
   
-  // Add resource hints for better performance
+  // Generate CDN URLs for JS and CSS assets
+  const cssCdnUrl = cssFile ? `https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/build/static/css/${cssFile}` : `/static/css/${cssFile || 'main.css'}`;
+  const jsCdnUrl = jsFile ? `https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/build/static/js/${jsFile}` : `/static/js/${jsFile || 'main.js'}`;
+  
+  // Add resource hints for better performance with CDN enhancement
   const resourceHints = `
   <!-- Performance Optimizations -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Edmond_Headshot.webp" as="image" fetchpriority="high">
-  <link rel="preload" href="/static/css/${cssFile || 'main.css'}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="/static/js/${jsFile || 'main.js'}" as="script" fetchpriority="high">
+  <link rel="preload" href="${cssCdnUrl}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="${jsCdnUrl}" as="script" fetchpriority="high">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   
   <!-- DNS prefetch for external resources -->
@@ -189,8 +193,25 @@ const createOptimizedIndexHTML = () => {
   html = html.replace(/href="\/[^"]*\/static\//g, 'href="/static/');
   html = html.replace(/src="\/[^"]*\/static\//g, 'src="/static/');
   
+  // Replace CSS and JS URLs with CDN URLs (conservative enhancement)
+  if (cssFile) {
+    html = html.replace(
+      new RegExp(`href="/static/css/${cssFile}(\\?[^"]*)?"`, 'g'),
+      `href="${cssCdnUrl}"`
+    );
+  }
+  
+  if (jsFile) {
+    html = html.replace(
+      new RegExp(`src="/static/js/${jsFile}(\\?[^"]*)?"`, 'g'),
+      `src="${jsCdnUrl}"`
+    );
+  }
+  
   fs.writeFileSync(indexPath, html);
   console.log('✅ Performance optimizations applied to index.html');
+  console.log(`🚀 CSS CDN: ${cssCdnUrl}`);
+  console.log(`🚀 JS CDN: ${jsCdnUrl}`);
 };
 
 const optimizeImageSuggestions = () => {
