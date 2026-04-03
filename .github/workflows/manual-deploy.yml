@@ -15,6 +15,12 @@ on:
   repository_dispatch:  # Allow external triggers (e.g., from CMS webhook)
     types: [content_updated]
 
+# Add permissions to allow the build to "talk" to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   REACT_APP_GTM_ID: ${{ secrets.REACT_APP_GTM_ID }}
