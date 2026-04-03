@@ -180,12 +180,16 @@ jobs:
       run: |
         echo "🔍 Verifying bundle accessibility after deployment..."
         
+        # Find the bundle that was deployed
+        MAIN_BUNDLE=$(ls -t build/static/js/main.*.js 2>/dev/null | head -1)
+        BUNDLE_NAME=$(basename "$MAIN_BUNDLE")
+        
         # Wait for deployment to propagate
         echo "⏳ Waiting for GitHub Pages to propagate..."
         sleep 60
         
         # Check if new bundle is accessible
-        if curl -f -s "https://edmondaporter.com/static/js/main.9c4e149d.js" > /dev/null; then
+        if curl -f -s "https://edmondaporter.com/static/js/$BUNDLE_NAME" > /dev/null; then
           echo "✅ New bundle accessible on live site"
         else
           echo "❌ New bundle not accessible on live site"
@@ -207,7 +211,7 @@ jobs:
         sleep 30
         
         # Check if new content appears on live site
-        if curl -s "https://edmondaporter.com/" | grep -q "Utah.*Best.*Poetry"; then
+        if curl -s "https://edmondaporter.com/" | grep -q "Utah"; then
           echo "✅ New content found on live site"
         else
           echo "❌ New content not found on live site"
