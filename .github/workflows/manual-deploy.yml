@@ -140,6 +140,34 @@ jobs:
         
         echo "✅ Build validation passed!"
         
+    - name: Verify Build Artifacts 🔍
+      run: |
+        echo "🔍 Verifying build artifacts before upload..."
+        ls -la build/static/js/
+        
+        # Check if new bundle exists
+        if [ ! -f "build/static/js/main.9c4e149d.js" ]; then
+          echo "❌ New bundle not found in build artifacts"
+          exit 1
+        fi
+        
+        # Verify bundle size and content
+        BUNDLE_SIZE=$(stat -f%z "build/static/js/main.9c4e149d.js")
+        if [ "$BUNDLE_SIZE" -lt 100000 ]; then
+          echo "❌ Bundle size too small: $BUNDLE_SIZE bytes"
+          exit 1
+        fi
+        
+        # Check if bundle contains expected content
+        if ! grep -q "Utah.*Best.*Poetry" "build/static/js/main.9c4e149d.js"; then
+          echo "❌ Bundle does not contain expected content"
+          exit 1
+        fi
+        
+        echo "✅ Build artifacts verified successfully"
+        echo "📊 Bundle size: $BUNDLE_SIZE bytes"
+        echo "📚 Content: Utah's Best Poetry & Prose found"
+        
     - name: Upload Pages Artifact 📤
       uses: actions/upload-pages-artifact@v3
       with:
@@ -148,9 +176,50 @@ jobs:
     - name: Deploy to GitHub Pages 🚀
       uses: actions/deploy-pages@v4
       
+    - name: Verify Bundle Accessibility 🔍
+      run: |
+        echo "🔍 Verifying bundle accessibility after deployment..."
+        
+        # Wait for deployment to propagate
+        echo "⏳ Waiting for GitHub Pages to propagate..."
+        sleep 60
+        
+        # Check if new bundle is accessible
+        if curl -f -s "https://edmondaporter.com/static/js/main.9c4e149d.js" > /dev/null; then
+          echo "✅ New bundle accessible on live site"
+        else
+          echo "❌ New bundle not accessible on live site"
+          echo "🔍 Checking if old bundle is still being served..."
+          if curl -f -s "https://edmondaporter.com/static/js/main.2b3beed5.js" > /dev/null; then
+            echo "⚠️ Old bundle still being served - deployment may need more time"
+          else
+            echo "❌ No bundles accessible - deployment failed"
+            exit 1
+          fi
+        fi
+        
+    - name: Verify Content Integration 🔍
+      run: |
+        echo "🔍 Verifying content integration on live site..."
+        
+        # Wait additional time for content to be fully integrated
+        sleep 30
+        
+        # Check if new content appears on live site
+        if curl -s "https://edmondaporter.com/" | grep -q "Utah.*Best.*Poetry"; then
+          echo "✅ New content found on live site"
+        else
+          echo "❌ New content not found on live site"
+          echo "🔍 Checking live site content..."
+          curl -s "https://edmondaporter.com/" | grep -A 5 -B 5 "main\.[a-z0-9]*\.js"
+          exit 1
+        fi
+        
     - name: Deployment Summary 📊
       run: |
         echo "🎉 Deployment completed successfully!"
         echo "📚 Books deployed: $(jq 'length' "public/content/books-index.json")"
         echo "🌐 Site URL: https://edmondaporter.com"
         echo "📝 Reason: ${{ github.event.inputs.reason || 'Triggered via webhook' }}"
+        echo "🔍 Bundle verified: main.9c4e149d.js"
+        echo "📚 Content verified: Utah's Best Poetry & Prose"
