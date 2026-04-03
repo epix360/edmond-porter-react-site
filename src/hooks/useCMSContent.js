@@ -12,26 +12,14 @@ export const useCMSContent = (contentType, filename = null) => {
         setLoading(true);
         
         if (contentType === 'books') {
-          // Load individual book files
-          const bookFiles = [
-            'The_Seasons_That_Made_Me.json',
-            'Lucky_Penny.json', 
-            'Faithful_Hearts.json',
-            'Wanderlust.json',
-            'The_Work_and_the_Stories.json'
-          ];
-          
-          const bookPromises = bookFiles.map(async (file) => {
-            const url = `/content/books/${file}`;
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`Failed to load ${file}: ${response.status}`);
-            return response.json();
-          });
-          
-          const books = await Promise.all(bookPromises);
+          // Load books-index.json for centralized book data
+          const url = '/content/books-index.json';
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`Failed to load books-index.json: ${response.status}`);
+          const booksData = await response.json();
           
           // Sort books by order field with automatic reordering for duplicates
-          const sortedBooks = books.sort((a, b) => {
+          const sortedBooks = booksData.sort((a, b) => {
             const orderA = a.order || 999; // Default to high number if no order
             const orderB = b.order || 999;
             return orderA - orderB;
