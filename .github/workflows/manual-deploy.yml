@@ -145,21 +145,25 @@ jobs:
         echo "🔍 Verifying build artifacts before upload..."
         ls -la build/static/js/
         
-        # Check if new bundle exists
-        if [ ! -f "build/static/js/main.9c4e149d.js" ]; then
-          echo "❌ New bundle not found in build artifacts"
+        # Find the main bundle dynamically
+        MAIN_BUNDLE=$(ls -t build/static/js/main.*.js 2>/dev/null | head -1)
+        
+        if [ -z "$MAIN_BUNDLE" ]; then
+          echo "❌ No main bundle found in build artifacts"
           exit 1
         fi
         
+        echo "✅ Found bundle: $MAIN_BUNDLE"
+        
         # Verify bundle size and content
-        BUNDLE_SIZE=$(stat -f%z "build/static/js/main.9c4e149d.js")
+        BUNDLE_SIZE=$(stat -c%s "$MAIN_BUNDLE")
         if [ "$BUNDLE_SIZE" -lt 100000 ]; then
           echo "❌ Bundle size too small: $BUNDLE_SIZE bytes"
           exit 1
         fi
         
         # Check if bundle contains expected content
-        if ! grep -q "Utah.*Best.*Poetry" "build/static/js/main.9c4e149d.js"; then
+        if ! grep -q "Utah.*Best.*Poetry" "$MAIN_BUNDLE"; then
           echo "❌ Bundle does not contain expected content"
           exit 1
         fi
@@ -180,22 +184,27 @@ jobs:
       run: |
         echo "🔍 Verifying bundle accessibility after deployment..."
         
+        # Find the main bundle dynamically for verification
+        MAIN_BUNDLE=$(ls -t build/static/js/main.*.js 2>/dev/null | head -1)
+        BUNDLE_NAME=$(basename "$MAIN_BUNDLE")
+        
         # Wait for deployment to propagate
         echo "⏳ Waiting for GitHub Pages to propagate..."
         sleep 60
         
         # Check if new bundle is accessible
-        if curl -f -s "https://edmondaporter.com/static/js/main.9c4e149d.js" > /dev/null; then
+        if curl -f -s "https://edmondaporter.com/static/js/$BUNDLE_NAME" > /dev/null; then
           echo "✅ New bundle accessible on live site"
         else
           echo "❌ New bundle not accessible on live site"
-          echo "🔍 Checking if old bundle is still being served..."
-          if curl -f -s "https://edmondaporter.com/static/js/main.2b3beed5.js" > /dev/null; then
-            echo "⚠️ Old bundle still being served - deployment may need more time"
-          else
-            echo "❌ No bundles accessible - deployment failed"
-            exit 1
-          fi
+          echo "⏳ Deployment may need more time to propagate"
+        fi
+        
+        if curl -f -s "https://edmondaporter.com/static/js/main.2b3beed5.js" > /dev/null; then
+          echo "⚠️ Old bundle still being served - deployment may need more time"
+        else
+          echo "❌ No bundles accessible - deployment failed"
+          exit 1
         fi
         
     - name: Verify Content Integration 🔍
