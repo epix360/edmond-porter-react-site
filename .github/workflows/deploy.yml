@@ -26,6 +26,7 @@ concurrency:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   REACT_APP_GTM_ID: ${{ secrets.REACT_APP_GTM_ID }}
+  REACT_APP_GA4_ID: ${{ secrets.REACT_APP_GA4_ID }}
 
 jobs:
   detect-changes:
@@ -94,7 +95,7 @@ jobs:
     - name: Setup Node.js 
       uses: actions/setup-node@v4 # Updated to v4 for 2026 standards
       with:
-        node-version: '20'
+        node-version: '22'
         cache: 'npm'
         
     - name: Install dependencies 📦
