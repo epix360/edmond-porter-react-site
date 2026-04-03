@@ -36,69 +36,16 @@ const createOptimizedIndexHTML = () => {
     jsFile = jsFiles[0];
   }
   
-  // Generate CDN URLs for JS and CSS assets with fallback
-  const cssCdnUrl = cssFile ? `https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/build/static/css/${cssFile}` : `/static/css/${cssFile || 'main.css'}`;
-  const jsCdnUrl = jsFile ? `https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/build/static/js/${jsFile}` : `/static/js/${jsFile || 'main.js'}`;
-  const cssLocalUrl = `/static/css/${cssFile || 'main.css'}`;
-  const jsLocalUrl = `/static/js/${jsFile || 'main.js'}`;
-  
-  // Add resource hints for better performance with conservative CDN approach
+  // Add resource hints for better performance
   const resourceHints = `
   <!-- Performance Optimizations -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Turbulent_Waters.webp" as="image" fetchpriority="high">
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Edmond_Headshot.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="/static/css/${cssFile || 'main.css'}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/static/js/${jsFile || 'main.js'}" as="script" fetchpriority="high">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  
-  <!-- CDN Fallback Script -->
-  <script>
-    // Conservative CDN enhancement with local fallback
-    (function() {
-      const cssCdnUrl = '${cssCdnUrl}';
-      const jsCdnUrl = '${jsCdnUrl}';
-      const cssLocalUrl = '${cssLocalUrl}';
-      const jsLocalUrl = '${jsLocalUrl}';
-      
-      // Function to load CSS with fallback
-      function loadCssWithFallback() {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = cssCdnUrl;
-        
-        link.onerror = function() {
-          console.warn('CDN CSS failed, loading local fallback');
-          link.href = cssLocalUrl;
-        };
-        
-        document.head.appendChild(link);
-      }
-      
-      // Function to load JS with fallback
-      function loadJsWithFallback() {
-        const script = document.createElement('script');
-        script.src = jsCdnUrl;
-        script.defer = true;
-        
-        script.onerror = function() {
-          console.warn('CDN JS failed, loading local fallback');
-          script.src = jsLocalUrl;
-        };
-        
-        document.head.appendChild(script);
-      }
-      
-      // Load CSS immediately (critical for rendering)
-      loadCssWithFallback();
-      
-      // Load JS after DOM is ready to avoid blocking
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadJsWithFallback);
-      } else {
-        loadJsWithFallback();
-      }
-    })();
-  </script>
   
   <!-- DNS prefetch for external resources -->
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -231,14 +178,8 @@ const createOptimizedIndexHTML = () => {
   // Remove blocking font links from the HTML (they're now loaded async)
   html = html.replace(/<link[^>]*href="https:\/\/fonts\.googleapis\.com\/css[^"]*"[^>]*>/g, '');
   
-  // Remove original blocking CSS link (replaced with fallback script)
+  // Remove original blocking CSS link (replaced with preload)
   html = html.replace(/<link[^>]*href="\/[^"]*\.css"[^>]*rel="stylesheet"[^>]*>/g, '');
-  
-  // Remove any remaining CSS link tags
-  html = html.replace(/<link[^>]*href="\/static\/css\/[^"]*"[^>]*rel="stylesheet"[^>]*>/g, '');
-  
-  // Remove original JS script tag (replaced with fallback script)
-  html = html.replace(/<script[^>]*src="\/static\/js\/[^"]*"[^>]*><\/script>/g, '');
   
   // Fix any remaining GitHub Pages base paths
   html = html.replace(/\/edmond-porter-react-site\/favicon\.ico/g, '/favicon.ico');
@@ -248,25 +189,8 @@ const createOptimizedIndexHTML = () => {
   html = html.replace(/href="\/[^"]*\/static\//g, 'href="/static/');
   html = html.replace(/src="\/[^"]*\/static\//g, 'src="/static/');
   
-  // Replace CSS and JS URLs with local URLs (fallback script will try CDN first)
-  if (cssFile) {
-    html = html.replace(
-      new RegExp(`href="/static/css/${cssFile}(\\?[^"]*)?"`, 'g'),
-      `href="${cssLocalUrl}"`
-    );
-  }
-  
-  if (jsFile) {
-    html = html.replace(
-      new RegExp(`src="/static/js/${jsFile}(\\?[^"]*)?"`, 'g'),
-      `src="${jsLocalUrl}"`
-    );
-  }
-  
   fs.writeFileSync(indexPath, html);
   console.log('✅ Performance optimizations applied to index.html');
-  console.log(`🚀 CSS CDN: ${cssCdnUrl}`);
-  console.log(`🚀 JS CDN: ${jsCdnUrl}`);
 };
 
 const optimizeImageSuggestions = () => {
@@ -326,4 +250,3 @@ if (require.main === module) {
 }
 
 module.exports = { createOptimizedIndexHTML, optimizeImageSuggestions };
-// Force rebuild - Fri Apr  3 17:19:38 MDT 2026

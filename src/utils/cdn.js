@@ -30,8 +30,7 @@ export const getAssetUrl = (path, options = {}) => {
     useLocal = null, 
     version = null,
     branch = 'main',
-    subdirectory = 'images',  // For local use
-    assetType = 'images'     // New: images, js, css
+    subdirectory = 'images'  // For local use
   } = options;
   
   // Normalize path - remove leading slash and ensure clean path
@@ -41,9 +40,7 @@ export const getAssetUrl = (path, options = {}) => {
   const shouldUseLocal = useLocal !== null ? useLocal : isDevelopment();
   
   if (shouldUseLocal) {
-    // Serve from local paths during development
-    if (assetType === 'js') return `static/js/${normalizedPath}`;
-    if (assetType === 'css') return `static/css/${normalizedPath}`;
+    // Serve from local public folder during development
     return `${subdirectory}/${normalizedPath}`;
   }
   
@@ -51,27 +48,15 @@ export const getAssetUrl = (path, options = {}) => {
   const targetVersion = version || REPO_INFO.version;
   const cdnVersion = targetVersion.startsWith('v') ? targetVersion : branch;
   
-  // CDN needs to use appropriate subdirectory based on asset type
-  let cdnSubdirectory;
-  if (assetType === 'js') cdnSubdirectory = 'build/static/js';
-  else if (assetType === 'css') cdnSubdirectory = 'build/static/css';
-  else cdnSubdirectory = 'public/images';
+  // CDN needs to use public/images/ path
+  const cdnSubdirectory = 'public/images';
   
   return `https://cdn.jsdelivr.net/gh/${REPO_INFO.user}/${REPO_INFO.repo}@${cdnVersion}/${cdnSubdirectory}/${normalizedPath}`;
 };
 
 // Legacy compatibility function to replace getImagePath
 export const getImagePath = (path, options = {}) => {
-  return getAssetUrl(path, { ...options, assetType: 'images' });
-};
-
-// Helper functions for JS and CSS assets
-export const getJsUrl = (path, options = {}) => {
-  return getAssetUrl(path, { ...options, assetType: 'js' });
-};
-
-export const getCssUrl = (path, options = {}) => {
-  return getAssetUrl(path, { ...options, assetType: 'css' });
+  return getAssetUrl(path, options);
 };
 
 // CDN cache purging utility
@@ -157,8 +142,6 @@ export const CDN_CONFIG = {
 export default {
   getAssetUrl,
   getImagePath,
-  getJsUrl,
-  getCssUrl,
   purgeCdnCache,
   getOptimizedImageUrl,
   preloadAsset,
