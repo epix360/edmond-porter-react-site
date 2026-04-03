@@ -12,40 +12,4 @@
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
-    <loc>https://edmondaporter.combooks/the-seasons-that-made-me</loc>
-    <lastmod>2026-03-26</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://edmondaporter.combooks/lucky-penny</loc>
-    <lastmod>2026-03-26</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://edmondaporter.combooks/faithful-hearts</loc>
-    <lastmod>2026-03-26</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://edmondaporter.combooks/the-work-and-the-stories</loc>
-    <lastmod>2026-03-26</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://edmondaporter.combooks/wanderlust</loc>
-    <lastmod>2026-03-26</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://edmondaporter.combooks/turbulent-waters</loc>
-    <lastmod>2026-03-26</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
 </urlset>

@@ -1,0 +1,147 @@
+name: Manual Deploy with Content Validation
+
+on:
+  workflow_dispatch:  # Allow manual triggering from GitHub UI
+    inputs:
+      reason:
+        description: 'Reason for deployment'
+        required: false
+        default: 'Manual content update'
+      validate_content:
+        description: 'Run content validation checks'
+        required: false
+        default: true
+        type: boolean
+  repository_dispatch:  # Allow external triggers (e.g., from CMS webhook)
+    types: [content_updated]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  REACT_APP_GTM_ID: ${{ secrets.REACT_APP_GTM_ID }}
+  REACT_APP_GA4_ID: ${{ secrets.REACT_APP_GA4_ID }}
+
+jobs:
+  validate-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js 
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies 📦
+      run: npm ci
+      
+    - name: Validate Content Structure 🔍
+      if: ${{ github.event.inputs.validate_content == 'true' || github.event.inputs.validate_content == '' }}
+      run: |
+        echo "🔍 Validating book content structure..."
+        
+        # Check if all required JSON files exist
+        BOOKS_DIR="public/content/books"
+        REQUIRED_FIELDS=("title" "order" "cover" "type" "buyLink" "description")
+        
+        # Count books and validate structure
+        BOOK_COUNT=$(find "$BOOKS_DIR" -name "*.json" | wc -l)
+        echo "📚 Found $BOOK_COUNT book files"
+        
+        # Validate each book file
+        for book_file in "$BOOKS_DIR"/*.json; do
+          if [ -f "$book_file" ]; then
+            echo "🔍 Validating $(basename "$book_file")"
+            
+            # Check required fields
+            for field in "${REQUIRED_FIELDS[@]}"; do
+              if ! jq -e ".$field" "$book_file" > /dev/null; then
+                echo "❌ Missing required field '$field' in $(basename "$book_file")"
+                exit 1
+              fi
+            done
+            
+            # Validate order is a number
+            ORDER=$(jq -r '.order' "$book_file")
+            if ! [[ "$ORDER" =~ ^[0-9]+$ ]]; then
+              echo "❌ Invalid order '$ORDER' in $(basename "$book_file")"
+              exit 1
+            fi
+            
+            # Validate buy link is a URL
+            BUY_LINK=$(jq -r '.buyLink' "$book_file")
+            if [[ ! "$BUY_LINK" =~ ^https?:// ]]; then
+              echo "❌ Invalid buy link '$BUY_LINK' in $(basename "$book_file")"
+              exit 1
+            fi
+            
+            # Check if cover image exists
+            COVER=$(jq -r '.cover' "$book_file")
+            if [ ! -f "public/images/$(basename "$COVER")" ] && [ ! -f "public/$COVER" ]; then
+              echo "❌ Cover image not found: $COVER"
+              exit 1
+            fi
+            
+            echo "✅ $(basename "$book_file") validation passed"
+          fi
+        done
+        
+        # Check for duplicate orders
+        DUPLICATE_ORDERS=$(jq -r '.order' "$BOOKS_DIR"/*.json | sort | uniq -d)
+        if [ -n "$DUPLICATE_ORDERS" ]; then
+          echo "❌ Duplicate order numbers found: $DUPLICATE_ORDERS"
+          exit 1
+        fi
+        
+        echo "✅ All content validation checks passed!"
+        
+    - name: Build Application 🔨
+      run: npm run build
+      
+    - name: Validate Build Output 🧪
+      run: |
+        echo "🧪 Validating build output..."
+        
+        # Check if books-index.json was generated
+        if [ ! -f "public/content/books-index.json" ]; then
+          echo "❌ books-index.json not generated"
+          exit 1
+        fi
+        
+        # Check if all books are in the index
+        BOOKS_IN_INDEX=$(jq 'length' "public/content/books-index.json")
+        BOOKS_IN_DIR=$(find "public/content/books" -name "*.json" | wc -l)
+        
+        if [ "$BOOKS_IN_INDEX" -ne "$BOOKS_IN_DIR" ]; then
+          echo "❌ Book count mismatch: $BOOKS_IN_INDEX in index vs $BOOKS_IN_DIR in directory"
+          exit 1
+        fi
+        
+        # Check if build directory exists
+        if [ ! -d "build" ]; then
+          echo "❌ Build directory not created"
+          exit 1
+        fi
+        
+        # Check if index.html exists
+        if [ ! -f "build/index.html" ]; then
+          echo "❌ index.html not generated"
+          exit 1
+        fi
+        
+        echo "✅ Build validation passed!"
+        
+    - name: Deploy to GitHub Pages 🚀
+      uses: actions/deploy-pages@v4
+      
+    - name: Deployment Summary 📊
+      run: |
+        echo "🎉 Deployment completed successfully!"
+        echo "📚 Books deployed: $(jq 'length' "public/content/books-index.json")"
+        echo "🌐 Site URL: https://edmondaporter.com"
+        echo "📝 Reason: ${{ github.event.inputs.reason || 'Triggered via webhook' }}"
