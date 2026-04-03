@@ -180,7 +180,7 @@ jobs:
       run: |
         echo "🔍 Verifying bundle accessibility after deployment..."
         
-        # Find the bundle that was deployed
+        # Find the main bundle dynamically for verification
         MAIN_BUNDLE=$(ls -t build/static/js/main.*.js 2>/dev/null | head -1)
         BUNDLE_NAME=$(basename "$MAIN_BUNDLE")
         
@@ -190,16 +190,11 @@ jobs:
         
         # Check if new bundle is accessible
         if curl -f -s "https://edmondaporter.com/static/js/$BUNDLE_NAME" > /dev/null; then
-          echo "✅ New bundle accessible on live site"
+          echo "✅ New bundle accessible on live site: $BUNDLE_NAME"
         else
           echo "❌ New bundle not accessible on live site"
-          echo "🔍 Checking if old bundle is still being served..."
-          if curl -f -s "https://edmondaporter.com/static/js/main.2b3beed5.js" > /dev/null; then
-            echo "⚠️ Old bundle still being served - deployment may need more time"
-          else
-            echo "❌ No bundles accessible - deployment failed"
-            exit 1
-          fi
+          echo "⏳ Deployment may need more time to propagate"
+          exit 1
         fi
         
     # 5. Verify Content Integration

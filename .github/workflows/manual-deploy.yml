@@ -194,16 +194,10 @@ jobs:
         
         # Check if new bundle is accessible
         if curl -f -s "https://edmondaporter.com/static/js/$BUNDLE_NAME" > /dev/null; then
-          echo "✅ New bundle accessible on live site"
+          echo "✅ New bundle accessible on live site: $BUNDLE_NAME"
         else
           echo "❌ New bundle not accessible on live site"
           echo "⏳ Deployment may need more time to propagate"
-        fi
-        
-        if curl -f -s "https://edmondaporter.com/static/js/main.2b3beed5.js" > /dev/null; then
-          echo "⚠️ Old bundle still being served - deployment may need more time"
-        else
-          echo "❌ No bundles accessible - deployment failed"
           exit 1
         fi
         
