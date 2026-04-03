@@ -6,3 +6,4 @@
 // Manual trigger for deployment - Fri Apr  3 15:49:42 MDT 2026
 // Test fixed bundle verification - Fri Apr  3 16:03:54 MDT 2026
 // Test fixed content verification - Fri Apr  3 16:16:19 MDT 2026
+// Test fixed detect-changes - Fri Apr  3 16:26:32 MDT 2026
