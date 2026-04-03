@@ -5,6 +5,7 @@ import AboutPage from './pages/AboutPage';
 import './styles/index.css';
 import './styles/font-optimization.css';
 
+// Force bundle update - version 1.0.3 - $(date)
 function App() {
   return (
     <Routes>
