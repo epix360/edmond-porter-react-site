@@ -3,3 +3,4 @@
 // Test workflow fix - Fri Apr  3 14:18:17 MDT 2026
 // Final workflow test - Fri Apr  3 14:44:15 MDT 2026
 // Production-ready workflow test - Fri Apr  3 14:52:15 MDT 2026
+// Manual trigger for deployment - Fri Apr  3 15:49:42 MDT 2026
