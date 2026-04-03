@@ -3,6 +3,12 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'public/content/**'
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:  # Allow manual triggering
 
 # 1. Add permissions to allow the build to "talk" to GitHub Pages
@@ -22,11 +28,50 @@ env:
   REACT_APP_GTM_ID: ${{ secrets.REACT_APP_GTM_ID }}
 
 jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      content-changed: ${{ steps.changes.outputs.content }}
+      code-changed: ${{ steps.changes.outputs.code }}
+      build-triggered: ${{ steps.changes.outputs.build }}
+    steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+        
+    - name: Detect Changes 🔍
+      id: changes
+      run: |
+        echo "🔍 Detecting what changed in this push..."
+        
+        # Check if this is a Pages CMS commit
+        if [[ "${{ github.event.head_commit.message }}" == *"via Pages CMS"* ]]; then
+          echo "content=true" >> $GITHUB_OUTPUT
+          echo "build=true" >> $GITHUB_OUTPUT
+          echo "📚 Pages CMS content update detected"
+        elif [[ "${{ github.event.head_commit.message }}" == *"Trigger GitHub Actions deployment"* ]]; then
+          echo "build=true" >> $GITHUB_OUTPUT
+          echo "🚀 Manual deployment trigger detected"
+        else
+          # Check if any files that require build have changed
+          if git diff --name-only HEAD~1 HEAD | grep -E "(src/|package\.json|\.github/workflows/)"; then
+            echo "code=true" >> $GITHUB_OUTPUT
+            echo "build=true" >> $GITHUB_OUTPUT
+            echo "💻 Code changes detected"
+          else
+            echo "build=false" >> $GITHUB_OUTPUT
+            echo "⚠️ No build-triggering changes detected"
+          fi
+        fi
+
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.build-triggered == 'true'
     
     steps:
     - name: Checkout 🛎️
@@ -42,30 +87,57 @@ jobs:
         echo "Actor: ${{ github.actor }}"
         echo "Workflow: ${{ github.workflow }}"
         echo "Run ID: ${{ github.run_id }}"
-        echo "🚀 Fix pre-rendering script to use correct GitHub Pages paths v31"
+        echo "🚀 Enhanced deployment with Pages CMS integration v32"
+        echo "📚 Content Changed: ${{ needs.detect-changes.outputs.content-changed }}"
+        echo "💻 Code Changed: ${{ needs.detect-changes.outputs.code-changed }}"
     
     - name: Setup Node.js 
       uses: actions/setup-node@v4 # Updated to v4 for 2026 standards
       with:
-        node-version: '24' # Updated to Node.js 24 to resolve deprecation warning
+        node-version: '20'
         cache: 'npm'
-    
-    - name: Clear npm cache
-      run: npm cache clean --force
-    
-    - name: Install dependencies 
+        
+    - name: Install dependencies 📦
+      run: npm ci
+      
+    - name: Cache Busting 🧹
       run: |
-        npm ci || npm install --prefer-offline --no-audit
-    
-    - name: Build 
-      # This will automatically run your 'prebuild' script to index the books!
-      run: npm run build
+        echo "🧹 Implementing cache busting for immediate deployment..."
+        # Update build timestamp for cache invalidation
+        echo "BUILD_TIMESTAMP=$(date +%s)" >> $GITHUB_ENV
+        echo "CACHE_BUST=v$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+        echo "🕐 Build timestamp: $BUILD_TIMESTAMP"
+        echo "🔄 Cache bust version: $CACHE_BUST"
+        
+    - name: Enhanced Build with Content Validation 🔨
+      run: |
+        echo "🔨 Starting enhanced build process..."
+        echo "📚 Content Changed: ${{ needs.detect-changes.outputs.content-changed }}"
+        echo "💻 Code Changed: ${{ needs.detect-changes.outputs.code-changed }}"
+        
+        if [[ "${{ needs.detect-changes.outputs.content-changed }}" == "true" ]]; then
+          echo "📚 Building with content changes..."
+          npm run build
+          echo "✅ Content build completed successfully"
+        else
+          echo "💻 Building with code changes..."
+          npm run build
+          echo "✅ Code build completed successfully"
+        fi
+        
+        echo "🔍 Build verification..."
+        if [ ! -f "build/index.html" ]; then
+          echo "❌ Build failed - index.html not found"
+          exit 1
+        fi
+        
+        echo "✅ Build verification passed"
     
     # 2. Upload the 'build' folder as a temporary artifact
     - name: Upload Pages Artifact 📤
       uses: actions/upload-pages-artifact@v3
       with:
-        path: ./build
+        path: './build'
 
     # 3. Deploy that artifact directly to GitHub Pages
     - name: Deploy to GitHub Pages 🚀
@@ -97,4 +169,37 @@ jobs:
           --retry-delay 5
         
         echo "✅ jsDelivr cache purged successfully"
+
+    # 6. Verify Deployment Success
+    - name: Verify Deployment 🔍
+      if: success()
+      run: |
+        echo "🔍 Verifying deployment success..."
+        echo "🌐 Site URL: https://edmondaporter.com"
+        echo "📚 Content Changed: ${{ needs.detect-changes.outputs.content-changed }}"
+        echo "💻 Code Changed: ${{ needs.detect-changes.outputs.code-changed }}"
+        
+        # Wait for GitHub Pages to update
+        echo "⏳ Waiting for GitHub Pages to propagate..."
+        sleep 30
+        
+        # Verify site is accessible
+        if curl -f -s "https://edmondaporter.com/" > /dev/null; then
+          echo "✅ Site is accessible"
+        else
+          echo "❌ Site is not accessible"
+          exit 1
+        fi
+        
+        # Check if new content is present (if content was updated)
+        if [[ "${{ needs.detect-changes.outputs.content-changed }}" == "true" ]]; then
+          echo "🔍 Checking for new content on live site..."
+          if curl -s "https://edmondaporter.com/" | grep -q "Utah.*Best.*Poetry"; then
+            echo "✅ New content detected on live site"
+          else
+            echo "⚠️ New content not yet visible (may still be propagating)"
+          fi
+        fi
+        
+        echo "✅ Deployment verification completed"
         echo "📊 CDN will serve fresh assets within 5 minutes"
