@@ -1,6 +1,6 @@
 {
   "name": "edmond-porter-website",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Author website for Edmond A Porter",
   "homepage": "https://edmondaporter.com",
   "main": "src/index.js",
