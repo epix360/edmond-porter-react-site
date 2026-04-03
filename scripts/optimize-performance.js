@@ -326,3 +326,4 @@ if (require.main === module) {
 }
 
 module.exports = { createOptimizedIndexHTML, optimizeImageSuggestions };
+// Force rebuild - Fri Apr  3 17:19:38 MDT 2026
