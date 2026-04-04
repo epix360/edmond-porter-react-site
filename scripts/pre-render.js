@@ -147,7 +147,6 @@ ${structuredDataSchemas.map(schema => `  <script type="application/ld+json">\n${
   
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   
   <title>Edmond A Porter | Author</title>
   <link href="${cssPath}?v=1.0.1" rel="stylesheet">
