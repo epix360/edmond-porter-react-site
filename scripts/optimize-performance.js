@@ -46,6 +46,8 @@ const createOptimizedIndexHTML = () => {
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Edmond_Headshot.webp" as="image" fetchpriority="high">
   <link rel="preload" href="/static/css/${cssFile || 'main.css'}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/notoserif/v21/ga6daw1J5X9T9RW6j9bNdOwzfRMeF8.woff2" as="font" type="font/woff2" crossorigin>
   
   <!-- DNS prefetch for external resources -->
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -66,9 +68,9 @@ const createOptimizedIndexHTML = () => {
     WebFontConfig = {
       google: {
         families: [
-          'Inter:wght@300;400;500;600;700',
-          'Noto+Serif:ital,wght@0,400;0,700;1,400;1,700',
-          'Material+Symbols+Outlined:wght,FILL@100..700,0..1'
+          'Inter:wght@300;400;500;600;700&display=swap',
+          'Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+          'Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap'
         ],
         display: 'swap'
       },
@@ -142,6 +144,16 @@ const createOptimizedIndexHTML = () => {
     .wf-active .font-material-symbols { 
       font-family: 'Material Symbols Outlined', Arial, sans-serif;
       transition: font-family 0.1s ease-in-out;
+    }
+    
+    /* Ensure text remains visible during font loading */
+    .wf-loading body {
+      font-family: 'Inter-fallback', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    /* Prevent layout shift with font swap */
+    * {
+      font-display: swap;
     }
   </style>`;
   
