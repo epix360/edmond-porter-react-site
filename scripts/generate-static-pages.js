@@ -116,6 +116,12 @@ const generateStaticPages = () => {
       `<meta name="twitter:image" content="https://edmondaporter.com${route.ogImage}" />`
     );
     
+    // Update theme-color
+    routeHtml = routeHtml.replace(
+      /<meta name="theme-color" content="[^"]*" \/>/,
+      `<meta name="theme-color" content="#38414C" />`
+    );
+    
     // Update apple-touch-icon
     routeHtml = routeHtml.replace(
       /<link rel="apple-touch-icon" href="[^"]*" \/>/,

@@ -112,7 +112,7 @@ const createPreRenderedHTML = () => {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#38414C" />
   <meta name="description" content="Edmond A Porter - Author Website" />
   <meta name="author" content="Edmond A Porter" />
   <meta name="keywords" content="Edmond Porter, author, contemporary literature, fiction, essays, poetry, Turbulent Waters, The Seasons That Made Me" />
@@ -152,7 +152,6 @@ ${structuredDataSchemas.map(schema => `  <script type="application/ld+json">\n${
   <!-- Favicon and Theme -->
   <link rel="icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/pen.png" />
-  <meta name="theme-color" content="#000000" />
   
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
