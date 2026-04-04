@@ -57,7 +57,7 @@ jobs:
           echo "🚀 Manual deployment trigger detected"
         else
           # Efficient change detection - check only what matters
-          if git diff --name-only HEAD~1 HEAD | grep -E '(src/|package\.json|\.github/workflows/)'; then
+          if git diff --name-only HEAD~1 HEAD | grep -E 'src/|package\.json|\.github/workflows/'; then
             echo "code=true" >> $GITHUB_OUTPUT
             echo "build=true" >> $GITHUB_OUTPUT
             echo "💻 Code changes detected"
