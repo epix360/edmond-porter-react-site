@@ -1,14 +1,22 @@
 import React from 'react';
 import { getStructuredData } from '../../utils/structuredData';
 
-const StructuredData = ({ type, data }) => {
-  const structuredData = getStructuredData(type, data);
+const StructuredData = ({ structuredData }) => {
+  // Support both single schema object and array of schema objects
+  const schemas = Array.isArray(structuredData) 
+    ? structuredData.map(sd => getStructuredData(sd.type, sd.data))
+    : [getStructuredData(structuredData.type, structuredData.data)];
 
   return (
-    <script 
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-    />
+    <>
+      {schemas.map((schema, index) => (
+        <script 
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+    </>
   );
 };
 

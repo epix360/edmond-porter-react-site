@@ -89,8 +89,11 @@ const createPreRenderedHTML = () => {
     console.log('⚠️ Could not read manifest, using default paths');
   }
   
-  // Generate structured data for homepage
-  const structuredData = getStructuredData('website');
+  // Generate structured data for homepage (both website and book collection)
+  const structuredDataSchemas = [
+    getStructuredData('website'),
+    getStructuredData('bookCollection', { books: [] }) // Empty books array for pre-render
+  ];
   
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -132,9 +135,7 @@ const createPreRenderedHTML = () => {
   <meta name="twitter:image" content="${siteUrl}/images/Edmond_Headshot.webp" />
   
   <!-- Structured Data -->
-  <script type="application/ld+json">
-${JSON.stringify(structuredData, null, 2)}
-  </script>
+${structuredDataSchemas.map(schema => `  <script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n  </script>`).join('\n')}
   
   <!-- Favicon and Theme -->
   <link rel="icon" href="/favicon.ico" />

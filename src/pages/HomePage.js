@@ -29,13 +29,13 @@ const preloadHeroImage = (imagePath) => {
   if (typeof window !== 'undefined' && imagePath) {
     // Use mobile image for mobile devices
     const isMobile = window.innerWidth <= 768;
-    const heroImage = isMobile && heroContent?.mobileCover ? heroContent.mobileCover : imagePath;
+    const mobileImagePath = imagePath.replace(/\.webp$/, '_mobile.webp');
+    const finalImagePath = isMobile && mobileImagePath.includes('Turbulent_Waters') ? mobileImagePath : imagePath;
     
     const link = document.createElement('link');
     link.rel = 'preload';
-    link.href = heroImage;
     link.as = 'image';
-    link.fetchPriority = 'high';
+    link.href = finalImagePath;
     document.head.appendChild(link);
   }
 };
@@ -215,7 +215,10 @@ const HomePage = () => {
           description="Edmond A Porter - Contemporary author exploring human experience through compelling narratives and thoughtful prose. Discover essays, poetry, and novels."
           canonicalUrl="/"
           ogImage="/images/Edmond_Headshot.webp"
-          structuredData={{ type: 'website', data: { books: homeBioContent?.books || fallbackContent.books } }}
+          structuredData={[
+            { type: 'website' },
+            { type: 'bookCollection', data: { books } }
+          ]}
         />
         <Navigation />
         <main className="pt-16 md:pt-16">

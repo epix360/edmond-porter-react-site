@@ -23,6 +23,18 @@ const generateStaticPages = () => {
   
   const indexHtml = fs.readFileSync(indexPath, 'utf8');
   
+  // Load books data for structured data
+  let booksData = [];
+  try {
+    const booksPath = path.join(__dirname, '../public/content/books-index.json');
+    if (fs.existsSync(booksPath)) {
+      const booksContent = fs.readFileSync(booksPath, 'utf8');
+      booksData = JSON.parse(booksContent);
+    }
+  } catch (error) {
+    console.warn('Warning: Could not load books data:', error.message);
+  }
+  
   // Define routes to generate static pages for
   const routes = [
     {
@@ -31,7 +43,9 @@ const generateStaticPages = () => {
       description: 'Learn about Edmond A Porter, contemporary author exploring human experience through compelling narratives. Discover his biography, literary achievements, and writing journey.',
       canonicalUrl: '/about',
       ogImage: '/images/Edmond_Seated.webp',
-      structuredDataType: 'author'
+      structuredData: [
+        { type: 'author' }
+      ]
     },
     {
       path: 'books.html',
@@ -39,13 +53,16 @@ const generateStaticPages = () => {
       description: 'Explore the complete collection of books by Edmond A Porter, including contemporary fiction, essays, and poetry that explore the human experience.',
       canonicalUrl: '/books',
       ogImage: '/images/Turbulent_Waters.webp',
-      structuredDataType: 'website'
+      structuredData: [
+        { type: 'website' },
+        { type: 'bookCollection', data: { books: booksData } }
+      ]
     }
   ];
   
   routes.forEach(route => {
-    // Generate structured data for this route
-    const structuredData = getStructuredData(route.structuredDataType);
+    // Generate structured data for this route (handle multiple schemas)
+    const structuredDataSchemas = route.structuredData.map(sd => getStructuredData(sd.type, sd.data));
     
     // Create route-specific HTML by modifying the index.html
     let routeHtml = indexHtml;
@@ -113,11 +130,26 @@ const generateStaticPages = () => {
       );
     }
     
-    // Update structured data
+    // Update structured data (handle multiple schemas)
+    // Remove existing structured data scripts
     routeHtml = routeHtml.replace(
-      /<script type="application\/ld\+json">\s*\{[\s\S]*?\}\s*<\/script>/,
-      `<script type="application/ld+json">\n${JSON.stringify(structuredData, null, 2)}\n  </script>`
+      /<script type="application\/ld\+json">\s*\{[\s\S]*?\}\s*<\/script>/g,
+      ''
     );
+    
+    // Add all structured data schemas
+    const structuredDataScripts = structuredDataSchemas.map(schema => 
+      `  <script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n  </script>`
+    ).join('\n');
+    
+    // Insert structured data before the closing head or before the next script
+    const insertPosition = routeHtml.indexOf('</head>') !== -1 
+      ? routeHtml.indexOf('</head>')
+      : routeHtml.indexOf('<script');
+    
+    routeHtml = routeHtml.slice(0, insertPosition) + 
+      '\n' + structuredDataScripts + '\n' + 
+      routeHtml.slice(insertPosition);
     
     // Write the static page
     const routePath = path.join(buildDir, route.path);

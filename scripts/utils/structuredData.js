@@ -64,6 +64,47 @@ const getStructuredData = (type, data = {}) => {
         }
       };
 
+    case 'bookCollection':
+      return {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Books by Edmond A Porter",
+        "description": "Complete collection of books by Edmond A Porter, including contemporary fiction, essays, and poetry.",
+        "url": "https://edmondaporter.com/#published-works",
+        "about": {
+          "@type": "Person",
+          "name": "Edmond A Porter"
+        },
+        "mainEntity": {
+          "@type": "ItemList",
+          "numberOfItems": data.books ? data.books.length : 0,
+          "itemListElement": data.books ? data.books.map((book, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "item": {
+              "@type": "Book",
+              "name": book.title,
+              "description": book.description,
+              "genre": book.type,
+              "url": `https://edmondaporter.com/#published-works`,
+              "image": `https://edmondaporter.com/images/${book.cover.replace(/^\//, '')}`,
+              "author": {
+                "@type": "Person",
+                "name": "Edmond A. Porter",
+                "url": "https://edmondaporter.com"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": book.buyLink,
+                "availability": "https://schema.org/InStock",
+                "priceCurrency": "USD",
+                "price": "0.00"
+              }
+            }
+          })) : []
+        }
+      };
+
     case 'website':
       return {
         "@context": "https://schema.org",
