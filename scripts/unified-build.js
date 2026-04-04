@@ -22,49 +22,53 @@ const unifiedBuild = () => {
   
   // Run React build
   console.log('⚛️ Building React application...');
-  const buildResult = execSync('npx react-scripts build', { 
-    stdio: 'inherit',
-    encoding: 'utf8'
-  });
-  
-  if (buildResult.status !== 0) {
-    console.error('❌ React build failed');
+  try {
+    execSync('npx react-scripts build', { 
+      stdio: 'inherit',
+      encoding: 'utf8'
+    });
+    console.log('✅ React build completed successfully');
+  } catch (error) {
+    console.error('❌ React build failed:', error.message);
     process.exit(1);
   }
   
   // Run pre-render with optimizations
   console.log('📝 Pre-rendering HTML with optimizations...');
-  const preRenderResult = execSync('node scripts/pre-render', { 
-    stdio: 'inherit',
-    encoding: 'utf8'
-  });
-  
-  if (preRenderResult.status !== 0) {
-    console.error('❌ Pre-render failed');
+  try {
+    execSync('node scripts/pre-render', { 
+      stdio: 'inherit',
+      encoding: 'utf8'
+    });
+    console.log('✅ Pre-render completed successfully');
+  } catch (error) {
+    console.error('❌ Pre-render failed:', error.message);
     process.exit(1);
   }
   
   // Generate static pages
   console.log('📄 Generating static pages...');
-  const staticPagesResult = execSync('node scripts/generate-static-pages', { 
-    stdio: 'inherit',
-    encoding: 'utf8'
-  });
-  
-  if (staticPagesResult.status !== 0) {
-    console.error('❌ Static pages generation failed');
+  try {
+    execSync('node scripts/generate-static-pages', { 
+      stdio: 'inherit',
+      encoding: 'utf8'
+    });
+    console.log('✅ Static pages generated successfully');
+  } catch (error) {
+    console.error('❌ Static pages generation failed:', error.message);
     process.exit(1);
   }
   
   // Generate service worker
   console.log('🔧 Generating service worker...');
-  const serviceWorkerResult = execSync('node scripts/generate-service-worker', { 
-    stdio: 'inherit',
-    encoding: 'utf8'
-  });
-  
-  if (serviceWorkerResult.status !== 0) {
-    console.error('❌ Service worker generation failed');
+  try {
+    execSync('node scripts/generate-service-worker', { 
+      stdio: 'inherit',
+      encoding: 'utf8'
+    });
+    console.log('✅ Service worker generated successfully');
+  } catch (error) {
+    console.error('❌ Service worker generation failed:', error.message);
     process.exit(1);
   }
   
