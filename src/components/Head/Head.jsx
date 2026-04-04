@@ -64,10 +64,6 @@ const Head = ({
       <link rel="apple-touch-icon" href="/images/logo192.png" />
       <meta name="theme-color" content="#000000" />
       
-      {/* Preload Critical Resources */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      
       {children}
     </Helmet>
   );

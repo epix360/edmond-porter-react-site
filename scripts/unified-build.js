@@ -22,7 +22,7 @@ const unifiedBuild = () => {
   
   // Run React build
   console.log('⚛️ Building React application...');
-  const buildResult = execSync('npm run build', { 
+  const buildResult = execSync('npx react-scripts build', { 
     stdio: 'inherit',
     encoding: 'utf8'
   });
