@@ -100,22 +100,6 @@ const generateStaticPages = () => {
       `<meta property="og:image" content="https://edmondaporter.com${route.ogImage}" />`
     );
     
-    // Update Twitter Card tags
-    routeHtml = routeHtml.replace(
-      /<meta name="twitter:title" content="[^"]*"\/>/,
-      `<meta name="twitter:title" content="${route.title}" />`
-    );
-    
-    routeHtml = routeHtml.replace(
-      /<meta name="twitter:description" content="[^"]*"\/>/,
-      `<meta name="twitter:description" content="${route.description}" />`
-    );
-    
-    routeHtml = routeHtml.replace(
-      /<meta name="twitter:image" content="[^"]*"\/>/,
-      `<meta name="twitter:image" content="https://edmondaporter.com${route.ogImage}" />`
-    );
-    
     // Update theme-color
     routeHtml = routeHtml.replace(
       /<meta name="theme-color" content="[^"]*" \/>/,

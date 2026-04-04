@@ -138,14 +138,6 @@ const createPreRenderedHTML = () => {
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Edmond A Porter - Contemporary Author" />
   
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@edmondporter" />
-  <meta name="twitter:creator" content="@edmondporter" />
-  <meta name="twitter:title" content="Edmond A Porter | Author" />
-  <meta name="twitter:description" content="Edmond A Porter - Author Website" />
-  <meta name="twitter:image" content="${siteUrl}/images/Edmond_Headshot.webp" />
-  
   <!-- Structured Data -->
 ${structuredDataSchemas.map(schema => `  <script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n  </script>`).join('\n')}
   
