@@ -8,6 +8,9 @@
 const fs = require('fs');
 const path = require('path');
 
+// Import structured data utility
+const { getStructuredData } = require('./utils/structuredData');
+
 const createPreRenderedHTML = () => {
   // For now, use root paths since custom domain is active
   // GitHub Pages will still work with these paths during transition
@@ -86,6 +89,9 @@ const createPreRenderedHTML = () => {
     console.log('⚠️ Could not read manifest, using default paths');
   }
   
+  // Generate structured data for homepage
+  const structuredData = getStructuredData('website');
+  
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,22 +133,7 @@ const createPreRenderedHTML = () => {
   
   <!-- Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Edmond A Porter",
-    "url": "${siteUrl}",
-    "image": "${siteUrl}/images/Edmond_Headshot.webp",
-    "sameAs": [
-      "https://twitter.com/edmondporter"
-    ],
-    "jobTitle": "Author",
-    "knowsAbout": [
-      "Contemporary Literature",
-      "Human Experience",
-      "Historical Resonance"
-    ]
-  }
+${JSON.stringify(structuredData, null, 2)}
   </script>
   
   <!-- Favicon and Theme -->
