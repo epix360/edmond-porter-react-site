@@ -116,6 +116,12 @@ const generateStaticPages = () => {
       `<meta name="twitter:image" content="https://edmondaporter.com${route.ogImage}" />`
     );
     
+    // Update apple-touch-icon
+    routeHtml = routeHtml.replace(
+      /<link rel="apple-touch-icon" href="[^"]*" \/>/,
+      `<link rel="apple-touch-icon" href="/pen.png" />`
+    );
+    
     // Update canonical URL (add it if it doesn't exist)
     if (routeHtml.includes('<link rel="canonical"')) {
       routeHtml = routeHtml.replace(
