@@ -46,8 +46,6 @@ const createOptimizedIndexHTML = () => {
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/public/images/Edmond_Headshot.webp" as="image" fetchpriority="high">
   <link rel="preload" href="/static/css/${cssFile || 'main.css'}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="https://fonts.gstatic.com/s/notoserif/v21/ga6daw1J5X9T9RW6j9bNdOwzfRMeF8.woff2" as="font" type="font/woff2" crossorigin>
   
   <!-- DNS prefetch for external resources -->
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
