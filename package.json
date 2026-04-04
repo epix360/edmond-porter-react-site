@@ -7,6 +7,7 @@
   "scripts": {
     "prebuild": "node scripts/generate-book-index.js && node scripts/generate-timeline-js.js && node scripts/copy-images",
     "build": "react-scripts build && node scripts/pre-render && node scripts/optimize-performance && node scripts/generate-static-pages && node scripts/generate-service-worker",
+    "build:unified": "react-scripts build && node scripts/unified-build",
     "build:analyze": "npm run build && node scripts/optimize-performance",
     "start": "react-scripts start",
     "test": "react-scripts test",
