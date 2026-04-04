@@ -51,6 +51,9 @@ const createOptimizedIndexHTML = () => {
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   
+  <!-- Material Symbols Font - Direct Load -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">
+  
   <!-- Web Font Loader for async font loading -->
   <script>
     (function(d) {
@@ -185,9 +188,9 @@ const createOptimizedIndexHTML = () => {
     });
   });
   
-  // Remove blocking font links from the HTML (they're now loaded async)
-  html = html.replace(/<link[^>]*href="https:\/\/fonts\.googleapis\.com\/css[^"]*"[^>]*>/g, '');
-  
+  // Remove blocking font links from the HTML (they're now loaded async) - but keep Material Symbols
+  html = html.replace(/<link[^>]*href="https:\/\/fonts\.googleapis\.com\/css[^"]*Inter[^"]*"[^>]*>/g, '');
+  html = html.replace(/<link[^>]*href="https:\/\/fonts\.googleapis\.com\/css[^"]*Noto[^"]*"[^>]*>/g, '');
   // Remove original blocking CSS link (replaced with preload)
   html = html.replace(/<link[^>]*href="\/static\/css\/[^"]*\.css[^"]*"[^>]*rel="stylesheet"[^>]*>/g, '');
   
