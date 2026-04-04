@@ -3,6 +3,7 @@
 /**
  * Performance Optimization Script
  * Optimizes images and adds resource hints for better performance
+ * Updated: 2026-04-04 - Optimized preconnect resources
  */
 
 const fs = require('fs');
