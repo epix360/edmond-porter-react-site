@@ -89,10 +89,22 @@ const createPreRenderedHTML = () => {
     console.log('⚠️ Could not read manifest, using default paths');
   }
   
+  // Load books data for structured data
+  let booksData = [];
+  try {
+    const booksPath = path.join(__dirname, '../public/content/books-index.json');
+    if (fs.existsSync(booksPath)) {
+      const booksContent = fs.readFileSync(booksPath, 'utf8');
+      booksData = JSON.parse(booksContent);
+    }
+  } catch (error) {
+    console.warn('Warning: Could not load books data:', error.message);
+  }
+  
   // Generate structured data for homepage (both website and book collection)
   const structuredDataSchemas = [
     getStructuredData('website'),
-    getStructuredData('bookCollection', { books: [] }) // Empty books array for pre-render
+    getStructuredData('bookCollection', { books: booksData })
   ];
   
   const html = `<!DOCTYPE html>
