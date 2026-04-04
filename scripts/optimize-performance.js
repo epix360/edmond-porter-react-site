@@ -179,7 +179,7 @@ const createOptimizedIndexHTML = () => {
   html = html.replace(/<link[^>]*href="https:\/\/fonts\.googleapis\.com\/css[^"]*"[^>]*>/g, '');
   
   // Remove original blocking CSS link (replaced with preload)
-  html = html.replace(/<link[^>]*href="\/[^"]*\.css"[^>]*rel="stylesheet"[^>]*>/g, '');
+  html = html.replace(/<link[^>]*href="\/static\/css\/[^"]*\.css[^"]*"[^>]*rel="stylesheet"[^>]*>/g, '');
   
   // Fix any remaining GitHub Pages base paths
   html = html.replace(/\/edmond-porter-react-site\/favicon\.ico/g, '/favicon.ico');
