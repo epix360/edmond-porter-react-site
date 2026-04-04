@@ -66,6 +66,7 @@ jobs:
             echo "build=false" >> $GITHUB_OUTPUT
             echo "⚠️ No build-triggering changes detected"
           fi
+        fi
 
   deploy:
     environment:
