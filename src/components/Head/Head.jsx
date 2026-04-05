@@ -7,11 +7,10 @@ const Head = ({
   canonicalUrl, 
   ogImage, 
   ogType = 'website',
-  twitterCard = 'summary_large_image',
   structuredData,
   children 
 }) => {
-  const siteTitle = title ? `${title} | Edmond A Porter` : 'Edmond A Porter | Author';
+  const siteTitle = title ? `${title} | Edmond A Porter | Local Utah Author, Writer, Novelist, Poet, Essayist` : 'Edmond A Porter | Local Utah Author, Writer, Novelist, Poet, Essayist';
   const siteDescription = description || 'Contemporary author exploring human experience through compelling narratives and thoughtful prose.';
   const siteUrl = 'https://edmondaporter.com';
   const fullCanonicalUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
@@ -35,15 +34,6 @@ const Head = ({
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content="Edmond A Porter - Contemporary Author" />
-      
-      {/* Twitter Card Meta Tags */}
-      {/* <meta name="twitter:card" content={twitterCard} />
-      <meta name="twitter:site" content="@edmondporter" />
-      <meta name="twitter:creator" content="@edmondporter" />
-      <meta name="twitter:title" content={siteTitle} />
-      <meta name="twitter:description" content={siteDescription} />
-      <meta name="twitter:image" content={ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/images/Edmond_Headshot.webp`} />
-      <meta name="twitter:image:alt" content="Edmond A Porter - Contemporary Author" /> */}
       
       {/* Additional SEO Meta Tags */}
       <meta name="author" content="Edmond A Porter" />
