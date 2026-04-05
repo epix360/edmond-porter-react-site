@@ -48,7 +48,6 @@ const LazyImage = ({
 
   const handleError = () => {
     setHasError(true);
-    console.warn(`Failed to load image: ${src}`);
   };
 
   return (

@@ -159,13 +159,7 @@ const HomePage = () => {
 
         // 1. Honeypot check
         if (formData.get("organization_name")) {
-            console.warn("Spam detected:", {
-                timestamp: new Date().toISOString(),
-                formData: Object.fromEntries(formData)
-            });
-            setSubmissionStatus("success"); // Fake success to fool bots
-            form.reset(); // Clear form for bots
-            return;
+            return; // Exit early if spam detected
         }
 
         setSubmissionStatus("sending");

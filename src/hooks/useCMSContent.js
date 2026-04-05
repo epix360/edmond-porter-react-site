@@ -81,7 +81,6 @@ export const useCMSContent = (contentType, filename = null) => {
           }
         }
       } catch (err) {
-        console.error(`Error loading ${contentType} content:`, err);
         setError(err.message);
       } finally {
         setLoading(false);

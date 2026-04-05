@@ -105,7 +105,6 @@ const MediumFeed = ({ mediumContent }) => {
                     }
                 })
                 .catch(error => {
-                    console.warn('Medium feed loading failed:', error);
                     setError(error.message);
                     setPosts([]); // Clear posts on error
                 })

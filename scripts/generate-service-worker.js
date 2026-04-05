@@ -64,11 +64,9 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(STATIC_CACHE)
       .then((cache) => {
-        console.log('Caching static assets:', STATIC_ASSETS);
         return cache.addAll(STATIC_ASSETS);
       })
       .then(() => {
-        console.log('Service Worker installed successfully');
         return self.skipWaiting();
       })
       .catch((error) => {
@@ -86,14 +84,12 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== STATIC_CACHE && cacheName !== CONTENT_CACHE) {
-            console.log('Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
     })
     .then(() => {
-      console.log('Service Worker activated');
       return self.clients.claim();
     })
   );
@@ -220,11 +216,6 @@ self.addEventListener('push', (event) => {
   
   // Write service worker to build directory
   fs.writeFileSync(serviceWorkerPath, serviceWorkerContent);
-  console.log('✅ Service worker generated successfully!');
-  console.log(`📄 Assets to cache: ${staticAssetsList.length} files`);
-  console.log(`📄 CSS: ${cssFile}`);
-  console.log(`📄 JS: ${jsFile}`);
-  console.log(`📄 Images: ${imageFiles.length} files`);
 };
 
 // Run the function
