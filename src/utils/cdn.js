@@ -41,7 +41,7 @@ export const getAssetUrl = (path, options = {}) => {
   
   if (shouldUseLocal) {
     // Serve from local public folder during development
-    return `${subdirectory}/${normalizedPath}`;
+    return `/${subdirectory}/${normalizedPath}`;
   }
   
   // Use jsDelivr CDN for production

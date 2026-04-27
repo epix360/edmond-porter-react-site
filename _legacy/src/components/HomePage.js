@@ -1,28 +1,16 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
-import MediumFeed from '../components/MediumFeed';
-import Head from '../components/Head';
-import StructuredData from '../components/SEO/StructuredData';
-import LazyImage from '../components/Optimization/LazyImage';
-import AccessibleImage from '../components/Accessibility/AccessibleImage';
-import { getImagePath as getAssetPath, CDN_CONFIG } from '../utils/cdn';
+import Link from 'next/link';
+import Navigation from '@/src/components/Navigation';
+import Footer from '@/src/components/Footer';
+import Head from '@/src/components/Head/Head';
+import StructuredData from '@/src/components/SEO/StructuredData';
+import LazyImage from '@/src/components/Optimization/LazyImage';
+import AccessibleImage from '@/src/components/Accessibility/AccessibleImage';
+import { getImagePath as getAssetPath, CDN_CONFIG } from '@/src/utils/cdn';
 import emailjs from '@emailjs/browser';
-
-// Initialize EmailJS with security features
-emailjs.init({
-  publicKey: 'HfqzXzg24u4VT7IwB',
-  blockHeadless: true, // Prevents headless browser spam
-  limitRate: {
-    id: 'contact-form',
-    throttle: 60000, // Users can only send 1 email every 60 seconds
-  },
-});
-
-// Google Apps Script endpoint
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwyB9lKwi9FHadaQ_jrKhJdwW29B2dyEX2fqkVi8E1xNwg5TuPSbhBxBsgCt_QB4618IA/exec";
-import { useCMSContent, fallbackContent } from '../hooks/useCMSContent';
+import { useCMSContent, fallbackContent } from '@/src/hooks/useCMSContent';
 
 // Preload hero image for LCP optimization
 const preloadHeroImage = (imagePath) => {
@@ -228,7 +216,7 @@ const HomePage = () => {
                         )}
                         <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                             {heroContent.title.split(' ').map((word, i) => 
-                                i === 0 ? word : <><br key={i} className="hidden sm:block" /><span key={i} className="italic text-[#B8C8DB] sm:inline">{' '}{word}</span></>
+                                i === 0 ? word : <React.Fragment key={i}><br className="hidden sm:block" /><span className="italic text-[#B8C8DB] sm:inline">{' '}{word}</span></React.Fragment>
                             )}
                         </h1>
                         <p className="text-base sm:text-lg md:text-xl text-on-primary-container mb-3 sm:mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed font-light">
@@ -275,7 +263,7 @@ const HomePage = () => {
                         <div className="md:col-span-7">
                             <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-8">{homeBioContent.teaserHeadline}</h2>
                             <p className="text-on-surface-variant text-lg max-w-2xl mb-6" dangerouslySetInnerHTML={{ __html: homeBioContent.teaserBody }} />
-                            <Link to="/about" className="text-secondary font-bold inline-flex items-center group">
+                            <Link href="/about" className="text-secondary font-bold inline-flex items-center group">
                                 {homeBioContent.readMoreLink} 
                                 <span className="material-symbols-outlined ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
                             </Link>
@@ -329,9 +317,6 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
-
-            {/* Medium Feed Section */}
-            <MediumFeed mediumContent={mediumContent} />
 
             {/* Newsletter / Contact Section */}
             <section className="py-20 bg-primary" id="contact">

@@ -11,17 +11,24 @@
     "build:analyze": "npm run build && node scripts/optimize-performance",
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev:next": "node scripts/build-next.js dev",
+    "build:next": "node scripts/build-next.js build",
+    "build:next:direct": "next build",
+    "start:next": "next start"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "next": "^16.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^3.0.0",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "rss-parser": "^3.13.0"
   },
   "devDependencies": {
+    "@types/react": "19.2.14",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",
     "react-snap": "^1.23.0",

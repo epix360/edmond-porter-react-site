@@ -2,10 +2,13 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - main
+
     paths:
       - 'public/content/**'
       - 'src/**'
+      - 'app/**'
       - 'scripts/**'
       - 'package.json'
       - 'package-lock.json'
@@ -127,7 +130,7 @@ jobs:
     - name: Upload Pages Artifact 📤
       uses: actions/upload-pages-artifact@v3
       with:
-        path: './build'
+        path: './out'
         
     # 3. Deploy that artifact directly to GitHub Pages
     - name: Deploy to GitHub Pages 🚀
