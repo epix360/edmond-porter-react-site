@@ -1,0 +1,49 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Font Display Optimization - Reduces layout shifts during font swap */
+body {
+    @apply bg-background text-on-background font-body leading-relaxed selection:bg-secondary-container;
+    scroll-behavior: smooth;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+/* Reduce FOUT (Flash of Unstyled Text) */
+.wf-loading {
+    visibility: visible;
+}
+
+.wf-inactive {
+    visibility: visible;
+}
+
+/* Smooth font transitions */
+* {
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Utility Classes */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.text-justify-custom { text-align: justify; text-justify: inter-word; }
+.perspective-1000 { perspective: 1000px; }

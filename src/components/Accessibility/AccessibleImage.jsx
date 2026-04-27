@@ -55,7 +55,7 @@ const AccessibleImage = ({
         sizes={sizes}
         width={width}
         height={height}
-        fetchpriority={priority ? 'high' : 'auto'}
+        fetchPriority={priority ? 'high' : 'auto'}
         onLoad={() => {
           // Mobile image successfully loaded - no debug logging needed
         }}

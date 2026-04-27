@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -8,7 +8,7 @@ const Footer = () => {
         <footer className="bg-slate-900 text-amber-500 py-12 px-6">
             <div className="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto space-y-8 md:space-y-0">
                 <div className="text-center md:text-left">
-                    <Link className="text-xl font-headline italic text-white mb-2 block" to="/">Edmond A Porter</Link>
+                    <Link className="text-xl font-headline italic text-white mb-2 block" href="/">Edmond A Porter</Link>
                     <p className="text-slate-400 font-body text-sm tracking-wide">© {currentYear} Edmond A Porter. All rights reserved.</p>
                 </div>
                 <div className="flex items-center space-x-4 opacity-80 hover:opacity-100 duration-300">

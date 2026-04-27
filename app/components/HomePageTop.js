@@ -1,0 +1,233 @@
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import Navigation from '@/src/components/Navigation';
+import { getImagePath as getAssetPath, CDN_CONFIG } from '@/src/utils/cdn';
+import { useCMSContent, fallbackContent } from '@/src/hooks/useCMSContent';
+
+// Preload hero image for LCP optimization
+const preloadHeroImage = (imagePath) => {
+  if (typeof window !== 'undefined' && imagePath) {
+    const isMobile = window.innerWidth <= 768;
+    const mobileImagePath = imagePath.replace(/\.webp$/, '_mobile.webp');
+    const finalImagePath = isMobile && mobileImagePath.includes('Turbulent_Waters') ? mobileImagePath : imagePath;
+    
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = finalImagePath;
+    document.head.appendChild(link);
+  }
+};
+
+// Helper function for consistent image paths
+const getImagePath = (path) => getAssetPath(path);
+
+// Status template configurations
+const getStatusTemplate = (status, showSpecificDate, releaseDate, customDateText) => {
+  const templates = {
+    "coming-soon": { 
+      icon: "calendar_today", 
+      text: getComingSoonText(showSpecificDate, releaseDate, customDateText), 
+      color: "text-secondary-fixed-dim",
+      label: "Coming Soon"
+    },
+    "new-release": { 
+      icon: "auto_awesome", 
+      text: "New Release!", 
+      color: "text-secondary",
+      label: "Just Released"
+    },
+    "bestseller": { 
+      icon: "military_tech", 
+      text: "Bestseller", 
+      color: "text-amber-600",
+      label: "Bestselling Book"
+    },
+    "available": { 
+      icon: "check_circle", 
+      text: "Available Now", 
+      color: "text-primary",
+      label: "Available"
+    }
+  };
+  
+  return templates[status] || templates["available"];
+};
+
+// Helper function for coming soon text
+const getComingSoonText = (showSpecificDate, releaseDate, customDateText) => {
+  if (customDateText) return customDateText;
+  if (showSpecificDate && releaseDate) {
+    const date = new Date(releaseDate);
+    return `Coming ${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+  }
+  return "Coming Soon";
+};
+
+export default function HomePageTop() {
+  // Load CMS content
+  const { content: hero, loading: heroLoading, error: heroError } = useCMSContent('hero');
+  const { content: books, loading: booksLoading, error: booksError } = useCMSContent('books');
+  const { content: homeBio, loading: homeBioLoading, error: homeBioError } = useCMSContent('home-bio');
+  
+  // Use fallback content if CMS fails
+  const heroContent = hero || fallbackContent.hero;
+  const booksContent = books || fallbackContent.books;
+  const homeBioContent = homeBio || fallbackContent.homeBio;
+  
+  // Get status template
+  const statusTemplate = getStatusTemplate(
+    heroContent.bookStatus, 
+    heroContent.showSpecificDate, 
+    heroContent.releaseDate, 
+    heroContent.customDateText
+  );
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Handle hash scrolling for cross-page navigation
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      // requestAnimationFrame ensures the browser has completely finished painting the DOM
+      requestAnimationFrame(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+  }, []);
+
+  return (
+    <>
+      <Navigation />
+      
+      <main className="pt-16 md:pt-16">
+        {/* Hero Section */}
+        <section className="relative min-h-[450px] sm:min-h-[500px] md:min-h-[800px] flex items-center overflow-hidden bg-primary-container">
+          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{backgroundImage: "radial-gradient(circle at 20% 50%, #805533 0%, transparent 50%)"}}></div>
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center relative z-10 py-12 md:py-20">
+            <div className="order-2 md:order-1 text-center md:text-left">
+              {statusTemplate && (
+                <span className={`inline-block font-label uppercase tracking-[0.2em] font-bold mb-1 sm:mb-4 text-sm ${statusTemplate.color}`}>
+                  {statusTemplate.label}
+                </span>
+              )}
+              <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+                {heroContent?.title?.split(' ').map((word, i) => 
+                  i === 0 ? word : <React.Fragment key={i}><br className="hidden sm:block" /><span className="italic text-[#B8C8DB] sm:inline">{' '}{word}</span></React.Fragment>
+                ) || 'Edmond A Porter'}
+              </h1>
+              <p className="text-base sm:text-lg md:text-xl text-on-primary-container mb-3 sm:mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed font-light">
+                {heroContent?.blurb || 'Author of contemporary fiction'}
+              </p>
+              <div className="flex flex-col sm:flex-row-reverse md:justify-end gap-4">
+                {statusTemplate && (
+                  <div className={`flex items-center justify-center space-x-2 font-label ${statusTemplate.color}`}>
+                    <span className="material-symbols-outlined">{statusTemplate.icon}</span>
+                    <span>{statusTemplate.text}</span>
+                  </div>
+                )}
+                <a className="bg-secondary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-center hover:bg-[#96643c] transition-colors shadow-lg shadow-black/20" href={heroContent?.link || '#'} target="_blank" rel="noopener noreferrer">
+                  {heroContent?.buttonText || 'Learn More'}
+                </a>
+              </div>
+            </div>
+            <div className="order-1 md:order-2 flex justify-center md:justify-end">
+              <Image 
+                src={getImagePath(heroContent?.heroImage || 'Turbulent_Waters.webp')}
+                alt="Book cover"
+                className="relative z-10 rounded-lg shadow-2xl w-full max-w-[280px] sm:max-w-[320px] md:max-w-md aspect-[2/3] object-cover"
+                priority={true}
+                width={400}
+                height={600}
+                unoptimized
+              />
+            </div>
+          </div>
+        </section>
+        
+        {/* Quick About Link */}
+        <section className="py-12 bg-surface-bright" id="about-teaser">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid md:grid-cols-12 gap-10 items-center">
+              <div className="md:col-span-5 relative">
+                <Image 
+                  src={getImagePath(homeBioContent?.teaserImage || 'Edmond_Headshot.webp')}
+                  alt="Portrait"
+                  className="relative z-10 rounded-lg shadow-xl w-full aspect-[4/5] object-cover"
+                  priority={true}
+                  width={400}
+                  height={500}
+                  unoptimized
+                />
+              </div>
+              <div className="md:col-span-7">
+                <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-8">{homeBioContent?.teaserHeadline || 'About the Author'}</h2>
+                <p className="text-on-surface-variant text-lg max-w-2xl mb-6" dangerouslySetInnerHTML={{ __html: homeBioContent?.teaserBody || '<p>Edmond A Porter is a contemporary author...</p>' }} />
+                <Link href="/about" className="text-secondary font-bold inline-flex items-center group">
+                  {homeBioContent?.readMoreLink || 'Read More'} 
+                  <span className="material-symbols-outlined ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Books Section */}
+        <section className="py-12 bg-surface-container-low" id="published-works">
+          <div className="max-w-[1440px] mx-auto px-6">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+              <div>
+                <span className="font-label text-secondary uppercase tracking-widest text-sm font-bold mb-4 block">The Bibliography</span>
+                <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary">Published Works</h2>
+              </div>
+              <a className="flex items-center space-x-2 text-secondary font-bold hover:translate-x-2 transition-transform" href="https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y" target="_blank" rel="noopener noreferrer">
+                <span>Visit Amazon Author Page</span>
+                <span className="material-symbols-outlined">arrow_forward</span>
+              </a>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-stretch">
+              {booksContent.map((book, i) => (
+                <div key={i} className="flex flex-col h-full space-y-6">
+                  <a href={book.buyLink} target="_blank" rel="noopener noreferrer" className="block group h-full">
+                    <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full">
+                      <div className="flex justify-center -mt-12">
+                        <div className="relative h-64 md:h-80 w-auto object-contain rounded shadow-lg transform group-hover:-translate-y-2 transition-transform duration-300" style={{ aspectRatio: '300 / 450', width: '300px', height: '450px' }}>
+                          <Image
+                            src={getImagePath(book.cover)}
+                            alt={book.title}
+                            className="object-cover w-full h-full rounded"
+                            fill
+                            priority={i === 0}
+                            unoptimized
+                          />
+                        </div>
+                      </div>
+                      <div className="mt-8 flex-grow">
+                        <h3 className="font-headline text-2xl font-bold text-primary mb-2">{book.title}</h3>
+                        <p className="text-on-surface-variant font-label text-sm uppercase tracking-wider mb-4">{book.type}</p>
+                        <p className="text-on-surface-variant line-clamp-3 mb-6">{book.description}</p>
+                      </div>
+                      <div className="mt-auto">
+                        <span className="text-secondary font-bold inline-flex items-center group/link">
+                          Buy now <span className="material-symbols-outlined ml-1 text-sm group-hover/link:translate-x-1 transition-transform">open_in_new</span>
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
+  );
+}
