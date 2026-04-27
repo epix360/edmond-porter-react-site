@@ -5,22 +5,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '@/src/components/Navigation';
 import { getImagePath as getAssetPath, CDN_CONFIG } from '@/src/utils/cdn';
-import { useCMSContent, fallbackContent } from '@/src/hooks/useCMSContent';
-
-// Preload hero image for LCP optimization
-const preloadHeroImage = (imagePath) => {
-  if (typeof window !== 'undefined' && imagePath) {
-    const isMobile = window.innerWidth <= 768;
-    const mobileImagePath = imagePath.replace(/\.webp$/, '_mobile.webp');
-    const finalImagePath = isMobile && mobileImagePath.includes('Turbulent_Waters') ? mobileImagePath : imagePath;
-    
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = finalImagePath;
-    document.head.appendChild(link);
-  }
-};
+import { fallbackContent } from '@/src/data/fallbackContent';
+// Import CMS content directly for static generation
+import heroData from '@/public/content/hero.json';
+import booksData from '@/public/content/books-index.json';
+import homeBioData from '@/public/content/home-bio.json';
 
 // Helper function for consistent image paths
 const getImagePath = (path) => getAssetPath(path);
@@ -68,15 +57,10 @@ const getComingSoonText = (showSpecificDate, releaseDate, customDateText) => {
 };
 
 export default function HomePageTop() {
-  // Load CMS content
-  const { content: hero, loading: heroLoading, error: heroError } = useCMSContent('hero');
-  const { content: books, loading: booksLoading, error: booksError } = useCMSContent('books');
-  const { content: homeBio, loading: homeBioLoading, error: homeBioError } = useCMSContent('home-bio');
-  
-  // Use fallback content if CMS fails
-  const heroContent = hero || fallbackContent.hero;
-  const booksContent = books || fallbackContent.books;
-  const homeBioContent = homeBio || fallbackContent.homeBio;
+  // Use imported CMS content directly (baked in at build time)
+  const heroContent = heroData || fallbackContent.hero;
+  const booksContent = booksData || fallbackContent.books;
+  const homeBioContent = homeBioData || fallbackContent.homeBio;
   
   // Get status template
   const statusTemplate = getStatusTemplate(
@@ -162,7 +146,6 @@ export default function HomePageTop() {
                   src={getImagePath(homeBioContent?.teaserImage || 'Edmond_Headshot.webp')}
                   alt="Portrait"
                   className="relative z-10 rounded-lg shadow-xl w-full aspect-[4/5] object-cover"
-                  priority={true}
                   width={400}
                   height={500}
                   unoptimized
@@ -205,7 +188,6 @@ export default function HomePageTop() {
                             alt={book.title}
                             className="object-cover w-full h-full rounded"
                             fill
-                            priority={i === 0}
                             unoptimized
                           />
                         </div>

@@ -2,7 +2,9 @@
 
 import React, { useState } from 'react';
 import Footer from '@/src/components/Footer';
-import { useCMSContent, fallbackContent } from '@/src/hooks/useCMSContent';
+import { fallbackContent } from '@/src/data/fallbackContent';
+// Import CMS content directly for static generation
+import heroData from '@/public/content/hero.json';
 
 // Google Apps Script endpoint
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwyB9lKwi9FHadaQ_jrKhJdwW29B2dyEX2fqkVi8E1xNwg5TuPSbhBxBsgCt_QB4618IA/exec";
@@ -18,9 +20,8 @@ export default function HomePageBottom() {
   const [submissionStatus, setSubmissionStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Load CMS content with fallback
-  const { content: hero, loading: heroLoading } = useCMSContent('hero');
-  const heroContent = hero || fallbackContent.hero || {};
+  // Use imported CMS content directly (baked in at build time)
+  const heroContent = heroData || fallbackContent.hero || {};
 
   const handleChange = (e) => {
     setFormData({

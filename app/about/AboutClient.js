@@ -6,7 +6,10 @@ import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
 import Image from 'next/image';
 import { getImagePath as getAssetPath } from '@/src/utils/cdn';
-import { useCMSContent, fallbackContent } from '@/src/hooks/useCMSContent';
+import { fallbackContent } from '@/src/data/fallbackContent';
+// Import CMS content directly for static generation
+import aboutBioData from '@/public/content/about-bio.json';
+import timeline2026 from '@/public/content/timeline/2026.json';
 
 // Simple markdown to HTML converter
 const convertMarkdown = (text) => {
@@ -58,17 +61,14 @@ const convertMarkdown = (text) => {
 };
 
 export default function AboutPage() {
-  // Load CMS content for about page
-  const { content: aboutBio, loading: aboutBioLoading, error: aboutBioError } = useCMSContent('about-bio');
-  const { content: timeline, loading: timelineLoading, error: timelineError } = useCMSContent('timeline');
+  // Use imported CMS content directly (baked in at build time)
+  const aboutBioContent = aboutBioData || fallbackContent.aboutBio;
+  // Build timeline array from imported JSON files
+  const timelineContent = [timeline2026] || fallbackContent.timeline;
   
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
-  // Use fallback content if CMS fails
-  const aboutBioContent = aboutBio || fallbackContent.aboutBio;
-  const timelineContent = timeline || fallbackContent.timeline;
   
   const timelineData = timelineContent.map(yearData => ({
     year: yearData.year,
@@ -115,7 +115,6 @@ export default function AboutPage() {
                     src={getAssetPath(aboutBioContent?.bioImage)}
                     alt="Edmond A Porter"
                     className="w-full h-full object-cover"
-                    priority={true}
                     fill
                     unoptimized
                   />
