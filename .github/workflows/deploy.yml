@@ -121,8 +121,8 @@ jobs:
         echo "📚 Content Changed: ${{ needs.detect-changes.outputs.content-changed }}"
         echo "💻 Code Changed: ${{ needs.detect-changes.outputs.code-changed }}"
         
-        # Run optimized build (same as original but with better logging)
-        npm run build
+        # Run optimized Next.js build
+        npm run build:next
         
         echo "✅ Build completed successfully!"
         echo "⏱️ Build time: $SECONDS seconds"
