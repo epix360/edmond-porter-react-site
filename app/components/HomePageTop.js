@@ -46,12 +46,17 @@ const getStatusTemplate = (status, showSpecificDate, releaseDate, customDateText
   return templates[status] || templates["available"];
 };
 
-// Helper function for coming soon text
+// Helper function for coming soon text (uses UTC to avoid hydration mismatch)
 const getComingSoonText = (showSpecificDate, releaseDate, customDateText) => {
   if (customDateText) return customDateText;
   if (showSpecificDate && releaseDate) {
     const date = new Date(releaseDate);
-    return `Coming ${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+    return `Coming ${date.toLocaleDateString('en-US', { 
+      timeZone: 'UTC',
+      month: 'long', 
+      day: 'numeric', 
+      year: 'numeric' 
+    })}`;
   }
   return "Coming Soon";
 };
