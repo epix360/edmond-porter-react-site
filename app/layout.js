@@ -35,12 +35,7 @@ export const metadata = {
       },
     ],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Edmond A Porter | Local Utah Author, Writer, Novelist, Poet, Essayist',
-    description: 'Contemporary author exploring human experience through compelling narratives and thoughtful prose.',
-    images: ['https://edmondaporter.com/images/Edmond_Headshot.webp'],
-  },
+  twitter: null,
   robots: {
     index: true,
     follow: true,

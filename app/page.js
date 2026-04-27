@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import HomePageTop from './components/HomePageTop';
 import HomePageBottom from './components/HomePageBottom';
 import ServerMediumFeed from './components/ServerMediumFeed';
@@ -51,16 +50,8 @@ export default function HomePage() {
       {/* Hero + About + Books sections */}
       <HomePageTop />
       
-      {/* Server-side Medium feed with Suspense */}
-      <Suspense fallback={
-        <section className="py-12 bg-surface-container-lowest" id="medium">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-          </div>
-        </section>
-      }>
-        <ServerMediumFeed />
-      </Suspense>
+      {/* Server-side Medium feed - baked into static HTML */}
+      <ServerMediumFeed />
       
       {/* Contact section */}
       <HomePageBottom />

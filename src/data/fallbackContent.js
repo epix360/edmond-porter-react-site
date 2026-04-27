@@ -15,9 +15,17 @@ export const fallbackContent = {
     customDateText: ""
   },
   books: [
+    {
+      title: "Turbulent Waters",
+      order: 1,
+      type: "NOVEL",
+      description: "In the shadow of Idaho's biggest engineering project, Jake and Anna are on opposite sides of the river—until the current pulls them together and the flood takes everything else.",
+      cover: "Turbulent_Waters.webp",
+      buyLink: "https://www.amazon.com/Turbulent-Waters-Edmond-Porter-ebook/dp/B0GRLFBQJX"
+    },
     { 
       title: "The Seasons That Made Me", 
-      order: 1,
+      order: 2,
       type: "ESSAY COLLECTION",
       description: "A collection of deeply personal essays on growth, loss, and the cyclical nature of our creative lives.",
       cover: "The_Seasons_That_Made_Me.webp",
@@ -25,7 +33,7 @@ export const fallbackContent = {
     },
     {
       title: "Lucky Penny",
-      order: 2,
+      order: 3,
       type: "ANTHOLOGY",
       description: 'Short stories of magical realism invite our imaginations to wander and wonder "what if?"',
       cover: "Lucky_Penny.webp", 
@@ -33,7 +41,7 @@ export const fallbackContent = {
     },
     {
       title: "Faithful Hearts",
-      order: 3,
+      order: 4,
       type: "ANTHOLOGY",
       description: "Heartwarming stories and poems celebrating our furriest family members: our pets.",
       cover: "Faithful_Hearts.webp",
@@ -41,7 +49,7 @@ export const fallbackContent = {
     },
     {
       title: "Wanderlust",
-      order: 4,
+      order: 5,
       type: "ANTHOLOGY",
       description: "Join seventeen authors as they take you on journeys through Asia, the Americas, and Europe.",
       cover: "Wanderlust.webp",
@@ -49,7 +57,7 @@ export const fallbackContent = {
     },
     {
       title: "The Work and the Stories",
-      order: 5,
+      order: 6,
       type: "ANTHOLOGY",
       description: "An eclectic collection of funny memories and poignant challenges from LDS missionary experiences.",
       cover: "The_Work_and_the_Stories.webp",
