@@ -35,7 +35,6 @@ export const metadata = {
       },
     ],
   },
-  twitter: null,
   robots: {
     index: true,
     follow: true,
