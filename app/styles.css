@@ -6,7 +6,6 @@
 body {
     @apply bg-background text-on-background font-body leading-relaxed selection:bg-secondary-container;
     scroll-behavior: smooth;
-    font-synthesis: none;
     text-rendering: optimizeLegibility;
 }
 
