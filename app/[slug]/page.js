@@ -108,13 +108,10 @@ export default async function GenericPage({ params }) {
             <Link
               href="/"
               className="inline-flex items-center text-slate-400 hover:text-amber-500 transition-colors text-sm"
-          <Link
-            href="/"
-            className="inline-flex items-center text-slate-400 hover:text-amber-500 transition-colors text-sm"
-          >
-            <span className="material-symbols-outlined mr-1" style={{ fontFamily: 'Material Symbols Outlined' }}>arrow_back</span>
-            Back to Home
-          </Link>
+            >
+              <span className="material-symbols-outlined mr-1" style={{ fontFamily: 'Material Symbols Outlined' }}>arrow_back</span>
+              Back to Home
+            </Link>
         </div>
       </section>
       
@@ -185,5 +182,7 @@ export default async function GenericPage({ params }) {
         </div>
       </section>
     </main>
+    <Footer />
+  </>
   );
 }
