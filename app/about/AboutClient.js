@@ -169,9 +169,12 @@ export default function AboutPage() {
             <h2 className="font-headline text-3xl font-bold text-primary mb-16 text-center">Milestones &amp; Moments</h2>
             <div className="space-y-12">
               {timelineData.map((yearData, yearIndex) => (
-                <div key={yearIndex} className="flex gap-8 group">
-                  <div className="flex flex-col items-center">
-                    <div className="w-4 h-4 rounded-full bg-secondary group-hover:scale-125 transition-transform"></div>
+                <div key={yearIndex} className="flex gap-8">
+                  <div className="flex flex-col items-center relative">
+                    <div className="w-3 h-3 rounded-full bg-secondary"></div>
+                    {yearIndex < timelineData.length - 1 && (
+                      <div className="w-px h-full bg-secondary mt-2 absolute top-3 left-1/2 -translate-x-1/2"></div>
+                    )}
                   </div>
                   <div>
                     <span className="font-label text-sm text-secondary font-bold mb-1 block">{yearData.year}</span>
