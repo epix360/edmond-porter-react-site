@@ -87,7 +87,7 @@ export default async function GenericPage({ params }) {
             href="/"
             className="inline-flex items-center text-amber-500 hover:text-amber-400 transition-colors"
           >
-            <span className="material-symbols-outlined mr-2">arrow_back</span>
+            <span className="material-symbols-outlined mr-2" style={{ fontFamily: 'Material Symbols Outlined' }}>arrow_back</span>
             Return Home
           </Link>
         </div>
@@ -98,7 +98,7 @@ export default async function GenericPage({ params }) {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-slate-900">
+      <main className="min-h-screen bg-slate-900 pt-24">
         {/* Hero Section */}
         <section className="bg-slate-800 py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
@@ -112,7 +112,7 @@ export default async function GenericPage({ params }) {
             href="/"
             className="inline-flex items-center text-slate-400 hover:text-amber-500 transition-colors text-sm"
           >
-            <span className="material-symbols-outlined mr-1">arrow_back</span>
+            <span className="material-symbols-outlined mr-1" style={{ fontFamily: 'Material Symbols Outlined' }}>arrow_back</span>
             Back to Home
           </Link>
         </div>

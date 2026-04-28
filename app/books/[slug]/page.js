@@ -124,14 +124,14 @@ export default async function BookPage({ params }) {
       />
       
       <Navigation />
-      <main className="min-h-screen bg-slate-900 py-12">
+      <main className="min-h-screen bg-slate-900 py-12 pt-24">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Back Link */}
           <Link
             href="/"
             className="inline-flex items-center text-slate-400 hover:text-amber-500 transition-colors mb-12"
           >
-            <span className="material-symbols-outlined mr-2">arrow_back</span>
+            <span className="material-symbols-outlined mr-2" style={{ fontFamily: 'Material Symbols Outlined' }}>arrow_back</span>
             Back to Home
           </Link>
           
