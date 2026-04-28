@@ -33,6 +33,9 @@ const convertMarkdown = (text) => {
     return line;
   }).join('\n');
   
+  // Convert markdown links [text](url) to HTML
+  result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-secondary hover:underline">$1</a>');
+  
   // Convert bold and italic using simple string methods
   result = result.split('**').map((part, index) => {
     if (index % 2 === 1) {
