@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
+import Navigation from '@/src/components/Navigation';
+import Footer from '@/src/components/Footer';
 
 // Reserved slugs that cannot be used for CMS pages
 const RESERVED_SLUGS = ['about', 'admin', 'books'];
@@ -94,13 +96,18 @@ export default async function GenericPage({ params }) {
   }
   
   return (
-    <main className="min-h-screen bg-slate-900">
-      {/* Hero Section */}
-      <section className="bg-slate-800 py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white font-headline mb-4">
-            {page.title}
-          </h1>
+    <>
+      <Navigation />
+      <main className="min-h-screen bg-slate-900">
+        {/* Hero Section */}
+        <section className="bg-slate-800 py-16 px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white font-headline mb-4">
+              {page.title}
+            </h1>
+            <Link
+              href="/"
+              className="inline-flex items-center text-slate-400 hover:text-amber-500 transition-colors text-sm"
           <Link
             href="/"
             className="inline-flex items-center text-slate-400 hover:text-amber-500 transition-colors text-sm"

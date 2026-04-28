@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import Image from 'next/image';
 import Link from 'next/link';
+import Navigation from '@/src/components/Navigation';
+import Footer from '@/src/components/Footer';
 
 // Read all book JSON files and return static params
 export async function generateStaticParams() {
@@ -120,8 +122,9 @@ export default async function BookPage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(cleanSchema) }}
       />
       
-      <main className="min-h-screen bg-slate-900 py-16 px-4">
-        <div className="max-w-6xl mx-auto">
+      <Navigation />
+      <main className="min-h-screen bg-slate-900 py-12">
+        <div className="container mx-auto px-4 max-w-6xl">
           {/* Back Link */}
           <Link
             href="/"
@@ -166,11 +169,10 @@ export default async function BookPage({ params }) {
                 href={book.amazonUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 px-8 rounded-lg transition-colors duration-300 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center w-full py-3 px-4 border-2 border-[#b46b25] text-[#b46b25] font-bold uppercase tracking-widest rounded-t-lg bg-transparent hover:bg-[#b46b25] hover:text-white transition-colors duration-300"
               >
-                <span className="material-symbols-outlined mr-2">shopping_cart</span>
                 Buy on Amazon
-                <span className="material-symbols-outlined ml-2">open_in_new</span>
+                <span className="material-symbols-outlined ml-1">open_in_new</span>
               </a>
               
               {/* Additional Info */}
@@ -183,6 +185,7 @@ export default async function BookPage({ params }) {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 }
