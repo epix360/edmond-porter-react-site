@@ -199,7 +199,7 @@ export default function HomePageTop() {
                 <Link href="/about" className="text-secondary font-bold inline-flex items-center group">
                   {homeBioContent?.readMoreLink || 'Read More'} 
                   <span className="material-symbols-outlined ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default function HomePageTop() {
               <a className="flex items-center space-x-2 text-secondary font-bold hover:translate-x-2 transition-transform" href="https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y" target="_blank" rel="noopener noreferrer">
                 <span>Visit Amazon Author Page</span>
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
+              </a>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-stretch">
               {sortedBooks.map((book, i) => (
@@ -228,7 +228,7 @@ export default function HomePageTop() {
                     <span className="material-symbols-outlined mr-2">visibility</span>
                     View Book
                     <span className="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
-                  </a>
+                  </Link>
                   <Link href={`/books/${book.slug}`} className="block group h-full">
                     <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full">
                       <div className="flex justify-center -mt-12">
@@ -252,7 +252,7 @@ export default function HomePageTop() {
                         </span>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>
