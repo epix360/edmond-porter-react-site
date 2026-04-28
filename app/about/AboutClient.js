@@ -64,10 +64,10 @@ const convertMarkdown = (text) => {
   const processedParagraphs = paragraphs.map(paragraph => {
     if (!paragraph.trim()) return '';
     if (paragraph.startsWith('<h')) return paragraph;
-    return `<p class="mb-6 leading-relaxed max-w-2xl italic mx-auto md:mx-0 font-headline text-lg md:text-xl text-on-surface-variant">${paragraph}</p>`;
+    return `<p class="leading-relaxed max-w-2xl italic mx-auto md:mx-0 font-headline text-lg md:text-xl text-on-surface-variant">${paragraph}</p>`;
   })
     .join('\n')
-    .replace(/<p class="mb-6 leading-relaxed max-w-2xl italic mx-auto md:mx-0 font-headline text-lg md:text-xl text-on-surface-variant"><\/p>/g, '');
+    .replace(/<p class="leading-relaxed max-w-2xl italic mx-auto md:mx-0 font-headline text-lg md:text-xl text-on-surface-variant"><\/p>/g, '');
   
   return processedParagraphs;
 };
