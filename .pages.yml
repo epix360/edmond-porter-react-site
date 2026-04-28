@@ -33,6 +33,7 @@ content:
       - { name: slug, label: "URL Slug", type: string }
       - { name: releaseDate, label: "Release Date", type: date }
       - { name: description, label: "Description", type: text }
+      - { name: body, label: "Extended Content", type: rich-text }
       - { name: image, label: "Book Cover Image", type: image }
       - { name: amazonUrl, label: "Amazon Purchase URL", type: string }
       - { name: featured, label: "Featured Book", type: boolean, default: false }

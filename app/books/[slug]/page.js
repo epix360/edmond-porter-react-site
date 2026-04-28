@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import Image from 'next/image';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
 
@@ -178,6 +179,15 @@ export default async function BookPage({ params }) {
                 Buy on Amazon
                 <span className="material-symbols-outlined ml-1">open_in_new</span>
               </a>
+
+              {/* Extended Content */}
+              {book.body && (
+                <div className="mt-8 pt-8 border-t border-slate-700">
+                  <div className="prose prose-invert prose-slate max-w-none">
+                    <ReactMarkdown>{book.body}</ReactMarkdown>
+                  </div>
+                </div>
+              )}
               
             </div>
           </div>
