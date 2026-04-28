@@ -12,6 +12,23 @@ import aboutBioData from '@/public/content/about-bio.json';
 import timeline2025 from '@/public/content/timeline/2025.json';
 import timeline2026 from '@/public/content/timeline/2026.json';
 
+// Process inline formatting (bold/italic) on text
+const processInline = (text) => {
+  // Bold first (**text**)
+  let result = text.split('**').map((part, index) => {
+    if (index % 2 === 1) return `<strong class="font-bold">${part}</strong>`;
+    return part;
+  }).join('');
+  
+  // Then italic (*text*)
+  result = result.split('*').map((part, index) => {
+    if (index % 2 === 1) return `<em class="italic">${part}</em>`;
+    return part;
+  }).join('');
+  
+  return result;
+};
+
 // Simple markdown to HTML converter
 const convertMarkdown = (text) => {
   if (!text) return text;
@@ -33,23 +50,14 @@ const convertMarkdown = (text) => {
     return line;
   }).join('\n');
   
-  // Convert markdown links [text](url) to HTML
-  result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-secondary hover:underline">$1</a>');
+  // Convert markdown links [text](url) to HTML with inline formatting inside
+  result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
+    const processedText = processInline(linkText);
+    return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-secondary hover:underline">${processedText}</a>`;
+  });
   
-  // Convert bold and italic using simple string methods
-  result = result.split('**').map((part, index) => {
-    if (index % 2 === 1) {
-      return `<strong class="font-bold">${part}</strong>`;
-    }
-    return part;
-  }).join('');
-  
-  result = result.split('*').map((part, index) => {
-    if (index % 2 === 1) {
-      return `<em class="italic">${part}</em>`;
-    }
-    return part;
-  }).join('');
+  // Process remaining inline formatting (text not in links)
+  result = processInline(result);
   
   // Split into paragraphs and wrap non-header content
   const paragraphs = result.split('\n');
