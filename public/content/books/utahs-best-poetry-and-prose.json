@@ -1,8 +1,11 @@
 {
   "title": "Utah's Best Poetry & Prose",
-  "order": 2,
-  "cover": "/Utahs_Best_Poetry_and_Prose_2026.webp",
-  "type": "ANTHOLOGY",
-  "buyLink": "https://www.amazon.com/dp/B0GVYCWR4X",
-  "description": "A collection of the year’s best fiction, poetry, and personal essays selected by the League of Utah Writers 2025 Writer of the Year David Rodeback."
+  "slug": "utahs-best-poetry-and-prose",
+  "releaseDate": "2026-04-28",
+  "description": "A collection of the year’s best fiction, poetry, and personal essays selected by the League of Utah Writers 2025 Writer of the Year David Rodeback.",
+  "featured": false,
+  "seo": {
+    "metaTitle": "Utah's Best Poetry & Prose",
+    "metaDescription": "A collection of the year’s best fiction, poetry, and personal essays selected by the League of Utah Writers 2025 Writer of the Year David Rodeback."
+  }
 }
