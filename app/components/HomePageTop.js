@@ -8,8 +8,14 @@ import { getImagePath as getAssetPath, CDN_CONFIG } from '@/src/utils/cdn';
 import { fallbackContent } from '@/src/data/fallbackContent';
 // Import CMS content directly for static generation
 import heroData from '@/public/content/hero.json';
-import booksData from '@/public/content/books-index.json';
 import homeBioData from '@/public/content/home-bio.json';
+// Import individual book JSON files
+import turbulentWaters from '@/public/content/books/turbulent-waters.json';
+import theSeasonsThatMadeMe from '@/public/content/books/the-seasons-that-made-me.json';
+import luckyPenny from '@/public/content/books/lucky-penny.json';
+import faithfulHearts from '@/public/content/books/faithful-hearts.json';
+import wanderlust from '@/public/content/books/wanderlust.json';
+import theWorkAndTheStories from '@/public/content/books/the-work-and-the-stories.json';
 
 // Helper function for consistent image paths
 const getImagePath = (path) => getAssetPath(path);
@@ -64,8 +70,39 @@ const getComingSoonText = (showSpecificDate, releaseDate, customDateText) => {
 export default function HomePageTop() {
   // Use imported CMS content directly (baked in at build time)
   const heroContent = heroData || fallbackContent.hero;
-  const booksContent = booksData || fallbackContent.books;
   const homeBioContent = homeBioData || fallbackContent.homeBio;
+  
+  // Combine all book data into array
+  const allBooks = [
+    turbulentWaters,
+    theSeasonsThatMadeMe,
+    luckyPenny,
+    faithfulHearts,
+    wanderlust,
+    theWorkAndTheStories
+  ];
+  
+  // Sorting function: featured first, then by releaseDate descending
+  const sortBooks = (books) => {
+    return books.sort((a, b) => {
+      // Featured books come first
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      
+      // Both featured or both not featured - sort by releaseDate descending
+      const dateA = a.releaseDate ? new Date(a.releaseDate) : null;
+      const dateB = b.releaseDate ? new Date(b.releaseDate) : null;
+      
+      if (dateA && dateB) {
+        return dateB - dateA; // Newest first
+      }
+      if (dateA) return -1; // A has date, B doesn't - A comes first
+      if (dateB) return 1;  // B has date, A doesn't - B comes first
+      return 0; // Neither has date - maintain original order
+    });
+  };
+  
+  const sortedBooks = sortBooks([...allBooks]);
   
   // Get status template
   const statusTemplate = getStatusTemplate(
@@ -162,7 +199,7 @@ export default function HomePageTop() {
                 <Link href="/about" className="text-secondary font-bold inline-flex items-center group">
                   {homeBioContent?.readMoreLink || 'Read More'} 
                   <span className="material-symbols-outlined ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -179,17 +216,25 @@ export default function HomePageTop() {
               <a className="flex items-center space-x-2 text-secondary font-bold hover:translate-x-2 transition-transform" href="https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y" target="_blank" rel="noopener noreferrer">
                 <span>Visit Amazon Author Page</span>
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </a>
+              </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-stretch">
-              {booksContent.map((book, i) => (
+              {sortedBooks.map((book, i) => (
                 <div key={i} className="flex flex-col h-full space-y-6">
-                  <a href={book.buyLink} target="_blank" rel="noopener noreferrer" className="block group h-full">
+                  <Link 
+                    href={`/books/${book.slug}`}
+                    className="inline-flex items-center justify-center w-full px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition-colors duration-300"
+                  >
+                    <span className="material-symbols-outlined mr-2">visibility</span>
+                    View Book
+                    <span className="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+                  </a>
+                  <Link href={`/books/${book.slug}`} className="block group h-full">
                     <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full">
                       <div className="flex justify-center -mt-12">
                         <div className="relative h-64 md:h-80 w-auto object-contain rounded shadow-lg transform group-hover:-translate-y-2 transition-transform duration-300" style={{ aspectRatio: '300 / 450', width: '300px', height: '450px' }}>
                           <Image
-                            src={getImagePath(book.cover)}
+                            src={getImagePath(book.image)}
                             alt={book.title}
                             className="object-cover w-full h-full rounded"
                             fill
@@ -199,8 +244,7 @@ export default function HomePageTop() {
                       </div>
                       <div className="mt-8 flex-grow">
                         <h3 className="font-headline text-2xl font-bold text-primary mb-2">{book.title}</h3>
-                        <p className="text-on-surface-variant font-label text-sm uppercase tracking-wider mb-4">{book.type}</p>
-                        <p className="text-on-surface-variant line-clamp-3 mb-6">{book.description}</p>
+                                                <p className="text-on-surface-variant line-clamp-3 mb-6">{book.description}</p>
                       </div>
                       <div className="mt-auto">
                         <span className="text-secondary font-bold inline-flex items-center group/link">
