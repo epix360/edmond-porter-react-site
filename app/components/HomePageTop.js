@@ -223,11 +223,10 @@ export default function HomePageTop() {
                 <div key={i} className="flex flex-col h-full space-y-6">
                   <Link 
                     href={`/books/${book.slug}`}
-                    className="inline-flex items-center justify-center w-full px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition-colors duration-300"
+                    className="inline-flex items-center justify-center w-full py-3 px-4 border-2 border-[#b46b25] text-[#b46b25] font-bold uppercase tracking-widest rounded-t-lg bg-transparent hover:bg-[#b46b25] hover:text-white transition-colors duration-300"
                   >
-                    <span className="material-symbols-outlined mr-2">visibility</span>
-                    View Book
-                    <span className="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+                    See details
+                    <span className="material-symbols-outlined ml-1">arrow_forward</span>
                   </Link>
                   <Link href={`/books/${book.slug}`} className="block group h-full">
                     <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full">
