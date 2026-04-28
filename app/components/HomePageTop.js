@@ -221,37 +221,44 @@ export default function HomePageTop() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-stretch">
               {sortedBooks.map((book, i) => (
                 <div key={i} className="flex flex-col h-full space-y-6">
-                  <Link 
-                    href={`/books/${book.slug}`}
-                    className="inline-flex items-center justify-center w-full py-3 px-4 border-2 border-[#b46b25] text-[#b46b25] font-bold uppercase tracking-widest rounded-t-lg bg-transparent hover:bg-[#b46b25] hover:text-white transition-colors duration-300"
-                  >
-                    See details
-                    <span className="material-symbols-outlined ml-1">arrow_forward</span>
-                  </Link>
-                  <Link href={`/books/${book.slug}`} className="block group h-full">
-                    <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full">
-                      <div className="flex justify-center -mt-12">
-                        <div className="relative h-64 md:h-80 w-auto object-contain rounded shadow-lg transform group-hover:-translate-y-2 transition-transform duration-300" style={{ aspectRatio: '300 / 450', width: '300px', height: '450px' }}>
-                          <Image
-                            src={getImagePath(book.image)}
-                            alt={book.title}
-                            className="object-cover w-full h-full rounded"
-                            fill
-                            unoptimized
-                          />
-                        </div>
-                      </div>
-                      <div className="mt-8 flex-grow">
-                        <h3 className="font-headline text-2xl font-bold text-primary mb-2">{book.title}</h3>
-                                                <p className="text-on-surface-variant line-clamp-3 mb-6">{book.description}</p>
-                      </div>
-                      <div className="mt-auto">
-                        <span className="text-secondary font-bold inline-flex items-center group/link">
-                          Buy now <span className="material-symbols-outlined ml-1 text-sm group-hover/link:translate-x-1 transition-transform">open_in_new</span>
-                        </span>
+                  {/* Card content - not clickable */}
+                  <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm flex flex-col h-full">
+                    <div className="flex justify-center -mt-12">
+                      <div className="relative h-64 md:h-80 w-auto object-contain rounded shadow-lg" style={{ aspectRatio: '300 / 450', width: '300px', height: '450px' }}>
+                        <Image
+                          src={getImagePath(book.image)}
+                          alt={book.title}
+                          className="object-cover w-full h-full rounded"
+                          fill
+                          unoptimized
+                        />
                       </div>
                     </div>
+                    <div className="mt-8 flex-grow">
+                      <h3 className="font-headline text-2xl font-bold text-primary mb-2">{book.title}</h3>
+                      <p className="text-on-surface-variant line-clamp-3 mb-6">{book.description}</p>
+                    </div>
+                  </div>
+                  
+                  {/* See details - text link, left-aligned */}
+                  <Link 
+                    href={`/books/${book.slug}`}
+                    className="inline-flex items-center text-secondary font-bold hover:text-[#b46b25] transition-colors"
+                  >
+                    See details
+                    <span className="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
                   </Link>
+                  
+                  {/* Buy now - orange outline button, opens Amazon in new tab */}
+                  <a 
+                    href={book.amazonUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center w-full py-3 px-4 border-2 border-[#b46b25] text-[#b46b25] font-bold uppercase tracking-widest rounded-t-lg bg-transparent hover:bg-[#b46b25] hover:text-white transition-colors duration-300"
+                  >
+                    Buy now
+                    <span className="material-symbols-outlined ml-1">open_in_new</span>
+                  </a>
                 </div>
               ))}
             </div>
