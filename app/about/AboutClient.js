@@ -9,6 +9,7 @@ import { getImagePath as getAssetPath } from '@/src/utils/cdn';
 import { fallbackContent } from '@/src/data/fallbackContent';
 // Import CMS content directly for static generation
 import aboutBioData from '@/public/content/about-bio.json';
+import timeline2025 from '@/public/content/timeline/2025.json';
 import timeline2026 from '@/public/content/timeline/2026.json';
 
 // Simple markdown to HTML converter
@@ -64,7 +65,7 @@ export default function AboutPage() {
   // Use imported CMS content directly (baked in at build time)
   const aboutBioContent = aboutBioData || fallbackContent.aboutBio;
   // Build timeline array from imported JSON files
-  const timelineContent = [timeline2026] || fallbackContent.timeline;
+  const timelineContent = [timeline2025, timeline2026] || fallbackContent.timeline;
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -156,20 +157,25 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="font-headline text-3xl font-bold text-primary mb-16 text-center">Milestones &amp; Moments</h2>
             <div className="space-y-12">
-              <div className="flex gap-8 group">
-                <div className="flex flex-col items-center">
-                  <div className="w-4 h-4 rounded-full bg-secondary group-hover:scale-125 transition-transform"></div>
-                </div>
-                <div>
-                  <span className="font-label text-sm text-secondary font-bold mb-1 block">2026</span>
-                  <div className="mb-6 last:mb-0">
-                    <h4 className="font-headline text-xl font-bold text-primary mb-2">First novel published</h4>
-                    <div className="text-on-surface-variant font-body">
-                      <p className="mb-6">Turbulent Waters releases June 1, 2026</p>
-                    </div>
+              {timelineData.map((yearData, yearIndex) => (
+                <div key={yearIndex} className="flex gap-8 group">
+                  <div className="flex flex-col items-center">
+                    <div className="w-4 h-4 rounded-full bg-secondary group-hover:scale-125 transition-transform"></div>
+                  </div>
+                  <div>
+                    <span className="font-label text-sm text-secondary font-bold mb-1 block">{yearData.year}</span>
+                    {yearData.milestones.map((milestone, milestoneIndex) => (
+                      <div key={milestoneIndex} className="mb-6 last:mb-0">
+                        <h4 className="font-headline text-xl font-bold text-primary mb-2">{milestone.title}</h4>
+                        <div 
+                          className="text-on-surface-variant font-body"
+                          dangerouslySetInnerHTML={{ __html: convertMarkdown(milestone.description) }}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
