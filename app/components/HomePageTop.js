@@ -14,7 +14,7 @@ import turbulentWaters from '@/public/content/books/turbulent-waters.json';
 import theSeasonsThatMadeMe from '@/public/content/books/the-seasons-that-made-me.json';
 import luckyPenny from '@/public/content/books/lucky-penny.json';
 import faithfulHearts from '@/public/content/books/faithful-hearts.json';
-import wanderlust from '@/public/content/books/wanderlust.json';
+import wanderlust from '@/public/content/books/Wanderlust.json';
 import theWorkAndTheStories from '@/public/content/books/the-work-and-the-stories.json';
 
 // Helper function for consistent image paths
