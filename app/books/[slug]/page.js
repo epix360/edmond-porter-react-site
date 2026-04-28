@@ -149,9 +149,13 @@ export default async function BookPage({ params }) {
             
             {/* Book Info */}
             <div className="flex flex-col">
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 font-headline">
+              <h1 className="text-3xl md:text-4xl font-bold text-white font-headline mb-4">
                 {book.title}
               </h1>
+              
+              <p className="text-sm text-slate-400 mb-6">
+                By Edmond A Porter
+              </p>
               
               {hasReleaseDate && (
                 <div className="flex items-center text-slate-400 mb-6">
@@ -175,12 +179,6 @@ export default async function BookPage({ params }) {
                 <span className="material-symbols-outlined ml-1">open_in_new</span>
               </a>
               
-              {/* Additional Info */}
-              <div className="mt-12 pt-8 border-t border-slate-700">
-                <p className="text-sm text-slate-500">
-                  By Edmond A Porter
-                </p>
-              </div>
             </div>
           </div>
         </div>
