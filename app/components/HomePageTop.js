@@ -220,8 +220,8 @@ export default function HomePageTop() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-stretch">
               {sortedBooks.map((book, i) => (
-                <div key={i} className="flex flex-col h-full space-y-6">
-                  {/* Card content - not clickable */}
+                <div key={i} className="flex flex-col h-full">
+                  {/* Card with content and links inside */}
                   <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm flex flex-col h-full">
                     <div className="flex justify-center -mt-12">
                       <div className="relative h-64 md:h-80 w-auto object-contain rounded shadow-lg" style={{ aspectRatio: '300 / 450', width: '300px', height: '450px' }}>
@@ -238,27 +238,27 @@ export default function HomePageTop() {
                       <h3 className="font-headline text-2xl font-bold text-primary mb-2">{book.title}</h3>
                       <p className="text-on-surface-variant line-clamp-3 mb-6">{book.description}</p>
                     </div>
+                    
+                    {/* See details - text link, left-aligned */}
+                    <Link 
+                      href={`/books/${book.slug}`}
+                      className="inline-flex items-center text-secondary font-bold hover:text-[#b46b25] transition-colors mb-4"
+                    >
+                      See details
+                      <span className="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+                    </Link>
+                    
+                    {/* Buy now - orange outline button, opens Amazon in new tab */}
+                    <a 
+                      href={book.amazonUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center w-full py-3 px-4 border-2 border-[#b46b25] text-[#b46b25] font-bold uppercase tracking-widest rounded-t-lg bg-transparent hover:bg-[#b46b25] hover:text-white transition-colors duration-300"
+                    >
+                      Buy now
+                      <span className="material-symbols-outlined ml-1">open_in_new</span>
+                    </a>
                   </div>
-                  
-                  {/* See details - text link, left-aligned */}
-                  <Link 
-                    href={`/books/${book.slug}`}
-                    className="inline-flex items-center text-secondary font-bold hover:text-[#b46b25] transition-colors"
-                  >
-                    See details
-                    <span className="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
-                  </Link>
-                  
-                  {/* Buy now - orange outline button, opens Amazon in new tab */}
-                  <a 
-                    href={book.amazonUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center w-full py-3 px-4 border-2 border-[#b46b25] text-[#b46b25] font-bold uppercase tracking-widest rounded-t-lg bg-transparent hover:bg-[#b46b25] hover:text-white transition-colors duration-300"
-                  >
-                    Buy now
-                    <span className="material-symbols-outlined ml-1">open_in_new</span>
-                  </a>
                 </div>
               ))}
             </div>
