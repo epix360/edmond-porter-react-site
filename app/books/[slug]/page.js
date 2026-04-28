@@ -23,7 +23,7 @@ export async function generateStaticParams() {
 
 // Generate metadata from book's SEO object
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const filePath = path.join(process.cwd(), 'public/content/books', `${slug}.json`);
   
   try {
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }) {
 
 // Book landing page component
 export default async function BookPage({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const filePath = path.join(process.cwd(), 'public/content/books', `${slug}.json`);
   
   let book;

@@ -41,7 +41,7 @@ export async function generateStaticParams() {
 
 // Generate metadata from page's SEO object
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const filePath = path.join(process.cwd(), 'public/content/pages', `${slug}.json`);
   
   try {
@@ -66,7 +66,7 @@ export async function generateMetadata({ params }) {
 
 // Generic catch-all page component
 export default async function GenericPage({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const filePath = path.join(process.cwd(), 'public/content/pages', `${slug}.json`);
   
   let page;
