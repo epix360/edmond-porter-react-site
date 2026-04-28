@@ -15,7 +15,8 @@ export async function generateStaticParams() {
       const content = fs.readFileSync(filePath, 'utf8');
       const book = JSON.parse(content);
       return { slug: book.slug };
-    });
+    })
+    .filter(item => item.slug); // Only include books with a valid slug
   
   return books;
 }

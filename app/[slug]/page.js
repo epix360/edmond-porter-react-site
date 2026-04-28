@@ -33,7 +33,8 @@ export async function generateStaticParams() {
       }
       
       return { slug: page.slug };
-    });
+    })
+    .filter(item => item.slug); // Only include pages with a valid slug
   
   return pages;
 }
