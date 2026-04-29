@@ -155,7 +155,7 @@ export default async function BookPage({ params }) {
               </h1>
               
               <p className="text-sm text-slate-400 mb-6">
-                By Edmond A Porter
+                {book.authorship === 'contributor' ? 'Featuring Edmond A Porter' : 'By Edmond A Porter'}
               </p>
               
               <p className="text-lg text-slate-300 leading-relaxed mb-8 font-body">

@@ -37,6 +37,15 @@ content:
       - { name: image, label: "Book Cover Image", type: image }
       - { name: amazonUrl, label: "Amazon Purchase URL", type: string }
       - { name: featured, label: "Featured Book", type: boolean, default: false }
+      - name: authorship
+        label: "Authorship"
+        type: select
+        options:
+          - value: author
+            label: "By Edmond A Porter"
+          - value: contributor
+            label: "Featuring Edmond A Porter"
+        default: author
       - name: seo
         label: "SEO Metadata"
         type: object
