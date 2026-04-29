@@ -1,10 +1,5 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  // Configure turbopack to avoid webpack conflicts and set correct root
-  turbopack: {
-    root: '/Users/eporter/CascadeProjects/edmond-porter-website',
-  },
-  
+const nextConfig = {  
   // Exclude src/pages directory to avoid conflicts with CRA
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
   
