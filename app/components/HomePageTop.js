@@ -16,6 +16,7 @@ import luckyPenny from '@/public/content/books/lucky-penny.json';
 import faithfulHearts from '@/public/content/books/faithful-hearts.json';
 import wanderlust from '@/public/content/books/Wanderlust.json';
 import theWorkAndTheStories from '@/public/content/books/the-work-and-the-stories.json';
+import utahsBestPoetryAndProse from '@/public/content/books/utahs-best-poetry-and-prose.json';
 
 // Helper function for consistent image paths
 const getImagePath = (path) => getAssetPath(path);
@@ -79,7 +80,8 @@ export default function HomePageTop() {
     luckyPenny,
     faithfulHearts,
     wanderlust,
-    theWorkAndTheStories
+    theWorkAndTheStories,
+    utahsBestPoetryAndProse
   ];
   
   // Sorting function: featured first, then by releaseDate descending
