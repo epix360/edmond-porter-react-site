@@ -171,6 +171,7 @@ export default function HomePageTop() {
                 alt="Book cover"
                 className="relative z-10 rounded-lg shadow-2xl w-full max-w-[280px] sm:max-w-[320px] md:max-w-md aspect-[2/3] object-cover"
                 priority={true}
+                loading="eager"
                 width={400}
                 height={600}
                 unoptimized
