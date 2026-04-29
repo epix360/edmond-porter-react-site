@@ -116,6 +116,7 @@ jobs:
         echo "💻 Code Changed: ${{ needs.detect-changes.outputs.code-changed }}"
         
         # Run optimized Next.js build
+        rm -rf .next
         npm run build:next
         
         echo "✅ Build completed successfully!"
