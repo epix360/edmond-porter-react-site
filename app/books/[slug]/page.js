@@ -158,13 +158,6 @@ export default async function BookPage({ params }) {
                 By Edmond A Porter
               </p>
               
-              {hasReleaseDate && (
-                <div className="flex items-center text-[#FDC29A] mb-6">
-                  <span className="material-symbols-outlined mr-2">calendar_today</span>
-                  <span>Release Date: {book.releaseDate}</span>
-                </div>
-              )}
-              
               <p className="text-lg text-slate-300 leading-relaxed mb-8 font-body">
                 {book.description}
               </p>
@@ -183,7 +176,7 @@ export default async function BookPage({ params }) {
 
             {/* Extended Content - wraps around floated image */}
             {book.body && (
-              <div className="mt-4 pt-4">
+              <div className="mt-2 pt-2">
                 <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-slate-200 prose-strong:text-white prose-a:text-[#FDC29A]">
                   <ReactMarkdown>{book.body}</ReactMarkdown>
                 </div>
