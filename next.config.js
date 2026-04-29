@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {  
+const nextConfig = {
+  // Configure turbopack to avoid webpack conflicts and set correct root
+  turbopack: {
+
+  },
+  
   // Exclude src/pages directory to avoid conflicts with CRA
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
   
