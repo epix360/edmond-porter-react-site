@@ -1,0 +1,23 @@
+# Edmond A Porter
+
+> Official website for Edmond A Porter, a contemporary Utah author of fiction, essays, and poetry exploring the human experience, rural America, and storytelling.
+
+## Author Context
+
+- [About the Author](https://edmondaporter.com/about): Biographical information, background, and literary focus.
+- [Published Works](https://edmondaporter.com/#published-works): Overview of available books, anthologies, and collections.
+- [Medium Articles](https://edmondaporter.com/articles): Aggregated hub of recent essays and thoughts on writing, syndicated from Medium.
+
+## Site Architecture & Content Management
+
+This site is statically generated using Next.js and managed via Pages CMS. Content is stored as JSON and Markdown files in the repository.
+
+- [Books Data Structure](https://github.com/epix360/edmond-porter-react-site/tree/main/public/content/books): Source JSON files defining book metadata, Amazon URLs, and descriptions.
+- [Generic Pages Data](https://github.com/epix360/edmond-porter-react-site/tree/main/public/content/pages): Source JSON files for standard pages, utilizing Markdown for body content.
+- [Medium Aggregation Script](https://github.com/epix360/edmond-porter-react-site/blob/main/lib/medium.js): Node utility that fetches and parses the external Medium RSS feed at build time to generate static article stubs.
+
+## Contact & Social
+
+- [Contact Form](https://edmondaporter.com/#contact): Direct channel for media inquiries and speaking engagements.
+- [Amazon Author Hub](https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y): Primary retail destination for all publications.
+- [Goodreads Profile](https://www.goodreads.com/author/show/60996287.Edmond_A_Porter): Reader reviews and reading lists.

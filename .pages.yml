@@ -21,20 +21,29 @@ content:
       - { name: releaseDate, label: "Release Date", type: date }
       - { name: customDateText, label: "Custom Date Text (Optional)", type: string }
 
-  # SECTION 2: The Bookshelf (Collection)
+  # SECTION 2: Books (Collection)
   - name: books
-    label: "Bookshelf (All Books)"
+    label: "Books"
     type: collection
     path: public/content/books
     format: json
-    filename: "{fields.title}.json"
+    filename: "{fields.slug}.json"
     fields:
       - { name: title, label: "Book Title", type: string }
-      - { name: order, label: "Display Order", type: number, default: 1 }
-      - { name: cover, label: "Cover Thumbnail", type: image }
-      - { name: type, label: "Book type", type: string }
-      - { name: buyLink, label: "Purchase URL", type: string }
-      - { name: description, label: "Description", type: rich-text }
+      - { name: slug, label: "URL Slug", type: string }
+      - { name: releaseDate, label: "Release Date", type: date }
+      - { name: description, label: "Description", type: text }
+      - { name: body, label: "Extended Content", type: rich-text }
+      - { name: image, label: "Book Cover Image", type: image }
+      - { name: amazonUrl, label: "Amazon Purchase URL", type: string }
+      - { name: featured, label: "Featured Book", type: boolean, default: false }
+      - { name: authorship, label: "Authorship", type: select, options: { values: [{ value: "author", label: "By Edmond A Porter" }, { value: "contributor", label: "Featuring Edmond A Porter" }] }, default: "author" }
+      - name: seo
+        label: "SEO Metadata"
+        type: object
+        fields:
+          - { name: metaTitle, label: "Meta Title", type: string }
+          - { name: metaDescription, label: "Meta Description", type: string }
 
   # SECTION 3: Home Bio Teaser (Single File)
   - name: home-bio
@@ -88,3 +97,21 @@ content:
       - { name: headline, label: "Section Headline", type: string }
       - { name: description, label: "Section Description", type: rich-text }
       - { name: posts, label: "Medium Posts (Future)", type: collection, fields: [{ name: title, label: "Post Title", type: string }, { name: link, label: "Post URL", type: string }, { name: description, label: "Post Description", type: rich-text }] }
+
+  # SECTION 7: Generic Pages (Collection)
+  - name: pages
+    label: "Generic Pages"
+    type: collection
+    path: public/content/pages
+    format: json
+    filename: "{fields.slug}.json"
+    fields:
+      - { name: title, label: "Page Title", type: string }
+      - { name: slug, label: "URL Slug", type: string }
+      - { name: body, label: "Page Content", type: markdown }
+      - name: seo
+        label: "SEO Metadata"
+        type: object
+        fields:
+          - { name: metaTitle, label: "Meta Title", type: string }
+          - { name: metaDescription, label: "Meta Description", type: string }

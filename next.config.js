@@ -2,7 +2,7 @@
 const nextConfig = {
   // Configure turbopack to avoid webpack conflicts and set correct root
   turbopack: {
-    root: '.',
+    root: '/Users/eporter/CascadeProjects/edmond-porter-website',
   },
   
   // Exclude src/pages directory to avoid conflicts with CRA
@@ -15,6 +15,7 @@ const nextConfig = {
   
   // Configure image optimization
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

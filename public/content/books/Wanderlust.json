@@ -1,8 +1,15 @@
 {
   "title": "Wanderlust",
-  "order": 5,
-  "cover": "/Wanderlust.webp",
-  "type": "ANTHOLOGY",
-  "buyLink": "https://www.amazon.com/Wanderlust-Collection-Travel-Angela-Acosta-ebook/dp/B0CM8Y7W2T",
-  "description": "Join seventeen authors as they take you on journeys through Asia, the Americas, and Europe."
+  "slug": "wanderlust",
+  "releaseDate": "2023-11-10",
+  "description": "Join seventeen authors as they take you on journeys through Asia, the Americas, and Europe.",
+  "body": "> We travel to lose ourselves, to find ourselves, and sometimes just to be someone else for a while. Join seventeen authors as they take you on journeys through Asia, the Americas, and Europe. Sometimes funny, sometimes poignant, these true tales remind us how travel nourishes our souls.\n\n",
+  "image": "/Wanderlust.webp",
+  "amazonUrl": "https://www.amazon.com/Wanderlust-Collection-Travel-Angela-Acosta-ebook/dp/B0CM8Y7W2T",
+  "featured": false,
+  "authorship": "contributor",
+  "seo": {
+    "metaTitle": "Wanderlust | Edmond A Porter",
+    "metaDescription": "Join seventeen authors as they take you on journeys through Asia, the Americas, and Europe."
+  }
 }
