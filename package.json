@@ -5,17 +5,9 @@
   "homepage": "https://edmondaporter.com",
   "main": "src/index.js",
   "scripts": {
-    "prebuild": "node scripts/generate-book-index.js && node scripts/generate-timeline-js.js && node scripts/copy-images",
-    "build": "react-scripts build && node scripts/pre-render && node scripts/optimize-performance && node scripts/generate-static-pages && node scripts/generate-service-worker",
-    "build:unified": "node scripts/unified-build",
-    "build:analyze": "npm run build && node scripts/optimize-performance",
-    "start": "react-scripts start",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dev:next": "node --no-deprecation scripts/build-next.js dev",
-    "build:next": "node scripts/build-next.js build",
-    "build:next:direct": "next build",
-    "start:next": "next start"
+    "dev": "next dev",
+    "build": "rm -rf .next && next build",
+    "start": "next start"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

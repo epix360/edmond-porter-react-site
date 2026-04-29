@@ -117,7 +117,7 @@ jobs:
         
         # Run optimized Next.js build
         rm -rf .next
-        npm run build:next
+        npm run build
         
         echo "✅ Build completed successfully!"
         echo "⏱️ Build time: $SECONDS seconds"
