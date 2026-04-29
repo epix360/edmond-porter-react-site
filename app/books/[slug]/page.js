@@ -124,7 +124,7 @@ export default async function BookPage({ params }) {
       />
       
       <Navigation />
-      <main className="min-h-screen bg-slate-900 py-12 pt-24">
+      <main className="min-h-screen py-12 pt-24" style={{ backgroundColor: '#2C3E4F' }}>
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Back Link */}
           <Link
@@ -135,15 +135,15 @@ export default async function BookPage({ params }) {
             Back to Home
           </Link>
           
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            {/* Book Cover */}
-            <div className="relative aspect-[2/3] max-w-md mx-auto md:mx-0">
+          <div className="overflow-hidden">
+            {/* Book Cover - floated left for text wrapping */}
+            <div className="relative aspect-[2/3] w-full max-w-xs md:max-w-sm lg:max-w-md float-left mr-8 mb-4 rounded-lg shadow-2xl overflow-hidden">
               <Image
                 src={`/images/${book.image}`}
                 alt={`${book.title} book cover`}
                 fill
-                className="object-cover rounded-lg shadow-2xl"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 400px"
                 priority
               />
             </div>
@@ -159,7 +159,7 @@ export default async function BookPage({ params }) {
               </p>
               
               {hasReleaseDate && (
-                <div className="flex items-center text-slate-400 mb-6">
+                <div className="flex items-center text-[#FDC29A] mb-6">
                   <span className="material-symbols-outlined mr-2">calendar_today</span>
                   <span>Release Date: {book.releaseDate}</span>
                 </div>
@@ -174,7 +174,7 @@ export default async function BookPage({ params }) {
                 href={book.amazonUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-full py-3 px-4 border-2 border-[#b46b25] text-[#b46b25] font-bold uppercase tracking-widest rounded-t-lg bg-transparent hover:bg-[#b46b25] hover:text-white transition-colors duration-300"
+                className="inline-flex items-center justify-center w-full py-3 px-4 border-2 border-[#FDC29A] text-[#FDC29A] font-bold uppercase tracking-widest rounded-t-lg bg-transparent hover:bg-[#FDC29A] hover:text-[#2C3E4F] transition-colors duration-300"
               >
                 Buy on Amazon
                 <span className="material-symbols-outlined ml-1">open_in_new</span>
@@ -182,8 +182,8 @@ export default async function BookPage({ params }) {
 
               {/* Extended Content */}
               {book.body && (
-                <div className="mt-8 pt-8 border-t border-slate-700">
-                  <div className="prose prose-invert prose-slate max-w-none">
+                <div className="mt-8 pt-8 border-t border-slate-600 clear-both">
+                  <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-slate-200 prose-strong:text-white prose-a:text-[#FDC29A]">
                     <ReactMarkdown>{book.body}</ReactMarkdown>
                   </div>
                 </div>
