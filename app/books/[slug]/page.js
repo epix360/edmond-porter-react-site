@@ -136,7 +136,7 @@ export default async function BookPage({ params }) {
           </Link>
           
           <div className="overflow-hidden">
-            {/* Book Cover - floated left for text wrapping */}
+            {/* Book Cover - floated left for text wrapping, larger on desktop */}
             <div className="relative aspect-[2/3] w-full max-w-xs md:max-w-sm lg:max-w-md float-left mr-8 mb-4 rounded-lg shadow-2xl overflow-hidden">
               <Image
                 src={`/images/${book.image}`}
@@ -179,17 +179,16 @@ export default async function BookPage({ params }) {
                 Buy on Amazon
                 <span className="material-symbols-outlined ml-1">open_in_new</span>
               </a>
-
-              {/* Extended Content */}
-              {book.body && (
-                <div className="mt-8 pt-8 border-t border-slate-600 clear-both">
-                  <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-slate-200 prose-strong:text-white prose-a:text-[#FDC29A]">
-                    <ReactMarkdown>{book.body}</ReactMarkdown>
-                  </div>
-                </div>
-              )}
-              
             </div>
+
+            {/* Extended Content - wraps around floated image */}
+            {book.body && (
+              <div className="mt-4 pt-4">
+                <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-slate-200 prose-strong:text-white prose-a:text-[#FDC29A]">
+                  <ReactMarkdown>{book.body}</ReactMarkdown>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </main>
