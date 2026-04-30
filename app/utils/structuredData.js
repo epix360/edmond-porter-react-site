@@ -10,6 +10,7 @@ const getStructuredData = (type, data = {}) => {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Edmond A. Porter",
+        "alternateName": "Edmond Porter",
         "givenName": "Edmond",
         "familyName": "Porter",
         "jobTitle": "Author",
