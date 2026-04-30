@@ -1,15 +1,15 @@
 {
-    "title": "Wanderlust",
-    "slug": "wanderlust",
-    "releaseDate": "2023-11-10",
-    "description": "Join seventeen authors as they take you on journeys through Asia, the Americas, and Europe.",
-    "body": "> We travel to lose ourselves, to find ourselves, and sometimes just to be someone else for a while. Join seventeen authors as they take you on journeys through Asia, the Americas, and Europe. Sometimes funny, sometimes poignant, these true tales remind us how travel nourishes our souls.",
-    "image": "/Wanderlust.webp",
-    "amazonUrl": "https://www.amazon.com/Wanderlust-Collection-Travel-Angela-Acosta-ebook/dp/B0CM8Y7W2T",
-    "featured": false,
-    "authorship": "contributor",
-    "seo": {
-        "metaTitle": "Wanderlust | Edmond A Porter",
-        "metaDescription": "Join seventeen authors as they take you on journeys through Asia, the Americas, and Europe."
-    }
+  "title": "Wanderlust",
+  "slug": "wanderlust",
+  "releaseDate": "2023-11-10",
+  "description": "Join seventeen authors as they take you on journeys through Asia, the Americas, and Europe.",
+  "body": "> We travel to lose ourselves, to find ourselves, and sometimes just to be someone else for a while. Join seventeen authors as they take you on journeys through Asia, the Americas, and Europe. Sometimes funny, sometimes poignant, these true tales remind us how travel nourishes our souls.\n\n## Journeys Across Three Continents\n\n*Wanderlust* is a global exploration curated by the authors of The Writers' Cache. This collection features seventeen distinct voices who document their journeys through Asia, the Americas, and Europe. Rather than traditional travel guides, these stories function as personal maps of discovery. The writers invite readers to cross borders and experience the world through a lens of curiosity and transformation.\n\n## Finding Yourself in the Far-Flung\n\nThe core philosophy of this anthology is that travel serves as a vehicle for self-reflection. As the description suggests, \"sometimes we find ourselves by getting lost.\" These true tales explore the psychological and emotional impact of being a stranger in a foreign land. Whether the narrative is a funny account of a cultural misunderstanding or a poignant moment of clarity on a lonely trail, each story reinforces how leaving home nourishes the soul.\n\n## A Compilation of Global Perspectives\n\nThis anthology showcases the diverse experiences of Utahn authors as they navigate the complexities of international travel. The contributors provide an intimate look at the rituals, landscapes, and people they encountered abroad. From the bustling streets of Asian metropolises to the quiet corners of the European countryside, *Wanderlust* captures the universal desire to step outside of one's routine and, for a brief time, become someone else. Pet lovers, history buffs, and armchair travelers alike will find resonance in these shared human experiences.",
+  "image": "/Wanderlust.webp",
+  "amazonUrl": "https://www.amazon.com/Wanderlust-Collection-Travel-Angela-Acosta-ebook/dp/B0CM8Y7W2T",
+  "featured": false,
+  "authorship": "contributor",
+  "seo": {
+    "metaTitle": "Wanderlust | Stories of personal discovery through travel, travel essays, amusing anecdotes",
+    "metaDescription": "Be enthralled by memoirs of international travel and adventure in this travel anthology featuring Utah authors from The Writers Cache as they share their stories through the narrative travel writing collection"
+  }
 }
