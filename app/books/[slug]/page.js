@@ -175,9 +175,9 @@ export default async function BookPage({ params }) {
               </a>
             </div>
 
-            {/* Extended Content - full width below on mobile, wraps around floated image on desktop */}
+            {/* Extended Content - wraps around floated image on desktop, clears below on mobile */}
             {book.body && (
-              <div className="mt-8 md:mt-2 pt-2 clear-both">
+              <div className="mt-8 md:mt-2 pt-2 clear-both md:clear-none">
                 <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-slate-200 prose-strong:text-white prose-a:text-[#FDC29A]">
                   <ReactMarkdown>{book.body}</ReactMarkdown>
                 </div>
