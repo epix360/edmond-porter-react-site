@@ -1,6 +1,6 @@
 import HomePageTop from './components/HomePageTop';
 import HomePageBottom from './components/HomePageBottom';
-import ServerMediumFeed from './components/ServerMediumFeed';
+import HomeMediumSection from './components/HomeMediumSection';
 import { fallbackContent } from '@/src/data/fallbackContent';
 
 export const metadata = {
@@ -50,8 +50,8 @@ export default function HomePage() {
       {/* Hero + About + Books sections */}
       <HomePageTop />
       
-      {/* Server-side Medium feed - baked into static HTML */}
-      <ServerMediumFeed />
+      {/* Articles section - links to local /articles routes */}
+      <HomeMediumSection />
       
       {/* Contact section */}
       <HomePageBottom />
