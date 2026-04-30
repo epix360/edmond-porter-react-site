@@ -1,5 +1,7 @@
 import { getMediumArticles, getArticleBySlug } from '@/lib/medium';
 import Link from 'next/link';
+import Navigation from '@/src/components/Navigation';
+import Footer from '@/src/components/Footer';
 
 // Generate static paths for all articles
 export async function generateStaticParams() {
@@ -11,7 +13,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }) {
-  const article = await getArticleBySlug(params.slug);
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
   
   if (!article) {
     return {
@@ -31,7 +34,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ArticlePage({ params }) {
-  const article = await getArticleBySlug(params.slug);
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
   
   if (!article) {
     return (
@@ -58,7 +62,7 @@ export default async function ArticlePage({ params }) {
     '@type': 'BlogPosting',
     headline: article.title,
     description: article.description,
-    url: `https://edmondaporter.com/articles/${article.slug}`,
+    url: `https://edmondaporter.com/articles/${slug}`,
     datePublished: article.pubDate,
     author: {
       '@type': 'Person',
@@ -72,7 +76,7 @@ export default async function ArticlePage({ params }) {
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://edmondaporter.com/articles/${article.slug}`
+      '@id': `https://edmondaporter.com/articles/${slug}`
     },
     ...(article.thumbnail && {
       image: {
@@ -83,7 +87,9 @@ export default async function ArticlePage({ params }) {
   };
   
   return (
-    <main className="min-h-screen py-12 pt-24 bg-surface-container-lowest">
+    <>
+      <Navigation />
+      <main className="min-h-screen py-12 pt-24 bg-surface-container-lowest">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
@@ -133,6 +139,17 @@ export default async function ArticlePage({ params }) {
             {article.description}
           </p>
           
+          {/* First Three Paragraphs Preview */}
+          {article.firstThreeParagraphs && article.firstThreeParagraphs.length > 0 && (
+            <div className="mb-8 space-y-4">
+              {article.firstThreeParagraphs.map((paragraph, index) => (
+                <p key={index} className="text-on-surface-variant leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          )}
+          
           {/* CTA Button - Outlined Style */}
           <div className="border-t border-slate-200 pt-8">
             <p className="text-on-surface-variant mb-4">
@@ -151,5 +168,7 @@ export default async function ArticlePage({ params }) {
         </article>
       </div>
     </main>
+    <Footer />
+  </>
   );
 }

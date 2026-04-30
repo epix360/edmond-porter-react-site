@@ -1,5 +1,7 @@
 import { getMediumArticles } from '@/lib/medium';
 import Link from 'next/link';
+import Navigation from '@/src/components/Navigation';
+import Footer from '@/src/components/Footer';
 
 export const metadata = {
   title: 'Articles | Edmond A Porter',
@@ -14,7 +16,9 @@ export default async function ArticlesPage() {
   const articles = await getMediumArticles();
   
   return (
-    <main className="min-h-screen py-12 pt-24 bg-surface-container-lowest">
+    <>
+      <Navigation />
+      <main className="min-h-screen py-12 pt-24 bg-surface-container-lowest">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Back Link */}
         <Link
@@ -30,7 +34,7 @@ export default async function ArticlesPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-primary font-headline mb-4">
             Latest Articles
           </h1>
-          <p className="text-lg text-on-surface-variant max-w-2xl">
+          <p className="text-lg text-on-surface-variant">
             Thoughts on writing, creativity, and the stories behind the stories. 
             All articles originally published on Medium.
           </p>
@@ -120,5 +124,7 @@ export default async function ArticlesPage() {
         </div>
       </div>
     </main>
+    <Footer />
+  </>
   );
 }
