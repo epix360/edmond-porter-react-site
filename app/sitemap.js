@@ -15,9 +15,10 @@ async function scanAppDirectory(dir, basePath = '') {
     const fullPath = path.join(dir, entry.name);
     const relativePath = path.join(basePath, entry.name);
     
-    // Skip special directories and files
+    // Skip special directories and files (including dynamic routes like [slug])
     if (entry.name.startsWith('_') || 
         entry.name.startsWith('(') || 
+        entry.name.includes('[') ||
         entry.name === 'api' || 
         entry.name === 'components' ||
         entry.name === 'lib') {
