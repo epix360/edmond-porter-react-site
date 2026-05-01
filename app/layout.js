@@ -1,5 +1,5 @@
 import { Inter, Noto_Serif } from 'next/font/google'
-import { GoogleAnalytics } from '@next/third-parties/google';
+import CookieConsent from './components/CookieConsent';
 import './globals.css'
 
 // Font optimization
@@ -70,8 +70,8 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${inter.className} ${notoSerif.className} bg-background text-on-background font-body leading-relaxed selection:bg-secondary-container`} suppressHydrationWarning={true}>
         {children}
+        <CookieConsent gaId={process.env.NEXT_PUBLIC_GA_ID} />
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
     </html>
   )
 }
