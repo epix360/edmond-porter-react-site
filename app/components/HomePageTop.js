@@ -143,7 +143,7 @@ export default function HomePageTop() {
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center relative z-10 py-12 md:py-20">
             <div className="order-2 md:order-1 text-center md:text-left">
               <h1 className="sr-only">
-                Edmond A Porter: Award-Winning Utah Author
+                Edmond A Porter: Award-Winning Utah Author | Official Website
               </h1>
               {statusTemplate && (
                 <span className={`inline-block font-label uppercase tracking-[0.2em] font-bold mb-1 sm:mb-4 text-sm ${statusTemplate.color}`}>
