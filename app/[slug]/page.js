@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
 
@@ -118,67 +117,10 @@ export default async function GenericPage({ params }) {
       {/* Content Section */}
       <section className="py-12 px-4">
         <div className="max-w-4xl mx-auto">
-          <article className="prose prose-lg prose-invert prose-slate max-w-none">
-            <ReactMarkdown
-              components={{
-                h1: ({ children }) => (
-                  <h1 className="text-3xl font-bold text-white font-headline mb-6 mt-8">{children}</h1>
-                ),
-                h2: ({ children }) => (
-                  <h2 className="text-2xl font-bold text-white font-headline mb-4 mt-8">{children}</h2>
-                ),
-                h3: ({ children }) => (
-                  <h3 className="text-xl font-bold text-white font-headline mb-4 mt-6">{children}</h3>
-                ),
-                p: ({ children }) => (
-                  <p className="text-slate-300 leading-relaxed mb-4 font-body">{children}</p>
-                ),
-                a: ({ children, href }) => (
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-amber-500 hover:text-amber-400 underline transition-colors"
-                  >
-                    {children}
-                  </a>
-                ),
-                ul: ({ children }) => (
-                  <ul className="list-disc list-inside text-slate-300 mb-4 ml-4">{children}</ul>
-                ),
-                ol: ({ children }) => (
-                  <ol className="list-decimal list-inside text-slate-300 mb-4 ml-4">{children}</ol>
-                ),
-                li: ({ children }) => (
-                  <li className="mb-2">{children}</li>
-                ),
-                blockquote: ({ children }) => (
-                  <blockquote className="border-l-4 border-amber-500 pl-4 italic text-slate-400 my-6">
-                    {children}
-                  </blockquote>
-                ),
-                hr: () => <hr className="border-slate-700 my-8" />,
-                strong: ({ children }) => (
-                  <strong className="font-bold text-white">{children}</strong>
-                ),
-                em: ({ children }) => (
-                  <em className="italic text-slate-300">{children}</em>
-                ),
-                code: ({ children }) => (
-                  <code className="bg-slate-800 text-amber-400 px-2 py-1 rounded text-sm font-mono">
-                    {children}
-                  </code>
-                ),
-                pre: ({ children }) => (
-                  <pre className="bg-slate-800 p-4 rounded-lg overflow-x-auto mb-4">
-                    {children}
-                  </pre>
-                ),
-              }}
-            >
-              {page.body}
-            </ReactMarkdown>
-          </article>
+          <article 
+            className="prose prose-lg prose-invert prose-slate max-w-none"
+            dangerouslySetInnerHTML={{ __html: page.body }}
+          />
         </div>
       </section>
     </main>

@@ -117,7 +117,7 @@ content:
     fields:
       - { name: title, label: "Page Title", type: string }
       - { name: slug, label: "URL Slug", type: string }
-      - { name: body, label: "Page Content", type: markdown }
+      - { name: body, label: "Page Content", type: rich-text }
       - name: seo
         label: "SEO Metadata"
         type: object
