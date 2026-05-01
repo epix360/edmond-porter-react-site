@@ -1,4 +1,5 @@
 import { Inter, Noto_Serif } from 'next/font/google'
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css'
 
 // Font optimization
@@ -70,6 +71,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} ${notoSerif.className} bg-background text-on-background font-body leading-relaxed selection:bg-secondary-container`} suppressHydrationWarning={true}>
         {children}
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
     </html>
   )
 }
