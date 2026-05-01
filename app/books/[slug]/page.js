@@ -99,7 +99,10 @@ export default async function BookPage({ params }) {
     bookFormat: 'EBook',
     numberOfPages: null,
     datePublished: hasReleaseDate ? new Date(book.releaseDate).toISOString() : null,
-    publisher: '',
+    publisher: book.publisher ? {
+      '@type': 'Organization',
+      name: book.publisher,
+    } : null,
     url: `https://edmondaporter.com/books/${book.slug}`,
     offers: {
       '@type': 'Offer',
