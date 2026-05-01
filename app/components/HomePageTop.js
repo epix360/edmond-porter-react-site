@@ -142,16 +142,19 @@ export default function HomePageTop() {
           <div className="absolute inset-0 opacity-20 pointer-events-none" style={{backgroundImage: "radial-gradient(circle at 20% 50%, #805533 0%, transparent 50%)"}}></div>
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center relative z-10 py-12 md:py-20">
             <div className="order-2 md:order-1 text-center md:text-left">
+              <h1 className="sr-only">
+                Edmond A Porter: Award-Winning Utah Author
+              </h1>
               {statusTemplate && (
                 <span className={`inline-block font-label uppercase tracking-[0.2em] font-bold mb-1 sm:mb-4 text-sm ${statusTemplate.color}`}>
                   {statusTemplate.label}
                 </span>
               )}
-              <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+              <h2 className="font-headline text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                 {heroContent?.title?.split(' ').map((word, i) => 
                   i === 0 ? word : <React.Fragment key={i}><br className="hidden sm:block" /><span className="italic text-[#B8C8DB] sm:inline">{' '}{word}</span></React.Fragment>
                 ) || 'Edmond A Porter'}
-              </h1>
+              </h2>
               <p className="text-base sm:text-lg md:text-xl text-on-primary-container mb-3 sm:mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed font-light">
                 {heroContent?.blurb || 'Author of contemporary fiction'}
               </p>
