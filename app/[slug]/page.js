@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
 
@@ -117,10 +118,9 @@ export default async function GenericPage({ params }) {
       {/* Content Section */}
       <section className="py-12 px-4">
         <div className="max-w-4xl mx-auto">
-          <article 
-            className="prose prose-lg prose-invert prose-slate max-w-none"
-            dangerouslySetInnerHTML={{ __html: page.body }}
-          />
+          <article className="prose prose-lg prose-invert prose-slate max-w-none">
+            <ReactMarkdown>{page.body}</ReactMarkdown>
+          </article>
         </div>
       </section>
     </main>
