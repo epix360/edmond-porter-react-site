@@ -5,7 +5,7 @@ import path from 'path';
 // Function to load page data from JSON
 async function getPageData() {
   try {
-    const filePath = path.join(process.cwd(), 'public/content/pages/about.json');
+    const filePath = path.join(process.cwd(), 'public/content/about-bio.json');
     const content = fs.readFileSync(filePath, 'utf8');
     return JSON.parse(content);
   } catch (error) {
@@ -22,14 +22,15 @@ async function getPageData() {
 
 export async function generateMetadata() {
   const data = await getPageData();
+  const seo = data.seo || {};
   
   return {
-    title: data.metaTitle || 'About | Edmond A Porter',
-    description: data.metaDescription || 'Learn about Edmond A Porter.',
+    title: seo.metaTitle || data.metaTitle || 'About | Edmond A Porter',
+    description: seo.metaDescription || data.metaDescription || 'Learn about Edmond A Porter.',
     openGraph: {
-      title: data.ogTitle || data.metaTitle || 'About Edmond A Porter',
-      description: data.ogDescription || data.metaDescription || 'Discover the biography and writing journey of Edmond A Porter.',
-      images: [data.ogImage || '/images/Edmond_Seated.webp'],
+      title: seo.ogTitle || seo.metaTitle || data.ogTitle || data.metaTitle || 'About Edmond A Porter',
+      description: seo.ogDescription || seo.metaDescription || data.ogDescription || data.metaDescription || 'Discover the biography and writing journey of Edmond A Porter.',
+      images: [seo.ogImage || data.ogImage || '/images/Edmond_Seated.webp'],
     },
   };
 }

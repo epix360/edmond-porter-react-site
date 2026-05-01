@@ -69,6 +69,15 @@ content:
       - { name: bioSubtitle, label: "Bio Subtitle", type: string }
       - { name: bioBody, label: "Full Bio Body", type: rich-text }
       - { name: bioImage, label: "Bio Image", type: image }
+      - name: seo
+        label: "SEO Metadata"
+        type: object
+        fields:
+          - { name: metaTitle, label: "Meta Title", type: string, description: "Title shown in browser tabs and search results" }
+          - { name: metaDescription, label: "Meta Description", type: text, description: "Description shown in search engine results" }
+          - { name: ogTitle, label: "OpenGraph Title", type: string, description: "Title for social media sharing" }
+          - { name: ogDescription, label: "OpenGraph Description", type: text, description: "Description for social media sharing" }
+          - { name: ogImage, label: "OpenGraph Image", type: image, description: "Image for social media sharing" }
 
   # SECTION 5: Timeline Milestones (Collection)
   - name: timeline
@@ -98,20 +107,7 @@ content:
       - { name: description, label: "Section Description", type: rich-text }
       - { name: posts, label: "Medium Posts (Future)", type: collection, fields: [{ name: title, label: "Post Title", type: string }, { name: link, label: "Post URL", type: string }, { name: description, label: "Post Description", type: rich-text }] }
 
-  # SECTION 7: About Page Metadata (Single File)
-  - name: about
-    label: "About Page Metadata"
-    type: file
-    path: public/content/pages/about.json
-    format: json
-    fields:
-      - { name: metaTitle, label: "Meta Title", type: string, description: "Title shown in browser tabs and search results" }
-      - { name: metaDescription, label: "Meta Description", type: text, description: "Description shown in search engine results" }
-      - { name: ogTitle, label: "OpenGraph Title", type: string, description: "Title for social media sharing" }
-      - { name: ogDescription, label: "OpenGraph Description", type: text, description: "Description for social media sharing" }
-      - { name: ogImage, label: "OpenGraph Image", type: image, description: "Image for social media sharing" }
-
-  # SECTION 8: Generic Pages (Collection)
+  # SECTION 7: Generic Pages (Collection)
   - name: pages
     label: "Generic Pages"
     type: collection
