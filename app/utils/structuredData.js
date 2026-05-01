@@ -9,7 +9,7 @@ const getStructuredData = (type, data = {}) => {
       return {
         "@context": "https://schema.org",
         "@type": "Person",
-        "name": "Edmond A. Porter",
+        "name": "Edmond A Porter",
         "alternateName": "Edmond Porter",
         "givenName": "Edmond",
         "familyName": "Porter",
@@ -43,7 +43,7 @@ const getStructuredData = (type, data = {}) => {
         "alternateName": data.subtitle || "",
         "author": {
           "@type": "Person",
-          "name": "Edmond A. Porter",
+          "name": "Edmond A Porter",
           "url": "https://edmondaporter.com"
         },
         "description": data.description,
@@ -91,7 +91,7 @@ const getStructuredData = (type, data = {}) => {
               "image": `https://edmondaporter.com/images/${book.cover.replace(/^\//, '')}`,
               "author": {
                 "@type": "Person",
-                "name": "Edmond A. Porter",
+                "name": "Edmond A Porter",
                 "url": "https://edmondaporter.com"
               },
               "offers": {
