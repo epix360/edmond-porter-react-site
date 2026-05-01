@@ -5,11 +5,12 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
     
     return (
-        <footer className="bg-slate-900 text-amber-500 py-12 px-6">
-            <div className="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto space-y-8 md:space-y-0">
+        <footer className="bg-slate-900 text-amber-500 pt-12 px-6">
+            <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-center pb-6">
                 <div className="text-center md:text-left">
-                    <Link className="text-xl font-headline italic text-white mb-2 block" href="/">Edmond A Porter</Link>
-                    <p className="text-slate-400 font-body text-sm tracking-wide">© {currentYear} Edmond A Porter. All rights reserved.</p>
+                    <Link className="text-3xl font-headline italic text-white mb-2 block" href="/">Edmond A Porter</Link>
+                    <p className="text-slate-300 font-body text-md tracking-wide">© {currentYear} Edmond A Porter. All rights reserved.</p>
                 </div>
                 <div className="flex flex-col">
                     <a href="https://www.leagueofutahwriters.com/" target="_blank" rel="noopener noreferrer">League of Utah Writers</a>
@@ -19,6 +20,11 @@ const Footer = () => {
                     <a className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors" title="Goodreads" href="https://www.goodreads.com/author/show/60996287.Edmond_A_Porter" target="_blank" rel="noopener noreferrer"><span className="material-symbols-outlined text-white">book_2</span></a>
                     <a className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors" title="RSS Feed" href="https://medium.com/feed/@eporter609" target="_blank" rel="noopener noreferrer"><span className="material-symbols-outlined text-white">rss_feed</span></a>
                 </div>
+            </div>
+            <div className="flex flex-col md:flex-row justify-between items-center border-t border-slate-700 pt-3 pb-3">
+                <small className="font-light text-slate-300">As an Amazon Associate I earn from qualifying purchases.</small>
+                <a className="font-light text-slate-400" href="/privacy-policy">Privacy Policy</a>
+            </div>
             </div>
         </footer>
     );
