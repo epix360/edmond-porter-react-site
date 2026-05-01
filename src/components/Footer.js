@@ -24,6 +24,7 @@ const Footer = () => {
             <div className="flex flex-col md:flex-row justify-between items-center border-t border-slate-700 pt-3 pb-3">
                 <small className="font-light text-slate-300">As an Amazon Associate I earn from qualifying purchases.</small>
                 <a className="font-light text-slate-400" href="/privacy-policy">Privacy Policy</a>
+                <a className="font-light text-slate-400" href="/terms-of-use">Terms of Use</a>
             </div>
             </div>
         </footer>
