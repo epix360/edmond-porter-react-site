@@ -108,7 +108,7 @@ export default async function BookPage({ params }) {
       '@type': 'Offer',
       url: book.amazonUrl,
       availability: availability,
-      price: '0.00',
+      price: book.price || '0.00',
       priceCurrency: 'USD',
     },
   };
