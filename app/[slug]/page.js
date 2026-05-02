@@ -98,11 +98,11 @@ export default async function GenericPage({ params }) {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-slate-900 pt-24">
+      <main className="min-h-screen bg-white">
         {/* Hero Section */}
-        <section className="bg-slate-800 py-16 px-4">
+        <section className="bg-slate-800 py-16 px-4 pt-24">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white font-headline mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-white font-headline mb-4 mt-10">
               {page.title}
             </h1>
             <Link
@@ -118,7 +118,7 @@ export default async function GenericPage({ params }) {
       {/* Content Section */}
       <section className="py-12 px-4">
         <div className="max-w-4xl mx-auto">
-          <article className="prose prose-lg prose-invert prose-slate max-w-none">
+          <article className="prose prose-lg prose-slate max-w-none prose-headings:text-slate-900 prose-p:text-slate-700 prose-a:text-amber-600 hover:prose-a:text-amber-500">
             <ReactMarkdown>{page.body}</ReactMarkdown>
           </article>
         </div>
