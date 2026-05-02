@@ -98,11 +98,11 @@ export default async function GenericPage({ params }) {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-white mt-16">
         {/* Hero Section */}
-        <section className="bg-slate-800 py-16 px-4 pt-24">
+        <section className="bg-slate-800 py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white font-headline mb-4 mt-10">
+            <h1 className="text-4xl md:text-5xl font-bold text-white font-headline mb-4 mt-6">
               {page.title}
             </h1>
             <Link
