@@ -89,7 +89,7 @@ export default async function BookPage({ params }) {
     '@type': 'Book',
     name: book.title,
     description: book.description,
-    image: `https://edmondaporter.com/images/${book.image}`,
+    image: `https://edmondaporter.com/images/${book.image.replace(/^\//, '')}`,
     author: {
       '@type': 'Person',
       name: 'Edmond A Porter',

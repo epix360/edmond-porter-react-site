@@ -49,7 +49,7 @@ const getStructuredData = (type, data = {}) => {
         "genre": data.type,
         "isbn": data.isbn || "",
         "url": `https://edmondaporter.com/books/${data.slug}`,
-        "image": `https://edmondaporter.com/images/${data.cover}`,
+        "image": `https://edmondaporter.com/images/${data.cover.replace(/^\//, '')}`,
         "datePublished": data.releaseDate,
         "publisher": {
           "@type": "Organization",

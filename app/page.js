@@ -24,7 +24,7 @@ const bookSchemaData = {
     position: book.order,
     name: book.title,
     description: book.description,
-    image: `https://edmondaporter.com/images/${book.cover}`,
+    image: `https://edmondaporter.com/images/${book.cover.replace(/^\//, '')}`,
     author: {
       '@type': 'Person',
       name: 'Edmond A Porter',
