@@ -1,4 +1,4 @@
-import { getMediumArticles, getArticleBySlug } from '@/lib/medium';
+import { getMediumArticles, getArticleBySlug, getRecommendedArticles } from '@/lib/medium';
 import Link from 'next/link';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
@@ -36,6 +36,7 @@ export async function generateMetadata({ params }) {
 export default async function ArticlePage({ params }) {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
+  const recommendedArticles = await getRecommendedArticles(slug, 2);
   
   if (!article) {
     return (
@@ -160,6 +161,42 @@ export default async function ArticlePage({ params }) {
               <span className="material-symbols-outlined ml-2">open_in_new</span>
             </a>
           </div>
+
+          {/* Read Next Section */}
+          {recommendedArticles.length > 0 && (
+            <>
+              <hr className="my-12 border-slate-200" />
+              <section>
+                <h3 className="text-2xl font-headline font-bold text-primary mb-6">Read Next</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {recommendedArticles.map((recArticle) => (
+                    <Link
+                      href={`/articles/${recArticle.slug}`}
+                      key={recArticle.slug}
+                      className="group flex flex-col gap-3"
+                    >
+                      <div className="relative w-full aspect-video overflow-hidden rounded-lg bg-surface-container">
+                        {recArticle.thumbnail ? (
+                          <img
+                            src={recArticle.thumbnail}
+                            alt={recArticle.title}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-slate-200 flex items-center justify-center">
+                            <span className="material-symbols-outlined text-slate-400 text-4xl">article</span>
+                          </div>
+                        )}
+                      </div>
+                      <h4 className="text-lg font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2">
+                        {recArticle.title}
+                      </h4>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            </>
+          )}
         </article>
       </div>
     </main>
