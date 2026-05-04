@@ -134,16 +134,11 @@ export default async function ArticlePage({ params }) {
             </time>
           )}
           
-          {/* Description */}
-          <p className="text-lg text-on-surface-variant leading-relaxed mb-8">
-            {article.description}
-          </p>
-          
-          {/* First Three Paragraphs Preview */}
-          {article.firstThreeParagraphs && article.firstThreeParagraphs.length > 0 && (
+          {/* Article Preview */}
+          {article.description && (
             <div className="mb-8 space-y-4">
-              {article.firstThreeParagraphs.map((paragraph, index) => (
-                <p key={index} className="text-on-surface-variant leading-relaxed">
+              {article.description.split('\n\n').map((paragraph, index) => (
+                <p key={index} className="text-lg text-on-surface-variant leading-relaxed">
                   {paragraph}
                 </p>
               ))}
