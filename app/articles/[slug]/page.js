@@ -36,7 +36,7 @@ export async function generateMetadata({ params }) {
 export default async function ArticlePage({ params }) {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
-  const recommendedArticles = await getRecommendedArticles(slug, 2);
+  const recommendedArticles = await getRecommendedArticles(slug);
   
   if (!article) {
     return (
@@ -168,7 +168,7 @@ export default async function ArticlePage({ params }) {
               <hr className="my-12 border-slate-200" />
               <section>
                 <h3 className="text-2xl font-headline font-bold text-primary mb-6">Read Next</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {recommendedArticles.map((recArticle) => (
                     <Link
                       href={`/articles/${recArticle.slug}`}
