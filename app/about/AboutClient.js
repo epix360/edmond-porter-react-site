@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import ContentWithLinks from '@/app/components/ContentWithLinks';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
 import Image from 'next/image';
@@ -139,12 +140,10 @@ export default function AboutPage() {
         {/* Bio Section */}
         <section className="py-8 md:py-16 bg-surface-container-lowest">
           <div className="max-w-4xl mx-auto px-6">
-            <div className="prose prose-lg prose-slate max-w-none">
-              <div 
-                className="text-on-surface-variant leading-relaxed space-y-6"
-                dangerouslySetInnerHTML={{ __html: convertMarkdown(aboutBioContent?.bioBody || '') }}
-              />
-            </div>
+            <ContentWithLinks 
+              html={convertMarkdown(aboutBioContent?.bioBody || '')}
+              className="prose prose-lg prose-slate max-w-none prose-headings:font-headline prose-headings:text-primary prose-h2:text-3xl prose-h2:font-bold prose-h2:mb-6 prose-h2:mt-8 prose-h3:text-2xl prose-h3:font-bold prose-h3:mb-4 prose-h3:mt-8 prose-p:mb-6 [&_p]:max-w-none [&_p]:w-full"
+            />
           </div>
         </section>
         

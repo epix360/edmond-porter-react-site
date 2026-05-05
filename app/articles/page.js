@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
-import ClientArticlesGrid from '@/app/components/ClientArticlesGrid';
+import { getMediumArticles } from '@/lib/medium';
 
 export const metadata = {
   title: 'Articles | Edmond A Porter',
@@ -16,7 +16,9 @@ export const metadata = {
   },
 };
 
-export default function ArticlesPage() {
+export default async function ArticlesPage() {
+  const articles = await getMediumArticles();
+  
   return (
     <>
       <Navigation />
@@ -42,8 +44,67 @@ export default function ArticlesPage() {
           </p>
         </header>
         
-        {/* Articles Grid - Client-side fetched */}
-        <ClientArticlesGrid />
+        {/* Articles Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {articles.length > 0 ? (
+            articles.map((article, index) => (
+              <article 
+                key={index} 
+                className="bg-surface-container rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+              >
+                {article.thumbnail && (
+                  <div className="h-48 overflow-hidden">
+                    <img
+                      src={article.thumbnail}
+                      alt={article.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+                
+                <div className="p-6">
+                  <h2 className="font-headline text-xl font-bold text-primary mb-3 line-clamp-2">
+                    <Link 
+                      href={`/articles/${article.slug}`}
+                      className="hover:text-secondary transition-colors"
+                    >
+                      {article.title}
+                    </Link>
+                  </h2>
+                  
+                  {article.formattedDate && (
+                    <time className="text-sm text-on-surface-variant mb-3 block">
+                      {new Date(article.formattedDate).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </time>
+                  )}
+                  
+                  <p className="text-on-surface-variant line-clamp-3 mb-4">
+                    {article.description}
+                  </p>
+                  
+                  <Link
+                    href={`/articles/${article.slug}`}
+                    className="inline-flex items-center text-secondary font-bold hover:text-[#b46b25] transition-colors"
+                  >
+                    Read Article
+                    <span className="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+                  </Link>
+                </div>
+              </article>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-on-surface-variant">
+                No articles available at the moment.
+              </p>
+            </div>
+          )}
+        </div>
         
         {/* Footer Link to Medium */}
         <div className="mt-12 pt-8 border-t border-slate-200 text-center">
