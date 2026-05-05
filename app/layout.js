@@ -1,4 +1,5 @@
 import { Inter, Noto_Serif } from 'next/font/google'
+import Script from 'next/script'
 import CookieConsent from './components/CookieConsent';
 import './globals.css'
 
@@ -16,6 +17,12 @@ const notoSerif = Noto_Serif({
   preload: true,
   variable: '--font-headline'
 })
+
+// Material Symbols stylesheet URL — loaded async after hydration so it
+// does not block first paint. Subset is restricted via icon_names to keep
+// the CSS payload small.
+const MATERIAL_SYMBOLS_HREF =
+  'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,arrow_forward,auto_awesome,book_2,calendar_today,check_circle,close,mail,menu,military_tech,open_in_new,rss_feed';
 
 // Next.js Metadata API for global SEO
 export const metadata = {
@@ -59,15 +66,33 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${notoSerif.variable}`}>
       <head>
-        {/* Material Symbols font for icons - loaded via external link */}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,arrow_forward,auto_awesome,book_2,calendar_today,check_circle,close,mail,menu,military_tech,open_in_new,rss_feed" />
-
-        {/* DNS prefetch for external resources */}
+        {/* Warm up the connection for the icon font we'll lazy-load below */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+
+        {/* LCP image preload — must match the URL the <Image> in HomePageTop.js
+            actually requests, otherwise the preload is wasted. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/images/Turbulent_Waters.webp"
+          fetchPriority="high"
+        />
       </head>
       <body className={`${inter.className} ${notoSerif.className} bg-background text-on-background font-body leading-relaxed selection:bg-secondary-container`} suppressHydrationWarning={true}>
         {children}
         <CookieConsent gaId={process.env.NEXT_PUBLIC_GA_ID} />
+
+        {/* Inject the Material Symbols stylesheet after hydration so it
+            doesn't block first paint. Using a tiny inline injector instead
+            of <link rel="stylesheet"> keeps icon CSS off the critical path. */}
+        <Script id="material-symbols-loader" strategy="afterInteractive">
+          {`(function(){var l=document.createElement('link');l.rel='stylesheet';l.href=${JSON.stringify(MATERIAL_SYMBOLS_HREF)};document.head.appendChild(l);})();`}
+        </Script>
+        <noscript>
+          <link rel="stylesheet" href={MATERIAL_SYMBOLS_HREF} />
+        </noscript>
       </body>
     </html>
   )

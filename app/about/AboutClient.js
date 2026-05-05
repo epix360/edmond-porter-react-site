@@ -6,7 +6,7 @@ import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
 import Image from 'next/image';
 import ContentWithLinks from '@/app/components/ContentWithLinks';
-import { getImagePath as getAssetPath } from '@/src/utils/cdn';
+import { getImagePath as getAssetPath } from '@/app/utils/cdn';
 import { fallbackContent } from '@/src/data/fallbackContent';
 // Import CMS content directly for static generation
 import aboutBioData from '@/public/content/about-bio.json';

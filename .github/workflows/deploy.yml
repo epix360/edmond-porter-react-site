@@ -152,31 +152,6 @@ jobs:
           echo "⏳ Content may still be propagating (this is normal)"
         fi
 
-    # 6. Generate Version Tag for CDN
-    - name: Generate Version Tag 🏷️
-      if: success()
-      run: |
-        echo "🏷️ Generating version tag for CDN cache busting..."
-        VERSION_TAG="v$(date +%Y%m%d%H%M%S)"
-        echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_ENV
-        echo "🔄 Generated version tag: $VERSION_TAG"
-        
-        node scripts/generate-version-tag.js
-        
-        echo "✅ Version tag generated for CDN stability"
-
-    # 7. Purge jsDelivr CDN Cache (fire-and-forget, content-only)
-    - name: Purge jsDelivr Cache 🧹
-      if: success() && needs.detect-changes.outputs.content-changed == 'true'
-      continue-on-error: true
-      run: |
-        echo "🧹 Purging jsDelivr cache (async)..."
-        curl -X PURGE "https://cdn.jsdelivr.net/gh/epix360/edmond-porter-react-site@main/" \
-          -H "User-Agent: edmond-porter-website-cdn-purge/1.0" \
-          --max-time 10 \
-          --silent &
-        echo "✅ CDN purge initiated (may take a few minutes to propagate)"
-
     # 6. Quick Deployment Verification
     - name: Verify Deployment 🔍
       if: success()

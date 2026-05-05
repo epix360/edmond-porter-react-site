@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '@/src/components/Navigation';
-import { getImagePath as getAssetPath, CDN_CONFIG } from '@/src/utils/cdn';
+import { getImagePath as getAssetPath } from '@/app/utils/cdn';
 import { fallbackContent } from '@/src/data/fallbackContent';
 // Import CMS content directly for static generation
 import heroData from '@/public/content/hero.json';
