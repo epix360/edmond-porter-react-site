@@ -49,7 +49,12 @@ self.addEventListener('activate', (event) => {
 // Fetch event - serve from cache when offline
 self.addEventListener('fetch', (event) => {
   const request = event.request;
-  
+
+  // Ignore non-HTTP requests (like chrome-extension://)
+  if (!request.url.startsWith('http')) {
+    return;
+  }
+
   // Skip non-GET requests
   if (request.method !== 'GET') {
     return;
