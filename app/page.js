@@ -121,13 +121,13 @@ export default async function HomePage() {
           </div>
           
           <div className="text-center mt-12">
-            <a 
+            <Link 
               href="/articles"
               className="inline-flex items-center bg-secondary text-white px-8 py-3 rounded-lg font-bold hover:bg-[#96643c] transition-colors shadow-lg"
             >
               View All Articles
               <span className="material-symbols-outlined ml-2">arrow_forward</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
