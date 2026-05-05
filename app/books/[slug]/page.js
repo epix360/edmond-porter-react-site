@@ -138,7 +138,7 @@ export default async function BookPage({ params }) {
           {/* Back Link */}
           <Link
             href="/"
-            className="inline-flex items-center text-slate-400 hover:text-amber-500 transition-colors mb-12"
+            className="inline-flex items-center text-slate-300 hover:text-amber-500 transition-colors mb-12"
           >
             <span className="material-symbols-outlined mr-2" style={{ fontFamily: 'Material Symbols Outlined' }}>arrow_back</span>
             Back to Home
@@ -164,7 +164,7 @@ export default async function BookPage({ params }) {
                 {book.title}
               </h1>
               
-              <p className="text-sm text-slate-400 mb-6">
+              <p className="text-sm text-slate-300 mb-6">
                 {book.authorship === 'contributor' ? 'Featuring Edmond A Porter' : 'By Edmond A Porter'}
               </p>
               
