@@ -25,6 +25,9 @@ export async function generateMetadata({ params }) {
   return {
     title: `${article.title} | Edmond A Porter`,
     description: article.description,
+    alternates: {
+      canonical: article.link,
+    },
     openGraph: {
       title: article.title,
       description: article.description,

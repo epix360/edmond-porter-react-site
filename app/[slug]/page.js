@@ -53,6 +53,9 @@ export async function generateMetadata({ params }) {
     return {
       title: page.seo?.metaTitle || `${page.title} | Edmond A Porter`,
       description: page.seo?.metaDescription || page.body?.slice(0, 160) || '',
+      alternates: {
+        canonical: `/${slug}`,
+      },
       openGraph: {
         title: page.seo?.metaTitle || page.title,
         description: page.seo?.metaDescription || page.body?.slice(0, 160) || '',

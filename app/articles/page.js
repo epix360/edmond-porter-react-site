@@ -6,6 +6,9 @@ import ClientArticlesGrid from '@/app/components/ClientArticlesGrid';
 export const metadata = {
   title: 'Articles | Edmond A Porter',
   description: 'Latest articles and thoughts from Edmond A Porter on writing, creativity, and the stories behind the stories.',
+  alternates: {
+    canonical: '/articles',
+  },
   openGraph: {
     title: 'Articles | Edmond A Porter',
     description: 'Latest articles and thoughts on writing, creativity, and storytelling.',

@@ -7,6 +7,9 @@ import { fallbackContent } from '@/src/data/fallbackContent';
 export const metadata = {
   title: 'Home | Edmond A Porter',
   description: 'Edmond A Porter - Contemporary author exploring human experience through compelling narratives and thoughtful prose.',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Edmond A Porter',
     description: 'Contemporary author exploring human experience through compelling narratives.',

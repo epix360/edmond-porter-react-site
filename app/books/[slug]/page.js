@@ -36,6 +36,9 @@ export async function generateMetadata({ params }) {
     return {
       title: book.seo.metaTitle,
       description: book.seo.metaDescription,
+      alternates: {
+        canonical: `/books/${slug}`,
+      },
       openGraph: {
         title: book.seo.metaTitle,
         description: book.seo.metaDescription,
@@ -46,6 +49,9 @@ export async function generateMetadata({ params }) {
     return {
       title: 'Book | Edmond A Porter',
       description: 'Discover this book by Edmond A Porter.',
+      alternates: {
+        canonical: `/books/${slug}`,
+      },
     };
   }
 }
