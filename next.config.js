@@ -4,6 +4,21 @@ const nextConfig = {
   turbopack: {
 
   },
+
+  // Configure custom headers for static asset caching
+  async headers() {
+    return [
+      {
+        source: '/_next/static/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ]
+  },
   
   // Exclude src/pages directory to avoid conflicts with CRA
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
