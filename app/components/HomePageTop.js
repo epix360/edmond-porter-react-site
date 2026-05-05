@@ -171,15 +171,14 @@ export default function HomePageTop() {
               </div>
             </div>
             <div className="order-1 md:order-2 flex justify-center md:justify-end">
-              <Image 
-                src={getImagePath(heroContent?.heroImage || 'Turbulent_Waters.webp')}
-                alt="Book cover"
+              <Image
+                src="/images/Turbulent_Waters.webp"
+                alt="Turbulent Waters book cover"
                 className="relative z-10 rounded-lg shadow-2xl w-full max-w-[280px] sm:max-w-[320px] md:max-w-md aspect-[2/3] object-cover"
                 priority={true}
                 loading="eager"
                 width={400}
                 height={600}
-                unoptimized
               />
             </div>
           </div>

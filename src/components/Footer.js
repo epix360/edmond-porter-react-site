@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import FullWidthText from 'app/components/FullWidthText.js';
 
 const Footer = () => {
@@ -10,7 +11,7 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-center mb-3">
                     <div className="order-2 md:order-1 pt-3">
-                        <img src="/images/Redwood-Vail-Press-Logo.webp" alt="Redwood Vail Press Logo" className="rounded-xl" />
+                        <Image src="/images/Redwood-Vail-Press-Logo.webp" alt="Redwood Vail Press Logo" width={180} height={180} className="rounded-xl" />
                         <div className="w-full max-w-sm text-slate-300 pt-3"> 
                             <FullWidthText text="Redwood Vail Press" />
                         </div>
