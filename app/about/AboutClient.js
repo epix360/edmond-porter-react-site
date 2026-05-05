@@ -2,15 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
 import Image from 'next/image';
+import ContentWithLinks from '@/app/components/ContentWithLinks';
 import { getImagePath as getAssetPath } from '@/src/utils/cdn';
 import { fallbackContent } from '@/src/data/fallbackContent';
-
-// Dynamically import ContentWithLinks to prevent SSR DOMParser error
-const ContentWithLinks = dynamic(() => import('@/app/components/ContentWithLinks'), { ssr: false });
 // Import CMS content directly for static generation
 import aboutBioData from '@/public/content/about-bio.json';
 import timeline2025 from '@/public/content/timeline/2025.json';
