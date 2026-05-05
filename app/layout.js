@@ -2,17 +2,19 @@ import { Inter, Noto_Serif } from 'next/font/google'
 import CookieConsent from './components/CookieConsent';
 import './globals.css'
 
-// Font optimization
-const inter = Inter({ 
+// Font optimization with CSS variables for Tailwind integration
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
-  preload: true
+  preload: true,
+  variable: '--font-body'
 })
 
-const notoSerif = Noto_Serif({ 
+const notoSerif = Noto_Serif({
   subsets: ['latin'],
   display: 'swap',
-  preload: true
+  preload: true,
+  variable: '--font-headline'
 })
 
 // Next.js Metadata API for global SEO
@@ -57,16 +59,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${notoSerif.variable}`}>
       <head>
-        {/* Preconnect for font optimization */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
-        
-        {/* Material Symbols font for icons */}
+        {/* Material Symbols font for icons - loaded via external link */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,arrow_forward,auto_awesome,book_2,calendar_today,check_circle,close,mail,menu,military_tech,open_in_new,rss_feed" />
-        
+
         {/* DNS prefetch for external resources */}
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       <body className={`${inter.className} ${notoSerif.className} bg-background text-on-background font-body leading-relaxed selection:bg-secondary-container`} suppressHydrationWarning={true}>

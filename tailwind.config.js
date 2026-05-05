@@ -45,12 +45,9 @@ module.exports = {
         "form-text": "#C7CAD1",
       },
       fontFamily: {
-        "headline": ["Noto Serif", "serif"],
-        "body": ["Inter", "sans-serif"],
-        "label": ["Inter", "sans-serif"],
-        "inter-fallback": ["Inter-fallback", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
-        "noto-serif-fallback": ["Noto-Serif-fallback", "Georgia", "serif"],
-        "material-symbols-fallback": ["Material-Symbols-fallback", "Arial", "sans-serif"]
+        "headline": ["var(--font-headline)", "Georgia", "serif"],
+        "body": ["var(--font-body)", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        "label": ["var(--font-body)", "-apple-system", "BlinkMacSystemFont", "sans-serif"]
       },
       borderRadius: {
         "DEFAULT": "0.125rem", 
