@@ -36,7 +36,7 @@ export default function CookieConsent({ gaId }) {
         <div className="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 z-50 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gray-700 shadow-2xl">
           <div className="text-sm text-gray-300">
             We use cookies to analyze site traffic and improve your reading experience. 
-            Read the <Link href="/privacy" className="text-orange-400 hover:text-orange-300 underline">Privacy Policy</Link> for details.
+            Read the <Link href="/privacy-policy" className="text-orange-400 hover:text-orange-300 underline">Privacy Policy</Link> for details.
           </div>
           <div className="flex gap-4 shrink-0">
             <button 
