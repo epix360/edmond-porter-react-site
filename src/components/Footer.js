@@ -30,8 +30,8 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col md:flex-row justify-between items-center border-t border-slate-700 pt-3 pb-3">
                     <div>
-                        <Link className="font-light text-slate-400 mr-4" href="/privacy-policy">Privacy Policy</Link>
-                        <Link className="font-light text-slate-400" href="/terms-of-use">Terms of Use</Link>
+                        <Link className="font-light text-slate-300 mr-4" href="/privacy-policy">Privacy Policy</Link>
+                        <Link className="font-light text-slate-300" href="/terms-of-use">Terms of Use</Link>
                     </div>
                     <small className="font-light text-slate-300">As an Amazon Associate I earn from qualifying purchases.</small>
                 </div>

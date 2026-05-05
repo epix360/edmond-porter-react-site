@@ -41,7 +41,7 @@ export default function CookieConsent({ gaId }) {
           <div className="flex gap-4 shrink-0">
             <button 
               onClick={declineCookies}
-              className="px-4 py-2 text-sm text-gray-400 hover:text-white transition-colors"
+              className="px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors"
             >
               Decline
             </button>

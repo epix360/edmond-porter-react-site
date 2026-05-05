@@ -259,7 +259,7 @@ export default function HomePageTop() {
                       href={book.amazonUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center w-full py-3 px-4 border-2 border-[#b46b25] text-[#b46b25] font-bold uppercase tracking-widest rounded-t-lg bg-transparent hover:bg-[#b46b25] hover:text-white transition-colors duration-300"
+                      className="inline-flex items-center justify-center w-full py-3 px-4 border-2 border-[#8c521c] text-[#8c521c] font-bold uppercase tracking-widest rounded-t-lg bg-transparent hover:bg-[#b46b25] hover:text-white transition-colors duration-300"
                     >
                       Buy now
                       <span className="material-symbols-outlined ml-1">open_in_new</span>
