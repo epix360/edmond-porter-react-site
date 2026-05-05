@@ -56,12 +56,16 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title: page.seo?.metaTitle || page.title,
         description: page.seo?.metaDescription || page.body?.slice(0, 160) || '',
+        url: `/${slug}`,
       },
     };
   } catch (error) {
     return {
       title: 'Page | Edmond A Porter',
       description: 'Discover this page by Edmond A Porter.',
+      openGraph: {
+        url: `/${slug}`,
+      },
     };
   }
 }

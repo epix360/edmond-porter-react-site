@@ -25,8 +25,9 @@ export const metadata = {
   openGraph: {
     title: 'Edmond A Porter | Local Utah Author, Writer, Novelist, Poet, Essayist',
     description: 'Contemporary author exploring human experience through compelling narratives and thoughtful prose.',
-    url: 'https://edmondaporter.com',
+    url: '/',
     siteName: 'Edmond A Porter',
+    type: 'website',
     images: [
       {
         url: 'https://edmondaporter.com/images/Edmond_Headshot.webp',

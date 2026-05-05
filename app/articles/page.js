@@ -9,6 +9,7 @@ export const metadata = {
   openGraph: {
     title: 'Articles | Edmond A Porter',
     description: 'Latest articles and thoughts on writing, creativity, and storytelling.',
+    url: '/articles',
   },
 };
 

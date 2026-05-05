@@ -30,6 +30,7 @@ export async function generateMetadata() {
     openGraph: {
       title: seo.ogTitle || seo.metaTitle || data.ogTitle || data.metaTitle || 'About Edmond A Porter',
       description: seo.ogDescription || seo.metaDescription || data.ogDescription || data.metaDescription || 'Discover the biography and writing journey of Edmond A Porter.',
+      url: '/about',
       images: [seo.ogImage || data.ogImage || '/images/Edmond_Seated.webp'],
     },
   };
