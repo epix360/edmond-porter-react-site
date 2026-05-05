@@ -4,9 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
-import Image from 'next/image';
 import ContentWithLinks from '@/app/components/ContentWithLinks';
-import { getImagePath as getAssetPath } from '@/app/utils/cdn';
+import { getResponsiveImage } from '@/app/utils/responsiveImage';
 import { fallbackContent } from '@/src/data/fallbackContent';
 // Import CMS content directly for static generation
 import aboutBioData from '@/public/content/about-bio.json';
@@ -124,13 +123,20 @@ export default function AboutPage() {
                 {/* Decorative square behind image */}
                 <div className="absolute -bottom-4 -left-4 w-24 h-24 md:w-32 md:h-32 bg-secondary/30 rounded-lg -z-10"></div>
                 <div className="aspect-[2/3] bg-surface-container-high relative overflow-hidden shadow-2xl rounded-lg">
-                  <Image 
-                    src={getAssetPath(aboutBioContent?.bioImage)}
-                    alt="Edmond A Porter"
-                    className="w-full h-full object-cover"
-                    fill
-                    unoptimized
-                  />
+                  {(() => {
+                    const bio = getResponsiveImage(aboutBioContent?.bioImage);
+                    return (
+                      <img
+                        src={bio.src}
+                        srcSet={bio.srcSet}
+                        sizes="(max-width: 768px) 90vw, 448px"
+                        alt="Edmond A Porter"
+                        loading="lazy"
+                        decoding="async"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    );
+                  })()}
                 </div>
               </div>
             </div>

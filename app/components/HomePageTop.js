@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import Navigation from '@/src/components/Navigation';
 import { getImagePath as getAssetPath } from '@/app/utils/cdn';
+import { getResponsiveImage } from '@/app/utils/responsiveImage';
 import { fallbackContent } from '@/src/data/fallbackContent';
 // Import CMS content directly for static generation
 import heroData from '@/public/content/hero.json';
@@ -171,15 +171,23 @@ export default function HomePageTop() {
               </div>
             </div>
             <div className="order-1 md:order-2 flex justify-center md:justify-end">
-              <Image
-                src="/images/Turbulent_Waters.webp"
-                alt="Turbulent Waters book cover"
-                className="relative z-10 rounded-lg shadow-2xl w-full max-w-[280px] sm:max-w-[320px] md:max-w-md aspect-[2/3] object-cover"
-                priority={true}
-                loading="eager"
-                width={400}
-                height={600}
-              />
+              {(() => {
+                const hero = getResponsiveImage('Turbulent_Waters.webp');
+                return (
+                  <img
+                    src={hero.src}
+                    srcSet={hero.srcSet}
+                    sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, 448px"
+                    alt="Turbulent Waters book cover"
+                    width={400}
+                    height={600}
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    className="relative z-10 rounded-lg shadow-2xl w-full max-w-[280px] sm:max-w-[320px] md:max-w-md aspect-[2/3] object-cover"
+                  />
+                );
+              })()}
             </div>
           </div>
         </section>
@@ -189,14 +197,22 @@ export default function HomePageTop() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid md:grid-cols-12 gap-10 items-center">
               <div className="md:col-span-5 relative">
-                <Image 
-                  src={getImagePath(homeBioContent?.teaserImage || 'Edmond_Headshot.webp')}
-                  alt="Portrait"
-                  className="relative z-10 rounded-lg shadow-xl w-full aspect-[4/5] object-cover"
-                  width={400}
-                  height={500}
-                  unoptimized
-                />
+                {(() => {
+                  const teaser = getResponsiveImage(homeBioContent?.teaserImage || 'Edmond_Headshot.webp');
+                  return (
+                    <img
+                      src={teaser.src}
+                      srcSet={teaser.srcSet}
+                      sizes="(max-width: 768px) 100vw, 400px"
+                      alt="Portrait"
+                      width={400}
+                      height={500}
+                      loading="lazy"
+                      decoding="async"
+                      className="relative z-10 rounded-lg shadow-xl w-full aspect-[4/5] object-cover"
+                    />
+                  );
+                })()}
               </div>
               <div className="md:col-span-7">
                 <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-8">{homeBioContent?.teaserHeadline || 'About the Author'}</h2>
@@ -224,18 +240,24 @@ export default function HomePageTop() {
               </a>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-stretch">
-              {sortedBooks.map((book, i) => (
+              {sortedBooks.map((book, i) => {
+                const cover = getResponsiveImage(book.image);
+                return (
                 <div key={i} className="flex flex-col h-full">
                   {/* Card with content and links inside */}
                   <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm flex flex-col h-full">
                     <div className="flex justify-center -mt-12">
                       <div className="relative h-64 md:h-80 w-auto object-contain rounded shadow-lg" style={{ aspectRatio: '300 / 450', width: '300px', height: '450px' }}>
-                        <Image
-                          src={getImagePath(book.image)}
+                        <img
+                          src={cover.src}
+                          srcSet={cover.srcSet}
+                          sizes="300px"
                           alt={book.title}
-                          className="object-cover w-full h-full rounded"
-                          fill
-                          unoptimized
+                          width={300}
+                          height={450}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 object-cover w-full h-full rounded"
                         />
                       </div>
                     </div>
@@ -265,7 +287,8 @@ export default function HomePageTop() {
                     </a>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>

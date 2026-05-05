@@ -6,6 +6,8 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "next dev",
+    "build:images": "node scripts/build-image-sizes.js",
+    "prebuild": "npm run build:images",
     "build": "rm -rf .next && next build",
     "start": "next start"
   },
@@ -24,6 +26,7 @@
     "@types/react": "19.2.14",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",
+    "sharp": "^0.33.5",
     "tailwindcss": "^3.3.0",
     "typescript": "6.0.3"
   }
