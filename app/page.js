@@ -106,7 +106,7 @@ export default async function HomePage() {
                     href={`/articles/${article.slug}`}
                     className="inline-flex items-center text-secondary font-bold group"
                   >
-                    <span className="hover:underline">Read More</span>
+                    <span className="hover:underline">Read {article.title}</span>
                     <span className="material-symbols-outlined ml-1 text-sm no-underline">arrow_forward</span>
                   </Link>
                 </article>

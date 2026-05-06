@@ -154,7 +154,7 @@ export default async function ServerMediumFeed({ mediumContent }) {
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center text-secondary font-bold hover:underline"
                                     >
-                                        Read More 
+                                        Read {article.title} 
                                         <span className="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
                                     </a>
                                 </article>

@@ -271,7 +271,7 @@ export default function HomePageTop() {
                       href={`/books/${book.slug}`}
                       className="inline-flex items-center text-secondary font-bold hover:text-[#b46b25] transition-colors mb-4"
                     >
-                      See details
+                      {book.title} details
                       <span className="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
                     </Link>
                     

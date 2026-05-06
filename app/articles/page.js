@@ -91,7 +91,7 @@ export default async function ArticlesPage() {
                     href={`/articles/${article.slug}`}
                     className="inline-flex items-center text-secondary font-bold hover:text-[#b46b25] transition-colors"
                   >
-                    Read Article
+                    Read {article.title}
                     <span className="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
                   </Link>
                 </div>
