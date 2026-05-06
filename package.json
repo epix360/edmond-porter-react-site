@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "next dev",
     "build:images": "node scripts/build-image-sizes.js",
-    "prebuild": "npm run build:images",
+    "fetch:medium": "node scripts/fetch-medium.js",
+    "prebuild": "npm run build:images && npm run fetch:medium",
     "build": "rm -rf .next && next build",
     "start": "next start"
   },
