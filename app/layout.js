@@ -22,7 +22,7 @@ const notoSerif = Noto_Serif({
 // does not block first paint. Subset is restricted via icon_names to keep
 // the CSS payload small.
 const MATERIAL_SYMBOLS_HREF =
-  'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,arrow_forward,auto_awesome,book_2,calendar_today,check_circle,close,mail,menu,military_tech,open_in_new,rss_feed';
+  'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,arrow_forward,auto_awesome,book_2,calendar_today,check_circle,close,mail,menu,military_tech,open_in_new,rss_feed&display=swap';
 
 // Next.js Metadata API for global SEO
 export const metadata = {
