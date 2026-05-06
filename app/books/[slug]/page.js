@@ -164,8 +164,12 @@ export default async function BookPage({ params }) {
                 {book.title}
               </h1>
               
-              <p className="text-sm text-slate-300 mb-6">
+              <p className="text-sm text-slate-300 mb-3">
                 {book.authorship === 'contributor' ? 'Featuring Edmond A Porter' : 'By Edmond A Porter'}
+                {' | '}
+                <Link href="/about" className="text-[#FDC29A] hover:underline">
+                  About the author
+                </Link>
               </p>
               
               <p className="text-lg text-slate-300 leading-relaxed mb-8 font-body">
