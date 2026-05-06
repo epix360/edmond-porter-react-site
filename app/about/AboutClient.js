@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
 import ContentWithLinks from '@/app/components/ContentWithLinks';
+import AboutBookshelf from '@/app/components/AboutBookshelf';
 import { getResponsiveImage } from '@/app/utils/responsiveImage';
 import { fallbackContent } from '@/src/data/fallbackContent';
 // Import CMS content directly for static generation
@@ -152,7 +153,9 @@ export default function AboutPage() {
             />
           </div>
         </section>
-        
+
+        <AboutBookshelf />
+
         {/* Timeline */}
         <section className="py-16 bg-surface-container-low">
           <div className="max-w-4xl mx-auto px-6">
