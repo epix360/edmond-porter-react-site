@@ -9,14 +9,7 @@ import { fallbackContent } from '@/src/data/fallbackContent';
 // Import CMS content directly for static generation
 import heroData from '@/public/content/hero.json';
 import homeBioData from '@/public/content/home-bio.json';
-// Import individual book JSON files
-import turbulentWaters from '@/public/content/books/turbulent-waters.json';
-import theSeasonsThatMadeMe from '@/public/content/books/the-seasons-that-made-me.json';
-import luckyPenny from '@/public/content/books/lucky-penny.json';
-import faithfulHearts from '@/public/content/books/faithful-hearts.json';
-import wanderlust from '@/public/content/books/wanderlust.json';
-import theWorkAndTheStories from '@/public/content/books/the-work-and-the-stories.json';
-import utahsBestPoetryAndProse from '@/public/content/books/utahs-best-poetry-and-prose.json';
+import { allBooks, sortBooks } from '@/lib/books';
 
 // Helper function for consistent image paths
 const getImagePath = (path) => getAssetPath(path);
@@ -73,38 +66,7 @@ export default function HomePageTop() {
   const heroContent = heroData || fallbackContent.hero;
   const homeBioContent = homeBioData || fallbackContent.homeBio;
   
-  // Combine all book data into array
-  const allBooks = [
-    turbulentWaters,
-    theSeasonsThatMadeMe,
-    luckyPenny,
-    faithfulHearts,
-    wanderlust,
-    theWorkAndTheStories,
-    utahsBestPoetryAndProse
-  ];
-  
-  // Sorting function: featured first, then by releaseDate descending
-  const sortBooks = (books) => {
-    return books.sort((a, b) => {
-      // Featured books come first
-      if (a.featured && !b.featured) return -1;
-      if (!a.featured && b.featured) return 1;
-      
-      // Both featured or both not featured - sort by releaseDate descending
-      const dateA = a.releaseDate ? new Date(a.releaseDate) : null;
-      const dateB = b.releaseDate ? new Date(b.releaseDate) : null;
-      
-      if (dateA && dateB) {
-        return dateB - dateA; // Newest first
-      }
-      if (dateA) return -1; // A has date, B doesn't - A comes first
-      if (dateB) return 1;  // B has date, A doesn't - B comes first
-      return 0; // Neither has date - maintain original order
-    });
-  };
-  
-  const sortedBooks = sortBooks([...allBooks]);
+  const sortedBooks = sortBooks(allBooks);
   
   // Get status template
   const statusTemplate = getStatusTemplate(
