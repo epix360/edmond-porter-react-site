@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "Author website for Edmond A Porter",
   "homepage": "https://edmondaporter.com",
-  "main": "src/index.js",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build:images": "node scripts/build-image-sizes.js",
