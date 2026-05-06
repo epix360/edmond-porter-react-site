@@ -58,7 +58,7 @@ export default function AboutBookshelf() {
   const groups = groupByAuthorship(sortBooks(allBooks));
 
   return (
-    <section className="py-16 bg-surface-container-lowest">
+    <section className="pb-16 bg-surface-container-lowest">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="font-headline text-3xl font-bold text-primary mb-12 text-center">
           The Bookshelf

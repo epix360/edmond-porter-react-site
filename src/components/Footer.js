@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-center mb-3">
                     <div className="order-2 md:order-1 pt-3">
-                        <Image src="/images/Redwood-Vail-Press-Logo.webp" alt="Redwood Vail Press Logo" width={180} height={180} className="rounded-xl" />
+                        <Image src="/images/Redwood-Vail-Press-Logo.webp" alt="Redwood Vail Press Logo" width={180} height={180} className="rounded-xl" style={{ width: 180, height: 180 }} />
                         <div className="w-full max-w-sm text-slate-300 pt-2"> 
                             <span className="uppercase tracking-wide text-slate-300">Redwood Vail Press</span>
                         </div>
