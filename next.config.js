@@ -5,21 +5,13 @@ const nextConfig = {
 
   },
 
-  // Configure custom headers for static asset caching
-  async headers() {
-    return [
-      {
-        source: '/_next/static/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-    ]
-  },
-  
+  // NOTE: a `headers()` block used to live here to set long Cache-Control
+  // on /_next/static/*, but `headers()` is ignored under `output: 'export'`
+  // (Next.js only applies it from its runtime server). GitHub Pages serves
+  // everything with its own fixed 10-minute cache TTL and doesn't read this
+  // file. Reintroduce a `public/_headers` file (Cloudflare Pages / Netlify)
+  // or front the site with Cloudflare's proxy if/when we want long TTLs.
+
   // Exclude src/pages directory to avoid conflicts with CRA
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
   
