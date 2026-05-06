@@ -135,7 +135,6 @@ jobs:
     - name: Deployment Summary �
       run: |
         echo "🎉 Deployment completed successfully!"
-        echo "📚 Books deployed: $(jq 'length' "public/content/books-index.json")"
         echo "🌐 Site URL: https://edmondaporter.com"
         echo "⏱️ Build time: $SECONDS seconds"
 

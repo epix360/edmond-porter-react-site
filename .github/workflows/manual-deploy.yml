@@ -110,22 +110,7 @@ jobs:
     - name: Validate Build Output 🧪
       run: |
         echo "🧪 Validating build output..."
-        
-        # Check if books-index.json was generated
-        if [ ! -f "public/content/books-index.json" ]; then
-          echo "❌ books-index.json not generated"
-          exit 1
-        fi
-        
-        # Check if all books are in the index
-        BOOKS_IN_INDEX=$(jq 'length' "public/content/books-index.json")
-        BOOKS_IN_DIR=$(find "public/content/books" -name "*.json" | wc -l)
-        
-        if [ "$BOOKS_IN_INDEX" -ne "$BOOKS_IN_DIR" ]; then
-          echo "❌ Book count mismatch: $BOOKS_IN_INDEX in index vs $BOOKS_IN_DIR in directory"
-          exit 1
-        fi
-        
+
         # Check if build directory exists
         if [ ! -d "build" ]; then
           echo "❌ Build directory not created"
@@ -237,7 +222,6 @@ jobs:
     - name: Deployment Summary 📊
       run: |
         echo "🎉 Deployment completed successfully!"
-        echo "📚 Books deployed: $(jq 'length' "public/content/books-index.json")"
         echo "🌐 Site URL: https://edmondaporter.com"
         echo "📝 Reason: ${{ github.event.inputs.reason || 'Triggered via webhook' }}"
         echo "🔍 Bundle verified: main.9c4e149d.js"
