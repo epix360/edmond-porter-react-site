@@ -88,7 +88,7 @@ export default async function sitemap() {
     const booksDir = path.join(process.cwd(), 'public', 'content', 'books');
     const files = await fs.readdir(booksDir);
     const jsonFiles = files.filter(file => file.endsWith('.json'));
-    
+
     bookRoutes = jsonFiles.map(file => {
       const slug = file.replace('.json', '');
       return {
@@ -100,6 +100,26 @@ export default async function sitemap() {
     });
   } catch (error) {
     console.error('Error reading books directory for sitemap:', error);
+  }
+
+  // Generic CMS page routes (privacy-policy, terms-of-use, etc.)
+  let pageRoutes = [];
+  try {
+    const pagesDir = path.join(process.cwd(), 'public', 'content', 'pages');
+    const files = await fs.readdir(pagesDir);
+    const jsonFiles = files.filter(file => file.endsWith('.json'));
+
+    pageRoutes = jsonFiles.map(file => {
+      const slug = file.replace('.json', '');
+      return {
+        url: `${BASE_URL}/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'yearly',
+        priority: 0.3,
+      };
+    });
+  } catch (error) {
+    console.error('Error reading pages directory for sitemap:', error);
   }
 
   // Medium article routes - skip during static build to avoid network issues
@@ -119,5 +139,5 @@ export default async function sitemap() {
     console.error('Error fetching Medium articles for sitemap:', error);
   }
 
-  return [...staticRoutes, ...bookRoutes, ...articleRoutes];
+  return [...staticRoutes, ...bookRoutes, ...pageRoutes, ...articleRoutes];
 }

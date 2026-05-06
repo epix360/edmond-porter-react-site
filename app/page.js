@@ -5,14 +5,19 @@ import Link from 'next/link';
 import { fallbackContent } from '@/src/data/fallbackContent';
 
 export const metadata = {
-  title: 'Home | Edmond A Porter',
-  description: 'Edmond A Porter - Contemporary author exploring human experience through compelling narratives and thoughtful prose.',
+  title: 'Edmond A Porter | Utah Historical Fiction & Memoir Author',
+  description: 'Official site of Edmond A Porter, award-winning Utah author of Turbulent Waters, The Seasons That Made Me, and more. Historical fiction, memoir, and poetry rooted in the American West.',
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Edmond A Porter',
-    description: 'Contemporary author exploring human experience through compelling narratives.',
+    title: 'Edmond A Porter | Utah Historical Fiction & Memoir Author',
+    description: 'Official site of Edmond A Porter, award-winning Utah author of Turbulent Waters, The Seasons That Made Me, and more. Historical fiction, memoir, and poetry rooted in the American West.',
+    images: ['/images/Edmond_Headshot.webp'],
+  },
+  twitter: {
+    title: 'Edmond A Porter | Utah Historical Fiction & Memoir Author',
+    description: 'Official site of Edmond A Porter, award-winning Utah author of Turbulent Waters, The Seasons That Made Me, and more.',
     images: ['/images/Edmond_Headshot.webp'],
   },
 };
@@ -74,9 +79,11 @@ export default async function HomePage() {
                 <article key={index} className="bg-surface-container rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
                   {article.thumbnail && (
                     <div className="mb-4 overflow-hidden rounded-lg">
-                      <img 
-                        src={article.thumbnail} 
+                      <img
+                        src={article.thumbnail}
                         alt={article.title}
+                        width={400}
+                        height={225}
                         className="w-full h-48 object-cover"
                         loading="lazy"
                       />

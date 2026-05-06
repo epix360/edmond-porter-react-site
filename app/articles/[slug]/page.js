@@ -2,6 +2,7 @@ import { getMediumArticles, getArticleBySlug, getRecommendedArticles } from '@/l
 import Link from 'next/link';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
+import { getStructuredData } from '@/app/utils/structuredData';
 
 // Generate static paths for all articles
 export async function generateStaticParams() {
@@ -89,7 +90,15 @@ export default async function ArticlePage({ params }) {
       }
     })
   };
-  
+
+  const breadcrumbSchema = getStructuredData('breadcrumb', {
+    items: [
+      { name: 'Home', url: 'https://edmondaporter.com' },
+      { name: 'Articles', url: 'https://edmondaporter.com/articles' },
+      { name: article.title, url: `https://edmondaporter.com/articles/${slug}` },
+    ],
+  });
+
   return (
     <>
       <Navigation />
@@ -97,6 +106,10 @@ export default async function ArticlePage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       
       <div className="container mx-auto px-4 max-w-3xl">
@@ -117,6 +130,8 @@ export default async function ArticlePage({ params }) {
               <img
                 src={article.thumbnail}
                 alt={article.title}
+                width={1200}
+                height={675}
                 className="w-full h-64 md:h-80 object-cover"
               />
             </div>
@@ -183,6 +198,8 @@ export default async function ArticlePage({ params }) {
                           <img
                             src={recArticle.thumbnail}
                             alt={recArticle.title}
+                            width={400}
+                            height={225}
                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />
                         ) : (

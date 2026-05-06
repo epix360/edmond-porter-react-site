@@ -25,7 +25,7 @@ const getStructuredData = (type, data = {}) => {
         },
         "url": "https://edmondaporter.com",
         "sameAs": [
-          "https://www.amazon.com/author/edmond-a-porter",
+          "https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y",
           "https://www.goodreads.com/author/show/60996287.Edmond_A_Porter",
           "https://medium.com/@eporter609"
         ],
@@ -116,12 +116,36 @@ const getStructuredData = (type, data = {}) => {
         "author": {
           "@type": "Person",
           "name": "Edmond A Porter"
-        },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://edmondaporter.com/search?q={search_term_string}",
-          "query-input": "required name=search_term_string"
         }
+      };
+
+    case 'publisher':
+      // Redwood Vail Press — used as the canonical publisher Organization
+      // entity referenced from book schema via @id.
+      return {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://edmondaporter.com/#redwood-vail-press",
+        "name": "Redwood Vail Press",
+        "url": "https://edmondaporter.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://edmondaporter.com/images/Redwood-Vail-Press-Publisher-Logo.webp"
+        }
+      };
+
+    case 'breadcrumb':
+      // data.items: [{ name, url }] in trail order, e.g.
+      //   [{ name: 'Home', url: 'https://...' }, { name: 'Books', url: '...' }, { name: 'Title', url: '...' }]
+      return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": (data.items || []).map((item, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": item.name,
+          "item": item.url
+        }))
       };
 
     default:

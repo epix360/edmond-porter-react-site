@@ -57,6 +57,8 @@ export default async function ArticlesPage() {
                     <img
                       src={article.thumbnail}
                       alt={article.title}
+                      width={400}
+                      height={225}
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />

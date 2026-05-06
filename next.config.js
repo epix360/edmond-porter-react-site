@@ -14,7 +14,6 @@ const nextConfig = {
         hostname: 'edmondaporter.com',
       },
     ],
-    formats: ['image/webp', 'image/avif'],
   },
 
   trailingSlash: false,

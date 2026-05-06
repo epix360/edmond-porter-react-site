@@ -1,6 +1,7 @@
 import { Inter, Noto_Serif } from 'next/font/google'
 import Script from 'next/script'
 import CookieConsent from './components/CookieConsent';
+import { getStructuredData } from './utils/structuredData';
 import './globals.css'
 
 // Font optimization with CSS variables for Tailwind integration
@@ -27,13 +28,13 @@ const MATERIAL_SYMBOLS_HREF =
 // Next.js Metadata API for global SEO
 export const metadata = {
   metadataBase: new URL('https://edmondaporter.com'),
-  title: 'Edmond A Porter | Local Utah Author, Writer, Novelist, Poet, Essayist',
-  description: 'Contemporary author exploring human experience through compelling narratives and thoughtful prose.',
+  title: 'Edmond A Porter | Utah Author of Historical Fiction & Memoir',
+  description: 'Award-winning Utah author Edmond A Porter writes historical fiction, memoir, and poetry — including Turbulent Waters, a romance set against the 1976 Teton Dam collapse.',
   keywords: ['Edmond Porter', 'author', 'writer', 'contemporary literature', 'fiction', 'essays', 'poetry', 'novels', 'Turbulent Waters', 'The Seasons That Made Me'],
   authors: [{ name: 'Edmond A Porter' }],
   openGraph: {
-    title: 'Edmond A Porter | Local Utah Author, Writer, Novelist, Poet, Essayist',
-    description: 'Contemporary author exploring human experience through compelling narratives and thoughtful prose.',
+    title: 'Edmond A Porter | Utah Author of Historical Fiction & Memoir',
+    description: 'Award-winning Utah author Edmond A Porter writes historical fiction, memoir, and poetry — including Turbulent Waters, a romance set against the 1976 Teton Dam collapse.',
     url: '/',
     siteName: 'Edmond A Porter',
     type: 'website',
@@ -46,21 +47,30 @@ export const metadata = {
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Edmond A Porter | Utah Author of Historical Fiction & Memoir',
+    description: 'Award-winning Utah author Edmond A Porter writes historical fiction, memoir, and poetry — including Turbulent Waters, a romance set against the 1976 Teton Dam collapse.',
+    images: ['https://edmondaporter.com/images/Edmond_Headshot.webp'],
+    creator: '@eporter609',
+  },
   robots: {
     index: true,
     follow: true,
-  googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
 }
+
+// Site-wide JSON-LD: WebSite (sitelinks search box eligibility) and Person
+// (author/knowledge graph). Rendered once in <head> via app/layout.js.
+const websiteSchema = getStructuredData('website');
+const authorSchema = getStructuredData('author');
 
 export default function RootLayout({ children }) {
   return (
@@ -78,6 +88,16 @@ export default function RootLayout({ children }) {
           as="image"
           href="/images/Turbulent_Waters.webp"
           fetchPriority="high"
+        />
+
+        {/* Site-wide JSON-LD: WebSite + Person */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(authorSchema) }}
         />
       </head>
       <body className={`${inter.className} ${notoSerif.className} bg-background text-on-background font-body leading-relaxed selection:bg-secondary-container`} suppressHydrationWarning={true}>

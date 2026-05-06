@@ -5,6 +5,7 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
+import { getStructuredData } from '@/app/utils/structuredData';
 
 // Read all book JSON files and return static params
 export async function generateStaticParams() {
@@ -101,14 +102,15 @@ export default async function BookPage({ params }) {
       name: 'Edmond A Porter',
       url: 'https://edmondaporter.com',
     },
-    isbn: '',
-    bookFormat: 'EBook',
-    numberOfPages: null,
+    isbn: book.isbn || null,
+    bookFormat: 'https://schema.org/EBook',
+    numberOfPages: book.numberOfPages || null,
     datePublished: hasReleaseDate ? new Date(book.releaseDate).toISOString() : null,
-    publisher: book.publisher ? {
-      '@type': 'Organization',
-      name: book.publisher,
-    } : null,
+    publisher: book.publisher === 'Redwood Vail Press'
+      ? { '@id': 'https://edmondaporter.com/#redwood-vail-press' }
+      : book.publisher
+        ? { '@type': 'Organization', name: book.publisher }
+        : null,
     url: `https://edmondaporter.com/books/${book.slug}`,
     offers: {
       '@type': 'Offer',
@@ -118,12 +120,26 @@ export default async function BookPage({ params }) {
       priceCurrency: 'USD',
     },
   };
-  
-  // Remove null values from schema
+
+  // Remove null/empty values from schema
   const cleanSchema = Object.fromEntries(
-    Object.entries(bookSchema).filter(([_, v]) => v !== null)
+    Object.entries(bookSchema).filter(([_, v]) => v !== null && v !== '')
   );
-  
+
+  const breadcrumbSchema = getStructuredData('breadcrumb', {
+    items: [
+      { name: 'Home', url: 'https://edmondaporter.com' },
+      { name: 'Books', url: 'https://edmondaporter.com/#published-works' },
+      { name: book.title, url: `https://edmondaporter.com/books/${book.slug}` },
+    ],
+  });
+
+  // Emit publisher Organization once if this book is from Redwood Vail Press,
+  // so the @id reference in bookSchema resolves to a full entity.
+  const publisherSchema = book.publisher === 'Redwood Vail Press'
+    ? getStructuredData('publisher')
+    : null;
+
   return (
     <>
       {/* JSON-LD Structured Data */}
@@ -131,6 +147,16 @@ export default async function BookPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(cleanSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {publisherSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(publisherSchema) }}
+        />
+      )}
       
       <Navigation />
       <main className="min-h-screen py-12 pt-24" style={{ backgroundColor: '#2C3E4F' }}>
