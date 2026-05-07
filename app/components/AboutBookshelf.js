@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import { getResponsiveImage } from '@/app/utils/responsiveImage';
 import { allBooks, sortBooks, groupByAuthorship } from '@/lib/books';

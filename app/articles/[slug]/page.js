@@ -23,6 +23,8 @@ export async function generateMetadata({ params }) {
     };
   }
   
+  const images = article.thumbnail ? [article.thumbnail] : [];
+
   return {
     title: `${article.title} | Edmond A Porter`,
     description: article.description,
@@ -32,7 +34,13 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: article.title,
       description: article.description,
-      images: article.thumbnail ? [article.thumbnail] : [],
+      images,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.description,
+      images,
     },
   };
 }

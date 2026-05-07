@@ -1,41 +1,165 @@
-import AboutClient from './AboutClient';
 import fs from 'fs';
 import path from 'path';
+import Navigation from '@/src/components/Navigation';
+import Footer from '@/src/components/Footer';
+import ContentWithLinks from '@/app/components/ContentWithLinks';
+import AboutBookshelf from '@/app/components/AboutBookshelf';
+import { getResponsiveImage } from '@/app/utils/responsiveImage';
+import { convertMarkdown } from '@/app/utils/markdown';
+import { fallbackContent } from '@/src/data/fallbackContent';
 
-// Function to load page data from JSON
-async function getPageData() {
+// Load page data from JSON at build time
+function loadAboutData() {
   try {
     const filePath = path.join(process.cwd(), 'public/content/about-bio.json');
     const content = fs.readFileSync(filePath, 'utf8');
     return JSON.parse(content);
   } catch (error) {
     console.error('Error loading about page data:', error);
-    return {
-      metaTitle: 'About | Edmond A Porter',
-      metaDescription: 'Learn about Edmond A Porter, contemporary author exploring human experience through compelling narratives.',
-      ogTitle: 'About Edmond A Porter',
-      ogDescription: 'Discover the biography, literary achievements, and writing journey of Edmond A Porter.',
-      ogImage: '/images/Edmond_Seated.webp'
-    };
+    return fallbackContent.aboutBio || {};
   }
 }
 
+function loadTimeline() {
+  const years = ['2025', '2026'];
+  return years.map(year => {
+    try {
+      const filePath = path.join(process.cwd(), 'public/content/timeline', `${year}.json`);
+      const content = fs.readFileSync(filePath, 'utf8');
+      return JSON.parse(content);
+    } catch (error) {
+      console.error(`Error loading timeline ${year}:`, error);
+      return null;
+    }
+  }).filter(Boolean);
+}
+
 export async function generateMetadata() {
-  const data = await getPageData();
+  const data = loadAboutData();
   const seo = data.seo || {};
-  
+  const title = seo.metaTitle || data.metaTitle || 'About | Edmond A Porter';
+  const description = seo.metaDescription || data.metaDescription || 'Learn about Edmond A Porter.';
+  const image = seo.ogImage || data.ogImage || '/images/Edmond_Seated.webp';
+
   return {
-    title: seo.metaTitle || data.metaTitle || 'About | Edmond A Porter',
-    description: seo.metaDescription || data.metaDescription || 'Learn about Edmond A Porter.',
+    title,
+    description,
     openGraph: {
       title: seo.ogTitle || seo.metaTitle || data.ogTitle || data.metaTitle || 'About Edmond A Porter',
       description: seo.ogDescription || seo.metaDescription || data.ogDescription || data.metaDescription || 'Discover the biography and writing journey of Edmond A Porter.',
       url: '/about',
-      images: [seo.ogImage || data.ogImage || '/images/Edmond_Seated.webp'],
+      images: [image],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: seo.ogTitle || seo.metaTitle || title,
+      description: seo.ogDescription || seo.metaDescription || description,
+      images: [image],
     },
   };
 }
 
 export default function AboutPage() {
-  return <AboutClient />;
+  const aboutBio = loadAboutData();
+  const timeline = loadTimeline();
+
+  const timelineData = timeline.map(yearData => ({
+    year: yearData.year,
+    milestones: [
+      yearData.milestone1_title ? { title: yearData.milestone1_title, description: yearData.milestone1_description || '' } : null,
+      yearData.milestone2_title ? { title: yearData.milestone2_title, description: yearData.milestone2_description || '' } : null,
+      yearData.milestone3_title ? { title: yearData.milestone3_title, description: yearData.milestone3_description || '' } : null,
+    ].filter(Boolean),
+  }));
+
+  const bio = getResponsiveImage(aboutBio.bioImage);
+
+  return (
+    <div className="bg-background">
+      <Navigation />
+
+      <main className="pt-16 md:pt-16">
+        {/* About Hero */}
+        <section className="relative overflow-hidden py-4 md:py-16">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="order-2 md:order-1 text-center md:text-left">
+              <span className="font-label text-sm uppercase tracking-widest text-secondary font-semibold mb-4 block">
+                {aboutBio.bioLabel || 'About the Author'}
+              </span>
+              <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight mb-6">
+                {aboutBio.bioHeadline}
+              </h1>
+              <p className="font-headline text-lg md:text-xl text-on-surface-variant leading-relaxed max-w-2xl italic mx-auto md:mx-0">
+                {aboutBio.bioSubtitle}
+              </p>
+            </div>
+
+            <div className="order-1 md:order-2 flex justify-center md:justify-end">
+              <div className="max-w-[320px] md:max-w-md w-full relative">
+                <div className="absolute -bottom-4 -left-4 w-24 h-24 md:w-32 md:h-32 bg-secondary/30 rounded-lg -z-10"></div>
+                <div className="aspect-[2/3] bg-surface-container-high relative overflow-hidden shadow-2xl rounded-lg">
+                  <img
+                    src={bio.src}
+                    srcSet={bio.srcSet}
+                    sizes="(max-width: 768px) 90vw, 448px"
+                    alt="Edmond A Porter"
+                    width={448}
+                    height={672}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Bio Body */}
+        <section className="py-8 md:py-16 bg-surface-container-lowest">
+          <div className="max-w-4xl mx-auto px-6">
+            <ContentWithLinks
+              html={convertMarkdown(aboutBio.bioBody || '')}
+              className="prose prose-lg prose-slate max-w-none prose-headings:font-headline prose-headings:text-primary prose-h2:text-3xl prose-h2:font-bold prose-h2:mb-6 prose-h2:mt-8 prose-h3:text-2xl prose-h3:font-bold prose-h3:mb-4 prose-h3:mt-8 prose-p:mb-6 [&_p]:max-w-none [&_p]:w-full"
+            />
+          </div>
+        </section>
+
+        <AboutBookshelf />
+
+        {/* Timeline */}
+        <section className="py-16 bg-surface-container-low">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="font-headline text-3xl font-bold text-primary mb-16 text-center">Milestones &amp; Moments</h2>
+            <div className="space-y-12">
+              {timelineData.map((yearData, yearIndex) => (
+                <div key={yearIndex} className="flex gap-8">
+                  <div className="flex flex-col items-center relative">
+                    <div className="w-3 h-3 rounded-full bg-secondary"></div>
+                    {yearIndex < timelineData.length - 1 && (
+                      <div className="w-px h-full bg-secondary mt-2 absolute top-3 left-1/2 -translate-x-1/2"></div>
+                    )}
+                  </div>
+                  <div>
+                    <span className="font-label text-sm text-secondary font-bold mb-1 block">{yearData.year}</span>
+                    {yearData.milestones.map((milestone, milestoneIndex) => (
+                      <div key={milestoneIndex} className="mb-6 last:mb-0">
+                        <h4 className="font-headline text-xl font-bold text-primary mb-2">{milestone.title}</h4>
+                        <div
+                          className="text-on-surface-variant font-body"
+                          dangerouslySetInnerHTML={{ __html: convertMarkdown(milestone.description) }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <Footer />
+      </main>
+    </div>
+  );
 }

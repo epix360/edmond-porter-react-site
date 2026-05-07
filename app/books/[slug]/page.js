@@ -34,6 +34,7 @@ export async function generateMetadata({ params }) {
     const content = fs.readFileSync(filePath, 'utf8');
     const book = JSON.parse(content);
     
+    const coverImage = `/images/${book.image.replace(/^\//, '')}`;
     return {
       title: book.seo.metaTitle,
       description: book.seo.metaDescription,
@@ -43,7 +44,13 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title: book.seo.metaTitle,
         description: book.seo.metaDescription,
-        images: [`/images/${book.image}`],
+        images: [coverImage],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: book.seo.metaTitle,
+        description: book.seo.metaDescription,
+        images: [coverImage],
       },
     };
   } catch (error) {
