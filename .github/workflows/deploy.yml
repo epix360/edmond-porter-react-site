@@ -46,16 +46,17 @@ jobs:
         
     - name: Detect Changes 🔍
       id: changes
+      env:
+        HEAD_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
       run: |
         echo "🔍 Detecting what changed in this push..."
-        
+
         # Check if this is a Pages CMS commit
-        if [[ "${{ github.event.head_commit.message }}" == *"via Pages CMS"* ]]; then
+        if [[ "$HEAD_COMMIT_MESSAGE" == *"via Pages CMS"* ]]; then
           echo "content=true" >> $GITHUB_OUTPUT
           echo "build=true" >> $GITHUB_OUTPUT
           echo "📚 Pages CMS content update detected"
-        elif [[ "${{ github.event.head_commit.message }}" == *"Trigger GitHub Actions deployment"* ]]; then
-          echo "build=true" >> $GITHUB_OUTPUT
+        elif [[ "$HEAD_COMMIT_MESSAGE" == *"Trigger GitHub Actions deployment"* ]]; then
           echo "build=true" >> $GITHUB_OUTPUT
           echo "🚀 Manual deployment trigger detected"
         else
@@ -65,7 +66,6 @@ jobs:
             echo "build=true" >> $GITHUB_OUTPUT
             echo "💻 Code changes detected"
           else
-            echo "build=false" >> $GITHUB_OUTPUT
             echo "build=false" >> $GITHUB_OUTPUT
             echo "⚠️ No build-triggering changes detected"
           fi
