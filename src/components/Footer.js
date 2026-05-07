@@ -22,7 +22,7 @@ const Footer = () => {
                     </div>
                     <div className="flex flex-col text-center md:text-left mt-3 mb-4 order-3">
                         <a href="https://www.leagueofutahwriters.com/" target="_blank" rel="noopener noreferrer">League of Utah Writers</a>
-                        <a href="http://www.writerscache.org/" target="_blank" rel="noopener noreferrer">The Writer's Cache</a>
+                        <a href="http://www.writerscache.org/" target="_blank" rel="noopener noreferrer">The Writers' Cache</a>
                     </div>
                     <div className="flex items-center space-x-4 opacity-80 hover:opacity-100 duration-300 order-4">
                         <a className="w-10 h-10 flex items-center justify-center bg-slate-800 rounded-full hover:bg-slate-700 transition-colors" title="Goodreads" href="https://www.goodreads.com/author/show/60996287.Edmond_A_Porter" target="_blank" rel="noopener noreferrer"><span className="material-symbols-outlined text-white text-xl">book_2</span></a>

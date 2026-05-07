@@ -14,10 +14,34 @@ const getStructuredData = (type, data = {}) => {
         "givenName": "Edmond",
         "familyName": "Porter",
         "jobTitle": "Author",
-        "memberOf": {
-          "@type": "Organization",
-          "name": "The Writers' Cache"
-        },
+        "memberOf": [
+          {
+            "@type": "Organization",
+            "@id": "https://edmondaporter.com/#league-of-utah-writers",
+            "name": "League of Utah Writers",
+            "url": "https://www.leagueofutahwriters.com/"
+          },
+          {
+            "@type": "Organization",
+            "name": "Brigham City Writers",
+            "url": "https://www.leagueofutahwriters.com/chapterlistings/brigham-city-writers",
+            "parentOrganization": {
+              "@id": "https://edmondaporter.com/#league-of-utah-writers"
+            }
+          },
+          {
+            "@type": "Organization",
+            "name": "The Writers' Cache",
+            "alternateName": "Cache Valley Chapter",
+            "url": "http://www.writerscache.org/",
+            "sameAs": [
+              "https://www.leagueofutahwriters.com/chapterlistings/cache-valley-chapter"
+            ],
+            "parentOrganization": {
+              "@id": "https://edmondaporter.com/#league-of-utah-writers"
+            }
+          }
+        ],
         "pronouns": "He/Him",
         "nationality": {
           "@type": "Country",
