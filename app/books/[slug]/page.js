@@ -113,6 +113,9 @@ export default async function BookPage({ params }) {
     bookFormat: 'https://schema.org/EBook',
     numberOfPages: book.numberOfPages || null,
     datePublished: hasReleaseDate ? new Date(book.releaseDate).toISOString() : null,
+    genre: book.genre || null,
+    keywords: book.keywords || null,
+    about: book.about || null,
     publisher: book.publisher === 'Redwood Vail Press'
       ? { '@id': 'https://edmondaporter.com/#redwood-vail-press' }
       : book.publisher
