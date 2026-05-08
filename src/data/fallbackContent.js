@@ -112,7 +112,7 @@ As they grew, I read to each of them every night at bedtime. I went to band conc
 I began writing when I was in third grade. I tried my hand at news articles, fiction, and fan fiction. Most of the writing I did in high school remained hidden, except for the editorials I wrote as editor of my high school newspaper. In college, I had one paper that a professor thought might be worthy of publication, but I didn't know how to proceed. I wrote budget proposals and other work-related documents. Now that I am retired, I have been published in three anthologies, two newsletters, and online. My first short book of essays and poems was published on Amazon in October of 2025. Recently, I was awarded first and third place in the first chapter and creative nonfiction divisions of the League of Utah Writers' annual contest.
 
 My first novel, Turbulent Waters, a historical romance set surrounding the building and ultimate failure of the Teton Dam, is set for release on June 1, 2026, to coincide with the 50th anniversary of the Teton Dam Flood.`,
-    bioImage: "Edmond_Seated.webp"
+    bioImage: "/images/Edmond_Seated.webp"
   },
   timeline: [
     {
