@@ -104,7 +104,7 @@ export default function HomePageTop() {
           <div className="absolute inset-0 opacity-20 pointer-events-none" style={{backgroundImage: "radial-gradient(circle at 20% 50%, #805533 0%, transparent 50%)"}}></div>
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center relative z-10 py-6 sm:py-10 md:py-20">
             <div className="order-2 md:order-1 text-center md:text-left">
-              <h1 className="sr-only">
+              <h1 className="sr-only text-slate-300">
                 Edmond A Porter: Award-Winning Utah Author | Official Website
               </h1>
               {statusTemplate && (
@@ -112,7 +112,7 @@ export default function HomePageTop() {
                   {statusTemplate.label}
                 </span>
               )}
-              <h2 className="font-headline text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+              <h2 className="font-headline text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-2 sm:mb-6 leading-tight">
                 {heroContent?.title?.split(' ').map((word, i) => 
                   i === 0 ? word : <React.Fragment key={i}><br className="hidden sm:block" /><span className="italic text-[#B8C8DB] sm:inline">{' '}{word}</span></React.Fragment>
                 ) || 'Edmond A Porter'}
