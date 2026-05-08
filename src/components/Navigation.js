@@ -9,12 +9,19 @@ const Navigation = () => {
     const isHome = pathname === '/';
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeAnchor, setActiveAnchor] = useState(null);
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         if (pathname !== '/') {
             setActiveAnchor(null);
         }
     }, [pathname]);
+
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 10);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     const handleAnchorClick = (e, targetId) => {
         if (isHome) {
@@ -33,7 +40,14 @@ const Navigation = () => {
         <>
             <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm">
                 {/* Main Flex Container */}
-                <div className="flex justify-between items-center w-full px-4 sm:px-6 py-4 max-w-7xl mx-auto">
+                <div
+                    className="flex justify-between items-center w-full px-4 sm:px-6 max-w-7xl mx-auto md:!py-4"
+                    style={{
+                        paddingTop: scrolled ? '0.25rem' : '1rem',
+                        paddingBottom: scrolled ? '0.25rem' : '1rem',
+                        transition: 'padding-top 0.3s ease, padding-bottom 0.3s ease',
+                    }}
+                >
                     
                     {/* 1. Logo Section (Fixed duplicate tags) */}
                     <Link href="/" className="text-lg sm:text-xl md:text-2xl font-headline font-bold text-primary uppercase tracking-widest italic truncate">
