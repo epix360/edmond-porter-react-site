@@ -102,7 +102,7 @@ export default function HomePageTop() {
         {/* Hero Section */}
         <section className="relative min-h-[450px] sm:min-h-[500px] md:min-h-[800px] flex items-center overflow-hidden bg-primary-container">
           <div className="absolute inset-0 opacity-20 pointer-events-none" style={{backgroundImage: "radial-gradient(circle at 20% 50%, #805533 0%, transparent 50%)"}}></div>
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center relative z-10 py-12 md:py-20">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center relative z-10 py-6 sm:py-10 md:py-20">
             <div className="order-2 md:order-1 text-center md:text-left">
               <h1 className="sr-only">
                 Edmond A Porter: Award-Winning Utah Author | Official Website
@@ -146,7 +146,7 @@ export default function HomePageTop() {
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
-                    className="relative z-10 rounded-lg shadow-2xl w-full max-w-[280px] sm:max-w-[320px] md:max-w-md aspect-[2/3] object-cover"
+                    className="relative z-10 rounded-lg shadow-2xl w-full max-w-[200px] sm:max-w-[320px] md:max-w-md aspect-[2/3] object-cover"
                   />
                 );
               })()}
