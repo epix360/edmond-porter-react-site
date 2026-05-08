@@ -36,7 +36,6 @@ export default function LinksPage() {
   return (
     <main className="min-h-screen bg-slate-900 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md flex flex-col items-center">
-        {/* Profile Image */}
         <div className="relative w-[200px] h-[200px] mb-8">
           <Image
             src="/images/Edmond_Headshot.webp"
@@ -48,33 +47,29 @@ export default function LinksPage() {
           />
         </div>
 
-        {/* Author Name */}
         <h1 className="font-headline text-2xl font-bold text-white mb-2">
           Edmond A Porter
         </h1>
 
-        {/* Subtitle */}
         <p className="font-body text-slate-400 text-sm mb-8">
           Historical Fiction & Memoir Author
         </p>
 
-        {/* Links */}
         <div className="w-full space-y-4">
-          {links.map((link, index) => {
-            const baseClasses =
-              'block w-full text-center py-4 px-6 rounded-xl font-body font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]';
-            const accentClasses = link.accent
-              ? 'bg-amber-500 text-slate-900 hover:bg-amber-400'
-              : 'bg-slate-800 text-white hover:bg-slate-700';
+          {links.map((link) => {
+            const className = [
+              'block w-full text-center py-4 px-6 rounded-xl font-body font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]',
+              link.accent ? 'bg-amber-500 text-slate-900 hover:bg-amber-400' : 'bg-slate-800 text-white hover:bg-slate-700',
+            ].join(' ');
 
             if (link.external) {
               return (
                 <a
-                  key={index}
+                  key={link.href}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${baseClasses} ${accentClasses}`}
+                  className={className}
                 >
                   {link.label}
                 </a>
@@ -82,11 +77,7 @@ export default function LinksPage() {
             }
 
             return (
-              <Link
-                key={index}
-                href={link.href}
-                className={`${baseClasses} ${accentClasses}`}
-              >
+              <Link key={link.href} href={link.href} className={className}>
                 {link.label}
               </Link>
             );

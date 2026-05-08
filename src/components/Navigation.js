@@ -32,7 +32,6 @@ const Navigation = () => {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
         }
-        // If not on home page, let Next.js Link handle routing natively
         setMobileMenuOpen(false);
     };
 
@@ -49,12 +48,10 @@ const Navigation = () => {
                     }}
                 >
                     
-                    {/* 1. Logo Section (Fixed duplicate tags) */}
                     <Link href="/" className="text-lg sm:text-xl md:text-2xl font-headline font-bold text-primary uppercase tracking-widest italic truncate">
                         Edmond A Porter
                     </Link>
 
-                    {/* 2. Desktop Navigation Links */}
                     <div className="hidden md:flex items-center space-x-4 sm:space-x-8 font-label text-sm sm:text-base tracking-tight">
                         <Link className={`${pathname === '/' && !activeAnchor ? 'text-secondary font-bold border-b-2 border-secondary' : 'text-slate-600 hover:text-secondary'} transition-all py-1`} href="/" onClick={() => {setActiveAnchor(null); if (pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }) }}}>Home</Link>
                         <Link className={`${activeAnchor === '#published-works' ? 'text-secondary font-bold border-b-2 border-secondary' : 'text-slate-600 hover:text-secondary'} transition-all py-1`} href={isHome ? "#published-works" : "/#published-works"} onClick={(e) => handleAnchorClick(e, 'published-works')}>Books</Link>
@@ -63,7 +60,6 @@ const Navigation = () => {
                         <Link className={`${pathname === '/about' ? 'text-secondary font-bold border-b-2 border-secondary' : 'text-slate-600 hover:text-secondary'} transition-all py-1`} href="/about" onClick={() => setActiveAnchor(null)}>About</Link>
                     </div>
 
-                    {/* 3. Action Buttons (Moved inside the flex container) */}
                     <div className="flex items-center space-x-2 sm:space-x-4">
                         <a className="hidden sm:inline-flex bg-primary text-white px-4 sm:px-6 py-2 rounded-lg font-label font-semibold tracking-wide hover:bg-primary/90 transition-all text-sm" href="https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y" target="_blank" rel="noopener noreferrer">
                             Amazon Store
