@@ -8,7 +8,6 @@ import { getResponsiveImage } from '@/app/utils/responsiveImage';
 import { convertMarkdown } from '@/app/utils/markdown';
 import { fallbackContent } from '@/src/data/fallbackContent';
 
-// Load page data from JSON at build time
 function loadAboutData() {
   try {
     const filePath = path.join(process.cwd(), 'public/content/about-bio.json');
@@ -19,6 +18,8 @@ function loadAboutData() {
     return fallbackContent.aboutBio || {};
   }
 }
+
+const aboutData = loadAboutData();
 
 function loadTimeline() {
   const years = ['2025', '2026'];
@@ -35,7 +36,7 @@ function loadTimeline() {
 }
 
 export async function generateMetadata() {
-  const data = loadAboutData();
+  const data = aboutData;
   const seo = data.seo || {};
   const title = seo.metaTitle || data.metaTitle || 'About | Edmond A Porter';
   const description = seo.metaDescription || data.metaDescription || 'Learn about Edmond A Porter.';
@@ -60,16 +61,17 @@ export async function generateMetadata() {
 }
 
 export default function AboutPage() {
-  const aboutBio = loadAboutData();
+  const aboutBio = aboutData;
   const timeline = loadTimeline();
 
   const timelineData = timeline.map(yearData => ({
     year: yearData.year,
-    milestones: [
-      yearData.milestone1_title ? { title: yearData.milestone1_title, description: yearData.milestone1_description || '' } : null,
-      yearData.milestone2_title ? { title: yearData.milestone2_title, description: yearData.milestone2_description || '' } : null,
-      yearData.milestone3_title ? { title: yearData.milestone3_title, description: yearData.milestone3_description || '' } : null,
-    ].filter(Boolean),
+    milestones: [1, 2, 3]
+      .filter(n => yearData[`milestone${n}_title`])
+      .map(n => ({
+        title: yearData[`milestone${n}_title`],
+        description: yearData[`milestone${n}_description`] || '',
+      })),
   }));
 
   const bio = getResponsiveImage(aboutBio.bioImage);

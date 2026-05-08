@@ -3,18 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Navigation from '@/src/components/Navigation';
-import { getImagePath as getAssetPath } from '@/app/utils/cdn';
 import { getResponsiveImage } from '@/app/utils/responsiveImage';
 import { fallbackContent } from '@/src/data/fallbackContent';
-// Import CMS content directly for static generation
 import heroData from '@/public/content/hero.json';
 import homeBioData from '@/public/content/home-bio.json';
 import { allBooks, sortBooks } from '@/lib/books';
 
-// Helper function for consistent image paths
-const getImagePath = (path) => getAssetPath(path);
-
-// Status template configurations
 const getStatusTemplate = (status, showSpecificDate, releaseDate, customDateText) => {
   const templates = {
     "coming-soon": { 
@@ -62,13 +56,12 @@ const getComingSoonText = (showSpecificDate, releaseDate, customDateText) => {
 };
 
 export default function HomePageTop() {
-  // Use imported CMS content directly (baked in at build time)
   const heroContent = heroData || fallbackContent.hero;
   const homeBioContent = homeBioData || fallbackContent.homeBio;
-  
   const sortedBooks = sortBooks(allBooks);
-  
-  // Get status template
+  const hero = getResponsiveImage('Turbulent_Waters.webp');
+  const teaser = getResponsiveImage(homeBioContent?.teaserImage || 'Edmond_Headshot.webp');
+
   const statusTemplate = getStatusTemplate(
     heroContent.bookStatus, 
     heroContent.showSpecificDate, 
@@ -77,10 +70,11 @@ export default function HomePageTop() {
   );
   
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
-  // Handle hash scrolling for cross-page navigation
   useEffect(() => {
     const hash = window.location.hash;
     if (hash) {
@@ -133,23 +127,18 @@ export default function HomePageTop() {
               </div>
             </div>
             <div className="order-1 md:order-2 flex justify-center md:justify-end">
-              {(() => {
-                const hero = getResponsiveImage('Turbulent_Waters.webp');
-                return (
-                  <img
-                    src={hero.src}
-                    srcSet={hero.srcSet}
-                    sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, 448px"
-                    alt="Turbulent Waters book cover"
-                    width={400}
-                    height={600}
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    className="relative z-10 rounded-lg shadow-2xl w-full max-w-[200px] sm:max-w-[320px] md:max-w-md aspect-[2/3] object-cover"
-                  />
-                );
-              })()}
+              <img
+                src={hero.src}
+                srcSet={hero.srcSet}
+                sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, 448px"
+                alt="Turbulent Waters book cover"
+                width={400}
+                height={600}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="relative z-10 rounded-lg shadow-2xl w-full max-w-[200px] sm:max-w-[320px] md:max-w-md aspect-[2/3] object-cover"
+              />
             </div>
           </div>
         </section>
@@ -159,22 +148,17 @@ export default function HomePageTop() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid md:grid-cols-12 gap-10 items-center">
               <div className="md:col-span-5 relative">
-                {(() => {
-                  const teaser = getResponsiveImage(homeBioContent?.teaserImage || 'Edmond_Headshot.webp');
-                  return (
-                    <img
-                      src={teaser.src}
-                      srcSet={teaser.srcSet}
-                      sizes="(max-width: 768px) 100vw, 400px"
-                      alt="Portrait"
-                      width={400}
-                      height={500}
-                      loading="lazy"
-                      decoding="async"
-                      className="relative z-10 rounded-lg shadow-xl w-full aspect-[4/5] object-cover"
-                    />
-                  );
-                })()}
+                <img
+                  src={teaser.src}
+                  srcSet={teaser.srcSet}
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  alt="Portrait"
+                  width={400}
+                  height={500}
+                  loading="lazy"
+                  decoding="async"
+                  className="relative z-10 rounded-lg shadow-xl w-full aspect-[4/5] object-cover"
+                />
               </div>
               <div className="md:col-span-7">
                 <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-8">{homeBioContent?.teaserHeadline || 'About the Author'}</h2>
@@ -228,8 +212,7 @@ export default function HomePageTop() {
                       <p className="text-on-surface-variant line-clamp-3 mb-6">{book.description}</p>
                     </div>
                     
-                    {/* See details - text link, left-aligned */}
-                    <Link 
+                    <Link
                       href={`/books/${book.slug}`}
                       className="inline-flex items-center text-secondary font-bold hover:text-[#b46b25] transition-colors mb-4"
                     >
@@ -237,8 +220,7 @@ export default function HomePageTop() {
                       <span className="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
                     </Link>
                     
-                    {/* Buy now - orange outline button, opens Amazon in new tab */}
-                    <a 
+                    <a
                       href={book.amazonUrl}
                       target="_blank"
                       rel="noopener noreferrer"
