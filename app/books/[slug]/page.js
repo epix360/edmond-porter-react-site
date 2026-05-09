@@ -196,7 +196,7 @@ export default async function BookPage({ params }) {
             
             {/* Book Info */}
             <div className="flex flex-col">
-              <h1 className="text-3xl md:text-4xl font-bold text-white font-headline mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold text-white font-headline mb-3">
                 {book.title}
               </h1>
               
