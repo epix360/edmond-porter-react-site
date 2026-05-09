@@ -208,6 +208,11 @@ export default function HomePageTop() {
                       </div>
                     </div>
                     <div className="mt-8 flex-grow">
+                      {book.type && (
+                        <span className="font-label text-secondary uppercase tracking-widest text-xs font-bold mb-2 block">
+                          {book.type}
+                        </span>
+                      )}
                       <h3 className="font-headline text-2xl font-bold text-primary mb-2">{book.title}</h3>
                       <p className="text-on-surface-variant line-clamp-3 mb-6">{book.description}</p>
                     </div>

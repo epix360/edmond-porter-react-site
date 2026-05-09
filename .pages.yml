@@ -38,6 +38,7 @@ content:
       - { name: amazonUrl, label: "Amazon Purchase URL", type: string }
       - { name: featured, label: "Featured Book", type: boolean, default: false }
       - { name: authorship, label: "Authorship", type: select, options: { values: [{ value: "author", label: "By Edmond A Porter" }, { value: "contributor", label: "Featuring Edmond A Porter" }] }, default: "author" }
+      - { name: type, label: "Book Type", type: string, description: "e.g., Novel, Memoir, Anthology, Poetry Collection" }
       - name: seo
         label: "SEO Metadata"
         type: object
