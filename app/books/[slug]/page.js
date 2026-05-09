@@ -173,11 +173,11 @@ export default async function BookPage({ params }) {
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Back Link */}
           <Link
-            href="/"
+            href="/#published-works"
             className="inline-flex items-center text-slate-300 hover:text-amber-500 transition-colors mb-12"
           >
             <span className="material-symbols-outlined mr-2" style={{ fontFamily: 'Material Symbols Outlined' }}>arrow_back</span>
-            Back to Home
+            Back to books
           </Link>
           
           {/* Mobile: flex-col stacks image above content. Desktop: float layout for text wrapping */}
