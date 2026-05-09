@@ -200,6 +200,11 @@ export default async function BookPage({ params }) {
                 {book.title}
               </h1>
               
+              {book.type && (
+                <p className="text-sm font-label uppercase tracking-widest text-[#FDC29A] mb-2">
+                  {book.type}
+                </p>
+              )}
               <p className="text-sm text-slate-300 mb-3">
                 {book.authorship === 'contributor' ? 'Featuring Edmond A Porter' : 'By Edmond A Porter'}
                 {' | '}
