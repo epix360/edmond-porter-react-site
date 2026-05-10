@@ -174,7 +174,7 @@ export default async function BookPage({ params }) {
           {/* Back Link */}
           <Link
             href="/publications"
-            className="inline-flex items-center text-slate-300 hover:text-amber-500 transition-colors mb-12"
+            className="inline-flex items-center text-slate-300 hover:text-amber-500 transition-colors mb-6"
           >
             <span className="material-symbols-outlined mr-2" style={{ fontFamily: 'Material Symbols Outlined' }}>arrow_back</span>
             All Books
