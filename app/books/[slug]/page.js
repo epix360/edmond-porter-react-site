@@ -177,7 +177,7 @@ export default async function BookPage({ params }) {
             className="inline-flex items-center text-slate-300 hover:text-amber-500 transition-colors mb-12"
           >
             <span className="material-symbols-outlined mr-2" style={{ fontFamily: 'Material Symbols Outlined' }}>arrow_back</span>
-            Back to books
+            All Books
           </Link>
           
           {/* Mobile: flex-col stacks image above content. Desktop: float layout for text wrapping */}
