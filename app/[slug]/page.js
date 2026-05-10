@@ -5,6 +5,8 @@ import ReactMarkdown from 'react-markdown';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
 
+export const dynamicParams = false;
+
 // Reserved slugs that cannot be used for CMS pages
 const RESERVED_SLUGS = ['about', 'admin', 'books'];
 
