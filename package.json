@@ -10,7 +10,8 @@
     "fetch:medium": "node scripts/fetch-medium.js",
     "prebuild": "npm run build:images && npm run fetch:medium",
     "build": "rm -rf .next && next build",
-    "start": "next start"
+    "start": "next start",
+    "indexnow": "node scripts/indexnow-submit.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
