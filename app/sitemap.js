@@ -122,22 +122,10 @@ export default async function sitemap() {
     console.error('Error reading pages directory for sitemap:', error);
   }
 
-  // Medium article routes - skip during static build to avoid network issues
+  // Medium article routes - excluded from sitemap (only include /articles index page)
   let articleRoutes = [];
-  try {
-    // Only fetch Medium articles if not in static export build
-    if (process.env.NODE_ENV !== 'production' || !process.env.NEXT_EXPORT) {
-      const articles = await getMediumArticles();
-      articleRoutes = articles.map(article => ({
-        url: `${BASE_URL}/articles/${article.slug}`,
-        lastModified: article.pubDate ? new Date(article.pubDate) : new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.6,
-      }));
-    }
-  } catch (error) {
-    console.error('Error fetching Medium articles for sitemap:', error);
-  }
+  // Individual article pages are excluded to prevent indexing
+  // Only the /articles index page will be included in staticRoutes
 
   return [...staticRoutes, ...bookRoutes, ...pageRoutes, ...articleRoutes];
 }

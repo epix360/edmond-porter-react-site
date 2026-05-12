@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /articles/
+
+# Allow the articles index page but disallow individual article pages
+Allow: /articles$
 
 # Sitemap location
 Sitemap: https://edmondaporter.com/sitemap.xml
