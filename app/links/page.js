@@ -7,21 +7,33 @@ export const metadata = {
 
 const links = [
   {
-    label: 'Pre-order Turbulent Waters',
+    label: <>Pre-order <i>Turbulent Waters</i></>,
     href: 'https://www.amazon.com/Turbulent-Waters-Edmond-Porter-ebook/dp/B0GRLFBQJX',
     external: true,
     accent: true,
   },
   {
-    label: 'Read Recent Articles on Medium',
-    href: 'https://medium.com/@eporter609',
+    label: 'Official Website',
+    href: '/',
+    external: false,
+    accent: false,
+  },
+  {
+    label: 'Amazon Author Page',
+    href: 'https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y',
     external: true,
     accent: false,
   },
   {
-    label: 'Visit Official Website',
-    href: '/',
-    external: false,
+    label: 'Goodreads Author Page',
+    href: 'https://www.goodreads.com/author/show/60996287.Edmond_A_Porter',
+    external: true,
+    accent: false,
+  },
+  {
+    label: 'Read Recent Articles on Medium',
+    href: 'https://medium.com/@eporter609',
+    external: true,
     accent: false,
   },
   {
