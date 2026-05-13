@@ -158,12 +158,25 @@ jobs:
       run: |
         echo "🔍 Quick deployment check..."
         echo "🌐 Site URL: https://edmondaporter.com"
-        
+
         # Quick check site is accessible
         if curl -f -s --max-time 10 "https://edmondaporter.com/" > /dev/null; then
           echo "✅ Site is accessible"
         else
           echo "⏳ Site may still be propagating (this is normal for GitHub Pages)"
         fi
-        
+
         echo "✅ Deployment complete"
+
+    # 7. Notify Bing (and other IndexNow participants) that content has changed.
+    # Runs after deploy succeeds and after a short delay so the new content is
+    # live on GitHub Pages before crawlers come to fetch it. continue-on-error
+    # is intentional: a failed ping should never fail the deployment.
+    - name: Notify Bing via IndexNow 📡
+      if: success()
+      continue-on-error: true
+      run: |
+        echo "⏳ Waiting 30s for GitHub Pages to propagate before pinging IndexNow..."
+        sleep 30
+        echo "📡 Submitting sitemap URLs to Bing IndexNow..."
+        npm run indexnow
