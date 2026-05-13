@@ -1,0 +1,32 @@
+{
+  "title": "The 1976 Teton Dam Collapse",
+  "slug": "teton-dam-flood",
+  "body": "## A 200-foot earthen dam that failed before it was finished\n\nThe Teton Dam stood in the deep volcanic canyons of eastern Idaho, on the Teton River roughly 15 miles northeast of Rexburg. The site straddled the border of Fremont and Madison counties. The U.S. Bureau of Reclamation designed the earthen structure to irrigate 11,000 acres of arid Upper Snake River Valley farmland and to generate hydroelectric power.\n\nOn June 5, 1976, before the reservoir had ever reached full capacity, the dam failed catastrophically. A breach opened on the right abutment. Within hours, roughly 80 billion gallons of water tore through the canyon and poured onto the plains below.\n\n## The communities the flood reached\n\nThe natural contours of the land funneled the floodwaters directly into a string of small agricultural towns. Wilford was essentially destroyed. Sugar City and Hibbard suffered catastrophic damage. The flood crested in Rexburg later that day, sweeping homes, barns, livestock, and vehicles into a slurry of mud and debris that stretched for miles.\n\nEleven people lost their lives. Thousands lost homes, livelihoods, or both. Damage estimates ran into the hundreds of millions of 1976 dollars — roughly a billion in today's terms.\n\n## What caused the collapse\n\nA federal panel convened after the disaster traced the failure to internal erosion — \"piping\" — through the dam's foundation key trench. Water found a path through fissured volcanic rock that the design had not adequately accounted for, washed fine material out of the embankment from the inside, and progressively enlarged the void until the structure could no longer hold. The panel's findings reshaped earthen dam design standards across the United States and led the Bureau of Reclamation to abandon several similar projects already on the drawing board.\n\n## The recovery, and the chain it forged\n\nWhat happened in the weeks after the flood is, in many ways, the more remarkable story. Neighbors arrived from across Idaho, Utah, and Wyoming with shovels, tractors, and food. Volunteers — many organized through local LDS wards and stakes — cleared mud from homes that strangers owned. Insurance and federal recovery funds eventually flowed, but the first wave of cleanup was almost entirely a community effort. The towns rebuilt. Five decades later, the people of the Upper Snake River Valley still mark June 5 as a day that defines the region.\n\n## Turbulent Waters: a novel set inside the disaster\n\nAuthor Edmond A Porter grew up an hour west of the flood zone, in Preston, Idaho. His debut novel, *[Turbulent Waters](/books/turbulent-waters)*, places fictional characters inside the real geography and timeline of the collapse. Jake Ford works as an assistant engineer on the dam. Anna Stone fights its construction to protect the Yellowstone Cutthroat trout habitat downstream. The river brings them together. The flood tears their worlds apart.\n\nThe novel releases on June 1, 2026 from Redwood Vail Press — four days before the 50th anniversary of the breach.\n\n## Flood 50: the 2026 commemoration\n\nThe **City of Rexburg** is hosting *Flood 50*, a week of commemorative events marking the 50th anniversary of the Teton Dam collapse in **June 2026**. The commemoration honors the eleven people who died, the families who rebuilt, and the volunteers who arrived from across the region in the weeks after the disaster.\n\nFull details and the official schedule are published by Rexburg Cultural Arts:\n\n- **Event home:** [rexburg.org/o/arts/page/flood-50](https://www.rexburg.org/o/arts/page/flood-50)\n- **Schedule of events:** [rexburg.org/o/arts/page/flood-50-schedule](https://www.rexburg.org/o/arts/page/flood-50-schedule)\n\n### Meet Edmond A Porter at Flood 50\n\nEdmond will be attending Flood 50 in person and selling signed copies of *Turbulent Waters* during the commemoration. If you are traveling to Rexburg for the events — or live nearby and plan to attend — stop by to talk about the history, the novel, and the people who lived through the flood.\n\n*Specific booth location and signing times will be posted here as they are confirmed. For media inquiries or to arrange a meeting at the event, use the [contact form](/#contact).*\n\n## Further reading\n\n- *[Turbulent Waters](/books/turbulent-waters)* — Edmond A Porter's historical fiction novel set against the collapse. Pre-order on Amazon Kindle.\n- *[The Seasons That Made Me](/books/the-seasons-that-made-me)* — Memoir essays drawn from Edmond's Preston, Idaho upbringing, including reflections on the eastern Idaho landscape the flood reshaped.",
+  "event": {
+    "name": "Flood 50 — Teton Dam 50th Anniversary Commemoration",
+    "startDate": "2026-06-01",
+    "endDate": "2026-06-06",
+    "url": "https://www.rexburg.org/o/arts/page/flood-50",
+    "description": "A week of commemorative events hosted by the City of Rexburg marking the 50th anniversary of the June 5, 1976 Teton Dam collapse. Author Edmond A Porter will attend in person and sign copies of his historical fiction novel Turbulent Waters.",
+    "locationName": "Rexburg, Idaho",
+    "locationAddress": {
+      "@type": "PostalAddress",
+      "addressLocality": "Rexburg",
+      "addressRegion": "ID",
+      "addressCountry": "US"
+    },
+    "organizerName": "City of Rexburg",
+    "organizerUrl": "https://www.rexburg.org/o/arts/page/flood-50",
+    "performerName": "Edmond A Porter",
+    "performerUrl": "https://edmondaporter.com",
+    "aboutEvent": {
+      "name": "Teton Dam collapse",
+      "startDate": "1976-06-05",
+      "locationName": "Teton River, Fremont and Madison counties, Idaho"
+    }
+  },
+  "seo": {
+    "metaTitle": "The 1976 Teton Dam Collapse | History, Flood 50 Anniversary & Turbulent Waters",
+    "metaDescription": "What happened at the Teton Dam in 1976, where the flood hit, and how Rexburg is marking the 50th anniversary at Flood 50 — with author Edmond A Porter in attendance signing copies of Turbulent Waters."
+  }
+}

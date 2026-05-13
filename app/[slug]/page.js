@@ -4,6 +4,7 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import Navigation from '@/src/components/Navigation';
 import Footer from '@/src/components/Footer';
+import { getStructuredData } from '@/app/utils/structuredData';
 
 export const dynamicParams = false;
 
@@ -104,8 +105,18 @@ export default async function GenericPage({ params }) {
     );
   }
   
+  const eventSchema = page.event
+    ? getStructuredData('event', { ...page.event, url: page.event.url || `https://edmondaporter.com/${slug}` })
+    : null;
+
   return (
     <>
+      {eventSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
+        />
+      )}
       <Navigation />
       <main className="min-h-screen bg-white mt-16">
         {/* Hero Section */}

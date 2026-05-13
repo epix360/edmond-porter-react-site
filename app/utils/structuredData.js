@@ -158,6 +158,53 @@ const getStructuredData = (type, data = {}) => {
         }
       };
 
+    case 'event':
+      // data: { name, startDate, endDate, url, description, locationName,
+      //         locationAddress, organizerName, organizerUrl, performerName,
+      //         performerUrl, aboutEvent, image }
+      return {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": data.name,
+        "startDate": data.startDate,
+        "endDate": data.endDate || data.startDate,
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "url": data.url,
+        "description": data.description,
+        "location": {
+          "@type": "Place",
+          "name": data.locationName,
+          "address": data.locationAddress
+        },
+        ...(data.organizerName && {
+          "organizer": {
+            "@type": "Organization",
+            "name": data.organizerName,
+            "url": data.organizerUrl
+          }
+        }),
+        ...(data.performerName && {
+          "performer": {
+            "@type": "Person",
+            "name": data.performerName,
+            "url": data.performerUrl
+          }
+        }),
+        ...(data.aboutEvent && {
+          "about": {
+            "@type": "Event",
+            "name": data.aboutEvent.name,
+            "startDate": data.aboutEvent.startDate,
+            "location": {
+              "@type": "Place",
+              "name": data.aboutEvent.locationName
+            }
+          }
+        }),
+        ...(data.image && { "image": data.image })
+      };
+
     case 'breadcrumb':
       // data.items: [{ name, url }] in trail order, e.g.
       //   [{ name: 'Home', url: 'https://...' }, { name: 'Books', url: '...' }, { name: 'Title', url: '...' }]
