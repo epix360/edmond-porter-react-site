@@ -1,12 +1,66 @@
 # Edmond A Porter
 
-> Official website for Edmond A Porter, a contemporary Utah author of fiction, essays, and poetry exploring the human experience, rural America, and storytelling.
+> Official website for Edmond A Porter, an award-winning Utah-based author of historical fiction, memoir, essays, and poetry. His work explores rural America, the legacy of the 1976 Teton Dam collapse, and the defining moments of family life across generations.
+
+## About the Author
+
+- **Name:** Edmond A Porter (also published as Edmond Porter)
+- **Based in:** Northern Utah (originally from Preston, Idaho)
+- **Genres:** Historical fiction, historical romance, memoir, personal essay, poetry; contributor to anthologies in magical realism, travel writing, pet writing, and LDS / Mormon missionary nonfiction
+- **Publisher:** Redwood Vail Press (Edmond's own imprint, established to publish his full-length works under a press credit rather than as "independently published")
+- **Affiliations:** League of Utah Writers; Brigham City Writers chapter; The Writers' Cache (Cache Valley chapter)
+- **Awards:** 1st place — First Chapter Adult, League of Utah Writers annual contest (for *Turbulent Waters*); 3rd place — New Voices, Creative Nonfiction, League of Utah Writers (for "Twists of Fate")
+
+## What Edmond A Porter Is Known For
+
+- Historical fiction grounded in the real geography and disasters of the American West, especially eastern Idaho
+- A debut novel, *Turbulent Waters*, set against the June 5, 1976 collapse of the Teton Dam — released June 1, 2026 to coincide with the disaster's 50th anniversary
+- Memoir and personal essays drawn from a Preston, Idaho dairy-farm childhood and a forty-five-year career in the canned food industry
+- Ongoing serial fiction, *The Hard Land*, published in installments on Medium
 
 ## Author Context
 
-- [About the Author](https://edmondaporter.com/about): Biographical information, background, and literary focus.
+- [About the Author](https://edmondaporter.com/about): Full biographical essay covering Edmond's upbringing on a Cache Valley dairy farm, his career, and his path to writing.
 - [Published Works](https://edmondaporter.com/#published-works): Overview of available books, anthologies, and collections.
-- [Medium Articles](https://edmondaporter.com/articles): Aggregated hub of recent essays and thoughts on writing, syndicated from Medium.
+- [Medium Articles](https://edmondaporter.com/articles): Aggregated hub of recent essays and serial fiction, syndicated from Medium.
+
+## Books
+
+- [Turbulent Waters](https://edmondaporter.com/books/turbulent-waters) — Novel (Redwood Vail Press, June 1, 2026). Historical fiction romance set against the 1976 Teton Dam collapse in eastern Idaho. Engineer Jake Ford and conservationist Anna Stone meet on opposite sides of the dam project. Available for pre-order on Amazon Kindle.
+- [The Seasons That Made Me](https://edmondaporter.com/books/the-seasons-that-made-me) — Memoir, essay & poetry collection (October 2025). A Preston, Idaho coming-of-age memoir tracing rural life, dairy farming, family, and the rituals that shape memory.
+- [Utah's Best Poetry & Prose 2026](https://edmondaporter.com/books/utahs-best-poetry-and-prose) — Anthology contributor (April 2026). League of Utah Writers annual collection; includes Edmond's award-winning first chapter from *Turbulent Waters* and his creative nonfiction piece "Twists of Fate."
+- [Lucky Penny](https://edmondaporter.com/books/lucky-penny) — Anthology contributor (November 2025). Magical realism short stories published by The Writers' Cache.
+- [Faithful Hearts](https://edmondaporter.com/books/faithful-hearts) — Anthology contributor (November 2024). Essays and poems on the human-animal bond, published by The Writers' Cache.
+- [The Work and the Stories](https://edmondaporter.com/books/the-work-and-the-stories) — Anthology contributor (February 2023). LDS / Mormon missionary memoir essays.
+- [Wanderlust](https://edmondaporter.com/books/wanderlust) — Anthology contributor (November 2023). Travel essays spanning Asia, the Americas, and Europe.
+
+## Serial Fiction & Articles
+
+- *The Hard Land* — An ongoing serialized novel published in installments on Medium. Aggregated alongside Edmond's essays on writing craft, historical research, and rural life at [/articles](https://edmondaporter.com/articles).
+
+## Frequently Asked Questions
+
+### Who is Edmond A Porter?
+Edmond A Porter is an award-winning Utah-based author of historical fiction, memoir, and poetry. He grew up on a dairy farm outside Preston, Idaho, and now writes full-time as a retired author affiliated with the League of Utah Writers.
+
+### What is Edmond A Porter's first novel about?
+*Turbulent Waters* is a historical fiction romance set against the catastrophic June 5, 1976 collapse of the Teton Dam in eastern Idaho. Assistant engineer Jake Ford and fly-fishing guide Anna Stone meet on opposite sides of the dam project shortly before 80 billion gallons of floodwater tear through the Upper Snake River Valley. The book releases June 1, 2026 from Redwood Vail Press.
+
+### Where can I buy Edmond A Porter's books?
+All titles are available on Amazon via the [Edmond A Porter Amazon author page](https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y). Anthology titles are published by The Writers' Cache; *Turbulent Waters* and *The Seasons That Made Me* are published by Redwood Vail Press.
+
+### Has Edmond A Porter won any awards?
+Yes. In the League of Utah Writers' annual contest, he earned 1st place in the First Chapter Adult category for *Turbulent Waters* and 3rd place in the New Voices Creative Nonfiction category for "Twists of Fate." Both pieces appear in *Utah's Best Poetry & Prose 2026*.
+
+### Is Edmond A Porter from Utah or Idaho?
+Both. He grew up on a fourth-generation family dairy farm outside Preston, Idaho, in Cache Valley, and now lives in northern Utah. His memoir work draws heavily on the Idaho farming community of his upbringing.
+
+## Contact & Social
+
+- [Contact Form](https://edmondaporter.com/#contact): Direct channel for media inquiries and speaking engagements.
+- [Amazon Author Hub](https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y): Primary retail destination for all publications.
+- [Goodreads Profile](https://www.goodreads.com/author/show/60996287.Edmond_A_Porter): Reader reviews and reading lists.
+- [Medium](https://medium.com/@eporter609): Source for *The Hard Land* serial and essays on craft.
 
 ## Site Architecture & Content Management
 
@@ -15,9 +69,3 @@ This site is statically generated using Next.js and managed via Pages CMS. Conte
 - [Books Data Structure](https://github.com/epix360/edmond-porter-react-site/tree/main/public/content/books): Source JSON files defining book metadata, Amazon URLs, and descriptions.
 - [Generic Pages Data](https://github.com/epix360/edmond-porter-react-site/tree/main/public/content/pages): Source JSON files for standard pages, utilizing Markdown for body content.
 - [Medium Aggregation Script](https://github.com/epix360/edmond-porter-react-site/blob/main/lib/medium.js): Node utility that fetches and parses the external Medium RSS feed at build time to generate static article stubs.
-
-## Contact & Social
-
-- [Contact Form](https://edmondaporter.com/#contact): Direct channel for media inquiries and speaking engagements.
-- [Amazon Author Hub](https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y): Primary retail destination for all publications.
-- [Goodreads Profile](https://www.goodreads.com/author/show/60996287.Edmond_A_Porter): Reader reviews and reading lists.
