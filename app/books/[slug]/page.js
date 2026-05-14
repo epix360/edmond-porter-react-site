@@ -117,7 +117,7 @@ export default async function BookPage({ params }) {
     keywords: book.keywords || null,
     about: book.about || null,
     publisher: book.publisher === 'Redwood Vail Press'
-      ? { '@id': 'https://edmondaporter.com/#redwood-vail-press' }
+      ? { '@id': 'https://edmondaporter.com/redwood-vail-press#org' }
       : book.publisher
         ? { '@type': 'Organization', name: book.publisher }
         : null,

@@ -149,9 +149,9 @@ const getStructuredData = (type, data = {}) => {
       return {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "@id": "https://edmondaporter.com/#redwood-vail-press",
+        "@id": "https://edmondaporter.com/redwood-vail-press#org",
         "name": "Redwood Vail Press",
-        "url": "https://edmondaporter.com",
+        "url": "https://edmondaporter.com/redwood-vail-press",
         "logo": {
           "@type": "ImageObject",
           "url": "https://edmondaporter.com/images/Redwood-Vail-Press-Publisher-Logo.webp"

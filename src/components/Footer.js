@@ -11,10 +11,12 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-center mb-3">
                     <div className="order-2 md:order-1 pt-3">
-                        <Image src="/images/Redwood-Vail-Press-Logo.webp" alt="Redwood Vail Press Logo" width={180} height={180} className="rounded-xl" style={{ width: 180, height: 180 }} />
-                        <div className="w-full max-w-sm text-slate-300 pt-2"> 
-                            <span className="uppercase tracking-wide text-slate-300">Redwood Vail Press</span>
-                        </div>
+                        <Link href="/redwood-vail-press" className="inline-block group" title="About Redwood Vail Press">
+                            <Image src="/images/Redwood-Vail-Press-Logo.webp" alt="Redwood Vail Press Logo" width={180} height={180} className="rounded-xl transition-opacity group-hover:opacity-90" style={{ width: 180, height: 180 }} />
+                            <div className="w-full max-w-sm text-slate-300 pt-2">
+                                <span className="uppercase tracking-wide text-slate-300 group-hover:text-amber-500 transition-colors">Redwood Vail Press</span>
+                            </div>
+                        </Link>
                     </div>
                     <div className="text-center md:text-left order-1 md:order-2">
                         <Link className="text-3xl font-headline italic text-slate-300 block" href="/">Edmond A Porter</Link>
