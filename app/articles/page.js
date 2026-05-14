@@ -47,7 +47,7 @@ export default async function ArticlesPage() {
         {/* Featured Collections */}
         <section aria-labelledby="collections-heading" className="mb-12">
           <h2 id="collections-heading" className="text-sm uppercase tracking-wider font-bold text-on-surface-variant mb-4">
-            Fiction collections
+            Collections
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <Link
@@ -76,7 +76,7 @@ export default async function ArticlesPage() {
             >
               <div className="flex items-start justify-between mb-2">
                 <span className="text-xs uppercase tracking-wider font-bold text-secondary">
-                  Short fiction
+                  Short stories & essays
                 </span>
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors">
                   arrow_forward
@@ -86,7 +86,7 @@ export default async function ArticlesPage() {
                 Short Stories
               </h3>
               <p className="text-on-surface-variant">
-                Standalone short fiction — suspense, literary, and personal stories including <em>The MaGee House</em>, <em>The C-Word</em>, and more.
+                Standalone short stories and creative nonfiction — including <em>The MaGee House</em>, <em>The C-Word</em>, and more.
               </p>
             </Link>
           </div>
