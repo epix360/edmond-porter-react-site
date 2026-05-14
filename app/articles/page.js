@@ -39,12 +39,63 @@ export default async function ArticlesPage() {
             Latest Articles
           </h1>
           <p className="text-lg text-on-surface-variant">
-            Thoughts on writing, creativity, and the stories behind the stories. 
+            Thoughts on writing, creativity, and the stories behind the stories.
             All articles originally published on Medium.
           </p>
         </header>
-        
+
+        {/* Featured Collections */}
+        <section aria-labelledby="collections-heading" className="mb-12">
+          <h2 id="collections-heading" className="text-sm uppercase tracking-wider font-bold text-on-surface-variant mb-4">
+            Fiction collections
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Link
+              href="/the-hard-land"
+              className="group block bg-surface-container rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow border-l-4 border-secondary"
+            >
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-xs uppercase tracking-wider font-bold text-secondary">
+                  Serial novel
+                </span>
+                <span className="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors">
+                  arrow_forward
+                </span>
+              </div>
+              <h3 className="font-headline text-2xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors">
+                The Hard Land
+              </h3>
+              <p className="text-on-surface-variant">
+                A 33-part serial novel of love and survival in the early 20th-century American West. Start at Part 1 and follow the story chapter by chapter.
+              </p>
+            </Link>
+
+            <Link
+              href="/short-stories"
+              className="group block bg-surface-container rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow border-l-4 border-secondary"
+            >
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-xs uppercase tracking-wider font-bold text-secondary">
+                  Short fiction
+                </span>
+                <span className="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors">
+                  arrow_forward
+                </span>
+              </div>
+              <h3 className="font-headline text-2xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors">
+                Short Stories
+              </h3>
+              <p className="text-on-surface-variant">
+                Standalone short fiction — suspense, literary, and personal stories including <em>The MaGee House</em>, <em>The C-Word</em>, and more.
+              </p>
+            </Link>
+          </div>
+        </section>
+
         {/* Articles Grid */}
+        <h2 className="text-sm uppercase tracking-wider font-bold text-on-surface-variant mb-4">
+          All articles
+        </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {articles.length > 0 ? (
             articles.map((article, index) => (
