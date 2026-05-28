@@ -79,11 +79,10 @@ const Navigation = () => {
                     </button>
                     <div className="flex flex-col p-8 gap-8 text-2xl font-headline text-primary">
                         <Link href="/" onClick={() => { setMobileMenuOpen(false); setActiveAnchor(null); if (pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }} className={pathname === '/' && !activeAnchor ? 'text-secondary' : ''}>Home</Link>
-                        <Link href={isHome ? "#about-teaser" : "/#about-teaser"} onClick={(e) => handleAnchorClick(e, 'about-teaser')} className={activeAnchor === '#about-teaser' ? 'text-secondary' : ''}>About</Link>
                         <Link href={isHome ? "#published-works" : "/#published-works"} onClick={(e) => handleAnchorClick(e, 'published-works')} className={activeAnchor === '#published-works' ? 'text-secondary' : ''}>Books</Link>
                         <Link href={isHome ? "#medium" : "/#medium"} onClick={(e) => handleAnchorClick(e, 'medium')} className={activeAnchor === '#medium' ? 'text-secondary' : ''}>Medium</Link>
                         <Link href={isHome ? "#contact" : "/#contact"} onClick={(e) => handleAnchorClick(e, 'contact')} className={activeAnchor === '#contact' ? 'text-secondary' : ''}>Contact</Link>
-                        <Link href="/about" onClick={() => { setMobileMenuOpen(false); setActiveAnchor(null); }} className={pathname === '/about' ? 'text-secondary' : ''}>Bio</Link>
+                        <Link href="/about" onClick={() => { setMobileMenuOpen(false); setActiveAnchor(null); }} className={pathname === '/about' ? 'text-secondary' : ''}>About</Link>
                         <hr className="border-slate-300/30 shadow-sm" />
                         <a className="bg-secondary text-white text-center py-4 rounded-xl text-lg font-label shadow-xl hover:shadow-2xl transition-shadow" href="https://www.amazon.com/stores/Edmond-A-Porter/author/B0FXDLK38Y" target="_blank" rel="noopener noreferrer">
                             Amazon Store
