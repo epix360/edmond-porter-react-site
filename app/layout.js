@@ -102,14 +102,12 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-        {/* LCP image preload — must match the URL the <Image> in HomePageTop.js
-            actually requests, otherwise the preload is wasted. */}
-        <link
-          rel="preload"
-          as="image"
-          href="/images/Turbulent_Waters.webp"
-          fetchPriority="high"
-        />
+        {/* No manual LCP image preload: the hero <img> in HomePageTop.js carries
+            fetchPriority="high", so Next.js auto-generates a responsive preload
+            (with imageSrcSet/imageSizes) matching the exact variant it renders.
+            A manual href-only preload here just duplicated it with the wrong
+            (full-size) variant, which the browser flagged as "preloaded but not
+            used." */}
 
         {/* Site-wide JSON-LD: WebSite + Person */}
         <script
