@@ -13,6 +13,9 @@ export const metadata = {
   openGraph: {
     title: 'Edmond A Porter | Utah Historical Fiction & Memoir Author',
     description: 'Official site of Edmond A Porter, award-winning Utah author of Turbulent Waters, The Seasons That Made Me, and more. Historical fiction, memoir, and poetry rooted in the American West.',
+    url: '/',
+    siteName: 'Edmond A Porter',
+    type: 'website',
     images: ['/images/Edmond_Headshot.webp'],
   },
   twitter: {

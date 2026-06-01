@@ -14,6 +14,9 @@ export const metadata = {
     title: 'Publications | Edmond A Porter',
     description: 'Browse the complete bibliography of Edmond A Porter — novels, essay collections, and anthologies rooted in the American West.',
     url: '/publications',
+    siteName: 'Edmond A Porter',
+    type: 'website',
+    images: ['/images/Edmond_Headshot.webp'],
   },
 };
 

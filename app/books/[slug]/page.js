@@ -44,6 +44,9 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title: book.seo.metaTitle,
         description: book.seo.metaDescription,
+        url: `/books/${slug}`,
+        siteName: 'Edmond A Porter',
+        type: 'website',
         images: [coverImage],
       },
       twitter: {

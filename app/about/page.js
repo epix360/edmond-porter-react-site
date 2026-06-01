@@ -49,6 +49,8 @@ export async function generateMetadata() {
       title: seo.ogTitle || seo.metaTitle || data.ogTitle || data.metaTitle || 'About Edmond A Porter',
       description: seo.ogDescription || seo.metaDescription || data.ogDescription || data.metaDescription || 'Discover the biography and writing journey of Edmond A Porter.',
       url: '/about',
+      siteName: 'Edmond A Porter',
+      type: 'website',
       images: [image],
     },
     twitter: {

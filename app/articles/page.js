@@ -13,6 +13,9 @@ export const metadata = {
     title: 'Articles | Edmond A Porter',
     description: 'Latest articles and thoughts on writing, creativity, and storytelling.',
     url: '/articles',
+    siteName: 'Edmond A Porter',
+    type: 'website',
+    images: ['/images/Edmond_Headshot.webp'],
   },
 };
 

@@ -63,6 +63,9 @@ export async function generateMetadata({ params }) {
         title: page.seo?.metaTitle || page.title,
         description: page.seo?.metaDescription || page.body?.slice(0, 160) || '',
         url: `/${slug}`,
+        siteName: 'Edmond A Porter',
+        type: 'website',
+        images: [page.seo?.ogImage || '/images/Edmond_Headshot.webp'],
       },
     };
   } catch (error) {
@@ -71,6 +74,8 @@ export async function generateMetadata({ params }) {
       description: 'Discover this page by Edmond A Porter.',
       openGraph: {
         url: `/${slug}`,
+        siteName: 'Edmond A Porter',
+        type: 'website',
       },
     };
   }
