@@ -93,6 +93,13 @@ const isUpToDate = (variantFile, sourceFile) => {
       console.log(`  generated ${path.basename(out)} (${kb}KB)`);
     }
 
+    // Re-compress the original through sharp at the same quality setting.
+    // The original is served as the highest-resolution srcset entry, so it
+    // benefits from the same encoder pass as the resized variants.
+    const tmp = sourceFile + '.tmp.webp';
+    await sharp(sourceFile).webp({ quality: QUALITY }).toFile(tmp);
+    fs.renameSync(tmp, sourceFile);
+
     manifest[filename] = {
       widths: [...widths, originalWidth].sort((a, b) => a - b),
       originalWidth,

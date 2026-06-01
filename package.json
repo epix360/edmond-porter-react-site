@@ -33,11 +33,11 @@
     "typescript": "6.0.3"
   },
   "browserslist": [
-    ">0.5%",
-    "last 2 versions",
-    "Firefox ESR",
-    "not dead",
-    "not op_mini all",
-    "supports es6-module"
+    "chrome >= 91",
+    "edge >= 91",
+    "firefox >= 90",
+    "safari >= 15",
+    "ios_saf >= 15",
+    "not dead"
   ]
 }
