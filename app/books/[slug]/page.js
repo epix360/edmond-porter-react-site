@@ -188,7 +188,7 @@ export default async function BookPage({ params }) {
             {/* Book Cover - full width on mobile, floated on desktop */}
             <div className="relative aspect-[2/3] w-full max-w-xs md:max-w-sm lg:max-w-md md:float-left md:mr-8 md:mb-4 mx-auto md:mx-0 rounded-lg shadow-2xl overflow-hidden mb-6 md:mb-0">
               <Image
-                src={`/images/${book.image}`}
+                src={`/images/${book.image.replace(/^\//, '')}`}
                 alt={`${book.title} book cover`}
                 fill
                 className="object-cover"
