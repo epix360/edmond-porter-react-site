@@ -20,19 +20,19 @@ const getStatusTemplate = (status, showSpecificDate, releaseDate, customDateText
     "new-release": { 
       icon: "auto_awesome", 
       text: "New Release!", 
-      color: "text-secondary",
-      label: "Just Released"
+      color: "text-secondary-fixed-dim",
+      label: "Available now"
     },
     "bestseller": { 
       icon: "military_tech", 
       text: "Bestseller", 
-      color: "text-amber-600",
+      color: "text-secondary-fixed-dim",
       label: "Bestselling Book"
     },
     "available": { 
       icon: "check_circle", 
       text: "Available Now", 
-      color: "text-primary",
+      color: "text-secondary-fixed-dim",
       label: "Available"
     }
   };
