@@ -112,8 +112,8 @@ export default async function BookPage({ params }) {
       name: 'Edmond A Porter',
       url: 'https://edmondaporter.com',
     },
-    isbn: book.isbn || null,
-    bookFormat: 'https://schema.org/EBook',
+    isbn: book.formats?.find(f => f.isbn)?.isbn ?? book.isbn ?? null,
+    bookFormat: book.formats?.length === 1 ? book.formats[0].bookFormatSchema : (book.formats ? null : 'https://schema.org/EBook'),
     numberOfPages: book.numberOfPages || null,
     datePublished: hasReleaseDate ? new Date(book.releaseDate).toISOString() : null,
     genre: book.genre || null,
@@ -125,13 +125,21 @@ export default async function BookPage({ params }) {
         ? { '@type': 'Organization', name: book.publisher }
         : null,
     url: `https://edmondaporter.com/books/${book.slug}`,
-    offers: {
-      '@type': 'Offer',
-      url: book.amazonUrl,
-      availability: availability,
-      price: book.price || '0.00',
-      priceCurrency: 'USD',
-    },
+    offers: book.formats
+      ? book.formats.map(f => ({
+          '@type': 'Offer',
+          url: f.amazonUrl,
+          price: f.price,
+          priceCurrency: 'USD',
+          availability: availability,
+        }))
+      : {
+          '@type': 'Offer',
+          url: book.amazonUrl,
+          availability: availability,
+          price: book.price || '0.00',
+          priceCurrency: 'USD',
+        },
   };
 
   // Remove null/empty values from schema
