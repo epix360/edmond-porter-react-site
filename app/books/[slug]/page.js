@@ -126,6 +126,7 @@ export default async function BookPage({ params }) {
         ? { '@type': 'Organization', name: book.publisher }
         : null,
     url: `https://edmondaporter.com/books/${book.slug}`,
+    sameAs: book.sameAs || null,
     offers: book.formats
       ? book.formats.map(f => ({
           '@type': 'Offer',

@@ -24,6 +24,10 @@
   "featured": true,
   "authorship": "author",
   "type": "Novel",
+  "sameAs": [
+    "https://books.google.com/books/about/Turbulent_Waters.html",
+    "https://www.goodreads.com/book/show/250554462-turbulent-waters"
+  ],
   "seo": {
     "metaTitle": "Turbulent Waters | Teton Dam collapse historical fiction romance novel by Edmond A Porter",
     "metaDescription": "Teton Dam Collapse 1976: Award-winning author Edmond A Porter's historical fiction novel, Turbulent Waters, captures the Eastern Idaho disaster in Rexburg as the setting for a romantic tale."
