@@ -103,7 +103,7 @@ export default async function BookPage({ params }) {
   // Build Book schema.org structured data
   const bookSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Book',
+    '@type': ['Book', 'Product'],
     '@id': `https://edmondaporter.com/books/${book.slug}`,
     name: book.title,
     description: book.description,

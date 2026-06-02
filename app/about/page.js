@@ -32,7 +32,7 @@ const bookshelfSchemaData = {
       ? 'https://schema.org/PreOrder'
       : 'https://schema.org/InStock';
     return {
-      '@type': 'Book',
+      '@type': ['Book', 'Product'],
       '@id': canonicalUrl,
       position: index + 1,
       name: book.title,
