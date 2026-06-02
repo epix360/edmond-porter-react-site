@@ -7,6 +7,7 @@ import AboutBookshelf from '@/app/components/AboutBookshelf';
 import { getResponsiveImage } from '@/app/utils/responsiveImage';
 import { convertMarkdown } from '@/app/utils/markdown';
 import { fallbackContent } from '@/src/data/fallbackContent';
+import { allBooks, sortBooks } from '@/lib/books';
 
 function loadAboutData() {
   try {
@@ -20,6 +21,39 @@ function loadAboutData() {
 }
 
 const aboutData = loadAboutData();
+
+const bookshelfSchemaData = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: sortBooks(allBooks).map((book, index) => {
+    const canonicalUrl = `https://edmondaporter.com/books/${book.slug}`;
+    const hasReleaseDate = book.releaseDate && book.releaseDate.trim() !== '';
+    const availability = hasReleaseDate && new Date(book.releaseDate) > new Date()
+      ? 'https://schema.org/PreOrder'
+      : 'https://schema.org/InStock';
+    return {
+      '@type': 'Book',
+      '@id': canonicalUrl,
+      position: index + 1,
+      name: book.title,
+      url: canonicalUrl,
+      offers: book.formats
+        ? book.formats.map(f => ({
+            '@type': 'Offer',
+            ...(f.amazonUrl && { url: f.amazonUrl }),
+            price: f.price,
+            priceCurrency: 'USD',
+            availability,
+          }))
+        : {
+            '@type': 'Offer',
+            url: book.amazonUrl,
+            priceCurrency: 'USD',
+            availability,
+          },
+    };
+  }),
+};
 
 function loadTimeline() {
   const years = ['2025', '2026'];
@@ -80,6 +114,10 @@ export default function AboutPage() {
 
   return (
     <div className="bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(bookshelfSchemaData) }}
+      />
       <Navigation />
 
       <main className="pt-16 md:pt-16">

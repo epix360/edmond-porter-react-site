@@ -104,6 +104,7 @@ export default async function BookPage({ params }) {
   const bookSchema = {
     '@context': 'https://schema.org',
     '@type': 'Book',
+    '@id': `https://edmondaporter.com/books/${book.slug}`,
     name: book.title,
     description: book.description,
     image: `https://edmondaporter.com/images/${book.image.replace(/^\//, '')}`,
