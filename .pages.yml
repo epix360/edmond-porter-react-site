@@ -50,6 +50,12 @@ content:
       - { name: featured, label: "Featured Book", type: boolean, default: false }
       - { name: authorship, label: "Authorship", type: select, options: { values: [{ value: "author", label: "By Edmond A Porter" }, { value: "contributor", label: "Featuring Edmond A Porter" }] }, default: "author" }
       - { name: type, label: "Book Type", type: string, description: "e.g., Novel, Memoir, Anthology, Poetry Collection" }
+      - { name: genre, label: "Genre", type: string, description: "Structured-data genre, e.g., Historical Fiction, Memoir" }
+      - { name: keywords, label: "Keywords", type: string, list: true, description: "Topic keywords for structured data." }
+      - { name: about, label: "About (Subject)", type: text, description: "What the book is about — feeds the schema.org about property." }
+      - { name: numberOfPages, label: "Number of Pages", type: number }
+      - { name: isbn, label: "ISBN (fallback)", type: string, description: "Top-level ISBN used only if no format-level ISBN is set." }
+      - { name: publisher, label: "Publisher", type: string, description: "Publisher name. Use exactly \"Redwood Vail Press\" to link the canonical publisher entity in structured data." }
       - { name: sameAs, label: "Related URLs (Goodreads, Google Books, etc.)", type: string, list: true, description: "Authoritative links about this book — feeds the sameAs property in structured data." }
       - name: seo
         label: "SEO Metadata"
