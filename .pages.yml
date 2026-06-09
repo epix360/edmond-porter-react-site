@@ -36,9 +36,21 @@ content:
       - { name: body, label: "Extended Content", type: rich-text }
       - { name: image, label: "Book Cover Image", type: image }
       - { name: amazonUrl, label: "Amazon Purchase URL", type: string }
+      - name: formats
+        label: "Formats & Pricing"
+        type: object
+        list: true
+        description: "Each format (Kindle, Paperback, etc.) powers the price shown in Google Product/Merchant rich results. Leave empty only if the book has no purchasable formats."
+        fields:
+          - { name: label, label: "Format Label", type: string, description: "e.g., Kindle, Paperback, Hardcover" }
+          - { name: amazonUrl, label: "Amazon URL", type: string }
+          - { name: price, label: "Price (USD)", type: string, description: "Numeric only, e.g., 12.99 — no dollar sign" }
+          - { name: isbn, label: "ISBN", type: string }
+          - { name: bookFormatSchema, label: "Schema Format Type", type: select, options: { values: [{ value: "https://schema.org/EBook", label: "EBook" }, { value: "https://schema.org/Paperback", label: "Paperback" }, { value: "https://schema.org/Hardcover", label: "Hardcover" }, { value: "https://schema.org/AudiobookFormat", label: "Audiobook" }] } }
       - { name: featured, label: "Featured Book", type: boolean, default: false }
       - { name: authorship, label: "Authorship", type: select, options: { values: [{ value: "author", label: "By Edmond A Porter" }, { value: "contributor", label: "Featuring Edmond A Porter" }] }, default: "author" }
       - { name: type, label: "Book Type", type: string, description: "e.g., Novel, Memoir, Anthology, Poetry Collection" }
+      - { name: sameAs, label: "Related URLs (Goodreads, Google Books, etc.)", type: string, list: true, description: "Authoritative links about this book — feeds the sameAs property in structured data." }
       - name: seo
         label: "SEO Metadata"
         type: object
