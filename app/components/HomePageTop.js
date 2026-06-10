@@ -59,7 +59,7 @@ export default function HomePageTop() {
   const heroContent = heroData || fallbackContent.hero;
   const homeBioContent = homeBioData || fallbackContent.homeBio;
   const sortedBooks = sortBooks(allBooks);
-  const hero = getResponsiveImage('Turbulent_Waters.webp');
+  const hero = getResponsiveImage(heroContent?.cover || 'Turbulent_Waters.webp');
   const teaser = getResponsiveImage(homeBioContent?.teaserImage || 'Edmond_Headshot.webp');
 
   const statusTemplate = getStatusTemplate(
@@ -131,7 +131,7 @@ export default function HomePageTop() {
                 src={hero.src}
                 srcSet={hero.srcSet}
                 sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, 448px"
-                alt="Turbulent Waters book cover"
+                alt={`${heroContent?.title || 'Featured'} book cover`}
                 width={400}
                 height={600}
                 loading="eager"
