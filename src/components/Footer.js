@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import FullWidthText from 'app/components/FullWidthText.js';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
