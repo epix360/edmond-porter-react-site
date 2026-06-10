@@ -56,17 +56,27 @@ const bookshelfSchemaData = {
 };
 
 function loadTimeline() {
-  const years = ['2025', '2026'];
-  return years.map(year => {
-    try {
-      const filePath = path.join(process.cwd(), 'public/content/timeline', `${year}.json`);
-      const content = fs.readFileSync(filePath, 'utf8');
-      return JSON.parse(content);
-    } catch (error) {
-      console.error(`Error loading timeline ${year}:`, error);
-      return null;
-    }
-  }).filter(Boolean);
+  const timelineDir = path.join(process.cwd(), 'public/content/timeline');
+  let files;
+  try {
+    files = fs.readdirSync(timelineDir).filter(file => file.endsWith('.json'));
+  } catch (error) {
+    console.error('Error reading timeline directory:', error);
+    return [];
+  }
+
+  return files
+    .map(file => {
+      try {
+        const content = fs.readFileSync(path.join(timelineDir, file), 'utf8');
+        return JSON.parse(content);
+      } catch (error) {
+        console.error(`Error loading timeline ${file}:`, error);
+        return null;
+      }
+    })
+    .filter(Boolean)
+    .sort((a, b) => String(a.year).localeCompare(String(b.year)));
 }
 
 export async function generateMetadata() {
