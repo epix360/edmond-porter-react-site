@@ -93,12 +93,9 @@ const isUpToDate = (variantFile, sourceFile) => {
       console.log(`  generated ${path.basename(out)} (${kb}KB)`);
     }
 
-    // Re-compress the original through sharp at the same quality setting.
-    // The original is served as the highest-resolution srcset entry, so it
-    // benefits from the same encoder pass as the resized variants.
-    const tmp = sourceFile + '.tmp.webp';
-    await sharp(sourceFile).webp({ quality: QUALITY }).toFile(tmp);
-    fs.renameSync(tmp, sourceFile);
+    // Never re-encode the original in place: each lossy encode pass degrades
+    // it a little more, and this script runs on every build. Originals are
+    // compressed once (manually) when added; only the variants are generated.
 
     manifest[filename] = {
       widths: [...widths, originalWidth].sort((a, b) => a - b),
