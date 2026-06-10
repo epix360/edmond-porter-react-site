@@ -8,8 +8,9 @@ import { getStructuredData } from '@/app/utils/structuredData';
 
 export const dynamicParams = false;
 
-// Reserved slugs that cannot be used for CMS pages
-const RESERVED_SLUGS = ['about', 'admin', 'books'];
+// Reserved slugs that cannot be used for CMS pages — every static route in
+// app/ plus the CMS admin path. Keep in sync when adding new routes.
+const RESERVED_SLUGS = ['about', 'admin', 'articles', 'books', 'links', 'publications'];
 
 // Read all page JSON files and return static params
 export async function generateStaticParams() {
