@@ -46,9 +46,16 @@ export default function HomePageBottom() {
     try {
       // Import emailjs dynamically
       const emailjs = (await import('@emailjs/browser')).default;
-      
+
       const [emailResponse, sheetResponse] = await Promise.allSettled([
-        emailjs.sendForm('service_g5clgej', 'template_2flsjn5', form),
+        emailjs.sendForm('service_g5clgej', 'template_2flsjn5', form, {
+          publicKey: 'HfqzXzg24u4VT7IwB',
+          blockHeadless: true, // Prevents headless browser spam
+          limitRate: {
+            id: 'contact-form',
+            throttle: 60000, // Users can only send 1 email every 60 seconds
+          },
+        }),
         fetch(GOOGLE_SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
