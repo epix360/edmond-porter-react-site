@@ -5,6 +5,7 @@
   "homepage": "https://edmondaporter.com",
   "private": true,
   "scripts": {
+    "predev": "npm run build:images",
     "dev": "next dev",
     "build:images": "node scripts/build-image-sizes.js",
     "fetch:medium": "node scripts/fetch-medium.js",
