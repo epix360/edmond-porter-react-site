@@ -1,8 +1,7 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Navigation from '@/src/components/Navigation';
+import ScrollToHash from '@/app/components/ScrollToHash';
 import { getResponsiveImage } from '@/app/utils/responsiveImage';
 import { fallbackContent } from '@/src/data/fallbackContent';
 import heroData from '@/public/content/hero.json';
@@ -69,27 +68,9 @@ export default function HomePageTop() {
     heroContent.customDateText
   );
   
-  useEffect(() => {
-    if (!window.location.hash) {
-      window.scrollTo(0, 0);
-    }
-  }, []);
-
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (hash) {
-      // requestAnimationFrame ensures the browser has completely finished painting the DOM
-      requestAnimationFrame(() => {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    }
-  }, []);
-
   return (
     <>
+      <ScrollToHash />
       <Navigation />
       
       <main className="pt-16 md:pt-16">
