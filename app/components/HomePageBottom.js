@@ -76,7 +76,9 @@ export default function HomePageBottom() {
       }
       
       setSubmissionStatus("success");
-      form.reset();
+      // The inputs are controlled, so reset React state rather than the DOM —
+      // form.reset() would be undone by the next re-render.
+      setFormData({ name: '', email: '', subject: '', message: '', organization_name: '' });
       
     } catch (err) {
       setErrorMessage("Something went wrong. Please try again.");
