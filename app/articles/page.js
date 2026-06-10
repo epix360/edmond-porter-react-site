@@ -131,7 +131,7 @@ export default async function ArticlesPage() {
                   
                   {article.formattedDate && (
                     <time className="text-sm text-on-surface-variant mb-3 block">
-                      {new Date(article.formattedDate).toLocaleDateString('en-US', {
+                      {article.formattedDate.toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric'

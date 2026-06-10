@@ -12,7 +12,6 @@ const STATIC_URLS = [
   BASE_URL,
   `${BASE_URL}/about`,
   `${BASE_URL}/articles`,
-  `${BASE_URL}/books`,
   `${BASE_URL}/links`,
   `${BASE_URL}/publications`,
 ];
