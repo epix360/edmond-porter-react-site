@@ -1,0 +1,26 @@
+{
+  "title": "Gem State Gold: Legends of Lost Treasure",
+  "slug": "gem-state-gold",
+  "releaseDate": "2026-06-26",
+  "description": "From the earliest days of Idaho history, precious metals became the subject of oral histories passed on around the prospectors' campfires. Lost gold mines and daring stagecoach robberies elevated those oral histories to legends. Over 160 years later, those legends live on. This collection reimagines those legends, giving the reader a look into Idaho's storied past.",
+  "amazonUrl": "https://www.amazon.com/Gem-State-Gold-Legends-Treasure-ebook/dp/B0GX351QD2",
+  "formats": [
+    {
+      "label": "Kindle",
+      "amazonUrl": "https://www.amazon.com/Gem-State-Gold-Legends-Treasure-ebook/dp/B0GX351QD2",
+      "price": "4.99",
+      "isbn": "9798995226826",
+      "bookFormatSchema": "https://schema.org/EBook"
+    }
+  ],
+  "featured": false,
+  "authorship": "author",
+  "type": "Short Story Collection",
+  "genre": "Historical Fiction",
+  "numberOfPages": 81,
+  "publisher": "Redwood Vail Press",
+  "seo": {
+    "metaTitle": "Gem State Gold: Legends of Lost Treasure",
+    "metaDescription": "Legendary tales of lost gold mines and daring stagecoach robberies exploring Idaho's storied history with precious metals."
+  }
+}
