@@ -14,7 +14,7 @@
       "bookFormatSchema": "https://schema.org/EBook"
     }
   ],
-  "featured": false,
+  "featured": true,
   "authorship": "author",
   "type": "Short Story Collection",
   "genre": "Historical Fiction",
