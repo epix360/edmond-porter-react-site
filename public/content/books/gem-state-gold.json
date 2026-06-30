@@ -12,6 +12,13 @@
       "price": "4.99",
       "isbn": "9798995226826",
       "bookFormatSchema": "https://schema.org/EBook"
+    },
+    {
+      "label": "Paperback",
+      "amazonUrl": "https://www.amazon.com/Gem-State-Gold-Legends-Treasure/dp/B0H6KMG4FH",
+      "price": "9.99",
+      "isbn": "9798995226819",
+      "bookFormatSchema": "https://schema.org/Paperback"
     }
   ],
   "featured": true,
