@@ -36,6 +36,7 @@ const bookshelfSchemaData = {
       '@id': canonicalUrl,
       position: index + 1,
       name: book.title,
+      image: `https://edmondaporter.com/images/${book.image.replace(/^\//, '')}`,
       url: canonicalUrl,
       offers: book.formats
         ? book.formats.map(f => ({
