@@ -2,7 +2,7 @@ import HomePageTop from './components/HomePageTop';
 import HomePageBottom from './components/HomePageBottom';
 import { getMediumArticles } from '@/lib/medium';
 import Link from 'next/link';
-import { allBooks, sortBooks } from '@/lib/books';
+import { getBookListSchema } from '@/lib/books';
 
 export const metadata = {
   title: 'Edmond A Porter | Utah Historical Fiction & Memoir Author',
@@ -26,45 +26,7 @@ export const metadata = {
 };
 
 // Book Collection JSON-LD Structured Data
-const bookSchemaData = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  itemListElement: sortBooks(allBooks).map((book, index) => {
-    const canonicalUrl = `https://edmondaporter.com/books/${book.slug}`;
-    const hasReleaseDate = book.releaseDate && book.releaseDate.trim() !== '';
-    const availability = hasReleaseDate && new Date(book.releaseDate) > new Date()
-      ? 'https://schema.org/PreOrder'
-      : 'https://schema.org/InStock';
-    return {
-      '@type': ['Book', 'Product'],
-      '@id': canonicalUrl,
-      position: index + 1,
-      name: book.title,
-      description: book.description,
-      image: `https://edmondaporter.com/images/${book.image.replace(/^\//, '')}`,
-      url: canonicalUrl,
-      author: {
-        '@type': 'Person',
-        name: 'Edmond A Porter',
-        url: 'https://edmondaporter.com',
-      },
-      offers: book.formats
-        ? book.formats.map(f => ({
-            '@type': 'Offer',
-            ...(f.amazonUrl && { url: f.amazonUrl }),
-            price: f.price,
-            priceCurrency: 'USD',
-            availability,
-          }))
-        : {
-            '@type': 'Offer',
-            url: book.amazonUrl,
-            priceCurrency: 'USD',
-            availability,
-          },
-    };
-  }),
-};
+const bookSchemaData = getBookListSchema();
 
 // This is a Server Component - fetches at build time
 export default async function HomePage() {

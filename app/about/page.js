@@ -7,7 +7,7 @@ import AboutBookshelf from '@/app/components/AboutBookshelf';
 import { getResponsiveImage } from '@/app/utils/responsiveImage';
 import { convertMarkdown } from '@/app/utils/markdown';
 import { fallbackContent } from '@/src/data/fallbackContent';
-import { allBooks, sortBooks } from '@/lib/books';
+import { getBookListSchema } from '@/lib/books';
 
 function loadAboutData() {
   try {
@@ -22,45 +22,7 @@ function loadAboutData() {
 
 const aboutData = loadAboutData();
 
-const bookshelfSchemaData = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  itemListElement: sortBooks(allBooks).map((book, index) => {
-    const canonicalUrl = `https://edmondaporter.com/books/${book.slug}`;
-    const hasReleaseDate = book.releaseDate && book.releaseDate.trim() !== '';
-    const availability = hasReleaseDate && new Date(book.releaseDate) > new Date()
-      ? 'https://schema.org/PreOrder'
-      : 'https://schema.org/InStock';
-    return {
-      '@type': ['Book', 'Product'],
-      '@id': canonicalUrl,
-      position: index + 1,
-      name: book.title,
-      description: book.description,
-      image: `https://edmondaporter.com/images/${book.image.replace(/^\//, '')}`,
-      url: canonicalUrl,
-      author: {
-        '@type': 'Person',
-        name: 'Edmond A Porter',
-        url: 'https://edmondaporter.com',
-      },
-      offers: book.formats
-        ? book.formats.map(f => ({
-            '@type': 'Offer',
-            ...(f.amazonUrl && { url: f.amazonUrl }),
-            price: f.price,
-            priceCurrency: 'USD',
-            availability,
-          }))
-        : {
-            '@type': 'Offer',
-            url: book.amazonUrl,
-            priceCurrency: 'USD',
-            availability,
-          },
-    };
-  }),
-};
+const bookshelfSchemaData = getBookListSchema();
 
 function loadTimeline() {
   const timelineDir = path.join(process.cwd(), 'public/content/timeline');
